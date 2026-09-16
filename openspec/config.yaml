@@ -1,32 +1,24 @@
 schema: spec-driven
 
-# Project context (optional)
-# This is shown to AI when creating artifacts.
-# Add your tech stack, conventions, style guides, domain knowledge, etc.
-# Example:
-#   context: |
-#     Tech stack: TypeScript, React, Node.js
-#     We use conventional commits
-#     Domain: e-commerce platform
+context: |
+  Bazel ruleset delivering the Yarn CLI. Bzlmod only, no WORKSPACE.
+  Pinned: Bazel 9.2.0, Yarn 4.18.0, rules_nodejs 6.7.6.
+  Yarn distribution: https://repo.yarnpkg.com/4.18.0/packages/yarnpkg-cli/bin/yarn.js
+  sha256 fb8b1d20be72a0b544a35bcec4c7ed0ff55a9b173c01f191b02ba164b2051db5 (3784908 bytes).
+  Node comes from rules_nodejs toolchains; never from a host Node, Yarn or Corepack install.
+  Public API in yarn/, implementation in yarn/private/, consumer example in e2e/.
+  Supported platform: Linux x86_64.
 
-# Per-artifact rules (optional)
-# Add custom rules for specific artifacts.
-# Example:
-#   rules:
-#     proposal:
-#       - Keep proposals under 500 words
-#       - Always include a "Non-goals" section
-#     tasks:
-#       - Break tasks into chunks of max 2 hours
+rules:
+  specs:
+    - State observable behavior only; keep implementation detail in design.md.
+  tasks:
+    - Every task names how it is verified.
 
-# Per-operation guidance (optional)
-# Add advisory guidance for how apply and archive work should be conducted.
-# This is separate from artifact rules above.
-# Example:
-#   operations:
-#     apply:
-#       guidance:
-#         - Keep test summaries concise
-#     archive:
-#       guidance:
-#         - Summarize the archive outcome before finishing
+operations:
+  apply:
+    guidance:
+      - Fetch external artifacts by exact version with an integrity digest.
+      - Use supported rules_nodejs APIs; never target_tool_path or tool_files.
+      - Do not claim behavior that no test covers.
+      - Run buildifier and the root and e2e Bazel build/test before reporting completion.
