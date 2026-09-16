@@ -1,0 +1,36 @@
+default_stages: [pre-commit]
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v6.0.0
+    hooks:
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: check-toml
+      - id: check-yaml
+      - id: detect-private-key
+      - id: end-of-file-fixer
+      - id: trailing-whitespace
+  - repo: https://github.com/keith/pre-commit-buildifier
+    rev: 8.5.1
+    hooks:
+      - id: buildifier
+      - id: buildifier-lint
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v4.18.1
+    hooks:
+      - id: commitizen
+        stages: [commit-msg]
+  - repo: local
+    hooks:
+      - id: okf-validate
+        name: okf validate (.okf)
+        entry: tools/okf/validate.sh
+        language: script
+        pass_filenames: false
+        files: ^\.okf/
+      - id: openspec-validate
+        name: openspec validate --all --strict
+        entry: openspec validate --all --strict --no-interactive
+        language: system
+        pass_filenames: false
+        files: ^openspec/
