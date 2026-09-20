@@ -1,0 +1,10 @@
+# Settings for developing rules_yarn. Modules that depend on rules_yarn do not
+# inherit them.
+
+# Keep MODULE.bazel.lock complete and committed so every checkout resolves the
+# same module versions and Node.js digests. After changing dependencies, run:
+#     bazel mod deps --lockfile_mode=update
+common --lockfile_mode=error
+
+# Per-user settings; keep this import last so it can override the settings above.
+try-import %workspace%/.bazelrc.user
