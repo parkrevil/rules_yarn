@@ -22,6 +22,8 @@ fail() {
 
 probe="$(rlocation "$1")"
 [[ -x "$probe" ]] || fail "cannot find the probe launcher $1"
+resource_probe="$(rlocation "$2")"
+[[ -x "$resource_probe" ]] || fail "cannot find the resource probe launcher $2"
 
 out="$TEST_TMPDIR/stdout"
 err="$TEST_TMPDIR/stderr"
@@ -109,6 +111,12 @@ test_manifest_only_runfiles_lookup() {
   cmp -s "$out" "$TEST_TMPDIR/expected_stdout" || fail "probe did not run with manifest-only runfiles lookup"
 }
 
+test_entry_point_runtime_resource() {
+  "$resource_probe" >"$out" 2>"$err"
+
+  [[ "$(cat "$out")" == "resource-content" ]] || fail "entry point could not read its runtime resource; stdout was: $(cat "$out")"
+}
+
 test_arguments_and_streams
 test_launcher_settings_override_caller_environment
 test_exit_status
@@ -116,4 +124,5 @@ test_direct_invocation_keeps_working_directory
 test_bazel_run_uses_build_working_directory
 test_relative_runfiles_paths_survive_directory_change
 test_manifest_only_runfiles_lookup
+test_entry_point_runtime_resource
 echo "PASS"

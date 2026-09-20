@@ -54,6 +54,23 @@ def _test_launcher_and_runfiles_impl(env, targets):
     substitutions.get("{{YARN_RLOCATION_PATH}}", factory = subjects.str).equals("'_main/tests/yarn_binary/entry.cjs'")
     env.expect.that_bool(launcher_action.actual.substitutions["{{SHELL}}"].startswith("/")).equals(True)
 
+def _test_entry_point_runfiles_are_kept(name):
+    util.helper_target(
+        yarn_binary,
+        name = name + "_subject",
+        yarn = ":entry_with_resource",
+    )
+    analysis_test(
+        name = name,
+        impl = _test_entry_point_runfiles_are_kept_impl,
+        target = name + "_subject",
+    )
+
+def _test_entry_point_runfiles_are_kept_impl(env, target):
+    env.expect.that_target(target).runfiles().contains(
+        "_main/tests/yarn_binary/resource.txt",
+    )
+
 def _test_host_path_runtime_fails(name):
     util.helper_target(
         yarn_binary,
@@ -80,6 +97,7 @@ def yarn_binary_test_suite(name):
     test_suite(
         name = name,
         tests = [
+            _test_entry_point_runfiles_are_kept,
             _test_host_path_runtime_fails,
             _test_launcher_and_runfiles,
         ],

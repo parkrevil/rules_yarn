@@ -43,7 +43,12 @@ def _yarn_binary_impl(ctx):
     )
 
     runfiles = ctx.runfiles(files = [nodeinfo.node, ctx.file.yarn])
-    runfiles = runfiles.merge(ctx.attr._runfiles_library[DefaultInfo].default_runfiles)
+    runfiles = runfiles.merge_all([
+        # The entry point may carry its own runtime files, such as a filegroup
+        # with data.
+        ctx.attr.yarn[DefaultInfo].default_runfiles,
+        ctx.attr._runfiles_library[DefaultInfo].default_runfiles,
+    ])
     return [DefaultInfo(
         executable = executable,
         runfiles = runfiles,

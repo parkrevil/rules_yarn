@@ -11,11 +11,34 @@ yarn_binary(
     yarn = "@yarn",
 )
 
+genrule(
+    name = "gen_resource",
+    outs = ["resource.txt"],
+    cmd = "echo resource-content > $@",
+)
+
+filegroup(
+    name = "resource_entry",
+    srcs = ["resource_probe.cjs"],
+    data = [":resource.txt"],
+)
+
+yarn_binary(
+    name = "resource_probe",
+    yarn = ":resource_entry",
+)
+
 sh_test(
     name = "launcher_test",
     srcs = ["launcher_test.sh"],
-    args = ["$(rlocationpath :argv_probe)"],
-    data = [":argv_probe"],
+    args = [
+        "$(rlocationpath :argv_probe)",
+        "$(rlocationpath :resource_probe)",
+    ],
+    data = [
+        ":argv_probe",
+        ":resource_probe",
+    ],
     deps = ["@rules_shell//shell/runfiles"],
 )
 

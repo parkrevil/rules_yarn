@@ -30,3 +30,17 @@ toolchain(
     toolchain = ":host_path_node",
     toolchain_type = "@rules_nodejs//nodejs:runtime_toolchain_type",
 )
+
+# An entry point that carries a runtime resource, used to check that the
+# entry point's own runfiles reach the launcher.
+genrule(
+    name = "gen_resource",
+    outs = ["resource.txt"],
+    cmd = "echo resource-content > $@",
+)
+
+filegroup(
+    name = "entry_with_resource",
+    srcs = ["entry.cjs"],
+    data = [":resource.txt"],
+)
