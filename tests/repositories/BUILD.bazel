@@ -1,0 +1,3 @@
+load(":repositories_tests.bzl", "repositories_test_suite")
+
+repositories_test_suite(name = "repositories_tests")

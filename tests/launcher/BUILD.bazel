@@ -1,0 +1,29 @@
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
+load("//yarn:defs.bzl", "yarn_binary")
+
+yarn_binary(
+    name = "argv_probe",
+    yarn = "argv_probe.cjs",
+)
+
+yarn_binary(
+    name = "yarn",
+    yarn = "@yarn",
+)
+
+sh_test(
+    name = "launcher_test",
+    srcs = ["launcher_test.sh"],
+    args = ["$(rlocationpath :argv_probe)"],
+    data = [":argv_probe"],
+    deps = ["@rules_shell//shell/runfiles"],
+)
+
+sh_test(
+    name = "yarn_cli_test",
+    srcs = ["yarn_cli_test.sh"],
+    args = ["$(rlocationpath :yarn)"],
+    data = [":yarn"],
+    tags = ["block-network"],
+    deps = ["@rules_shell//shell/runfiles"],
+)

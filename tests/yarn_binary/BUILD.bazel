@@ -1,0 +1,32 @@
+load("@rules_nodejs//nodejs:toolchain.bzl", "nodejs_toolchain")
+load(":yarn_binary_tests.bzl", "yarn_binary_test_suite")
+
+yarn_binary_test_suite(name = "yarn_binary_tests")
+
+# A Node.js runtime that only names a host path. The development-only
+# registration in MODULE.bazel selects it for :host_path_node_platform, which
+# lets tests check that yarn_binary rejects runtimes without a node file.
+constraint_setting(name = "node_runtime_kind")
+
+constraint_value(
+    name = "host_path_node_runtime",
+    constraint_setting = ":node_runtime_kind",
+)
+
+platform(
+    name = "host_path_node_platform",
+    constraint_values = [":host_path_node_runtime"],
+    parents = ["@platforms//host"],
+)
+
+nodejs_toolchain(
+    name = "host_path_node",
+    node_path = "/opt/host/bin/node",
+)
+
+toolchain(
+    name = "host_path_node_runtime_toolchain",
+    target_compatible_with = [":host_path_node_runtime"],
+    toolchain = ":host_path_node",
+    toolchain_type = "@rules_nodejs//nodejs:runtime_toolchain_type",
+)
