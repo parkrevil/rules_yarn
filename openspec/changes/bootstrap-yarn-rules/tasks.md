@@ -1,21 +1,31 @@
-## 1. Ruleset foundation
+## 1. Module foundation
 
-- [ ] 1.1 Recheck stable Bazel, Yarn, rules_nodejs and Node releases and the exact APIs referenced in design.md; record the selected versions, distribution digest, upstream references, and compatibility requirements in the implementation documentation.
-- [ ] 1.2 Create the minimal Bzlmod module, version/configuration files, and public/private package layout using the applicable rules-template structure; verify `bazel mod graph` resolves and Buildifier accepts the added files.
+- [x] 1.1 Create `MODULE.bazel` (`rules_nodejs` 6.7.5, `rules_shell` 0.8.0, `bazel_skylib` 1.9.2, dev `rules_testing` 0.9.0, dev Node.js 24.21.0 toolchain), `.bazelversion`, `.bazelrc`, `.bazelignore`, `.gitignore`, and `MODULE.bazel.lock`; verify `bazel mod graph` succeeds with `--lockfile_mode=error` and Buildifier reports no findings.
+- [x] 1.2 Create the `yarn/` public package and `yarn/private/` package with load visibility and `bzl_library` targets; verify `bazel build //yarn/...` succeeds.
 
 ## 2. Yarn distribution
 
-- [ ] 2.1 Add checked-in Yarn version metadata and integrity-checked repository fetching; verify the supported release fetches and a deliberately incorrect digest fails.
-- [ ] 2.2 Implement the distribution module extension and its exported entry point; verify identical declarations deduplicate, unknown versions fail, and conflicting name/version declarations fail with actionable messages.
+- [x] 2.1 Add the checked-in Yarn version table and the `yarn_distribution` repository rule; verify a unit test with a mock `repository_ctx` asserts URL, integrity, output, BUILD content, and reproducible metadata, the root build fetches `@yarn`, and a scratch module with a wrong digest fails with a checksum error (record command and output here).
+  - 2026-09-18: `bazel test //tests/repositories:all` passed (2 tests). `bazel build @yarn//:yarn` in the root fetched `yarn.js` with sha256 `fb8b1d20be72a0b544a35bcec4c7ed0ff55a9b173c01f191b02ba164b2051db5`.
+  - 2026-09-18: a scratch consumer of a ruleset copy whose 4.18.0 digest was changed to `sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=` ran `bazel build --lockfile_mode=off @yarn//:yarn` and failed: `Error in download: ... Checksum was sha256-+4sdIL5yoLVEo1vOxMftD/Vamxc8AfGRsCuhZLIFHbU= but wanted sha256-AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=`.
+- [x] 2.2 Implement the `yarn` module extension; verify unit tests cover default and root-only names, closest-module selection, identical-declaration deduplication, conflicting declarations, and unsupported versions, and scratch modules show the unsupported-version, custom-name, and conflict errors from real Bazel runs (record commands and output here).
+  - 2026-09-18: `bazel test //tests/extensions:all` passed (9 tests). Changing the expected unsupported-version message made `test_unsupported_version_fails` fail; restoring it made the test pass again.
+  - 2026-09-18: `bazel mod deps --lockfile_mode=off` in scratch consumers failed with:
+    - root `version = "4.17.0"`: `Error in fail: yarn.distribution(version = "4.17.0") in the root module: Yarn 4.17.0 is not supported. Supported versions: 4.18.0.`
+    - root `4.18.0` then `4.17.0`: `Error in fail: Conflicting yarn.distribution declarations for repository "yarn" in the root module: Yarn 4.18.0 and Yarn 4.17.0. Declare one version per repository name.`
+    - dependency `dep@0.1.0` with `name = "custom"`: `Error in fail: yarn.distribution(name = "custom") in module dep@0.1.0: only the root module may use a repository name other than "yarn".`
 
-## 3. Yarn executable
+## 3. yarn_binary
 
-- [ ] 3.1 Implement the public yarn_binary rule using the Node runtime toolchain and complete runfiles; verify analysis selects a file-backed runtime and rejects host-path-only configuration.
-- [ ] 3.2 Implement the launcher with repository-aware runfiles lookup, explicit working-directory handling, selected-version enforcement and argument forwarding; verify arguments with spaces/metacharacters, output streams, nonzero exit status and project yarnPath redirection using focused launcher tests.
+- [x] 3.1 Implement the public `yarn_binary` rule and launcher template; verify analysis tests show the launcher is the executable, runfiles contain the toolchain's Node.js file, the Yarn file, and the runfiles library, launcher substitutions use runfiles-root paths, and a `node_path`-only runtime toolchain fails analysis with the documented message.
+  - 2026-09-18: `bazel test //tests/yarn_binary:all` passed (2 tests). Changing the expected host path in `test_host_path_runtime_fails` made it fail; restoring it made the test pass again.
+- [x] 3.2 Add launcher `sh_test` targets; verify argument boundaries with spaces and metacharacters, separate stdout and stderr, exit-status propagation, `BUILD_WORKING_DIRECTORY` and direct-invocation working directories, manifest-only runfiles lookup, `yarnPath` being ignored, `--version` with unusable host `node`/`yarn`/`corepack`, an invalid Yarn command's status and diagnostic, and unchanged project files under `block-network` with network access asserted blocked.
+  - 2026-09-20: `bazel test //tests/launcher:all` passed. `launcher_test` covers argument boundaries, stdout/stderr separation, exit status 7, `BUILD_WORKING_DIRECTORY` and direct-invocation working directories, relative runfiles paths across the directory change, launcher settings overriding the caller's environment, and a manifest-only lookup. `yarn_cli_test` (tag `block-network`) covers the blocked network, `--version` with unusable host `node`/`yarn`/`corepack`, an ignored project `yarnPath`, unchanged project files, and an invalid command's exit status 1 with Yarn's diagnostic.
+  - 2026-09-20: control checks outside Bazel: running the same `yarn.js` in the `yarnPath` project without `YARN_IGNORE_PATH` printed `redirected` and exited 3, while `YARN_IGNORE_PATH=1` printed `4.18.0`. Running the launcher where no runfiles directory exists with `RUNFILES_MANIFEST_FILE=/dev/null` failed with the runfiles library's own initialization error, `ERROR: cannot find bazel_tools/tools/bash/runfiles/runfiles.bash`, and exit status 1.
 
-## 4. Consumer verification and documentation
+## 4. Consumer, documentation, and final checks
 
-- [ ] 4.1 Add an independent e2e/smoke consumer with exact Node/Yarn selections and a local module override; verify it builds and runs the public Yarn target without private loads or host Node/Yarn/Corepack installations.
-- [ ] 4.2 Verify the selected version executes offline after repository fetch, leaves project files unchanged, and works with runfiles directory and manifest lookup; record actual Linux x86_64 results and any unsupported configurations.
-- [ ] 4.3 Document installation, public API, tested versions/platforms, and CLI-versus-build-integration boundaries; verify every documented command against the independent consumer.
-- [ ] 4.4 Run Buildifier, root and consumer `bazel build //...` and `bazel test //...`, and `openspec validate --all --strict`; review the resulting diff against the spec and cited official patterns, and record the results before marking implementation complete.
+- [ ] 4.1 Add `e2e/smoke` with `local_path_override`, exact Node.js and Yarn selections, public loads only, `.bazelversion`, and `MODULE.bazel.lock`; verify `bazel build //...` and `bazel test //...` pass there, including its `--version` test with unusable host tools under `block-network`.
+- [ ] 4.2 Verify from `e2e/smoke` that `bazel run //:yarn -- --version` from a subdirectory prints 4.18.0 and runs in that subdirectory, that the built executable prints 4.18.0 when run without network access after fetching, and that loading a private `.bzl` file fails with a visibility error (record commands and output here).
+- [ ] 4.3 Write `README.md` covering installation, public API, tested configuration, repository naming rules, and the CLI-versus-build-integration boundary; verify every documented snippet and command matches `e2e/smoke` or was run in 4.2.
+- [ ] 4.4 Run `buildifier -lint=warn -r .`, `bazel build //...` and `bazel test //...` in the root and `e2e/smoke`, and `openspec validate --all --strict`; verify all pass, then run `/opsx:verify` and the Codex adversarial review required by AGENTS.md and record their results here.

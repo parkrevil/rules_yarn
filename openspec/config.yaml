@@ -2,7 +2,7 @@ schema: spec-driven
 
 context: |
   Bazel ruleset delivering the Yarn CLI. Bzlmod only, no WORKSPACE.
-  Pinned: Bazel 9.2.0, Yarn 4.18.0, rules_nodejs 6.7.6.
+  Pinned: Bazel 9.2.0, Yarn 4.18.0, rules_nodejs 6.7.5.
   Yarn distribution: https://repo.yarnpkg.com/4.18.0/packages/yarnpkg-cli/bin/yarn.js
   sha256 fb8b1d20be72a0b544a35bcec4c7ed0ff55a9b173c01f191b02ba164b2051db5 (3784908 bytes).
   Node comes from rules_nodejs toolchains; never from a host Node, Yarn or Corepack install.
