@@ -2,12 +2,8 @@ schema: spec-driven
 
 context: |
   Bazel ruleset delivering the Yarn CLI. Bzlmod only, no WORKSPACE.
-  Pinned: Bazel 9.2.0, Yarn 4.18.0, rules_nodejs 6.7.5.
-  Yarn distribution: https://repo.yarnpkg.com/4.18.0/packages/yarnpkg-cli/bin/yarn.js
-  sha256 fb8b1d20be72a0b544a35bcec4c7ed0ff55a9b173c01f191b02ba164b2051db5 (3784908 bytes).
-  Node comes from rules_nodejs toolchains; never from a host Node, Yarn or Corepack install.
-  Public API in yarn/, implementation in yarn/private/, consumer example in e2e/.
-  Supported platform: Linux x86_64.
+  Engineering constraints, layout, and pin locations are stated in AGENTS.md;
+  do not restate them here.
 
 rules:
   specs:
@@ -18,7 +14,5 @@ rules:
 operations:
   apply:
     guidance:
-      - Fetch external artifacts by exact version with an integrity digest.
-      - Use supported rules_nodejs APIs; never target_tool_path or tool_files.
-      - Do not claim behavior that no test covers.
-      - Run buildifier and the root and e2e Bazel build/test before reporting completion.
+      - Follow the invariants and working rules in AGENTS.md; they are authoritative.
+      - Never use rules_nodejs target_tool_path or tool_files.
