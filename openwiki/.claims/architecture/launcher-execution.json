@@ -1,0 +1,140 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:2254fcd0abda1bb4007a1258902ae0477800d9b9120734713281bdec4bfdadfe",
+  "claims": [
+    {
+      "id": "claim_dc8ca9a0db904b2abc728ee78830c9be",
+      "statement": "yarn_binary fails analysis when the resolved rules_nodejs runtime toolchain provides only a host path instead of a Node.js file, which is where the ruleset's no-host-tools guarantee is enforced.",
+      "evidence": [
+        {
+          "resource": "repo://tests/yarn_binary/yarn_binary_tests.bzl#L76-L97",
+          "version": "repo-lines-v1:sha256:ce83cc1afa1098751bd07aa830f4ab78394e0ad484ce186d21dfd9e4bd76d4b9:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA5ZGQzNGE1YjFhNzgzNmI4ZjBhZTEzYTNkOTEyZjM2ZWI2NjdmMmZkNmNjMGM3M2Y2MWRkNTdkMTg1MDljY2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4MzEyMzNkMjhkOTUzNWQ3YjM3NjFkMjFhM2U5YWU0M2Q4MTYwZmQ1MTAzNWExNTM3ZDAxODJlODY4OGY4OWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM4MDU5ZGEzMzRkMjAxZTA0ZmFmNTljZTZhMDk4YTgxZDUzMDZmOTFiYmY0ZjQ3OTkyNGY1NWRlOTU5YjlmOWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhMmE0MzAyOTI1NDMyOTY5N2IzOGM0NDhjMjhhZmRiZmVhZDNhNTAzMDJkNWYzODNmNDFhNTdmNzU0NWQxZTQifQ"
+        },
+        {
+          "resource": "repo://yarn/private/yarn_binary.bzl#L25-L31",
+          "version": "repo-lines-v1:sha256:c7efa1db3f620e35d3f5a73bf6923a1475e3f4662de9ba013ffa325aee12b6f9:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTNkZTQwNzFmMTM1ZDUxMTA2NjRkNGRlYzUwZDBiM2M0NTQ5MTc0MDVjMTZlY2E5NDYwM2YxZDJlNGU5NTRiZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTQ3YzUzODc2MDdjYzNjMWM5Mjg5MjdlYjY0MjljZTg2OWY5MGU0YzQyMTk3NzhmMWNiYWIwMmU1NzAzZWVkZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTI1OTQwNzhjOGE0NTIyNDc5MjU4ZWI3ZDVkZGNlMGY5YzdkZTI3MTgyMzk1OGVlYmM4MDNhMDA4ZDgwZjc1ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDAwODU0ODNiNWRhZDU3MWM4YjU1NjI2MTdhMzdjZTk2MDE2Njk2MTE2OTA2MmRmMWMyMGIwNWY2OTFhZjM5NiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_e21d5d0ea7a1427fb8618ba6a0db8f81",
+      "statement": "The launcher is produced by a single expand_template action over a checked-in template with exactly three substitutions: the Node.js runfiles path, the Yarn runfiles path, and the shell interpreter path.",
+      "evidence": [
+        {
+          "resource": "repo://tests/yarn_binary/yarn_binary_tests.bzl#L46-L55",
+          "version": "repo-lines-v1:sha256:97212baf97df5382964efd8b5edbb23a03f21317f7ddc6a501ec76d80d49e217:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxOTU2ZDc4ODFjMTdkMGUwNTQ2NzYzMzhmOGFhNDRhNDg1MjRlMzMxOWI5M2I5YjI4Y2M4Y2I1YzM4NTFmNjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmYjEyNGEzZTU0NjQ2MjRmODM4NGU5MzQ3MzM4MTBmYWIxYmQyMWUwYzFlZjI2NWIxMzI3MWE5MWY5NDQ3NzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQyYmU3MzU5MmZlYzBlZTEyYzM4NzQ2NjY2MzgxYWQ0N2I4ZjIzN2NhZGZmOWY1NjQyMTUwYjNlNDM1Y2U4NWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhhMDFhMjk4NDRiNTdkOGJhNDYwZTZiYTBjZWFmNGRjZWExNGFlN2ZhOGNhNWQ2ZjVjODc1OTAzMDZkNzNhNzQifQ"
+        },
+        {
+          "resource": "repo://yarn/private/yarn_binary.bzl#L33-L43",
+          "version": "repo-lines-v1:sha256:467c813433e2bcf7f6cb1602e2b0d283acdd7877ca1c39ac1f07fdb115acc6d4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZkZWJkYTZjM2Y0OWEzMjEwNDg1ZmE2MWQ5MTJhODFkZTFhNTE4MDc0ZmVhMTEwYzVkMDE1ODkyMjlhZDA5NjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY3OTdjZWZlMDE3ZjY5NTUwZDUyNTEzNzFiMGI1ZDg3ZTg3NmJhYjM4OTI4YjU2NGFiYjUxNTM0ZmUzZmNmOTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQyMTQ1NWNhMDEzYTI3NjNjOWQzZmViOTdjNGE1MGIyNWMyNjVmNmE4MDgzMGFmZGRjZjIxNzkxMTc3YzI1OWMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d2ff9b9dcd2d4162a84a054a534a2cce",
+      "statement": "The two runfiles paths are shell-quoted because they are interpolated into shell word positions, while the interpreter path is left unquoted because it is consumed by the kernel on the #! line.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/yarn_binary.bzl#L37-L41",
+          "version": "repo-lines-v1:sha256:a9f2d7f8c498de31945ed7b9c07847aedb2bd67ecd6e11d5f69721e31a72475f:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmZkYjlkMWM2ZjZhNDdhYzJlYThiMDFkNjM1ZTkyN2ZlNDc3ZTI2MzdmY2NlNmM1NDBlYjYwNTlmZWRhMWJiNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWU2NzNhYmQ0NTdhOTdlZWExN2E2MDA2MmViMGZhZWE2YmRmMDk0ODY4Y2M2YjhmOGMwZWJkYTJmNjFlZDQyZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODkyMjA5ZjBkYTQxNWUzZDJhOTM3ODMwYTVjNTFhY2JiODYyYzQ2MWIzYzk3NmU4Mjg0YzA3NTliMzU1OTZhNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGM1YWIzZTgxNWRkZTE1MzdhY2U2YzczMGNjZThmZWE5NWZkZTQ5ODg1MGY0NDg1ZjRlNjkzZTYzY2M2YTM2OCJ9"
+        },
+        {
+          "resource": "repo://yarn/private/yarn_binary.sh.tpl#L1-L1",
+          "version": "repo-lines-v1:sha256:577abc909e7f56543bb7bb0e24afb9de22df2775889aa3d475d277456b15df61:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTc3YWJjOTA5ZTdmNTY1NDNiYjdiYjBlMjRhZmI5ZGUyMmRmMjc3NTg4OWFhM2Q0NzVkMjc3NDU2YjE1ZGY2MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTc3YWJjOTA5ZTdmNTY1NDNiYjdiYjBlMjRhZmI5ZGUyMmRmMjc3NTg4OWFhM2Q0NzVkMjc3NDU2YjE1ZGY2MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTk1M2ViMDM5MTgyOWFkYmNlZTEwYjQ5NGZiYzE2ZmI5OThjOGZmZjA4MTNlZWI4NjQwNDY2YmE5NDhmNTVlNCJ9"
+        },
+        {
+          "resource": "repo://yarn/private/yarn_binary.sh.tpl#L17-L24",
+          "version": "repo-lines-v1:sha256:915489e1d90b5ad1abb1d4307279ce1341af8104c56540cf2fed581de9f06f38:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTNmMGRkOGM2NTRlNzE3MzhlZDUwYTQ2MjcyNzdkOWNmZjI0ZmMxY2Y4MjhhZDI4NTgxYzBkZmMzODhlYjQxZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzc2OWQyMzdjZDQyMGI5ZDM4Yjk4MWEwYTRmNjc3MDE5MGE0YTgzZGNhMWZlNTZjNGY1YmExZTJjYmMwZWY3NiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmEwMWI2MjAyNTUyNjE1Nzc4Mjc1ZWQwZTkxZTczMWMxYWIwMmZkYmIzZjRmOWJiMzAyZDdkMzdjMjMxZDM2ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDE1ZTU4NjI1ZTE3ZDM4YzU1MjkzYjY4YjllZWUxOTZkYjRjNzUyMTlmYWM5MzQxZWI4YzRiMzVlMTljN2MyMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c0732987ed824f148eaa84c08efca8a0",
+      "statement": "The entry point target's own default runfiles are merged into the launcher's runfiles, so an entry point carrying data files keeps them at run time.",
+      "evidence": [
+        {
+          "resource": "repo://tests/yarn_binary/yarn_binary_tests.bzl#L58-L74",
+          "version": "repo-lines-v1:sha256:35e2b2a9c321a8b188401aff698ff482ab87efdfc41dd3a04f7e0d15167261d5:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0NDkyMzE4MDQ3OWQzMmM1MjIwYjcyN2E3MTZjNjZlNjVjNDBjNmNjYWEzM2U2ZmJlMzNmMTJiY2RlMTZlNDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU3OWVkN2ViYTJjZDkxYzA4Nzc1MDdlOWFjNTZlN2Y5Zjk3OTBkYTJiMmU0NWJhYTAzYWZjZmU1YTQzN2NkZGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImMwMDgyZGFjYmU1OWE2NGU3MWY1YzkyNDlhNWIxNTZkOGNlNmVlMDcwZmFhNjI5ZDg1ZTFmNTBkZTFkNzA5YzQifQ"
+        },
+        {
+          "resource": "repo://yarn/private/yarn_binary.bzl#L45-L51",
+          "version": "repo-lines-v1:sha256:1adebf37368f698fa3b5991fb795c00403c07885835b7b777dbc9dd80b0bac3e:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYmJjMDQwNWE0M2RlZjNiN2IzNTA1YzUwYTliZTlhN2JmNzk5ODBhOTQxZjY0OWY3YWFkMTY3NGEwZTdlYzk1NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGQ0Y2E0ZjhiZWZiNDNmYjE3NTI5N2RkMDVjYjcyMDQ1MGViOWI3YmI2YzRkOWZiYWYxODVmYjFlYzM1Zjc5ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGM1YWIzZTgxNWRkZTE1MzdhY2U2YzczMGNjZThmZWE5NWZkZTQ5ODg1MGY0NDg1ZjRlNjkzZTYzY2M2YTM2OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTgxOGViNTI1M2EwMGYwOTE5OTUxMzA1YWZkZmYwNWRhNzg5NzA2Y2VhY2U5YTlkMzcxZDc5M2Y5YzYxZTBjNiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ff16b035c46442ba9d7acbae41cd05f6",
+      "statement": "The launcher exports YARN_IGNORE_PATH=1 and YARN_ENABLE_TELEMETRY=0 unconditionally, overriding values set by the caller, so a project's yarnPath setting cannot redirect execution.",
+      "evidence": [
+        {
+          "resource": "repo://tests/launcher/launcher_test.sh#L55-L60",
+          "version": "repo-lines-v1:sha256:24170c843b951159ddd638c261895bcc822033f5aa3b45a096fd6d24b717fb35:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTMyOTg3NTgxZWI0YzI1M2VjYWNiYzFkYThkNzQwMDEwZmZhOTRmYmEwOWViYWRiMmRhMGU4M2NmYTExOGQ2YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGE3ODRmYTM5MDM2ZGFhZGFmYWNlM2U2M2YxMGIxMmNiYTIxMzg3MDVhZDg2ZDU5MjY4N2Y2OWRkNjVmNzA0OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGU3NmM1MDQ2NGQzYjQ3Nzc4ZmUyOWI3MTllNDg5OTNlNjliY2RjM2Y0ZGEzYmEwNjdhNjljNjA1NmM1OTVkYyJ9"
+        },
+        {
+          "resource": "repo://tests/launcher/yarn_cli_test.sh#L54-L77",
+          "version": "repo-lines-v1:sha256:beb5a86827ea69641add7a0c5fca62c520b00d5ec08c5f65a949a5fe3a13c8e2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0YTA1OGQ5YjZlNTJlNzcyZWMzYzdiMDE0NjRlYTBiMjRiZjk5YzA4OWJmMzlhZjNmYWU4ZjBiYWY2NjZhNTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiM2IwMjdlYjYxYmEzYTEzMDhlYjljNWMwOTY1OWE0YzhlNTQ5MGEwZjQ4MzFkODhjMGQ5ODYzOTM4ZjhmYTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiNGJjYjEzY2JlZTg0ZTA5MWUzMGM1MzkyYjM0MmFhZmIwZGZmMWRlNWQ2OWUwN2E1Y2NjMzMyOGM5NDJmZDIifQ"
+        },
+        {
+          "resource": "repo://yarn/private/yarn_binary.sh.tpl#L34-L37",
+          "version": "repo-lines-v1:sha256:f4bb0290244d9470505a9a382df3ff805c73a35d94cbbd4507ca427521b0fd6e:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmJjMTg1NmY4MTJhYzIwYjUwYTI2NTFmM2I2MDI5NTI1NzliNWUzZTM5OTcwMmZkZTIxZWQ3OTIwYjFjOWQyOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzEyZjk2NGY2OTRjZDdhMmVkYjEzYzA3ZjdiNjk1ZDYzZTRjMGM5NzA1ZWU2YjFlMzU3MjI2NzNmZGM4MmQwNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODc3YThmNmExNjU5OGE3OGMxNjMzNzE1MjY0ZmI2ZTI0YThlMmFhODdkYmI3ZmE4Yjk2NmM3NDU3YWM4NTM1ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjYzMDI4MzE1NGQ3MjVlMjlhMmRhN2U1ZjYxY2RiNzQ4NjgwMTkxOGEyMTlmODRmNDQxMzcxODkwZGZiMzZhMCJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ae956066900245169f94147b3de26a7f",
+      "statement": "The launcher runs Yarn in BUILD_WORKING_DIRECTORY when Bazel sets it and leaves the current directory unchanged otherwise, after making both resolved paths absolute so they survive the directory change.",
+      "evidence": [
+        {
+          "resource": "repo://tests/launcher/launcher_test.sh#L69-L94",
+          "version": "repo-lines-v1:sha256:541856038b9adee9083ed061c4ff73c6aaba26cb7e557ec82e43b808dc607bbd:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkwNGFlZjA2MDUxYTdjOGYxOWY0NjIyZDU4OGQzMjY5NGRiY2M0YjRlODgyNGE1ZjExOGU2OWU2YTc1N2EyMzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgxMmRmODk3NzcxZWYzODRiYzAzZmUyZjJmNDE4NDJiYjY0NDM1MzY2YzEyNjg0ZWY2YmQwNmNmZjM1YTY4MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU4ZDJlODVlYzVhNTExMmJmMjI0NTQxMzlhOGE2ZGIxNGI0ZThmMWFkNDhhYzUxM2IxMmUxNDViNDE5Yzk3NDMifQ"
+        },
+        {
+          "resource": "repo://yarn/private/yarn_binary.sh.tpl#L26-L45",
+          "version": "repo-lines-v1:sha256:6e02d2ef77f433b61eddcc720bf429ba5799ec8d00e5ebe2a6f674ee629d88fd:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1MWY2NmM2Y2FiYTgzNjFiYmIxMmJkYzUwMTA5ZmZjNWQwYjc5ZDU3OTYwMzFhOWUxYjc5ZmQ5ZWU5ZjU0NGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhOTA4Yjg1NzVkZjE0ODgwZGIyNmJmOTNkODUxNzk2MGM0NDE5M2JjZjI1ZmZiYzM4MjBiZGQzNjk5Zjk1YWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMxY2UxYWExMTY5NWQ5YjUxNTcwZGExNWYyMzlkNzBkMmY1Y2FkNThhNzg1MGQyYThkYTljZWQ1ODYxZDQ4MzIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e10c02c368c249ebb0250d8c4ec89722",
+      "statement": "The launcher resolves Node.js and the Yarn entry point through the Bash runfiles library and fails with its own diagnostic when either lookup is empty, supporting both runfiles-directory and manifest-only lookup.",
+      "evidence": [
+        {
+          "resource": "repo://tests/launcher/launcher_test.sh#L96-L112",
+          "version": "repo-lines-v1:sha256:9400a8d4de45bed7654446b14562c19ff4987b20c3d99a4b17f42d70abf2464c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiYzdhYzgxZjZmNzUyMmQzNGE0NThiNjA4NTVlYTBjOGYxZjc3NmNlMTI0MzUyNjY3NjRjMWJjMTIyMTcyNTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwZWRmNTA5NDYxYzRkM2JjY2RlNGIyNGQ1OTM1YmE5Yzk4YzgwM2VlZmM3NWQ3MmU1Mzc1YTYwYWRlY2I3ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3ZDA2NDJmZmM4ZWU2NTQ3YmU4M2M4YzczODEzNzJjNWI5OGMwZDE1YTU1ZjczZTg4ODJmYjRlYzg2ZTdhZWYifQ"
+        },
+        {
+          "resource": "repo://yarn/private/yarn_binary.sh.tpl#L5-L24",
+          "version": "repo-lines-v1:sha256:6630c0660907da39f95ae4b27af3d442228ddb55d3561eacca37f8d9616ed257:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhNjE3M2U0ZGMwYTMxZThlODEwZmIwYjJkYmU0Mjg3MzczMjZhYTRiNDliMzhlZTM5ZTgzN2I4NDU2ZjM3MmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM3NjlkMjM3Y2Q0MjBiOWQzOGI5ODFhMGE0ZjY3NzAxOTBhNGE4M2RjYTFmZTU2YzRmNWJhMWUyY2JjMGVmNzYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE5NTNlYjAzOTE4MjlhZGJjZWUxMGI0OTRmYmMxNmZiOTk4YzhmZmYwODEzZWViODY0MDQ2NmJhOTQ4ZjU1ZTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxNWU1ODYyNWUxN2QzOGM1NTI5M2I2OGI5ZWVlMTk2ZGI0Yzc1MjE5ZmFjOTM0MWViOGM0YjM1ZTE5YzdjMjMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c725161fcaff4bf3ae8a93ddc986a6ad",
+      "statement": "Yarn replaces the launcher process via exec, so Yarn's arguments, output streams and exit status pass through unchanged.",
+      "evidence": [
+        {
+          "resource": "repo://tests/launcher/launcher_test.sh#L35-L67",
+          "version": "repo-lines-v1:sha256:7d535e3b098e26effa2d04a955adac9ec5c50bc357441d4c6fc54ac61ffcd9f0:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZjVjMTk5Zjg4YzU5ODYzMGJlYzQ2OThiOTU2ZjZkYTdlNWY1NDljNzcwYTcxNTdkMjBiY2MyZWVhOGI1NzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQ5ZWRiNGYzYTRiOTRjYjgwZGZlODVlMTBmYzIxYjkzMWI0MmVkNjQ5YWVjMWEzYjFmNWViY2QzNGRmN2IzNGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAyYjIzZWZiOTY5YzM5ZjBjOTY3NzVhNTEwYTNhODcyY2M2MTFkMWUzZmQ1YmQyYTg0NDUxMWU5MGE2YmIzODcifQ"
+        },
+        {
+          "resource": "repo://yarn/private/yarn_binary.sh.tpl#L45-L45",
+          "version": "repo-lines-v1:sha256:1a908b8575df14880db26bf93d8517960c44193bcf25ffbc3820bdd3699f95ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMWE5MDhiODU3NWRmMTQ4ODBkYjI2YmY5M2Q4NTE3OTYwYzQ0MTkzYmNmMjVmZmJjMzgyMGJkZDM2OTlmOTVhZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWE5MDhiODU3NWRmMTQ4ODBkYjI2YmY5M2Q4NTE3OTYwYzQ0MTkzYmNmMjVmZmJjMzgyMGJkZDM2OTlmOTVhZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTYwNzdmNTIwMzRiNzhhYjhlYzhkNGZkNzAyZjdlMWQxZjgxMjVjNjAwMzhjZThjMmMxNjYxYmIxZTRkNTQ3MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6e859fe5b2384ac0888b1460523a270a",
+      "statement": "Running Yarn through yarn_binary is hermetic only in which Node.js and which Yarn execute; Yarn still reads and writes the project, its caches and the network as it would outside Bazel.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/yarn_binary.bzl#L76-L82",
+          "version": "repo-lines-v1:sha256:1076f66c6b384c85cbedd7a4d059311b8278bb43c8d37c1371d35f6e3ba485ff:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTQzNWU5YjI5ODkzMjc5NzVhNjEwYTQxMGNmNmZlYTdmYTY1ZjQ0NWEzYzAxMDBiMjMwYmJlYzhhZDhhNTBjZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjFjNTJkNjdlNDc2Yjk3MzQ1OGRhODFjZWQ2ZTgxMzg3ZDRkNWJiYjk1NjZhNWZkYzg2ZDA2NzljNjY3YjA5ZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjYyMmZlYjNkNzUyYTBkY2U5ZWJhZmM5NDYyODkwNjlmOTNjOThkNDViNGJkZGQ3MWNlZWU2YzA4MThhOGI5MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjIxYmI0ZmU5MDFlZWI0NmE3YzMyYjE2YTdiNzExOTcyNzhjNTU4NWQ5ZTA1YjI5MzQxN2Y5NjE0ZmQyNDE2ZSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-09-21T15:40:20.833Z"
+  }
+}

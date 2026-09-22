@@ -21,7 +21,7 @@ replacements (`generated.at`, `sources`), never as errors (§13.1). `--migrate`
 performs that rewrite in place, textually, so `--strict` has a door and not just
 a wall.
 
-Run:  uv run scripts/okf_validate.py <bundle-dir>
+Run:  uv run tools/okf/validate.py <bundle-dir>
         [--strict | --max-warnings N] [--migrate] [--json]
 """
 from __future__ import annotations

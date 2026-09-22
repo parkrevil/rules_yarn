@@ -1,0 +1,78 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:1a80f493b503d1b0590502a2d23f994cacc713e249537780b546497d84df0c0e",
+  "claims": [
+    {
+      "id": "claim_f94f369481c3466db1302dc475650602",
+      "statement": "The set of Yarn versions the ruleset can fetch is a checked-in map from version to Subresource Integrity digest, paired with a single URL template parameterized by version.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/versions.bzl#L5-L15",
+          "version": "repo-lines-v1:sha256:348a7476c2c8e06f5858f2ca7881ba0a71beed0033dee6ec01b9da4c1a3b5da8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4MGU0MDIxYTE5Njg4NzUwZWYxZmVjOTdlNDI1MDZmMjk4OWY3YTUzYjcwNmIwOWQ5NTRjOWI5MmZhZmFkMTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU1MGM0ZGIzOGRkNGFiNDM2MTUxMWRmYTUxYjE0NWI0Y2QxOWRjOGJjZDcxYTllNGM0OGZjZDkwMTZkZDM5ZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5777e25316114b9fb03b5e3884263c05",
+      "statement": "The root .bazelrc sets --lockfile_mode=error, so a stale or incomplete root lockfile fails the build instead of being rewritten.",
+      "evidence": [
+        {
+          "resource": "repo://.bazelrc",
+          "version": "repo-file-v1:sha256:bca2256a26505247fe6442e653e1504c00b7a3fc5da6f9a1ce5e16cfb8a2a791"
+        }
+      ]
+    },
+    {
+      "id": "claim_ebb91cc4c5ef471189423ab862c801cf",
+      "statement": "The consumer smoke module carries its own .bazelrc with the same lockfile error mode, because Bazel reads the .bazelrc of the module root it is invoked in and the root module's setting does not reach it.",
+      "evidence": [
+        {
+          "resource": "repo://.bazelrc",
+          "version": "repo-file-v1:sha256:bca2256a26505247fe6442e653e1504c00b7a3fc5da6f9a1ce5e16cfb8a2a791"
+        },
+        {
+          "resource": "repo://e2e/smoke/.bazelrc",
+          "version": "repo-file-v1:sha256:eff408f44f90b05a61423a4bf14027e804d5bd9b0fc02e7481de91e134c7c0f2"
+        }
+      ]
+    },
+    {
+      "id": "claim_dd9c4b35bd0c47178651c7ba7fe1d5a2",
+      "statement": "The consumer smoke module is a separate Bazel module with its own module file, lockfile and Bazel version pin, depending on the ruleset through a local_path_override rather than through a registry.",
+      "evidence": [
+        {
+          "resource": "repo://e2e/smoke/.bazelversion",
+          "version": "repo-file-v1:sha256:1b9487d55bea47fea50d226cc9c53bc548877ad2a318bac8fbc8b320f429e5c5"
+        },
+        {
+          "resource": "repo://e2e/smoke/MODULE.bazel#L1-L9",
+          "version": "repo-lines-v1:sha256:08ef781732e82eb7e4b02d002fc962d87fe7a94c649c7038c7318c821f0f94f5:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzI3NDQ2NzZiMDhlZTlmZGY0YjYyYTkxNjQ1N2M3OWI5ZmRkMmNmZjVkNTViMzdmMzkxNTJhOTkzOWNlNTZiNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTZmOTU4NTNhNGM2OWI1ZmNjMzc5ZjU1MGVjNWI1NDM5ZDYzM2UwNTVkZTJiYzdkYjFjMTI0MDBlNzNhNjE1MyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_80b561828663453a8744bff1db2a6b94",
+      "statement": "The Node.js toolchain registration, the test Yarn distribution, the platforms module and the testing framework are declared as development dependencies of the root module, so consumers do not inherit them.",
+      "evidence": [
+        {
+          "resource": "repo://MODULE.bazel#L9-L22",
+          "version": "repo-lines-v1:sha256:ed7d421e98d743a437c9af3eefa5d1767a2f61e350fb432119c48e3f9d028e5b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlYjAzOWI0NzM0YmM4OWVkYjliNzhhYWM3OTFlNTA3MmY4MzAyMjRhZDY4ZTlmOWQwYzcwNTg2YzYxN2EzMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiYjVmZTNjOTg4NTFkMWE4OGIzNjAyNDI4ODExZjc4OGVhNGQ5N2RlZTQzODE4YWRjYWEwYjg5ZGIyZDU1YzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjNWQ3ZjY3ZWZlYzE4MWQ5MjA3ZTBjYjI4OWI1MzUwOTI4MTdhNDkwMTIyOWQyMmRkNWZmOGQwNWEwNmM4MWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_751bbc5ada304413a4a3b606300745f6",
+      "statement": "Adding a Yarn version requires recording its digest against an upstream record — the bin/yarn.js file of @yarnpkg/cli-dist on the npm registry or the hash for that version in Corepack's configuration — because the bundle is served from the location Corepack fetches Yarn 2 and later from.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/versions.bzl#L5-L13",
+          "version": "repo-lines-v1:sha256:815a3543fd57f51ebee788cab0429b2977cb8f2517e8c96d114bbaced2ac81d4:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTgwZTQwMjFhMTk2ODg3NTBlZjFmZWM5N2U0MjUwNmYyOTg5ZjdhNTNiNzA2YjA5ZDk1NGM5YjkyZmFmYWQxNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWNkYzQ5Njg3ZjI3MDNhMzZhYTQ1NDU2NWVhMWY4ZWE2ZGE1NzIyZTNlZGE3M2ExOGIwMDBmMWRiMDlhMWFhZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTUwYzRkYjM4ZGQ0YWI0MzYxNTExZGZhNTFiMTQ1YjRjZDE5ZGM4YmNkNzFhOWU0YzQ4ZmNkOTAxNmRkMzlmYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTkxZWNkMGU5MzBlNGJhNjIyNWMyYzRhNzFmNzhlNDQ4NTQ2MmViMmM5OTllYTQ5ZTA5MzRlNzBjYjk2OTQ5ZSJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-09-21T15:40:20.833Z"
+  }
+}

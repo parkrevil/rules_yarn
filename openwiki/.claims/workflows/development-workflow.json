@@ -1,0 +1,124 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:5f0b40d65ee6a8035147be78a792287a0274fab9a72c660f86c5e7820fb0f56f",
+  "claims": [
+    {
+      "id": "claim_0d817a7a3b964d06937894529d820b10",
+      "statement": "AGENTS.md is the single agent instruction file and CLAUDE.md only includes it; its rules are grouped by when they apply rather than by topic.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md",
+          "version": "repo-file-v1:sha256:0d31883006d560c347a84f2235e819505e6bbb1c0020f4abbad4a6816d0dd147"
+        },
+        {
+          "resource": "repo://CLAUDE.md",
+          "version": "repo-file-v1:sha256:336cc4fbf19beaada7ccf9986414fa91851a8d7a07dfb3ccbe800a69eed0ab49"
+        }
+      ]
+    },
+    {
+      "id": "claim_b713e0a115054dffbbfb4e81f5ffcfd7",
+      "statement": "Changes are planned in OpenSpec using the spec-driven schema, and openspec/specs/ is written by archiving a completed change rather than edited by hand.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md",
+          "version": "repo-file-v1:sha256:0d31883006d560c347a84f2235e819505e6bbb1c0020f4abbad4a6816d0dd147"
+        },
+        {
+          "resource": "repo://openspec/config.yaml#L1-L1",
+          "version": "repo-lines-v1:sha256:85b53dd24fbe7d19c8b0f0ddccf5e82600c5c372c76b57a2a89dc34dfb0fc5b9:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODViNTNkZDI0ZmJlN2QxOWM4YjBmMGRkY2NmNWU4MjYwMGM1YzM3MmM3NmI1N2EyYTg5ZGMzNGRmYjBmYzViOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiODViNTNkZDI0ZmJlN2QxOWM4YjBmMGRkY2NmNWU4MjYwMGM1YzM3MmM3NmI1N2EyYTg5ZGMzNGRmYjBmYzViOSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNGZmOGFjN2U5ZmRjYTJiYTFkZWQxN2UyZmJkMGViNjFiOWUxMThkZTVlZTc3OGYyZGIyOTY1NTA2MTU4OGYwOSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_c38b93dc025f46fc826511043240f374",
+      "statement": "pre-commit enforces general file hygiene, buildifier and its linter over Bazel files, and two path-scoped local checks: the OKF bundle validator for .okf/ and openspec validate --all --strict for openspec/.",
+      "evidence": [
+        {
+          "resource": "repo://.pre-commit-config.yaml#L3-L37",
+          "version": "repo-lines-v1:sha256:b4cf06b4216ea5f20ce096a83e2c539b3d2ad43febed645f5b61755c50e848be:eyJzZWxlY3RlZExpbmVDb3VudCI6MzUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjVhMTEwZGI1YTkzNTdjZGExZDc4MjE2Y2RjMGJmOGIyNTVlMzM4Y2JjMWYzMjdlMGRmMDhjZmM3NzM5MWRkZWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE5N2I3YzIxODM3ZGY3ZjNhMmUwNzU2NGU3OTU1ODYwZjI1MThiNDAxMTYzMzcyMTRlZjBlZTQ3NDE5YjA2MGQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFlMzY1MDFhYWIzMDU2ZjIwOTNmNTQxMmVkNDY1MjViZWQzY2M2YzgyYmExNWUwNzc5OGQ4ZGM4MzYxY2MyYzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c3301935a755485883a92f45ff58bcfe",
+      "statement": "commitizen enforces Conventional Commits at the commit-msg stage, and the configuration declares both required install hook types so a plain pre-commit install wires the commit-message check.",
+      "evidence": [
+        {
+          "resource": "repo://.pre-commit-config.yaml#L1-L1",
+          "version": "repo-lines-v1:sha256:9237a3e651202fb371a4b699545679cc269ceff841bbeb3293e460f655ebd008:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTIzN2EzZTY1MTIwMmZiMzcxYTRiNjk5NTQ1Njc5Y2MyNjljZWZmODQxYmJlYjMyOTNlNDYwZjY1NWViZDAwOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTIzN2EzZTY1MTIwMmZiMzcxYTRiNjk5NTQ1Njc5Y2MyNjljZWZmODQxYmJlYjMyOTNlNDYwZjY1NWViZDAwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMWQ4NzU5NmM1MmY0OTk5MWU0M2MxMjNjOTU1MTZmY2U1NzExMTg3ZTY1NjdlZWEyZjczNzNjMzE3NjFhNjNlYSJ9"
+        },
+        {
+          "resource": "repo://.pre-commit-config.yaml#L19-L23",
+          "version": "repo-lines-v1:sha256:528d3a831a295a31a9c356605081511ffb1c8e36b52468f3f312b97c13356dde:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDM5NmU1NWM1NDM1ZTYyMTUzZTIyMjJkNDJhNjc0ZTdmNjhhMDlhYzVhZTZkZjUwZGQwOTYwYjBkM2Q2Mjc3OCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTI1YjFiNDE2YjA4MDlhNjE3Y2U2ZTIwMjI3MjcwNmYyNzViZjU5MThjZTQ0M2MxMmRiODc2NGY0Y2I2NTMzZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmY4M2NhYmFiYjVlNzRkMGNmMmY4OWFhYmI1YTAzZTdlOTg5MzkyNDNmNjQ0NGE1MmY3YWUzY2ViZmQyMGY5NiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTU1M2Y1MGY5Zjk1MGQ5ZmNhMmZkNjhjOWM0ZTAwOWY5Yzk3ZWUyYTA4OThhZGNjZWQ0Y2Q1ZWYxYjY1ZDYzMyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_98aeb73c8d62462ea5e43eef3b6cabac",
+      "statement": "Two Claude Code hooks run inside the agent tool loop and match write-capable tools including Bash, so shell-based edits are covered as well as the file-editing tools.",
+      "evidence": [
+        {
+          "resource": "repo://.claude/settings.json",
+          "version": "repo-file-v1:sha256:846a0d8d8fecfe92b89565203e4249d9b44c633813c4d8be6f6fcfac2b07d160"
+        }
+      ]
+    },
+    {
+      "id": "claim_8ed1afc7a93241f3be936b0294b4ab42",
+      "statement": "The generated-file guard denies writes to OpenWiki's bookkeeping files and to anything under openspec/specs/, while leaving OpenWiki page bodies writable because the agent authors them during a run.",
+      "evidence": [
+        {
+          "resource": "repo://tools/hooks/protect_generated.sh",
+          "version": "repo-file-v1:sha256:b9309302d2d451878352d62247cf7b27f747cdd961e3d7518e428d9404340d09"
+        }
+      ]
+    },
+    {
+      "id": "claim_8406522e225b42fd981b9ed79704b2eb",
+      "statement": "For shell commands the guard is advisory rather than exact: it splits a compound command and judges each part, requiring a redirection to name the protected path, counting in-place writers and interpreters wherever the path appears, and counting cp, mv and install only on their last argument; a redirection anywhere in a command naming a protected path is treated as a write, so a read whose output is redirected elsewhere is also refused.",
+      "evidence": [
+        {
+          "resource": "repo://tools/hooks/protect_generated.sh",
+          "version": "repo-file-v1:sha256:b9309302d2d451878352d62247cf7b27f747cdd961e3d7518e428d9404340d09"
+        }
+      ]
+    },
+    {
+      "id": "claim_2ed433fcc4314de6aa6f9ec236ba1843",
+      "statement": "The OKF conformance hook runs the bundle validator after a write touching .okf/ and returns its output as an error so the document is fixed before work continues, exiting quietly when no bundle exists.",
+      "evidence": [
+        {
+          "resource": "repo://tools/hooks/okf_conformance.sh",
+          "version": "repo-file-v1:sha256:9ea5eee088449d105657dc598b4a1a5a440cb13dc45ffb16ef28fd0a9d37dd76"
+        },
+        {
+          "resource": "repo://tools/okf/validate.sh",
+          "version": "repo-file-v1:sha256:a91aeaae203eddecea0326793661bc32af8142cd0ec14c044a1a2e0961edc633"
+        }
+      ]
+    },
+    {
+      "id": "claim_9a6ed5c993604bed86d8a3e0971fdf7d",
+      "statement": "Several working rules have no mechanical enforcement, including the cited-API requirement, test-first ordering, independent review, and the build-and-test gate: no workflow runs the build or the tests, and the repository's only workflow is the OpenWiki-owned scheduled wiki update.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/openwiki-update.yml",
+          "version": "repo-file-v1:sha256:a9c8e57b33934609b86242a281fabdd1df8518586a94575025f3c6c4b4df099f"
+        },
+        {
+          "resource": "repo://.pre-commit-config.yaml",
+          "version": "repo-file-v1:sha256:09ee9f833c3247889782ea5d04fae5d8b7200d6351f83a935813c68405d8c90a"
+        },
+        {
+          "resource": "repo://AGENTS.md",
+          "version": "repo-file-v1:sha256:0d31883006d560c347a84f2235e819505e6bbb1c0020f4abbad4a6816d0dd147"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-09-21T15:40:20.833Z"
+  }
+}

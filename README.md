@@ -101,6 +101,14 @@ than from `__dirname`, which Node.js resolves through the runfiles symlink.
 Analysis fails if the resolved Node.js runtime toolchain provides only a host
 path instead of a file.
 
+`yarn_binary` takes the distribution as a label rather than resolving it through
+a toolchain type, unlike the `register_toolchains` pattern `rules_nodejs` uses
+for the Node.js runtime. A Yarn bundle is platform-independent
+JavaScript — one artifact per version, with nothing for toolchain resolution to
+select between — so a toolchain would add a registration step and a resolution
+failure mode without deciding anything. The Node.js runtime, which is
+platform-specific, does come from a toolchain.
+
 ## Tested configuration
 
 Checked on 2026-09-20 on Linux x86_64:

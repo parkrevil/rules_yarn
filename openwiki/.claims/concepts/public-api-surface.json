@@ -1,0 +1,102 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:adc60f81e605115dfbfcfbd4e69be2baf33abd59649c0fd00ba4b4bf0204b56c",
+  "claims": [
+    {
+      "id": "claim_982785d0fd074cf9afca2ef0e4673dd2",
+      "statement": "The public Starlark surface is exactly two symbols: yarn_binary re-exported from yarn/defs.bzl and the yarn module extension re-exported from yarn/extensions.bzl, each a thin rebinding of a private implementation.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/defs.bzl",
+          "version": "repo-file-v1:sha256:f5df013186ee1bd9c3cee980a02509a055dd590de89dce93d1e523a0a353c47d"
+        },
+        {
+          "resource": "repo://yarn/extensions.bzl",
+          "version": "repo-file-v1:sha256:47a7b36739f47572d83b112e4acae05f7ba03fb135c8b416e2dc43b259c9bd0b"
+        }
+      ]
+    },
+    {
+      "id": "claim_91cbacefe5504a8c809c8823c1d0c935",
+      "statement": "Load visibility on the private Starlark files is enforced by Bazel during loading, so a package outside //tests/... and //yarn/... that loads one fails with a .bzl load visibility violation.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/extensions.bzl#L6-L6",
+          "version": "repo-lines-v1:sha256:2b1ac1272dbf10f352b80c0f7255bdc14efe84cfe43ae4513843999fabc7adb2:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODhhNDY2YmM4ZDBlYzNlMWFkMjA4OTA2ZGJkMjE5YjEwNzdlZjhhOTc0YzVjNTlmMDJjNTgyZTU2ZTUwYThlZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWUwNjk5MmZmMjBlZWU5NjhmNGU2MDdkMzVlOThkZTE5YzYwOTBkNWNiNWZkMzU4Zjc1MDliMGM2ZDI2OTkyOSJ9"
+        },
+        {
+          "resource": "repo://yarn/private/repositories.bzl#L3-L3",
+          "version": "repo-lines-v1:sha256:2b1ac1272dbf10f352b80c0f7255bdc14efe84cfe43ae4513843999fabc7adb2:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmI0MjM5OTU5YjcxNDczYzUyNTJhMDE5NTU5NGJkODQ0ODI1MzQ4MjlhNzIxODMzMjJkNWQ3YjFkYTRjMTRmOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDMzM2Q5MWNiYTViNWE4YmEzMjYxYjlkZWE4ZWE2NDQ0Mzg2M2JkMmZhZGU4ZWI0MmE3ZDk2ZGYwYTNlZDA0MCJ9"
+        },
+        {
+          "resource": "repo://yarn/private/yarn_binary.bzl#L5-L5",
+          "version": "repo-lines-v1:sha256:2b1ac1272dbf10f352b80c0f7255bdc14efe84cfe43ae4513843999fabc7adb2:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDU3Y2ViNzI5NjI0MDU5YjM0ZjI0MGEwNzk2N2U3MmQwNWVhYjEzNmJiNTAwNTQwNzY0NGNhMDQ2MDJjZDUxZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYmIxMDE0NjU1MTMyNmFkYjFmNDdmOTFkN2ExMDljYWExZjRhZDgyNTkzN2NkYzBlMDEwY2JiN2ZkNjVhMmE1ZiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3efad35e39f4402f9f26c09bade8e7c2",
+      "statement": "Only the extension and rule bzl_library targets are visible to //yarn; the repository and version libraries declare no visibility and so remain private to //yarn/private, reachable only from within that package, and the launcher template is exported privately.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/BUILD.bazel#L28-L33",
+          "version": "repo-lines-v1:sha256:d4fb1e5317deb913c54f7ea03b3e8568667140c1cd9891e4fdff6e1e90511cfa:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTZhMDZmM2NmM2QwMTRhNzhhODAyMGUxMGZiM2U3ZWQ3MzhkMzE5MWE0N2IwMWQzNGE5NDUyYjg1ZmRkNTE5NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODQ0YjJlNzVkNGUzOGY3YTg2ODI2ZGNmNDA0NTQ5ZTQ4YzliMjVmMjk2YTIyMzI2ZWJhNGZjZWUzOWY3YjA2YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://yarn/private/BUILD.bazel#L3-L6",
+          "version": "repo-lines-v1:sha256:05d6d97e156a2a3358ca954281cd53c54ad5d044ddb025d8fc0a6f7398ef27f2:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmUxM2NhMmE4ZTU2YTI5ZDIzMzE4YWJjMTdhMWJjM2M0MmI1M2U3ZWRjMjg1NDMyY2MyMDFlYTBhNTBmODI4ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODE3MGVkYjAwZjRiMTlkYzBlODhjM2UxNTkwOGI2MTNmY2E2NzgyY2JhODQ2N2U4NmUxMTRiYjJkMmMzOTIwYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDU3YTYxMDAzYjMxNDk0MDc4NTMxOGZiZDI1YjQ3NWI5MzgwNmFiMzZlYmExODhmZGQ4ZTBiZDIzM2Y1OTI0YiJ9"
+        },
+        {
+          "resource": "repo://yarn/private/BUILD.bazel#L8-L26",
+          "version": "repo-lines-v1:sha256:ccc672d714f03f66dcfd16e7d10646f9ebb4ebde58a53ada6832a87a0b7868a1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2YTA2ZjNjZjNkMDE0YTc4YTgwMjBlMTBmYjNlN2VkNzM4ZDMxOTFhNDdiMDFkMzRhOTQ1MmI4NWZkZDUxOTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxODdiYzcyNjMxMmVkYTFlNjMzYjdmNDgxM2QwYjFkYjlhOWE4ZTMzODVkNzBhNjhmMGY5NDNhMWJiNGYwNzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEwMzQ2Y2M1MTk2ZWIxYTRkYzkxNGU1YWQxMjU0ODM0ZGMxNDIwYjUyZmNhOTc0MjkyNzkwNGZhZmJjZDFjODQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_30e712bc724d479d9df85a81e5760a77",
+      "statement": "Each public Starlark file has a publicly visible bzl_library target declaring its transitive .bzl dependencies, so downstream tooling can describe the Starlark dependency graph.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/BUILD.bazel",
+          "version": "repo-file-v1:sha256:2c434d68ef18d66c359831e32285e6706b67f8d23b3cd06593d9a7aaab7db894"
+        }
+      ]
+    },
+    {
+      "id": "claim_7e4998e82faf4785a758ce754c1361b2",
+      "statement": "Consumer-facing documentation lives on the public symbols themselves: the extension file documents the MODULE.bazel snippet, and the rule and tag class carry doc strings covering attributes, repository naming, and the limits of the hermeticity guarantee.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/extensions.bzl#L1-L10",
+          "version": "repo-lines-v1:sha256:b2da6202e39fb25ade3aa694bee1ba5acf3000116454840e8a713de25741bdad:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4MTczMDJiNDZmYTVhNWJkMThkMDc0M2VlNjdlNTM1NjhmYzZmMjk1NjQ5M2YwZmFmNGEyYmMxZTFhNjZlMDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMDNlY2RkNGE0ZDEwZjE5YzczZmQ0MmZkMTI0MzdmZDMzNTRhODI2ODE2MDVkYTUyNTVhOTdhMzkwNjhkYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZhMmUzZDI0MDNkZDk0MGFmZTZlMDkyNDdkMzJjMDAwODNkOGQ0OTM2OGFhMjE4ZjE2MWUzN2MwNTYxZDkwYmMifQ"
+        },
+        {
+          "resource": "repo://yarn/private/extensions.bzl#L86-L105",
+          "version": "repo-lines-v1:sha256:16c4f322fa5214c72d71f038f9ddb44433f3d873376e781b61bc87b9133247de:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhZDVjODVjZmQ4ZDA2YjdmNzhhMzczNTRlOWY5OTcyYjE0ZDBiMmE5NWQzODA4MTZiNzYxYWIxYjMzNzIzYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUxNTM4ODM1M2RhMTEzZjBlMzQ1MDY5NTE0MGNmMjQ3N2YyYTZmYjI1MjlkOTJhYmMxYjQzNzgxZTIwNTQwYzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1ZmFlZDk4ZmNjMmU5MmFjMTBhYmY5MzFhN2E2ODNjZGM5MTJhNDA5YmQwNzBiNTZhMjZjYTUxZWFmMGYxMDYifQ"
+        },
+        {
+          "resource": "repo://yarn/private/yarn_binary.bzl#L59-L96",
+          "version": "repo-lines-v1:sha256:4578e2370b9ecb7218da741795a6b596bb08d556bf4613a2653b4b29984619ed:eyJzZWxlY3RlZExpbmVDb3VudCI6MzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3ODc5Y2RkOTQyNTliZWFlOTdkMTFjMTNhOGYzODQzNjg4ZmE3MjA5YzRlYTEwYTAzMWM1OGJmYzk2M2U5YjgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmMGNkYjk3MmE3YmZiN2VkMjQ2ZjlmZjY3MjM4NWU1NWY0OTY4ZmMxMTA0M2RjNWI2ODRkNTFkZmEzMWRiY2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiMGQwOWI5OTJmMGVlYWFjMmRjZjY1NTljZDVhMDI4YzZlMDZkNWU5YTU1OGRlMWRjOTQ0MTBlNmE4MmE1NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNkYWYzMWUzZjIyZTdlNmE4NDNiMTVhZTllOGE0NzM2Y2I2ZThjMTNlMzVmNDU5YjY0NDRiNTc2NjU5ZjlmMDUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0508ef2a901849a99920722ab5298385",
+      "statement": "The Yarn distribution is passed to yarn_binary as a label attribute rather than resolved through a toolchain type, so a consumer's BUILD file names the distribution explicitly.",
+      "evidence": [
+        {
+          "resource": "repo://e2e/smoke/BUILD.bazel#L4-L7",
+          "version": "repo-lines-v1:sha256:5b9ecaba8c7b302ff8551f3d6ebf42613bf31726db58dc80b72771e6bd585927:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTA0YjRiNWQ1YTVjNDQ4MDZmMWEzMTRiNmZjNGE3MjkwYTY3MGUyMjA1NmQzMmNkMDkyZjVlMTBjMDg1YjMzMCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTYwYWM2YjE1MDBkYzI5YWY2YWU1MDkzNmEwNjY2Y2U1NGMwNDAxNTYwY2QxMzlmZDQzN2NiMjZhNTIzODRjMiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjNkZDc2MGZjMjFjODY5MTkyM2M4ZmFlMzI1OWZmYWI4NmU4MmZlYWM1NjZiMDAxZDE4NGI1MzM4OWQwYTUyOSJ9"
+        },
+        {
+          "resource": "repo://yarn/private/yarn_binary.bzl#L83-L88",
+          "version": "repo-lines-v1:sha256:8a4f9c00452c34ce488f92abea81c9f228e760fadbb48119407cd639070b5cb8:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTFiNmJhMzRlYzBmZDQyZDFkZTZlZmQxZTlmYjU5M2U1ZmVhNGExMjJiOGIzM2E1NTdmYWFhMDY0YzIyYzU1NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTQzM2QwZWE5ZWNmMmYzOWM5YTUwNDA3Mzk1ZWU0MTE3MmZlNjgyYzljODg1YTM1MDhmNzViZGVlMTUxZWZmZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWI4NzY4ODIxNGY3ZDcwNmU4OGNmMWQ5ODBjN2EzOWU4YjRjYzczOTdkODE2NTYyOWYzOGU3ZWRjMGJkOWUzZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzNkNmE0ZGNiYjdmOWM3MzM5NjZkMDk4YTQ1ZTE0YjEwY2FjNDZmMWMwMjRmMmZjYzE0NTg1NTRmYWVlNTExYyJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-09-21T15:40:20.833Z"
+  }
+}

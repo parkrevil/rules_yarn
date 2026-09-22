@@ -1,0 +1,7 @@
+# Settings for the consumer smoke test.
+
+# Keep MODULE.bazel.lock complete and committed so this module resolves the same
+# versions as the ruleset it verifies. Without this, the default lockfile mode
+# rewrites a stale lock silently. After changing dependencies, run:
+#     bazel mod deps --lockfile_mode=update
+common --lockfile_mode=error

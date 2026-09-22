@@ -20,6 +20,7 @@ def _test_launcher_and_runfiles(name):
     analysis_test(
         name = name,
         impl = _test_launcher_and_runfiles_impl,
+        attr_values = {"size": "small"},
         targets = {
             "node_runtime": "@rules_nodejs//nodejs:current_node_runtime",
             "subject": name + "_subject",
@@ -63,6 +64,7 @@ def _test_entry_point_runfiles_are_kept(name):
     analysis_test(
         name = name,
         impl = _test_entry_point_runfiles_are_kept_impl,
+        attr_values = {"size": "small"},
         target = name + "_subject",
     )
 
@@ -80,6 +82,7 @@ def _test_host_path_runtime_fails(name):
     analysis_test(
         name = name,
         impl = _test_host_path_runtime_fails_impl,
+        attr_values = {"size": "small"},
         target = name + "_subject",
         expect_failure = True,
         config_settings = {

@@ -6,4 +6,4 @@ set -euo pipefail
 bundle="${1:-.okf}"
 [ -d "$bundle" ] || exit 0
 
-exec uv run "$(dirname "$0")/okf_validate.py" "$bundle" --strict
+exec uv run "$(dirname "$0")/validate.py" "$bundle" --strict

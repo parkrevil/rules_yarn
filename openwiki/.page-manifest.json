@@ -1,0 +1,54 @@
+{
+  "schemaVersion": 1,
+  "pages": {
+    "/openwiki/architecture/distribution-pipeline.md": {
+      "pageVersion": "sha256:03f29cc2ba2455d65d7e241f6017a9ea896dc6bc16c328cc51b4608a2625b914",
+      "completedBy": "claude-code",
+      "completedRunId": "cfe7da03-debd-4af3-b208-c608303f78fc",
+      "gitHead": "d5ee42b6ff507e0ba5ea4d496fe4ac8e57f5c2b7",
+      "sourceFingerprint": "sha256:1cf32ddbaf64ba589db15edf7be6149e5e664659e955ee68df91df1df4889653"
+    },
+    "/openwiki/architecture/launcher-execution.md": {
+      "pageVersion": "sha256:2254fcd0abda1bb4007a1258902ae0477800d9b9120734713281bdec4bfdadfe",
+      "completedBy": "claude-code",
+      "completedRunId": "9b8a6846-24b7-4144-93cd-12fae3e6c46e",
+      "gitHead": "d5ee42b6ff507e0ba5ea4d496fe4ac8e57f5c2b7",
+      "sourceFingerprint": "sha256:1cf32ddbaf64ba589db15edf7be6149e5e664659e955ee68df91df1df4889653"
+    },
+    "/openwiki/concepts/public-api-surface.md": {
+      "pageVersion": "sha256:adc60f81e605115dfbfcfbd4e69be2baf33abd59649c0fd00ba4b4bf0204b56c",
+      "completedBy": "claude-code",
+      "completedRunId": "9b8a6846-24b7-4144-93cd-12fae3e6c46e",
+      "gitHead": "d5ee42b6ff507e0ba5ea4d496fe4ac8e57f5c2b7",
+      "sourceFingerprint": "sha256:1cf32ddbaf64ba589db15edf7be6149e5e664659e955ee68df91df1df4889653"
+    },
+    "/openwiki/operations/version-pinning.md": {
+      "pageVersion": "sha256:1a80f493b503d1b0590502a2d23f994cacc713e249537780b546497d84df0c0e",
+      "completedBy": "claude-code",
+      "completedRunId": "9b8a6846-24b7-4144-93cd-12fae3e6c46e",
+      "gitHead": "d5ee42b6ff507e0ba5ea4d496fe4ac8e57f5c2b7",
+      "sourceFingerprint": "sha256:1cf32ddbaf64ba589db15edf7be6149e5e664659e955ee68df91df1df4889653"
+    },
+    "/openwiki/quickstart.md": {
+      "pageVersion": "sha256:02505ab1908fac965630bd85b09a578496ab64e97fd102956eb63352203dff7d",
+      "completedBy": "claude-code",
+      "completedRunId": "9b8a6846-24b7-4144-93cd-12fae3e6c46e",
+      "gitHead": "d5ee42b6ff507e0ba5ea4d496fe4ac8e57f5c2b7",
+      "sourceFingerprint": "sha256:1cf32ddbaf64ba589db15edf7be6149e5e664659e955ee68df91df1df4889653"
+    },
+    "/openwiki/testing/verification-strategy.md": {
+      "pageVersion": "sha256:c2f708dbc033ab310131eb3b981dd33dadbba67a86bc63535d336fda8bec4911",
+      "completedBy": "claude-code",
+      "completedRunId": "9b8a6846-24b7-4144-93cd-12fae3e6c46e",
+      "gitHead": "d5ee42b6ff507e0ba5ea4d496fe4ac8e57f5c2b7",
+      "sourceFingerprint": "sha256:1cf32ddbaf64ba589db15edf7be6149e5e664659e955ee68df91df1df4889653"
+    },
+    "/openwiki/workflows/development-workflow.md": {
+      "pageVersion": "sha256:5f0b40d65ee6a8035147be78a792287a0274fab9a72c660f86c5e7820fb0f56f",
+      "completedBy": "claude-code",
+      "completedRunId": "9b8a6846-24b7-4144-93cd-12fae3e6c46e",
+      "gitHead": "d5ee42b6ff507e0ba5ea4d496fe4ac8e57f5c2b7",
+      "sourceFingerprint": "sha256:1cf32ddbaf64ba589db15edf7be6149e5e664659e955ee68df91df1df4889653"
+    }
+  }
+}

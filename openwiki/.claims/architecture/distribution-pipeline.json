@@ -1,0 +1,144 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:03f29cc2ba2455d65d7e241f6017a9ea896dc6bc16c328cc51b4608a2625b914",
+  "claims": [
+    {
+      "id": "claim_14acd4982a1f40faa11864fff84f7705",
+      "statement": "Version selection is first-wins per repository name over Bazel's breadth-first module order, so the module closest to the root module decides the Yarn version for that name and later declarations of the same name are skipped.",
+      "evidence": [
+        {
+          "resource": "repo://tests/extensions/extensions_tests.bzl#L53-L70",
+          "version": "repo-lines-v1:sha256:9e179692c9a19e9a3799a593d0489402e061f5268a744f9f0cb3d859a5f36043:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3Njg1NDE4Njg1MTFjOTQwOTc0YTEwMmIwYjIyYTJhZmNjNmJkMjg2N2U4ODg2MjI4NjAzOWFiNmIyYTJiNzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRmMTcwOGE4Mjc1YTk4YWEwY2JhN2Y2MDIzYzhlZjBjY2E4NzJhOWQxYzM3MmQ3ZjBlMzhiMDgwNzRlYmM5MWMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNTc1NWIyMDhjNTc0ZmVmN2QzMWQ5MzYyNjZkZWZhOTAzNGVhNmYzYzA5ODg2MTg2MGY3NWU1MWVkNjRmZWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBjNTc0MzFhNmM1MTFiZDk1MGMxMjk5NmY5ZDU0YTI0ZGYxODBlYmE4MmM3OTcyZTk1YjNmZDBkMDM1NDliNWQifQ"
+        },
+        {
+          "resource": "repo://yarn/private/extensions.bzl#L32-L47",
+          "version": "repo-lines-v1:sha256:7378d39f752e36fc9e0e33be6dcf12050b4274ca37dfa062c66cf0fd679b44ec:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4ODVhMjdhZGU3YWUzMTE2YzIwYjAwMjg2ZmJlYTNlNDYyYjZlYTE2OGEwMDYwNTU1NmZjYjc2NzdhNDY5ZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkOGE5ZTljMzI1MjgyMGM2NWE4MTY1MjBiOGRiNDkzMjI4MDg0OWVjOGM3ZDJlYjYyNzJhZmRmZWJlMDU5YzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjgzMjJiMGYwMjNiNDQ0MDFlODQyNDMxY2U1YTM2MTQ1YzY4ZjhjMGRlY2U5NzFlZjI1ODg1MGJiODdhOWM3NmMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhhYjQxOGUwY2ViZjFjZDhlYTU5ZjEzMmU0NmIyYWQ0OTMzNzNhZTYwOTRhN2ZjNDYzNjYzOTVhZTJmNmQ4MGEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_fc3c30ac10334ceb93e0a11f5bcb2788",
+      "statement": "Only the root module may declare a repository name other than the default \"yarn\"; a non-root module doing so aborts extension evaluation.",
+      "evidence": [
+        {
+          "resource": "repo://tests/extensions/extensions_tests.bzl#L95-L104",
+          "version": "repo-lines-v1:sha256:f45fd3b1b740ed9600abd6578d9e6d5fbef1e6ed87a2e89099c5633aeec4a587:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwNWU4NjZlYjg5NGNjNTBmYWViNmI1ODkzM2Q4NWMzOTJkMGZlZWM0NzU1OTU5YzNlYWViOGNhMjBjN2E0ZjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2MTFiMzdjZGVjOWQzNjVhODU1Y2UyMzhjOGQzZWY4Njc0Y2JlZmFkMDAwMTU1NDY4MmJkZTFhM2QyMjM0N2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkODI3Y2RkZWE1ODNkMGJhYzA4ZGIwYjE0ZDY3MDk3NWQ0YzE2MTE0YTQzNWM1MzIwMWRmZDk3NDE3NjBiNjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2NGQ5ZjVkZWI3M2ExNzhkYTcyOTQ2Y2UwYjRlYzI2MjRiY2FmNzY0NGE1ODEzM2VmOWYyMGQyYTBiYzUzNGYifQ"
+        },
+        {
+          "resource": "repo://yarn/private/extensions.bzl#L36-L45",
+          "version": "repo-lines-v1:sha256:9cd4ee492adbbf66ced93508b3fba90ae228c875c5a630dfd9a35439412818ba:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVkYWM3NjFhODZlZmU1YzdlMmE0NWRhYWE1OTI4Y2JiNDNiZDZlMzA3NTZiNTNlZTEzNTJjZDczN2E1YzM3OTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhNTczODMyZDE1M2RlNGFiNjc3ZGMxNjcwYTJmYTNiZGFmY2I0ZGVkOTZhMmFkM2U3MjkzZjg3MzQ0MTI1NTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI4NmIzZWY1NjkyMTgwNmYyYTcwMWExZTYzNGRjZWQ0MjkwYWZjMWFhNWQ0YzIzZTYzOWIxMTM3OWU5YzQ1ZmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYwNGU1NWYxNzgzZGZjY2MwMWVjOTI2NWU3MzlmMDdlYjM0NzI5ODk2N2U4YTkxYmE3MjViZDFlMGM3OGE1OGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ffb9a0de723d49cf8c24a6eb50c25f3c",
+      "statement": "Two yarn.distribution tags in the deciding module that give the same repository name different versions are rejected as a conflict rather than resolved by last-wins.",
+      "evidence": [
+        {
+          "resource": "repo://tests/extensions/extensions_tests.bzl#L106-L117",
+          "version": "repo-lines-v1:sha256:06083f22441c3be182d3e86191045532ba7009415dc07b258af8a18570e94f32:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2MDU4ZjgwMjU0YzlhMDYyZDdjOTZhMDNkYmJlZGI5MDNlMmY4M2RhNTA0ZTcyYjIzODlhODkxNzM4ZmJiOWYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2MTFiMzdjZGVjOWQzNjVhODU1Y2UyMzhjOGQzZWY4Njc0Y2JlZmFkMDAwMTU1NDY4MmJkZTFhM2QyMjM0N2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUwYzExY2EzZWRlZWMxOWYzYzEyNWVkZTZjOWM2ZWIxODBiMjgyYzA0NTJkOGU2NTMzNzNlMjA0NzlkMGMyMzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjVlNzFkMDhmN2M3MzUyYjY4NThhMzlhMjQzMzI2NmFkZWZmNTk4N2M3ZjllOWUwNmI1NGNkYTQwOWZjYWUxZjIifQ"
+        },
+        {
+          "resource": "repo://yarn/private/extensions.bzl#L48-L61",
+          "version": "repo-lines-v1:sha256:b8d562d5088e84403d6a29928fec83cd67d890da081b25f83b04e92b0fe1a393:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2MTY2ZWI5NDRjNTQwYmIzZjllYzk3M2FiOWNmNGUzOWU1YTdmZDA4YjJkODVhMDZkMTk2YjFjNmMxOTVmMDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlkOGE5ZTljMzI1MjgyMGM2NWE4MTY1MjBiOGRiNDkzMjI4MDg0OWVjOGM3ZDJlYjYyNzJhZmRmZWJlMDU5YzMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBmMmJmZTk4YjRjMmFiN2Y2MzQ1Yjk0YzMzNjY2NGI2ZGVjNWVlY2JjNWIwM2Q1N2YzMGJkNTgxMTYwZmZmZTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU4NzdkMTQ5MjAyOTNiYmFmY2FjNDgyODAzNjVkMTc4ODMxMTg5MWI0NTYyYTFhMGEwMjhjYmYwZGY1ZmYzNmUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4475786715a54509b7a6cfea522a888f",
+      "statement": "A requested Yarn version that has no recorded digest is rejected during extension evaluation, before any download is attempted.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/extensions.bzl#L62-L71",
+          "version": "repo-lines-v1:sha256:4c10b21d923a0219be53bca5cfe03f185701b4c044e1ba64c288c12616ac2d39:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFhMzMwNGIxMDI5OWRiMjBhZmU5ZjViY2NlZWE0MjExMDc0MWE2NzljZTEzMWM0ZjdlYTBjYzZhYmRhZDI0NjUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhhNTczODMyZDE1M2RlNGFiNjc3ZGMxNjcwYTJmYTNiZGFmY2I0ZGVkOTZhMmFkM2U3MjkzZjg3MzQ0MTI1NTkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg3YTc4ZmIxOGZjMjU3ZDNkMjIyMDkwODdlMDFkOTBkZGZkY2I3YmJkNTRmMTUyZjEwMjhiZWFjMGI0NmI4MmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjlmNTdjMmI2ZDUxODgxMzYxMjUyMDNlNmUyNTAzZGYwYzE1Y2Y5Y2M3NWQyZWFkYWMxMDg3YzhhOTBjNGIxZjYifQ"
+        },
+        {
+          "resource": "repo://yarn/private/versions.bzl#L13-L15",
+          "version": "repo-lines-v1:sha256:1d4fced3738d34313387b80dec86a34d12209678b3e27ab64f8e51f72ce8b45a:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZWNkYzQ5Njg3ZjI3MDNhMzZhYTQ1NDU2NWVhMWY4ZWE2ZGE1NzIyZTNlZGE3M2ExOGIwMDBmMWRiMDlhMWFhZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMTJjM2JlNGM5NTM4NTczYzk5YWIwOWE2MjBkODMzNzVjYWYwYzUwODUyYWI2MTUxMzljYjg2YzMxNDA4NzNjZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_8a66480c8eaf475e935811caef806bcf",
+      "statement": "Declarations that lost the selection are skipped before the supported-version check, so an unsupported version requested by an overridden module does not fail the build.",
+      "evidence": [
+        {
+          "resource": "repo://tests/extensions/extensions_tests.bzl#L72-L79",
+          "version": "repo-lines-v1:sha256:46d5e0bd2ddfdca3455e22413488d81369e2c13ea6e63a1a69ee0756324c7c1e:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOWUxNzA0Y2U0MTQ1ZTE4YmYwMjc4ZDUzZWI1MGU2Y2I5ZWNjZjY4ZDQ1YzkzOTNjNzUwMWZjNmY0NjRmYjY1OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzZlZTRmYWJhNjQyMTlkOGU1OTBmMmIxYThjYTk0MDE5NDE1MWRmMWJmM2Y0NDk3ZTY0OTNkYTJjZGU5NTBlMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDJmZGUzMDEzZjU0YjJmNGY4ZDE1NGYwZWY5Njc2MDFjMGZlNDQxMGFjOTY4NWVlOTU5NmJlMWNlYzk4ZmE0YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTkxNjQxOTM4M2NlMzRjYzc2ZWYzODhhY2I2ODMyMmFjMzI4ZTU3MTEzZDkxYjVlM2NhMTA0OTVjMzM0NzE2MSJ9"
+        },
+        {
+          "resource": "repo://yarn/private/extensions.bzl#L46-L47",
+          "version": "repo-lines-v1:sha256:e937c74054f3b9b62820af7e76234656a94bb7ff1665904bd4deb74df343aca5:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTE5ZWQ5ZGQ1YjMzZmYzOTUzYTU5M2U2OGFiZWM2YmRjYTdhMmI0NDNmOGVlNGFiMGExYjZlY2VjNjZhZGE4NSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOWQ4YTllOWMzMjUyODIwYzY1YTgxNjUyMGI4ZGI0OTMyMjgwODQ5ZWM4YzdkMmViNjI3MmFmZGZlYmUwNTljMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjRlNjE2NDliMzRjNWEzZTRjMjRhNTY1MjRlM2FkZTIwY2FkZjdiZDIwMzkwMjI2YmQwM2JiYmJkOTYyNDViZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGFiNDE4ZTBjZWJmMWNkOGVhNTlmMTMyZTQ2YjJhZDQ5MzM3M2FlNjA5NGE3ZmM0NjM2NjM5NWFlMmY2ZDgwYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_673a2224a5644f7d901bdb0e51d860d2",
+      "statement": "The yarn_distribution repository rule cannot be instantiated without an integrity digest and a URL list: both attributes are mandatory, and the implementation performs exactly one integrity-checked download into yarn.js.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/repositories.bzl#L24-L28",
+          "version": "repo-lines-v1:sha256:870e87976d33737c4eba238c8c90586b4aca242de85816d57a77e74992826254:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDc3N2FkZmEwNWI1MjJhMTgzNzBkNWE1YzBmMjgyOWQ2N2M1NDQ3Y2VhMmExMDQ2MzU3ZTAyOGEzZmZiMGE0NiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzBjMWYxODhmMTQyZWQ3YTgyNDY4MGIyMDcxNzJjNTUxOWJjNjE0YTQ4ZmRhN2NmMTY3ZWRiOGRkZjc5OTU2YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTljZjAyZGQwM2ZmYmMyY2RhMjIzMmVkMmM4N2M1ZDIwYTI2YmQ1NmJmNGU1N2ExNjlkZDQ0YzlmODEzNzM4MCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDE3ZGFlYjNkZDA0MjkzZjBjODAwODhiNDQ5YWNmODFjMDE0OWU1ODQyZmY1ZTFlYzFmMzc5NjJiMTI4NTM4NiJ9"
+        },
+        {
+          "resource": "repo://yarn/private/repositories.bzl#L35-L44",
+          "version": "repo-lines-v1:sha256:1423824ac372b253f8e8cadc03a91d91b4e2543a6362b24168f5a42ecad408de:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImExYjZiYTM0ZWMwZmQ0MmQxZGU2ZWZkMWU5ZmI1OTNlNWZlYTRhMTIyYjhiMzNhNTU3ZmFhYTA2NGMyMmM1NTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFmMGNkYjk3MmE3YmZiN2VkMjQ2ZjlmZjY3MjM4NWU1NWY0OTY4ZmMxMTA0M2RjNWI2ODRkNTFkZmEzMWRiY2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmYzg1NjBlODMyMWM0ODU3MThjMDk5MzhhYTM3MDI3ZDM2OTRjY2Q1ODFhYzg2YWJjYThhZDc2OGRkYmQxYzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5fe966c1e5ac4a598ff30b07dc3847e7",
+      "statement": "The fetched repository exposes the bundle as a single publicly visible filegroup named yarn, generated by the repository rule rather than checked in.",
+      "evidence": [
+        {
+          "resource": "repo://tests/repositories/repositories_tests.bzl#L32-L38",
+          "version": "repo-lines-v1:sha256:34657be7c62dc1b7a933bca1e51be3d7023bc206b4efc8267053b7d48a324644:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTg4NzNiMDA3MWQ4NDNhNzAwNjljZjcxN2Q3MTFiODIxMjM5ZDRjMjEzYzVkNTdiY2ExZjBjOGZjMTAyYzQ2MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzI2NTY0YTAyZjQxZjcwYjJhMjI1NTM2NWI2ZGVjMDg3NmZmZmJmMGI3YmY1N2Y4OTgxZjM4ZGRkYTcwMzJhMSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTFjZmY1MjQzNzhkN2VlNWI1ZDExNzNjNjBmMDRmYzkyMWUxOWQ1Njg1Y2E0YjAzNGEzOWYyZTBjYTdmOTRmOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTZjZTljOWFhMmY2ZTBiZWFjNjE1MTEyN2Y1ODdjY2NmNDVlYTc5ZGMwZjkwNmEwYzBiNTBmYWRkMTM0YWFlYyJ9"
+        },
+        {
+          "resource": "repo://yarn/private/repositories.bzl#L5-L13",
+          "version": "repo-lines-v1:sha256:0470bd2c9b4f6c8a8334247be83890ef1c034355c545bd7162f581b5eb600b43:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDZmMjhlMzMyZWMyNmU0ODQyMGI2ZDRhMDc3Mjg1NDA4ZDE2MTMwMDhkOTJiOGRlZjNlODNlNDI0NjBjMjZhNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYTMwM2VjZGQ0YTRkMTBmMTljNzNmZDQyZmQxMjQzN2ZkMzM1NGE4MjY4MTYwNWRhNTI1NWE5N2EzOTA2OGRiYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTUwYzRkYjM4ZGQ0YWI0MzYxNTExZGZhNTFiMTQ1YjRjZDE5ZGM4YmNkNzFhOWU0YzQ4ZmNkOTAxNmRkMzlmYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNTkyOWY4NmQyNjU3ZGU5YmEwYWFlNTRkMjE4YzhmMjI4NjNiOWUxMmNiOWJiYzAzOTI5NDg3OTBkZTY2YTIxYSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_534d92c799624a5e8126b594e98f6001",
+      "statement": "Both the extension and the repository rule declare reproducibility: the extension is marked os-independent and arch-independent with reproducible metadata, and the repository implementation returns repo_metadata(reproducible = True) so its contents may be cached across workspaces.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/extensions.bzl#L107-L113",
+          "version": "repo-lines-v1:sha256:2d80f73165628cb6ee0d0a75a4989f224950e7fdbd8f84575fe2a22ce6af7c0b:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjRkNzI3ZTFkMTkyOWU0MThjYzQ0ZjhjYjYzZjk5MTliOTliMGU5NTc2OTJjNDI1ZTNkNzk3NWM5NTRlNTMyOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzlhNjBjZjA0ZjNmODQ3YzI5ODk3YWI0MDMwYTYyNzVjZDBmYzEzMmFjYzIwODFhZjM4YWQwMzNlYmNkMjk0YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://yarn/private/extensions.bzl#L84-L84",
+          "version": "repo-lines-v1:sha256:9300c7ccc12c27b78f00020d1e18c9fac7797f5497d9e09573e5d04f46d47899:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTMwMGM3Y2NjMTJjMjdiNzhmMDAwMjBkMWUxOGM5ZmFjNzc5N2Y1NDk3ZDllMDk1NzNlNWQwNGY0NmQ0Nzg5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTMwMGM3Y2NjMTJjMjdiNzhmMDAwMjBkMWUxOGM5ZmFjNzc5N2Y1NDk3ZDllMDk1NzNlNWQwNGY0NmQ0Nzg5OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjQ2YmM2NDMzMjUyMmRhNjhmNGFlMjkwNWYxYjZlZjc0MTgxMjczZTQ1NGFlODUyMzkwMmU2NGQ4YzgzNDYxYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMjFmMWNhNGY1MDc2YWZiMTIyMmE3YjBhYTNlNGZmNmE1MDM1ZWNhNDBmMGNkNTFiZTJiMzQ1ZWMwNWNiMDNlMCJ9"
+        },
+        {
+          "resource": "repo://yarn/private/repositories.bzl#L30-L30",
+          "version": "repo-lines-v1:sha256:99f7460bee095ec71e8d94b1497e692bc4d16656c37461c463b1c0f850f97f16:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTlmNzQ2MGJlZTA5NWVjNzFlOGQ5NGIxNDk3ZTY5MmJjNGQxNjY1NmMzNzQ2MWM0NjNiMWMwZjg1MGY5N2YxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTlmNzQ2MGJlZTA5NWVjNzFlOGQ5NGIxNDk3ZTY5MmJjNGQxNjY1NmMzNzQ2MWM0NjNiMWMwZjg1MGY5N2YxNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjI4MDQ2ZWY2YjU3OTAxY2IwOGJmMDdkYmZiMmRhYzQ1OGI2MjM5ODgyYThkYWYyNmE2ZmZmYzE0OGZiMjUyOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWVhMjFkMzhmOTY2ODZkMWU5ZjljOTkyMmM0MmZmODdhNjMzODA4Y2UwNjEzZTc4NGE4OTdlMjkyZTVhYmI0YyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_d067eeddcf3549a9880b12fade286101",
+      "statement": "The three pipeline files are internal: each declares load visibility limited to //tests/... and //yarn/..., so consumers cannot load them.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/extensions.bzl#L6-L6",
+          "version": "repo-lines-v1:sha256:2b1ac1272dbf10f352b80c0f7255bdc14efe84cfe43ae4513843999fabc7adb2:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODhhNDY2YmM4ZDBlYzNlMWFkMjA4OTA2ZGJkMjE5YjEwNzdlZjhhOTc0YzVjNTlmMDJjNTgyZTU2ZTUwYThlZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWUwNjk5MmZmMjBlZWU5NjhmNGU2MDdkMzVlOThkZTE5YzYwOTBkNWNiNWZkMzU4Zjc1MDliMGM2ZDI2OTkyOSJ9"
+        },
+        {
+          "resource": "repo://yarn/private/repositories.bzl#L3-L3",
+          "version": "repo-lines-v1:sha256:2b1ac1272dbf10f352b80c0f7255bdc14efe84cfe43ae4513843999fabc7adb2:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmI0MjM5OTU5YjcxNDczYzUyNTJhMDE5NTU5NGJkODQ0ODI1MzQ4MjlhNzIxODMzMjJkNWQ3YjFkYTRjMTRmOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDMzM2Q5MWNiYTViNWE4YmEzMjYxYjlkZWE4ZWE2NDQ0Mzg2M2JkMmZhZGU4ZWI0MmE3ZDk2ZGYwYTNlZDA0MCJ9"
+        },
+        {
+          "resource": "repo://yarn/private/versions.bzl#L3-L3",
+          "version": "repo-lines-v1:sha256:2b1ac1272dbf10f352b80c0f7255bdc14efe84cfe43ae4513843999fabc7adb2:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNzlmN2RiMTEzY2RhOTllZjQ0NjBlZDgzMTlhODYxZmJlMTFiNGM2Zjk5ZWEzNmNkMmUyODE0NjFmOWI1MmU1ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOGE3NzFjMTZkZjY1NzgwMmRhNzA2YTdmNGNiYTYyZjI5MDljM2VmZTYyNDZjYjMxNTJmOWUzNGEzODM1OWJhNyJ9"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-09-21T10:11:59.468Z"
+  }
+}
