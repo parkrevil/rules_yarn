@@ -47,34 +47,40 @@ path=$(jq -r '.tool_input.file_path // .tool_input.notebook_path // empty' <<<"$
 # A payload that parsed and names no file is not a write to a generated file.
 [ -n "$path" ] || exit 0
 
-# Judge the path by what it names, not by how it is spelled: resolve `.`, `..`
-# and symlinks, and express it relative to the repository so a matching name
-# somewhere else on the filesystem is not this repository's file.
+# Names a repository-relative path that a generator owns, or nothing.
+reason_for() {
+  case "$1" in
+    .. | ../*) return ;;
+    openspec/specs | openspec/specs/*)
+      printf '%s' "\`openspec archive\` writes openspec/specs/. Edit the delta spec under the change's own specs/ directory instead."
+      ;;
+    # OpenWiki keeps its bookkeeping in dot-named entries and generates every
+    # index page; the page bodies are what a run writes through these tools,
+    # so they stay editable. Naming the shape rather than today's files means
+    # a bookkeeping file OpenWiki adds later is covered without this list
+    # being updated — and a page a run has not written yet is not blocked,
+    # which a rule read out of .page-manifest.json would do.
+    openwiki/.* | openwiki/*/.* | openwiki/index.md | openwiki/*/index.md)
+      printf '%s' "OpenWiki owns this file. Regenerate it with \`openwiki --update\` instead of editing it."
+      ;;
+  esac
+}
+
 case "$path" in
   /*) ;;
   *) path=$repository/$path ;;
 esac
-relative=$(realpath -m --relative-to="$repository" -- "$path") ||
-  deny "tools/hooks/protect_generated.sh could not resolve $path, and refuses rather than guess."
-case "$relative" in
-  .. | ../*) exit 0 ;;
-esac
 
-case "$relative" in
-  openspec/specs | openspec/specs/*)
-    deny "\`openspec archive\` writes openspec/specs/. Edit the delta spec under the change's own specs/ directory instead. ($relative)"
-    ;;
-esac
-
-# OpenWiki owns its bookkeeping and every index page. The page bodies listed in
-# openwiki/.page-manifest.json are written by the agent during a run, so they
-# stay editable.
-case "$relative" in
-  openwiki/.claims | openwiki/.claims/* | \
-    openwiki/.run.json | openwiki/.page-manifest.json | openwiki/.last-update.json | \
-    openwiki/index.md | openwiki/*/index.md)
-    deny "OpenWiki owns this file. Regenerate it with \`openwiki --update\` instead of editing it. ($relative)"
-    ;;
-esac
+# Judge the path by what it names rather than how it is spelled, in both
+# directions. Following symlinks catches a path that reaches a generated file
+# from elsewhere; not following them catches a generated path that has been
+# replaced by a symlink leading somewhere harmless. Either spelling landing on
+# a generated file is enough to refuse.
+for resolution in -m -ms; do
+  relative=$(realpath "$resolution" --relative-to="$repository" -- "$path") ||
+    deny "tools/hooks/protect_generated.sh could not resolve $path, and refuses rather than guess."
+  reason=$(reason_for "$relative")
+  [ -z "$reason" ] || deny "$reason ($relative)"
+done
 
 exit 0

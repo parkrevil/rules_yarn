@@ -65,6 +65,22 @@ Alternatives considered:
   has the same problem. `openspec validate --all --strict` already runs there
   and checks what is checkable.
 
+### Judge a path in both senses
+
+A path can miss the generated file it names in two opposite ways. Followed
+through its symlinks it may reach a generated file from somewhere else;
+not followed, it may *be* a generated path that now points elsewhere — a
+symlinked `openwiki/` directory, or one planted there. Resolving only one way
+answers only half the question.
+
+So the path is compared twice, as written and as it resolves, and either
+landing on a generated file refuses the write. This is one rule with no
+special case, and it costs a second `realpath` call.
+
+Honest limit: no symlink exists in this repository today, so the two
+directions are exercised by the test's throwaway repository rather than
+observed here.
+
 ### Compare resolved, repository-relative paths
 
 The committed guard greps the raw path for a substring, so it answers about a
@@ -92,8 +108,8 @@ file at all.
 
 ### Match tools by shape, not by name
 
-A hook matcher is not a substring search. Measured by running the same
-`NotebookEdit` onto a generated path under each matcher in turn:
+Measured by running the same `NotebookEdit` onto a generated path under each
+matcher in turn:
 
 | matcher | result |
 | --- | --- |
@@ -101,29 +117,49 @@ A hook matcher is not a substring search. Measured by running the same
 | `Write\|Edit\|NotebookEdit` | refused |
 | `.*Write\|.*Edit` | refused |
 
-So the committed `Write|Edit|Bash` never selected `NotebookEdit`, and a
-notebook write to `openwiki/.claims/` reached nothing. A tool the matcher
-misses is a hole the guard cannot report, because it is not running — the
-same silent failure as failing open, one layer further out.
+So the committed `Write|Edit|Bash` never selected `NotebookEdit`: a notebook
+write to `openwiki/.claims/` reached nothing. A tool the matcher misses is a
+hole the guard cannot report, because it is not running — the same silent
+failure as failing open, one layer further out.
 
-Naming the tools explicitly would close today's hole and leave the class
-open. `.*Write|.*Edit` closes the class: any tool whose name ends in `Write`
-or `Edit` is covered. Over-matching costs nothing, because a call carrying no
-path is permitted anyway.
+`.*Write|.*Edit` is chosen over naming the three tools, so a later tool called
+something like `BulkEdit` is covered without anyone remembering. Over-matching
+costs nothing, because a call carrying no path is permitted anyway.
+
+What that does not cover, stated rather than implied: a file-writing tool
+whose name ends in neither word — an MCP server's `write_file`, say, which is
+lower case and would not match. The measurement above establishes the
+behaviour of these three matchers, not a general rule for how matchers are
+compared.
 
 `notebook_path` is read alongside `file_path` for the same reason: the guard
-should read whichever field names the target rather than assume one.
+reads whichever field names the target rather than assuming one.
 
-### The protected set is what OpenWiki and OpenSpec actually own
+### Name the shape of a generated file, not today's filenames
 
 - `openspec/specs/` — written by `openspec archive`.
-- `openwiki/.claims/`, `.run.json`, `.page-manifest.json`, `.last-update.json`
-  — OpenWiki's bookkeeping.
-- every `openwiki/**/index.md` — generated listings; none appears in
-  `openwiki/.page-manifest.json`, which is OpenWiki's own record of the pages
-  an agent writes during a run.
-- Everything else under `openwiki/`, including the seven page bodies in that
-  manifest, stays editable, because a run writes them through these tools.
+- any dot-named entry under `openwiki/`, at any depth — OpenWiki's
+  bookkeeping.
+- every `openwiki/**/index.md` — generated listings.
+- Everything else under `openwiki/` stays editable, because a run writes the
+  page bodies through these tools.
+
+The two OpenWiki rules are patterns rather than a list because a list drifts
+and nothing notices. Checked against the repository: everything OpenWiki owns
+under `openwiki/` is either dot-named — `.claims/`, `.page-manifest.json`,
+`.last-update.json`, and the transient `.run.json` — or an `index.md`, and the
+only non-dot files that are not in `openwiki/.page-manifest.json` are the six
+index pages. So the patterns are exactly the ownership boundary, and a
+bookkeeping file OpenWiki adds later is covered the day it appears.
+
+Alternative considered: deny everything under `openwiki/` except the pages
+listed in `.page-manifest.json`. Rejected — the manifest records pages a run
+has *completed*, so a page being written for the first time is not in it yet,
+and default-deny would block the run it is meant to protect.
+
+What the patterns do not cover: a generated file that is neither dot-named nor
+an `index.md`. None exists today. There is no shape left to match on, so that
+one would need a rule of its own.
 
 ### The test is the contract
 
@@ -149,9 +185,14 @@ Adding it to a gate belongs to the change that adds CI.
   The committed layer did not close this either.
 - [`realpath` is GNU coreutils] → Already required in practice: the repository
   is Linux x86_64 only, and the guard already depends on `jq`.
-- [A new generated file could be added without being added to the set] → The
-  set and the test sit next to each other in the same directory, and a missing
-  entry is a missing row.
+- [A generated file that is neither dot-named nor an `index.md` would not be
+  covered] → The patterns match the ownership boundary as it stands, and the
+  test pins it. This is the residue after the list was replaced by patterns,
+  not the drift the list had.
+- [The matcher covers tools whose names end in `Write` or `Edit`, and nothing
+  tells the guard about one that does not] → A tool the matcher misses cannot
+  be reported by the guard, because the guard does not run. There is no layer
+  below this one; it is a limit of hooking by tool name.
 
 ## Migration Plan
 

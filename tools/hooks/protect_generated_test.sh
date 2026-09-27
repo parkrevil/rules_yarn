@@ -7,6 +7,8 @@
 # Usage: tools/hooks/protect_generated_test.sh [path-to-hook]
 set -uo pipefail
 
+# A guard under test has to sit at its normal depth in the repository, because
+# that is how it finds the repository root.
 hook=${1:-"$(dirname "$0")/protect_generated.sh"}
 repository=$(cd "$(dirname "$0")/../.." && pwd -P)
 failures=0
@@ -57,6 +59,26 @@ without_jq_is() {
   record "$expected" "$got" "$what"
 }
 
+# A symlink can point at a generated file from elsewhere, or stand in place of
+# one. Both are built in a throwaway repository laid out like this one, so the
+# guard is run against real symlinks rather than assumed to handle them.
+symlink_is() {
+  local expected=$1 link=$2 target=$3 probe=$4 what=$5 fake got
+  fake=$(mktemp -d)
+  mkdir -p "$fake/tools/hooks" "$fake/openwiki" "$fake/outside"
+  cp "$hook" "$fake/tools/hooks/protect_generated.sh"
+  [ "$target" = "$link" ] || printf 'content\n' >"$fake/$target"
+  ln -s "$fake/$target" "$fake/$link"
+  if [ -n "$(jq -nc --arg p "$fake/$probe" '{tool_input: {file_path: $p}}' |
+    "$fake/tools/hooks/protect_generated.sh")" ]; then
+    got=deny
+  else
+    got=allow
+  fi
+  rm -rf "$fake"
+  record "$expected" "$got" "$what"
+}
+
 echo "# openspec: archive writes the main specs"
 case_is deny openspec/specs/yarn-execution/spec.md
 case_is deny openspec/specs/.gitkeep
@@ -77,6 +99,12 @@ case_is deny openwiki/.page-manifest.json
 case_is deny openwiki/.last-update.json
 
 echo
+echo "# openwiki: bookkeeping is recognised by its shape, not by a list"
+case_is deny openwiki/.a-file-openwiki-adds-later.json
+case_is deny openwiki/architecture/.a-nested-one.json
+case_is deny openwiki/.claims/architecture/a-new-page.json
+
+echo
 echo "# openwiki: every index page is generated, at any depth"
 case_is deny openwiki/index.md
 case_is deny openwiki/architecture/index.md
@@ -87,6 +115,8 @@ echo "# openwiki: page bodies are written during a run"
 case_is allow openwiki/quickstart.md
 case_is allow openwiki/architecture/launcher-execution.md
 case_is allow openwiki/concepts/public-api-surface.md
+case_is allow openwiki/a-page-a-run-has-not-written-yet.md
+case_is allow openwiki/architecture/a-new-page.md
 
 echo
 echo "# ordinary files"
@@ -106,6 +136,12 @@ echo "# a matching name outside this repository is not this repository's file"
 case_is allow /tmp/openwiki/index.md
 case_is allow /tmp/openspec/specs/spec.md
 case_is allow "$repository/../openwiki/index.md"
+
+echo
+echo "# symlinks, in both directions"
+symlink_is deny notes.md openwiki/index.md notes.md 'a symlink reaching a generated file'
+symlink_is deny openwiki/index.md outside/elsewhere.md openwiki/index.md 'a symlink standing in for a generated file'
+symlink_is allow notes.md outside/elsewhere.md notes.md 'a symlink between two ordinary files'
 
 echo
 echo "# a notebook edit names its target in notebook_path"
