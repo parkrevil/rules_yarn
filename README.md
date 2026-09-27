@@ -115,12 +115,17 @@ Checked on 2026-09-20 on Linux x86_64:
 
 | Component | Version |
 | --- | --- |
-| Bazel | 9.2.0 |
+| Bazel | 9.2.0, and 8.3.1 as the oldest supported line |
 | Yarn | 4.18.0 |
 | Node.js | 24.21.0 |
 | `rules_nodejs` | 6.7.5 |
 | `rules_shell` | 0.8.0 |
 | `bazel_skylib` | 1.9.2 |
+
+`rules_yarn` declares `bazel_compatibility = [">=8.3.0"]`, the release where
+the repository API it uses arrives. Bazel refuses an older version while it
+resolves the module graph, so you get a message naming this ruleset rather
+than an error from inside it.
 
 Other platforms are untested: the launcher is a POSIX shell script, so Windows
 needs work that this ruleset does not do yet. [`e2e/smoke`](e2e/smoke) is a

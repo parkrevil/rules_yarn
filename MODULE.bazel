@@ -1,6 +1,13 @@
 """Bazel rules for running the Yarn package manager."""
 
-module(name = "rules_yarn")
+# Bazel 8.3.0 is where `repository_ctx.repo_metadata` arrives, which
+# yarn/private/repositories.bzl calls. Declaring it means an older Bazel is
+# turned away while the module graph resolves, instead of failing inside this
+# ruleset's files.
+module(
+    name = "rules_yarn",
+    bazel_compatibility = [">=8.3.0"],
+)
 
 bazel_dep(name = "bazel_skylib", version = "1.9.2")
 bazel_dep(name = "rules_nodejs", version = "6.7.5")

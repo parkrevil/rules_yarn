@@ -1,7 +1,7 @@
 """Unit tests for selecting Yarn distributions in the `yarn` module extension."""
 
 load("@rules_testing//lib:test_suite.bzl", "test_suite")
-load("//yarn/private:extensions.bzl", "select_distributions")
+load("//yarn/private:extensions.bzl", "root_repositories", "select_distributions")
 
 _SUPPORTED_VERSIONS = ["1.0.0", "2.0.0"]
 
@@ -13,8 +13,9 @@ def _module(*, distributions, name = "dep", version = "1.2.3", is_root = False):
         version = version,
     )
 
-def _distribution(version, name = "yarn"):
+def _distribution(version, name = "yarn", dev = False):
     return struct(
+        dev = dev,
         name = name,
         version = version,
     )
@@ -30,6 +31,78 @@ def _select(*modules):
         errors = errors,
         selected = selected,
     )
+
+def _report(selected, *modules):
+    """Runs root_repositories against a module list, faking is_dev_dependency."""
+    module_ctx = struct(
+        is_dev_dependency = lambda tag: tag.dev,
+        modules = list(modules),
+    )
+    direct, dev = root_repositories(module_ctx, selected)
+    return struct(dev = dev, direct = direct)
+
+def _test_regular_declaration_is_reported_as_regular(env):
+    result = _report(
+        {"yarn": "1.0.0"},
+        _module(is_root = True, name = "", distributions = [_distribution("1.0.0")]),
+    )
+
+    env.expect.that_collection(result.direct).contains_exactly(["yarn"])
+    env.expect.that_collection(result.dev).contains_exactly([])
+
+def _test_development_declaration_is_reported_as_development(env):
+    result = _report(
+        {"yarn": "1.0.0"},
+        _module(is_root = True, name = "", distributions = [_distribution("1.0.0", dev = True)]),
+    )
+
+    env.expect.that_collection(result.direct).contains_exactly([])
+    env.expect.that_collection(result.dev).contains_exactly(["yarn"])
+
+def _test_repository_declared_both_ways_is_regular(env):
+    result = _report(
+        {"yarn": "1.0.0"},
+        _module(is_root = True, name = "", distributions = [
+            _distribution("1.0.0", dev = True),
+            _distribution("1.0.0"),
+        ]),
+    )
+
+    env.expect.that_collection(result.direct).contains_exactly(["yarn"])
+    env.expect.that_collection(result.dev).contains_exactly([])
+
+def _test_dependency_declaration_is_not_reported(env):
+    result = _report(
+        {"yarn": "1.0.0"},
+        _module(is_root = True, name = "", distributions = []),
+        _module(name = "dep", distributions = [_distribution("1.0.0")]),
+    )
+
+    env.expect.that_collection(result.direct).contains_exactly([])
+    env.expect.that_collection(result.dev).contains_exactly([])
+
+def _test_repository_the_extension_did_not_create_is_not_reported(env):
+    result = _report(
+        {"yarn": "1.0.0"},
+        _module(is_root = True, name = "", distributions = [
+            _distribution("1.0.0"),
+            _distribution("2.0.0", name = "yarn_two"),
+        ]),
+    )
+
+    env.expect.that_collection(result.direct).contains_exactly(["yarn"])
+    env.expect.that_collection(result.dev).contains_exactly([])
+
+def _test_each_repository_is_reported_once(env):
+    result = _report(
+        {"yarn": "1.0.0"},
+        _module(is_root = True, name = "", distributions = [
+            _distribution("1.0.0"),
+            _distribution("1.0.0"),
+        ]),
+    )
+
+    env.expect.that_collection(result.direct).contains_exactly(["yarn"])
 
 def _test_root_module_uses_default_name(env):
     result = _select(
@@ -130,6 +203,12 @@ def extensions_test_suite(name):
     test_suite(
         name = name,
         basic_tests = [
+            _test_dependency_declaration_is_not_reported,
+            _test_development_declaration_is_reported_as_development,
+            _test_each_repository_is_reported_once,
+            _test_regular_declaration_is_reported_as_regular,
+            _test_repository_declared_both_ways_is_regular,
+            _test_repository_the_extension_did_not_create_is_not_reported,
             _test_closest_dependency_decides_without_root_declaration,
             _test_conflict_in_deciding_module_fails,
             _test_dependency_custom_name_fails,

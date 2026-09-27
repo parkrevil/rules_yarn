@@ -73,6 +73,39 @@ def select_distributions(module_ctx, *, supported_versions, _fail = fail):
             selected[tag.name] = tag.version
     return selected
 
+def root_repositories(module_ctx, selected):
+    """Splits the repositories the root module declared into regular and development-only.
+
+    Bazel checks these against the root module's `use_repo` calls and
+    `bazel mod tidy` writes them, so a repository has to be reported in the
+    list that matches how the root module declared the extension. Only the
+    root module's declarations count: a repository a dependency asked for is
+    not a direct dependency of the root module. A repository the root module
+    declared both ways is regular, because Bazel expects a regular `use_repo`
+    for anything in the regular list.
+
+    Args:
+        module_ctx: The module extension context.
+        selected: The repository names the extension creates.
+
+    Returns:
+        A tuple of the regular and the development-only repository names.
+    """
+    direct = []
+    dev = []
+    for module in module_ctx.modules:
+        if not module.is_root:
+            continue
+        for tag in module.tags.distribution:
+            if tag.name not in selected:
+                continue
+            if module_ctx.is_dev_dependency(tag):
+                if tag.name not in dev:
+                    dev.append(tag.name)
+            elif tag.name not in direct:
+                direct.append(tag.name)
+    return direct, [name for name in dev if name not in direct]
+
 def _yarn_impl(module_ctx):
     distributions = select_distributions(module_ctx, supported_versions = YARN_VERSIONS.keys())
     for name, version in distributions.items():
@@ -81,7 +114,12 @@ def _yarn_impl(module_ctx):
             urls = [YARN_URL_TEMPLATE.format(version = version)],
             integrity = YARN_VERSIONS[version],
         )
-    return module_ctx.extension_metadata(reproducible = True)
+    direct, dev = root_repositories(module_ctx, distributions)
+    return module_ctx.extension_metadata(
+        root_module_direct_deps = direct,
+        root_module_direct_dev_deps = dev,
+        reproducible = True,
+    )
 
 _distribution = tag_class(
     doc = """Declares a repository that contains an exact Yarn distribution.
