@@ -134,3 +134,7 @@ sandboxing, or dependency-installation guarantees from Bazel: Yarn reads and
 writes your project, its caches, and the network exactly as it does outside
 Bazel. Installing dependencies, translating `yarn.lock` into Bazel targets, and
 Plug'n'Play or `node_modules` integration are not part of this ruleset.
+
+## License
+
+[Apache License 2.0](LICENSE), the license of the rulesets this one builds on.
