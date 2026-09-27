@@ -1,14 +1,32 @@
 #!/usr/bin/env bash
-# PreToolUse guard: refuse writes to files another tool owns.
+# PreToolUse guard: refuses to author a file that a generator owns.
 # Reads the hook payload on stdin, prints a permission decision on stdout.
+#
+# Scope. The guard covers the tools that write a file directly. They carry the
+# exact path, so the decision is a path comparison and nothing is inferred.
+#
+# A shell command is deliberately outside that scope. Deciding which files a
+# command writes means parsing a shell, and the programs that are supposed to
+# write these paths — `openspec archive` and `openwiki --update` — are shell
+# commands themselves, so any rule over command text refuses legitimate runs
+# and still misses a write behind a variable or `eval`. AGENTS.md states the
+# rule; review enforces it where a hook cannot decide it.
 set -uo pipefail
 
-payload=$(cat)
-path=$(jq -r '.tool_input.file_path // empty' <<<"$payload")
-command=$(jq -r '.tool_input.command // empty' <<<"$payload")
+repository=$(cd "$(dirname "$0")/../.." && pwd -P)
 
-openwiki_reason='OpenWiki owns this file. Regenerate it with `openwiki --update` instead of editing it.'
-openspec_reason='`openspec archive` writes openspec/specs/. Edit the delta spec in the change instead.'
+# Refusing is this guard's only job, so it fails closed: when it cannot read
+# the call it cannot clear the write either. `deny_without_jq` exists because
+# that is the one refusal it has to phrase without jq.
+deny_without_jq() {
+  printf '{"hookSpecificOutput":{"hookEventName":"PreToolUse","permissionDecision":"deny","permissionDecisionReason":"%s"}}\n' "$1"
+  exit 0
+}
+
+for tool in jq realpath; do
+  command -v "$tool" >/dev/null 2>&1 ||
+    deny_without_jq "tools/hooks/protect_generated.sh needs ${tool} to decide whether this file is generated, and refuses rather than guess while it is missing."
+done
 
 deny() {
   jq -nc --arg r "$1" '{
@@ -21,59 +39,42 @@ deny() {
   exit 0
 }
 
-# OpenWiki owns its bookkeeping, but the page bodies are written by the agent
-# during a run, so only the bookkeeping is protected.
-openwiki_owned='openwiki/(\.claims/|\.run\.json|\.page-manifest\.json|\.last-update\.json|index\.md)'
+payload=$(cat)
+# Every tool this guard is matched against names its target in one of these.
+path=$(jq -r '.tool_input.file_path // .tool_input.notebook_path // empty' <<<"$payload" 2>/dev/null) ||
+  deny_without_jq "tools/hooks/protect_generated.sh could not read the hook payload, and refuses rather than guess."
 
-# Write and Edit carry an exact path.
-if [ -n "$path" ]; then
-  grep -qE "$openwiki_owned" <<<"$path" && deny "$openwiki_reason ($path)"
-  case "$path" in
-    */openspec/specs/*|openspec/specs/*) deny "$openspec_reason ($path)" ;;
-  esac
-fi
+# A payload that parsed and names no file is not a write to a generated file.
+[ -n "$path" ] || exit 0
 
-# Bash carries a command string instead of a path, so this layer is advisory:
-# a shell command cannot be parsed soundly here, and the exact guarantee lives
-# on the Write and Edit paths above. Each command in a compound command is
-# judged on its own, so an unrelated writer in one segment does not condemn a
-# read in another, and copy-like commands are judged on their destination only.
-guarded_write() {
-  local target=$1 segment last
-  while IFS= read -r segment; do
-    [ -n "$segment" ] || continue
+# Judge the path by what it names, not by how it is spelled: resolve `.`, `..`
+# and symlinks, and express it relative to the repository so a matching name
+# somewhere else on the filesystem is not this repository's file.
+case "$path" in
+  /*) ;;
+  *) path=$repository/$path ;;
+esac
+relative=$(realpath -m --relative-to="$repository" -- "$path") ||
+  deny "tools/hooks/protect_generated.sh could not resolve $path, and refuses rather than guess."
+case "$relative" in
+  .. | ../*) exit 0 ;;
+esac
 
-    # A redirection has to name the protected path directly; a bare `>` turns
-    # up in unrelated commands.
-    grep -qE ">>?[[:space:]]*['\"]?[^[:space:]'\"]*${target}" <<<"$segment" && return 0
+case "$relative" in
+  openspec/specs | openspec/specs/*)
+    deny "\`openspec archive\` writes openspec/specs/. Edit the delta spec under the change's own specs/ directory instead. ($relative)"
+    ;;
+esac
 
-    # These take their targets as ordinary arguments. Interpreters are included
-    # because `-c` scripts write too; the cost is denying an interpreted read.
-    if grep -qE "(^|[[:space:]])(sed[[:space:]]+-i|tee|rm|truncate|touch|ln|dd|python3?|node|perl|ruby)([[:space:]]|$)" <<<"$segment" &&
-      grep -qE "$target" <<<"$segment"; then
-      return 0
-    fi
-
-    # Copy-like commands write only to their last argument.
-    if grep -qE "(^|[[:space:]])(cp|mv|install)([[:space:]]|$)" <<<"$segment"; then
-      last=${segment##* }
-      grep -qE "$target" <<<"$last" && return 0
-    fi
-  done < <(tr ';|&\n' '\n' <<<"$command")
-
-  # Indirection — a variable, xargs, a nested shell — separates the path from
-  # the redirection that writes it, so a file redirection anywhere in a command
-  # that also names a protected path counts. This denies a read whose output is
-  # redirected elsewhere; that trade is deliberate.
-  grep -qE ">>?[[:space:]]*['\"]?[^&[:space:]]" <<<"$command" &&
-    grep -qE "$target" <<<"$command" && return 0
-
-  return 1
-}
-
-if [ -n "$command" ]; then
-  guarded_write "$openwiki_owned" && deny "$openwiki_reason"
-  guarded_write "openspec/specs/" && deny "$openspec_reason"
-fi
+# OpenWiki owns its bookkeeping and every index page. The page bodies listed in
+# openwiki/.page-manifest.json are written by the agent during a run, so they
+# stay editable.
+case "$relative" in
+  openwiki/.claims | openwiki/.claims/* | \
+    openwiki/.run.json | openwiki/.page-manifest.json | openwiki/.last-update.json | \
+    openwiki/index.md | openwiki/*/index.md)
+    deny "OpenWiki owns this file. Regenerate it with \`openwiki --update\` instead of editing it. ($relative)"
+    ;;
+esac
 
 exit 0
