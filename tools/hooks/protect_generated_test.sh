@@ -45,17 +45,21 @@ payload_is() {
 # The guard has to refuse while a tool it depends on is missing, so run it
 # against a PATH that holds everything it needs except jq.
 without_jq_is() {
-  local expected=$1 what=$2 got stub tool
+  local expected=$1 what=$2 got stub tool out
   stub=$(mktemp -d)
   for tool in cat dirname realpath; do
     ln -s "$(command -v "$tool")" "$stub/$tool"
   done
-  if [ -n "$(PATH=$stub "$BASH" "$hook" <<<'{"tool_input": {"file_path": "openwiki/index.md"}}' 2>/dev/null)" ]; then
-    got=deny
-  else
-    got=allow
-  fi
+  out=$(PATH=$stub "$BASH" "$hook" <<<'{"tool_input": {"file_path": "openwiki/index.md"}}' 2>/dev/null)
   rm -rf "$stub"
+  # This is the one refusal the guard has to phrase without jq, so the decision
+  # is read back through jq: a message that broke the hand-written JSON would
+  # otherwise reach the harness as nothing at all, which is a permit.
+  if [ -z "$out" ]; then
+    got=allow
+  elif ! got=$(jq -r '.hookSpecificOutput.permissionDecision' <<<"$out" 2>/dev/null); then
+    got=malformed
+  fi
   record "$expected" "$got" "$what"
 }
 
