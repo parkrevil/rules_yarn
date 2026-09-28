@@ -1,0 +1,22 @@
+## 1. Regroup
+
+- [x] 1.1 Write the delta that returns `Bzlmod consumer integration` to its own obligation and states the other two as their own requirements; verify `openspec validate --strict` accepts the change and no longer reports a requirement as very long.
+  - 2026-09-27: two shapes were rejected before the third was accepted, each for a reason worth keeping. `MODIFIED` keeping only the two scenarios that stay: *"MODIFIED ... omits scenario(s) the current spec still has ... archive refuses to drop them"* — so `MODIFIED` cannot express a scenario moving to another requirement. Removing the requirement and adding it back under the same name: *"Requirement present in both ADDED and REMOVED."* The accepted shape removes the requirement and adds three, the first renamed to `Public API surface`.
+  - After archiving, `openspec validate --all --strict` no longer reports an over-long requirement.
+- [x] 1.2 Verify the regrouping loses nothing: compare the requirement sentences and the scenario set in the main spec before and after archiving, and confirm the only difference is which requirement each one sits under.
+  - 2026-09-27: every scenario name with its `WHEN` and `THEN` lines was extracted from the main spec before and after. Sorted, the two are identical — nothing lost, nothing reworded, nothing added.
+  - Unsorted, 15 lines moved from the top of the file to the bottom. `openspec archive` appends an added requirement, so `Public API surface` now sits eighth where `Bzlmod consumer integration` sat first. The content is intact and the order is not part of the contract; `openspec/specs/` is written by archive and not hand-edited, and reordering would mean removing and re-adding every requirement. Left as it is, recorded rather than hidden.
+
+## 2. Gate
+
+- [x] 2.1 Run the repository's pre-commit gate and the build gate; verify every pre-commit hook passes and `bazel build //... && bazel test //...` passes in the root and in `e2e/smoke`. Nothing outside `openspec/` changes, so an unchanged build is the expected result rather than a formality.
+  - 2026-09-27: root `bazel test //...` passed 22 tests, `e2e/smoke` passed 1, `tools/hooks/protect_generated_test.sh` passed 40 of 40, and every pre-commit hook passed at commit time — all unchanged, as a specification-only change should leave them.
+- [x] 2.2 Have a reviewer without this implementation conversation review the change, and record the outcome here.
+  - The first reviewer was cut off by a session limit partway through. Before stopping it pointed at `RENAMED Requirements`, a delta operation this change had not tried. That was checked in a scratch worktree at `7c567ca`: renaming the requirement and then modifying it under the new name is refused with the same omits-scenarios error, so `RENAMED` opens no path that keeps the original name while splitting it. The removal-and-three-additions shape is the only one the rules allow, and the rename is forced rather than chosen.
+  - 2026-09-29, second reviewer, no blockers.
+    - The regrouping was re-derived from `git show 7c567ca:openspec/specs/yarn-execution/spec.md` against the working tree: every scenario body, `WHEN`, `THEN` and requirement sentence byte-identical, only the requirement headers and the ordering differ. The claim holds.
+    - `Public API surface` fits its two scenarios; the other two requirements each state one obligation.
+    - No supported way to control placement exists — checked against `openspec archive`, `openspec validate` and `openspec schema` help output — so the appended ordering stands as recorded in 1.2.
+    - Should-fix, **upheld and not fixed here**: `Command forwarding` bundles three guarantees the same way this change's subject did, and was missed because its sentence is short enough that the length report never fired. This change's own design.md calls length a symptom rather than the criterion, and then followed the symptom. Applied in a separate change rather than reopening an archived one; see `apply-one-obligation-per-requirement`.
+    - Nit, not acted on: `Repository naming` covers who may choose a non-default name and which module's version wins. The reviewer read these as one naming-authority concept and so do I.
+    - Should-fix, **fixed**: this task was marked complete while its own note still said the outcome would be recorded once the review returned — a box checked ahead of the content it promised.
