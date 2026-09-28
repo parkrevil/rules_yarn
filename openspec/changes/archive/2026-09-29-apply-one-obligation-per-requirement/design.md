@@ -27,8 +27,10 @@ two requirements, whatever their combined length.
 Length is not the criterion. `openspec validate` reports a requirement over
 500 characters, which is a useful smell and nothing more. Measured against
 this spec: no requirement reaches 300 characters, the longest being `Managed
-runtime` at 284, so the report is silent across the whole file — and it is
-silent over the bundle this change fixes, at 230. It spoke once, about the
+runtime`, so the report is silent across the whole file — and it is silent
+over both bundles this change fixes. (Exact counts depend on how trailing
+whitespace is handled, so the figure that matters is the margin, not a
+digit: everything sits at roughly half the threshold.) It spoke once, about the
 requirement the previous change split, and only after that requirement had
 already been made long by piling a third obligation onto it. A report that
 fires after the mistake is made is not a way of finding the mistake.

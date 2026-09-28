@@ -21,26 +21,6 @@ Each Yarn distribution SHALL be identified by an exact supported version and a r
 - **WHEN** fetched distribution bytes do not match the recorded digest
 - **THEN** repository fetching fails before the distribution can execute
 
-### Requirement: Repository naming
-
-Only the root module SHALL be able to choose a distribution repository name other than the default. For each repository name, the declaration from the module closest to the root in the dependency graph SHALL determine the version.
-
-#### Scenario: Custom name in a dependency
-- **WHEN** a non-root module declares a distribution with a repository name other than the default
-- **THEN** configuration fails and identifies the module
-
-#### Scenario: Root module and dependency select different versions
-- **WHEN** the root module and a dependency both declare the default repository with different versions
-- **THEN** the repository provides the version declared by the root module
-
-#### Scenario: Conflicting declarations in the deciding module
-- **WHEN** the module that determines a repository declares that repository name with two different versions
-- **THEN** configuration fails and identifies both versions
-
-#### Scenario: Identical declarations
-- **WHEN** a module declares the same repository name and version more than once
-- **THEN** configuration succeeds and creates one repository
-
 ### Requirement: Managed runtime
 
 The executable SHALL use the Bazel-managed Node.js runtime and the selected Yarn distribution on each documented supported platform. It SHALL NOT fall back to host Node.js, Yarn, or Corepack executables, and project Yarn configuration SHALL NOT redirect it to a different Yarn binary.
@@ -56,22 +36,6 @@ The executable SHALL use the Bazel-managed Node.js runtime and the selected Yarn
 #### Scenario: Host path runtime
 - **WHEN** the resolved Node.js runtime toolchain provides only a host path instead of a Bazel-managed file
 - **THEN** analysis fails with an error stating that a file-backed Node.js runtime is required
-
-### Requirement: Command forwarding
-
-The executable SHALL forward the arguments supplied after `bazel run <target> --` to Yarn without shell re-interpretation and preserve Yarn's standard output, standard error, and exit status.
-
-#### Scenario: Argument preservation
-- **WHEN** a caller supplies arguments containing spaces or shell metacharacters
-- **THEN** Yarn receives the original argument boundaries and characters
-
-#### Scenario: Output streams
-- **WHEN** the Yarn process writes to standard output and standard error
-- **THEN** the caller receives each output on the same stream
-
-#### Scenario: Failed command
-- **WHEN** Yarn rejects an invalid command with a nonzero exit status
-- **THEN** the executable exits with that status and the caller receives Yarn's diagnostic output
 
 ### Requirement: Working directory
 
@@ -132,3 +96,51 @@ The distribution extension SHALL report the repositories the root module asked i
 #### Scenario: Repository declaration left out
 - **WHEN** the root module declares a distribution but not the repository the extension creates for it
 - **THEN** `bazel mod tidy` adds the missing declaration, matching how the root module declared the extension
+
+### Requirement: Repository naming authority
+
+Only the root module SHALL be able to choose a distribution repository name other than the default.
+
+#### Scenario: Custom name in a dependency
+- **WHEN** a non-root module declares a distribution with a repository name other than the default
+- **THEN** configuration fails and identifies the module
+
+### Requirement: Version arbitration across modules
+
+For each repository name, the declaration from the module closest to the root in the dependency graph SHALL determine the version.
+
+#### Scenario: Root module and dependency select different versions
+- **WHEN** the root module and a dependency both declare the default repository with different versions
+- **THEN** the repository provides the version declared by the root module
+
+#### Scenario: Conflicting declarations in the deciding module
+- **WHEN** the module that determines a repository declares that repository name with two different versions
+- **THEN** configuration fails and identifies both versions
+
+#### Scenario: Identical declarations
+- **WHEN** a module declares the same repository name and version more than once
+- **THEN** configuration succeeds and creates one repository
+
+### Requirement: Argument forwarding
+
+The executable SHALL forward the arguments supplied after `bazel run <target> --` to Yarn without shell re-interpretation.
+
+#### Scenario: Argument preservation
+- **WHEN** a caller supplies arguments containing spaces or shell metacharacters
+- **THEN** Yarn receives the original argument boundaries and characters
+
+### Requirement: Output stream passthrough
+
+The executable SHALL preserve Yarn's standard output and standard error.
+
+#### Scenario: Output streams
+- **WHEN** the Yarn process writes to standard output and standard error
+- **THEN** the caller receives each output on the same stream
+
+### Requirement: Exit status propagation
+
+The executable SHALL exit with the status Yarn exited with.
+
+#### Scenario: Failed command
+- **WHEN** Yarn rejects an invalid command with a nonzero exit status
+- **THEN** the executable exits with that status
