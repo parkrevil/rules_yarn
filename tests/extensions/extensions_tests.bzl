@@ -1,6 +1,6 @@
 """Unit tests for selecting Yarn distributions in the `yarn` module extension."""
 
-load("@rules_testing//lib:test_suite.bzl", "test_suite")
+load("@rules_testing//lib:analysis_test.bzl", "analysis_test")
 load("//yarn/private:extensions.bzl", "root_repositories", "select_distributions")
 
 _SUPPORTED_VERSIONS = ["1.0.0", "2.0.0"]
@@ -199,24 +199,38 @@ def _test_unsupported_version_fails(env):
     ])
     env.expect.that_bool(result.selected == None).equals(True)
 
-def extensions_test_suite(name):
-    test_suite(
+# `rules_testing`'s `unit_test` takes no size, so its tests default to
+# MODERATE and every run warns that a test finishing instantly is oversized.
+# Driving `analysis_test` directly is the same thing with the size set, over
+# the stub target `unit_test` itself uses.
+_STUB = "@rules_testing//lib:_stub_target_for_unit_tests"
+
+def _small_test(name, impl):
+    analysis_test(
         name = name,
-        basic_tests = [
-            _test_dependency_declaration_is_not_reported,
-            _test_development_declaration_is_reported_as_development,
-            _test_each_repository_is_reported_once,
-            _test_regular_declaration_is_reported_as_regular,
-            _test_repository_declared_both_ways_is_regular,
-            _test_repository_the_extension_did_not_create_is_not_reported,
-            _test_closest_dependency_decides_without_root_declaration,
-            _test_conflict_in_deciding_module_fails,
-            _test_dependency_custom_name_fails,
-            _test_identical_declarations_create_one_repository,
-            _test_ignored_declarations_are_not_validated,
-            _test_root_module_decides_over_dependency,
-            _test_root_module_may_use_custom_name,
-            _test_root_module_uses_default_name,
-            _test_unsupported_version_fails,
-        ],
+        impl = lambda env, target: impl(env),
+        target = _STUB,
+        attr_values = {"size": "small"},
     )
+
+def extensions_test_suite(name):
+    tests = {
+        "test_closest_dependency_decides_without_root_declaration": _test_closest_dependency_decides_without_root_declaration,
+        "test_conflict_in_deciding_module_fails": _test_conflict_in_deciding_module_fails,
+        "test_dependency_custom_name_fails": _test_dependency_custom_name_fails,
+        "test_dependency_declaration_is_not_reported": _test_dependency_declaration_is_not_reported,
+        "test_development_declaration_is_reported_as_development": _test_development_declaration_is_reported_as_development,
+        "test_each_repository_is_reported_once": _test_each_repository_is_reported_once,
+        "test_identical_declarations_create_one_repository": _test_identical_declarations_create_one_repository,
+        "test_ignored_declarations_are_not_validated": _test_ignored_declarations_are_not_validated,
+        "test_regular_declaration_is_reported_as_regular": _test_regular_declaration_is_reported_as_regular,
+        "test_repository_declared_both_ways_is_regular": _test_repository_declared_both_ways_is_regular,
+        "test_repository_the_extension_did_not_create_is_not_reported": _test_repository_the_extension_did_not_create_is_not_reported,
+        "test_root_module_decides_over_dependency": _test_root_module_decides_over_dependency,
+        "test_root_module_may_use_custom_name": _test_root_module_may_use_custom_name,
+        "test_root_module_uses_default_name": _test_root_module_uses_default_name,
+        "test_unsupported_version_fails": _test_unsupported_version_fails,
+    }
+    for test_name, impl in tests.items():
+        _small_test(test_name, impl)
+    native.test_suite(name = name, tests = ["%s" % t for t in tests])

@@ -23,12 +23,6 @@ repos:
         stages: [commit-msg]
   - repo: local
     hooks:
-      - id: okf-validate
-        name: okf validate (.okf)
-        entry: tools/okf/validate.sh
-        language: script
-        pass_filenames: false
-        files: ^\.okf/
       - id: openspec-validate
         name: openspec validate --all --strict
         entry: openspec validate --all --strict --no-interactive

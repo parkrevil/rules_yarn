@@ -26,6 +26,10 @@ yarn.distribution(version = "4.18.0")
 use_repo(yarn, "yarn")
 ```
 
+`path` is relative to the module you are writing. The snippet above is the
+one in [`e2e/smoke`](e2e/smoke), which sits two directories below this
+repository's root; point it at wherever your checkout of `rules_yarn` is.
+
 `rules_nodejs` supplies the Node.js runtime toolchain. Pick the Node.js version
 your project needs; the version above is the one this ruleset is tested with.
 [`archive_override`](https://bazel.build/rules/lib/globals/module#archive_override)
@@ -115,7 +119,7 @@ Checked on 2026-09-20 on Linux x86_64:
 
 | Component | Version |
 | --- | --- |
-| Bazel | 9.2.0, and 8.3.1 as the oldest supported line |
+| Bazel | 9.2.0, and 8.3.0 as the oldest supported |
 | Yarn | 4.18.0 |
 | Node.js | 24.21.0 |
 | `rules_nodejs` | 6.7.5 |
@@ -127,9 +131,12 @@ the repository API it uses arrives. Bazel refuses an older version while it
 resolves the module graph, so you get a message naming this ruleset rather
 than an error from inside it.
 
-Other platforms are untested: the launcher is a POSIX shell script, so Windows
-needs work that this ruleset does not do yet. [`e2e/smoke`](e2e/smoke) is a
-consumer module that uses only the public API; its snippets are the ones above.
+The launcher is a Bash script: it uses `[[ ]]`, `pipefail` and `source`, and
+the shell toolchain points at Bash on every operating system it supports. So
+Windows needs work this ruleset does not do yet.
+
+[`e2e/smoke`](e2e/smoke) is a consumer module that uses only the public API;
+its snippets are the ones above.
 
 ## Scope
 

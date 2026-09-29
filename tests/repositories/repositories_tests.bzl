@@ -1,6 +1,6 @@
 """Unit tests for the `yarn_distribution` repository rule."""
 
-load("@rules_testing//lib:test_suite.bzl", "test_suite")
+load("@rules_testing//lib:analysis_test.bzl", "analysis_test")
 load("//yarn/private:repositories.bzl", "BUILD_FILE_CONTENT", "yarn_distribution_impl")
 load("//yarn/private:versions.bzl", "YARN_URL_TEMPLATE", "YARN_VERSIONS")
 
@@ -49,11 +49,25 @@ def _test_versions_have_digests_and_urls(env):
         "https://repo.yarnpkg.com/4.18.0/packages/yarnpkg-cli/bin/yarn.js",
     )
 
-def repositories_test_suite(name):
-    test_suite(
+# `rules_testing`'s `unit_test` takes no size, so its tests default to
+# MODERATE and every run warns that a test finishing instantly is oversized.
+# Driving `analysis_test` directly is the same thing with the size set, over
+# the stub target `unit_test` itself uses.
+_STUB = "@rules_testing//lib:_stub_target_for_unit_tests"
+
+def _small_test(name, impl):
+    analysis_test(
         name = name,
-        basic_tests = [
-            _test_downloads_with_integrity_and_writes_build_file,
-            _test_versions_have_digests_and_urls,
-        ],
+        impl = lambda env, target: impl(env),
+        target = _STUB,
+        attr_values = {"size": "small"},
     )
+
+def repositories_test_suite(name):
+    tests = {
+        "test_downloads_with_integrity_and_writes_build_file": _test_downloads_with_integrity_and_writes_build_file,
+        "test_versions_have_digests_and_urls": _test_versions_have_digests_and_urls,
+    }
+    for test_name, impl in tests.items():
+        _small_test(test_name, impl)
+    native.test_suite(name = name, tests = ["%s" % t for t in tests])
