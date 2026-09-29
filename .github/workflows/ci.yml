@@ -1,0 +1,82 @@
+name: CI
+
+on:
+  push:
+  pull_request:
+
+# Nothing here writes to the repository.
+permissions:
+  contents: read
+
+jobs:
+  # The gate AGENTS.md asks for before every commit, on both build roots.
+  # `.bazelignore` keeps e2e/ out of the root run, so it needs its own.
+  build-and-test:
+    name: build and test (${{ matrix.os }})
+    strategy:
+      # One platform failing should not hide the other's result.
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest]
+    runs-on: ${{ matrix.os }}
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      # Both runner images ship Bazelisk as `bazel`, so .bazelversion decides
+      # the version and no setup action is needed.
+      - name: Report the Bazel version in use
+        run: bazel --version
+
+      - name: Build and test the ruleset
+        run: bazel build //... && bazel test //... --test_output=errors
+
+      - name: Build and test the consumer module
+        working-directory: e2e/smoke
+        run: bazel build //... && bazel test //... --test_output=errors
+
+  # A consumer resolving from scratch under the oldest Bazel MODULE.bazel
+  # accepts. The repository's own roots cannot check this: their lockfiles are
+  # written by a newer Bazel and both set --lockfile_mode=error.
+  minimum-bazel:
+    name: oldest supported Bazel
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Build and run a Yarn target at the declared floor
+        run: tools/ci/minimum_bazel.sh
+
+  checks:
+    name: checks
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: "24"
+
+      # pre-commit's openspec hook runs the CLI from PATH.
+      - name: Install OpenSpec
+        run: npm install --global @fission-ai/openspec@1.13.0
+
+      - name: Set up Python
+        uses: actions/setup-python@5fda3b95a4ea91299a34e894583c3862153e4b97 # v7.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Install pre-commit
+        run: pip install pre-commit==4.6.2
+
+      # Covers buildifier, its linter, the file hygiene hooks, and
+      # `openspec validate --all --strict`.
+      - name: Run the pre-commit hooks
+        run: pre-commit run --all-files --show-diff-on-failure
+
+      # The guard is harness tooling with no Bazel target, so it is run here.
+      - name: Check the generated-file guard's contract
+        run: tools/hooks/protect_generated_test.sh
