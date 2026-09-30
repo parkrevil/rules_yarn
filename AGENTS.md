@@ -5,6 +5,8 @@ Bazel rules that deliver the Yarn CLI. Linux x86_64 only. Public API lives in `y
 ## Always
 
 - Claim behavior only from a test or a recorded run.
+- Fix what you find. A risk or a known limit records what the approach cannot do, never what you did not do; say which it is.
+- Apply a rule you state to everything it covers, not only where a linter or a reviewer pointed. Record the verdict for each, including what you leave unchanged.
 - Fetch every external artifact by exact version with an integrity digest, never from a host-installed tool.
 - Check any Bazel or ruleset API against the defining ruleset's documentation or source at the pinned version, and cite that in the change. Nothing deprecated or experimental.
 - Stop and report when a pinned release or API is missing. Never ship a workaround consumers must copy into their own module.
