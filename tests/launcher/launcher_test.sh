@@ -99,7 +99,8 @@ test_manifest_only_runfiles_lookup() {
   local manifest="$TEST_TMPDIR/MANIFEST"
   (
     cd "$RUNFILES_DIR"
-    find . \( -type f -o -type l \) -printf '%P\n' | sort
+    # `-printf` is a GNU extension; BSD find, and so macOS, does not have it.
+    find . \( -type f -o -type l \) -print | sed 's|^\./||' | sort
   ) | while read -r entry; do
     printf '%s %s\n' "$entry" "$RUNFILES_DIR/$entry"
   done >"$manifest"

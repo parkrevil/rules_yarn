@@ -1,7 +1,9 @@
 #!/usr/bin/env bash
 # Tests the yarn_binary launcher with the real Yarn distribution: selected
-# version, unusable host tools, project yarnPath, invalid commands, unchanged
-# project files, and no network access.
+# version, unusable host tools, project yarnPath, invalid commands, and
+# unchanged project files. None of these needs the network blocked. Proving
+# that `--version` needs no network is yarn_offline_test's job, because that
+# one can only be proved in a sandbox that blocks it.
 
 # --- begin runfiles.bash initialization v3 ---
 # Copy-pasted from the Bazel Bash runfiles library v3.
@@ -25,12 +27,6 @@ yarn="$(rlocation "$1")"
 
 out="$TEST_TMPDIR/stdout"
 err="$TEST_TMPDIR/stderr"
-
-test_network_is_blocked() {
-  if "$BASH" -c 'exec 3<>/dev/tcp/1.1.1.1/443' 2>/dev/null; then
-    fail "the test can reach the network; run it in a sandbox that honors the block-network tag"
-  fi
-}
 
 test_version_without_usable_host_tools() {
   local host_tools="$TEST_TMPDIR/host tools"
@@ -86,7 +82,6 @@ test_invalid_command_reports_failure() {
   grep -qF "No project found in $(cd "$dir" && pwd -P)" "$out" || fail "missing Yarn diagnostic; stdout was: $(cat "$out")"
 }
 
-test_network_is_blocked
 test_version_without_usable_host_tools
 test_project_yarn_path_is_ignored_and_files_are_unchanged
 test_invalid_command_reports_failure

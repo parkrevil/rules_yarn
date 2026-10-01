@@ -28,6 +28,27 @@ jobs:
       - name: Report the Bazel version in use
         run: bazel --version
 
+      # The first run on this workflow used processwrapper-sandbox on Linux, so
+      # the block-network tag was not honoured and yarn_offline_test could not
+      # show what it exists to show. Nothing in the log said why. This reports
+      # the state before and after a plausible cause is addressed, so the next
+      # change acts on a measurement instead of a guess. A sysctl set here
+      # stays set for the build and test steps below, on the same runner, so
+      # if the cause is the one addressed those steps benefit too — that is
+      # intended, not incidental.
+      - name: Report what sandbox the runner allows
+        if: runner.os == 'Linux'
+        run: |
+          for s in kernel.unprivileged_userns_clone kernel.apparmor_restrict_unprivileged_userns; do
+            printf 'before: %s = %s\n' "$s" "$(sysctl -n "$s" 2>&1)"
+          done
+          unshare -Ur true && echo "before: unshare -Ur ok" || echo "before: unshare -Ur refused"
+          sudo sysctl -w kernel.apparmor_restrict_unprivileged_userns=0 2>&1 || true
+          unshare -Ur true && echo "after: unshare -Ur ok" || echo "after: unshare -Ur refused"
+          echo "--- what Bazel reports when linux-sandbox is demanded ---"
+          bazel test --spawn_strategy=linux-sandbox --nocache_test_results \
+            //tests/launcher:yarn_offline_test 2>&1 | tail -25 || true
+
       - name: Build and test the ruleset
         run: bazel build //... && bazel test //... --test_output=errors
 

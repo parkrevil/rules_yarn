@@ -1,6 +1,8 @@
 #!/usr/bin/env bash
 # Checks that the Yarn target built from the public rules_yarn API reports the
-# selected version without usable host tools and without network access.
+# selected version without usable host tools. Whether it needs the network is
+# yarn_offline_test's question, because only a sandbox that blocks the network
+# can answer it.
 
 # --- begin runfiles.bash initialization v3 ---
 # Copy-pasted from the Bazel Bash runfiles library v3.
@@ -21,10 +23,6 @@ fail() {
 
 yarn="$(rlocation "$1")"
 [[ -x "$yarn" ]] || fail "cannot find the Yarn launcher $1"
-
-if "$BASH" -c 'exec 3<>/dev/tcp/1.1.1.1/443' 2>/dev/null; then
-  fail "the test can reach the network; run it in a sandbox that honors the block-network tag"
-fi
 
 host_tools="$TEST_TMPDIR/host tools"
 marker="$TEST_TMPDIR/host-tool-used"

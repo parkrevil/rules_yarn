@@ -5,8 +5,6 @@ Bazel rules that deliver the Yarn CLI. Linux x86_64 only. Public API lives in `y
 ## Always
 
 - Claim behavior only from a test or a recorded run.
-- Fix what you find. A risk or a known limit records what the approach cannot do, never what you did not do; say which it is.
-- Apply a rule you state to everything it covers, not only where a linter or a reviewer pointed. Record the verdict for each, including what you leave unchanged.
 - Fetch every external artifact by exact version with an integrity digest, never from a host-installed tool.
 - Check any Bazel or ruleset API against the defining ruleset's documentation or source at the pinned version, and cite that in the change. Nothing deprecated or experimental.
 - Stop and report when a pinned release or API is missing. Never ship a workaround consumers must copy into their own module.
@@ -28,7 +26,9 @@ Pins are `MODULE.bazel`, `MODULE.bazel.lock`, `.bazelversion`, `yarn/private/ver
 ## Before commit
 
 - `bazel build //... && bazel test //...` passes in the root and in `e2e/smoke/`; `.bazelignore` keeps `e2e/` out of the root run.
-- A reviewer without the implementation conversation reviews the change; check each finding against documentation or a failing test; commit only what passed.
+- A reviewer without the implementation conversation reviews the change; check each finding against documentation or a failing test; commit only what passed. This holds for every commit, including one that changes this file.
+- Fix what the change is for, rather than recording it. A risk or a known limit states what the approach cannot do; it is not a place to put what you chose not to do. Say which one it is. A defect outside the change gets reported, and its own change.
+- When the change states a rule, apply it to everything that change touches, not only where a linter or a reviewer pointed, and record the verdict for each — including what you leave as it is.
 
 <!-- OPENWIKI:START -->
 

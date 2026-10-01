@@ -12,6 +12,20 @@ sh_test(
     srcs = ["yarn_version_test.sh"],
     args = ["$(rlocationpath :yarn)"],
     data = [":yarn"],
+    deps = ["@rules_shell//shell/runfiles"],
+)
+
+# Only a sandbox that blocks the network can show that Yarn does not need it,
+# so this is the one target that depends on the tag being honoured.
+sh_test(
+    name = "yarn_offline_test",
+    size = "small",
+    srcs = ["yarn_offline_test.sh"],
+    args = [
+        "$(rlocationpath :yarn)",
+        "4.18.0",
+    ],
+    data = [":yarn"],
     tags = ["block-network"],
     deps = ["@rules_shell//shell/runfiles"],
 )
