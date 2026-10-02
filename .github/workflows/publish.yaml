@@ -1,0 +1,40 @@
+# Offers a release to the Bazel Central Registry, using the reusable workflow
+# the registry's own publishing automation provides. The templates it reads
+# are in .bcr/.
+name: Publish to BCR
+
+on:
+  workflow_call:
+    inputs:
+      tag_name:
+        required: true
+        type: string
+    secrets:
+      publish_token:
+        required: true
+  # So a failed publish can be retried without cutting another release.
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: the git tag being published
+        required: true
+        type: string
+
+jobs:
+  publish:
+    uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@v1.5.0
+    with:
+      tag_name: ${{ inputs.tag_name }}
+      # A fork of bazelbuild/bazel-central-registry that the token can push to.
+      registry_fork: parkrevil/bazel-central-registry
+      # `draft` is left at its default of true on purpose. The reusable
+      # workflow explains why: the registry auto-approves a pull request when
+      # its author marks it ready for review, which is how an author gets
+      # around not being able to approve their own. Opening it ready, as
+      # rulesets publishing under a bot account do, gives that up.
+    permissions:
+      attestations: write
+      contents: write
+      id-token: write
+    secrets:
+      publish_token: ${{ secrets.publish_token || secrets.BCR_PUBLISH_TOKEN }}

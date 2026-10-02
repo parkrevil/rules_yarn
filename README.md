@@ -6,17 +6,11 @@ Node.js, Yarn, or Corepack installed to run Yarn.
 
 ## Installation
 
-`rules_yarn` is not published to the [Bazel Central Registry](https://registry.bazel.build)
-yet, so depend on it with a non-registry override. In `MODULE.bazel`:
+In `MODULE.bazel`:
 
 ```starlark
-bazel_dep(name = "rules_yarn")
+bazel_dep(name = "rules_yarn", version = "0.1.0")
 bazel_dep(name = "rules_nodejs", version = "6.7.5")
-
-local_path_override(
-    module_name = "rules_yarn",
-    path = "../..",
-)
 
 node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
 node.toolchain(node_version = "24.21.0")
@@ -26,15 +20,37 @@ yarn.distribution(version = "4.18.0")
 use_repo(yarn, "yarn")
 ```
 
-`path` is relative to the module you are writing. The snippet above is the
-one in [`e2e/smoke`](e2e/smoke), which sits two directories below this
-repository's root; point it at wherever your checkout of `rules_yarn` is.
+Bazel 8.3.0 or newer. `rules_yarn` declares that, so an older Bazel is turned
+away while the module graph resolves rather than failing inside the ruleset.
 
 `rules_nodejs` supplies the Node.js runtime toolchain. Pick the Node.js version
-your project needs; the version above is the one this ruleset is tested with.
-[`archive_override`](https://bazel.build/rules/lib/globals/module#archive_override)
-and [`git_override`](https://bazel.build/rules/lib/globals/module#git_override)
-work in place of `local_path_override`.
+your project needs; the one above is what this ruleset is tested with.
+
+### Before the module reaches the registry
+
+`rules_yarn` is not in the [Bazel Central Registry](https://registry.bazel.build)
+yet, so `bazel_dep` alone will not resolve it. Until it is, add an override
+next to the `bazel_dep` above. A release archive, which every release carries:
+
+```starlark
+archive_override(
+    module_name = "rules_yarn",
+    integrity = "sha256-...",
+    strip_prefix = "rules_yarn-0.1.0",
+    urls = ["https://github.com/parkrevil/rules_yarn/releases/download/v0.1.0/rules_yarn-v0.1.0.tar.gz"],
+)
+```
+
+The integrity value for each archive is in that release's notes.
+[`git_override`](https://bazel.build/rules/lib/globals/module#git_override) and
+[`local_path_override`](https://bazel.build/rules/lib/globals/module#local_path_override)
+work too; `local_path_override` is what [`e2e/smoke`](e2e/smoke) uses, with
+`path = "../.."`, because it sits two directories below this repository's root.
+
+An override only takes effect in the root module, so a module that depends on
+`rules_yarn` cannot pass it on — every root module that ends up depending on
+`rules_yarn` has to repeat it. That is the reason to publish, and the reason
+this section exists.
 
 ## Usage
 
@@ -135,8 +151,8 @@ The launcher is a Bash script: it uses `[[ ]]`, `pipefail` and `source`, and
 the shell toolchain points at Bash on every operating system it supports. So
 Windows needs work this ruleset does not do yet.
 
-[`e2e/smoke`](e2e/smoke) is a consumer module that uses only the public API;
-its snippets are the ones above.
+[`e2e/smoke`](e2e/smoke) is a consumer module that uses only the public API,
+and [`tests/bcr`](tests/bcr) is the one the registry presubmit runs.
 
 ## Scope
 

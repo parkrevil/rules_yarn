@@ -1,0 +1,19 @@
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
+load("@rules_yarn//yarn:defs.bzl", "yarn_binary")
+
+yarn_binary(
+    name = "yarn",
+    yarn = "@yarn",
+)
+
+sh_test(
+    name = "yarn_version_test",
+    size = "small",
+    srcs = ["yarn_version_test.sh"],
+    args = [
+        "$(rlocationpath :yarn)",
+        "4.18.0",
+    ],
+    data = [":yarn"],
+    deps = ["@rules_shell//shell/runfiles"],
+)

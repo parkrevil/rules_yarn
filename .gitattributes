@@ -1,0 +1,12 @@
+# What `git archive` leaves out of a release. The published archive is what
+# every consumer downloads and what the registry presubmit extracts, so it
+# carries the ruleset, its tests and its documentation — not the tooling used
+# to develop it or the record of how it was planned.
+.agents/ export-ignore
+.claude/ export-ignore
+.codex/ export-ignore
+.mcp.json export-ignore
+CLAUDE.md export-ignore
+openspec/ export-ignore
+openwiki/ export-ignore
+.gitattributes export-ignore

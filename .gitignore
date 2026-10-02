@@ -1,3 +1,5 @@
 bazel-*
 .bazelrc.user
 .claude/settings.local.json
+# `release_prep.sh` writes this when run locally.
+rules_yarn-*.tar.gz

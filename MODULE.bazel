@@ -4,8 +4,13 @@
 # yarn/private/repositories.bzl calls. Declaring it means an older Bazel is
 # turned away while the module graph resolves, instead of failing inside this
 # ruleset's files.
+# `version` stays at the placeholder in the repository. The Bazel Central
+# Registry entry carries the real version, which `publish-to-bcr` supplies as
+# a generated patch over the released archive — the same arrangement
+# rules_shell uses.
 module(
     name = "rules_yarn",
+    version = "0.0.0",
     bazel_compatibility = [">=8.3.0"],
 )
 
