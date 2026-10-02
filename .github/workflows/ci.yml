@@ -56,6 +56,15 @@ jobs:
         working-directory: e2e/smoke
         run: bazel build //... && bazel test //... --test_output=errors
 
+      # The module the registry presubmit runs. It keeps no lockfile, so it
+      # resolves from scratch; `--lockfile_mode=off` says so rather than
+      # letting Bazel write one into the checkout.
+      - name: Build and test the registry test module
+        working-directory: tests/bcr
+        run: |
+          bazel build //... --lockfile_mode=off
+          bazel test //... --lockfile_mode=off --test_output=errors
+
   # A consumer resolving from scratch under the oldest Bazel MODULE.bazel
   # accepts. The repository's own roots cannot check this: their lockfiles are
   # written by a newer Bazel and both set --lockfile_mode=error.
