@@ -1,0 +1,10 @@
+# Settings for the module the Bazel Central Registry presubmit runs.
+
+# Keep no lockfile. The presubmit resolves this module under several Bazel
+# versions, and a lockfile written by one of them fails under another. The
+# other two roots in this repository do the opposite, pinning a lockfile with
+# --lockfile_mode=error, because each checks one configuration.
+#
+# Without this, Bazel's default of --lockfile_mode=update writes one here, and
+# that is how a 700-line lockfile reached the repository in `fef0398`.
+common --lockfile_mode=off

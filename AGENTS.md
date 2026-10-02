@@ -18,7 +18,7 @@ Bazel rules that deliver the Yarn CLI. Linux and macOS. Public API lives in `yar
 
 ## Changing a pin
 
-Pins are `MODULE.bazel`, `MODULE.bazel.lock`, `.bazelversion`, `yarn/private/versions.bzl`, `e2e/smoke/`'s own `MODULE.bazel`, `MODULE.bazel.lock` and `.bazelversion`, and `tests/bcr/MODULE.bazel`. `tests/bcr/` keeps no lockfile on purpose: the registry presubmit runs it under several Bazel versions, and a pinned lock would defeat that.
+Pins are `MODULE.bazel`, `MODULE.bazel.lock`, `.bazelversion`, `yarn/private/versions.bzl`, `e2e/smoke/`'s own `MODULE.bazel`, `MODULE.bazel.lock` and `.bazelversion`, and `tests/bcr/MODULE.bazel`. `tests/bcr/` keeps no lockfile on purpose — the registry presubmit runs it under several Bazel versions and a pinned lock would defeat that — and its own `.bazelrc` sets `--lockfile_mode=off` so Bazel does not write one.
 
 - Confirm the version exists in every source the build resolves it from, and record the URLs in the change.
 - Run `bazel mod deps --lockfile_mode=update` in the root and in `e2e/smoke/`, then commit both locks. Each root sets `--lockfile_mode=error`, so a stale lock fails that root's build.
