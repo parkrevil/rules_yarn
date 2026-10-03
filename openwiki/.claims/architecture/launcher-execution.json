@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:2254fcd0abda1bb4007a1258902ae0477800d9b9120734713281bdec4bfdadfe",
+  "pageVersion": "sha256:befdd675aad67549c55941a0412a7a11c30060cf7e80770588337bf5ffa3d6a3",
   "claims": [
     {
       "id": "claim_dc8ca9a0db904b2abc728ee78830c9be",
@@ -21,7 +21,7 @@
       "statement": "The launcher is produced by a single expand_template action over a checked-in template with exactly three substitutions: the Node.js runfiles path, the Yarn runfiles path, and the shell interpreter path.",
       "evidence": [
         {
-          "resource": "repo://tests/yarn_binary/yarn_binary_tests.bzl#L46-L55",
+          "resource": "repo://tests/yarn_binary/yarn_binary_tests.bzl#L47-L56",
           "version": "repo-lines-v1:sha256:97212baf97df5382964efd8b5edbb23a03f21317f7ddc6a501ec76d80d49e217:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxOTU2ZDc4ODFjMTdkMGUwNTQ2NzYzMzhmOGFhNDRhNDg1MjRlMzMxOWI5M2I5YjI4Y2M4Y2I1YzM4NTFmNjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjlmYjEyNGEzZTU0NjQ2MjRmODM4NGU5MzQ3MzM4MTBmYWIxYmQyMWUwYzFlZjI2NWIxMzI3MWE5MWY5NDQ3NzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQyYmU3MzU5MmZlYzBlZTEyYzM4NzQ2NjY2MzgxYWQ0N2I4ZjIzN2NhZGZmOWY1NjQyMTUwYjNlNDM1Y2U4NWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhhMDFhMjk4NDRiNTdkOGJhNDYwZTZiYTBjZWFmNGRjZWExNGFlN2ZhOGNhNWQ2ZjVjODc1OTAzMDZkNzNhNzQifQ"
         },
         {
@@ -71,7 +71,7 @@
           "version": "repo-lines-v1:sha256:24170c843b951159ddd638c261895bcc822033f5aa3b45a096fd6d24b717fb35:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTMyOTg3NTgxZWI0YzI1M2VjYWNiYzFkYThkNzQwMDEwZmZhOTRmYmEwOWViYWRiMmRhMGU4M2NmYTExOGQ2YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGE3ODRmYTM5MDM2ZGFhZGFmYWNlM2U2M2YxMGIxMmNiYTIxMzg3MDVhZDg2ZDU5MjY4N2Y2OWRkNjVmNzA0OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGU3NmM1MDQ2NGQzYjQ3Nzc4ZmUyOWI3MTllNDg5OTNlNjliY2RjM2Y0ZGEzYmEwNjdhNjljNjA1NmM1OTVkYyJ9"
         },
         {
-          "resource": "repo://tests/launcher/yarn_cli_test.sh#L54-L77",
+          "resource": "repo://tests/launcher/yarn_cli_test.sh#L50-L73",
           "version": "repo-lines-v1:sha256:beb5a86827ea69641add7a0c5fca62c520b00d5ec08c5f65a949a5fe3a13c8e2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0YTA1OGQ5YjZlNTJlNzcyZWMzYzdiMDE0NjRlYTBiMjRiZjk5YzA4OWJmMzlhZjNmYWU4ZjBiYWY2NjZhNTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiM2IwMjdlYjYxYmEzYTEzMDhlYjljNWMwOTY1OWE0YzhlNTQ5MGEwZjQ4MzFkODhjMGQ5ODYzOTM4ZjhmYTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiNGJjYjEzY2JlZTg0ZTA5MWUzMGM1MzkyYjM0MmFhZmIwZGZmMWRlNWQ2OWUwN2E1Y2NjMzMyOGM5NDJmZDIifQ"
         },
         {
@@ -99,8 +99,8 @@
       "statement": "The launcher resolves Node.js and the Yarn entry point through the Bash runfiles library and fails with its own diagnostic when either lookup is empty, supporting both runfiles-directory and manifest-only lookup.",
       "evidence": [
         {
-          "resource": "repo://tests/launcher/launcher_test.sh#L96-L112",
-          "version": "repo-lines-v1:sha256:9400a8d4de45bed7654446b14562c19ff4987b20c3d99a4b17f42d70abf2464c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiYzdhYzgxZjZmNzUyMmQzNGE0NThiNjA4NTVlYTBjOGYxZjc3NmNlMTI0MzUyNjY3NjRjMWJjMTIyMTcyNTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwZWRmNTA5NDYxYzRkM2JjY2RlNGIyNGQ1OTM1YmE5Yzk4YzgwM2VlZmM3NWQ3MmU1Mzc1YTYwYWRlY2I3ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3ZDA2NDJmZmM4ZWU2NTQ3YmU4M2M4YzczODEzNzJjNWI5OGMwZDE1YTU1ZjczZTg4ODJmYjRlYzg2ZTdhZWYifQ"
+          "resource": "repo://tests/launcher/launcher_test.sh#L96-L113",
+          "version": "repo-lines-v1:sha256:a9773c1d6f24e8e2a89752ea67fc0ff23f18ca52deff0a46c3ce323a17603fb3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiYzdhYzgxZjZmNzUyMmQzNGE0NThiNjA4NTVlYTBjOGYxZjc3NmNlMTI0MzUyNjY3NjRjMWJjMTIyMTcyNTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwZWRmNTA5NDYxYzRkM2JjY2RlNGIyNGQ1OTM1YmE5Yzk4YzgwM2VlZmM3NWQ3MmU1Mzc1YTYwYWRlY2I3ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3ZDA2NDJmZmM4ZWU2NTQ3YmU4M2M4YzczODEzNzJjNWI5OGMwZDE1YTU1ZjczZTg4ODJmYjRlYzg2ZTdhZWYifQ"
         },
         {
           "resource": "repo://yarn/private/yarn_binary.sh.tpl#L5-L24",
@@ -135,6 +135,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-09-21T15:40:20.833Z"
+    "at": "2026-10-03T03:35:17.537Z"
   }
 }

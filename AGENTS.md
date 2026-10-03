@@ -29,6 +29,7 @@ Pins are `MODULE.bazel`, `MODULE.bazel.lock`, `.bazelversion`, `yarn/private/ver
 - A reviewer without the implementation conversation reviews the change; check each finding against documentation or a failing test; commit only what passed. This holds for every commit, including one that changes this file.
 - Fix what the change is for, rather than recording it. A risk or a known limit states what the approach cannot do; it is not a place to put what you chose not to do. Say which one it is. A defect outside the change gets reported, and its own change.
 - When the change states a rule, apply it to everything that change touches, not only where a linter or a reviewer pointed, and record the verdict for each — including what you leave as it is.
+- Regenerate the wiki when the change touches anything `openwiki/.claims` cites, and commit it with the change. `tools/hooks/openwiki_staleness.sh` recomputes each citation's digest and names what no longer matches; it runs at `pre-push`. Nothing regenerates the wiki on a schedule: the `## OpenWiki` section below says a workflow does, but that paragraph is written by the generator and the workflow it names was removed, because it needed a model API key this repository does not hold.
 
 <!-- OPENWIKI:START -->
 

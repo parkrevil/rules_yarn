@@ -3,9 +3,6 @@ type: architecture
 title: Launcher and execution model
 description: How the yarn_binary rule resolves toolchains, expands a shell launcher, finds Node.js and the Yarn entry point through runfiles, and controls the working directory and environment Yarn runs under.
 tags: [rule, toolchain, runfiles, launcher, bazel-run]
-verified:
-  - by: openwiki/0.5.1
-    at: 2026-09-21T15:40:20.833Z
 sources:
   - id: openwiki-source-8a52f3cc97aa21919ea82129
     resource: repo://tests/launcher/launcher_test.sh
@@ -18,6 +15,9 @@ sources:
   - id: openwiki-source-c20b05d8b903795173b9a3b2
     resource: repo://yarn/private/yarn_binary.sh.tpl
 generated: { by: "claude-code", at: "2026-09-21T10:11:59.468Z" }
+verified:
+  - by: openwiki/0.5.1
+    at: 2026-10-03T03:35:17.537Z
 ---
 
 # Launcher and execution model

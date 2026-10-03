@@ -105,6 +105,15 @@ jobs:
       - name: Run the pre-commit hooks
         run: pre-commit run --all-files --show-diff-on-failure
 
-      # The guard is harness tooling with no Bazel target, so it is run here.
+      # Both hooks are harness tooling with no Bazel target, so their contract
+      # tables are run here.
       - name: Check the generated-file guard's contract
         run: tools/hooks/protect_generated_test.sh
+
+      - name: Check the wiki staleness gate's contract
+        run: tools/hooks/openwiki_staleness_test.sh
+
+      # The wiki is generated, so it goes stale rather than wrong. Checking it
+      # needs no model, only the sources its own claims name.
+      - name: Check the wiki still describes the repository
+        run: tools/hooks/openwiki_staleness.sh

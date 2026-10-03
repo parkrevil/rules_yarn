@@ -3,12 +3,13 @@ type: operations
 title: Version pinning and lockfiles
 description: Every pinned input in the repository, where each is declared, how a new Yarn version and its digest are added, and how lockfile enforcement differs between the root module and the consumer smoke module.
 tags: [pinning, lockfile, bzlmod, integrity, maintenance]
-verified:
-  - by: openwiki/0.5.1
-    at: 2026-09-21T15:40:20.833Z
 sources:
   - id: openwiki-source-61e437e4689f6b29dc54938b
     resource: repo://.bazelrc
+  - id: openwiki-source-a996efa61d56b86aea305719
+    resource: repo://.bcr/presubmit.yml
+  - id: openwiki-source-8037e2358a2c4f9b2c722a11
+    resource: repo://AGENTS.md
   - id: openwiki-source-bc52b7fdf1f189e434bbea21
     resource: repo://e2e/smoke/.bazelrc
   - id: openwiki-source-549241bca0b004f1752341b2
@@ -17,9 +18,14 @@ sources:
     resource: repo://e2e/smoke/MODULE.bazel
   - id: openwiki-source-d92bdd4d3d554717b6869e2d
     resource: repo://MODULE.bazel
+  - id: openwiki-source-01bd775b2b199eca72dcc70e
+    resource: repo://tests/bcr/.bazelrc
   - id: openwiki-source-847ceba95f7fcfa239c5f25b
     resource: repo://yarn/private/versions.bzl
-generated: { by: "claude-code", at: "2026-09-21T15:40:20.833Z" }
+generated: { by: "claude-code", at: "2026-10-03T03:12:21.393Z" }
+verified:
+  - by: openwiki/0.5.1
+    at: 2026-10-03T03:35:17.537Z
 ---
 
 # Version pinning and lockfiles
@@ -37,10 +43,16 @@ are few enough to list.
 | `.bazelversion` | the Bazel release |
 | `yarn/private/versions.bzl` | every Yarn version the ruleset can fetch, with its integrity digest |
 | `e2e/smoke/MODULE.bazel`, `e2e/smoke/MODULE.bazel.lock`, `e2e/smoke/.bazelversion` | the same, for the consumer module |
+| `tests/bcr/MODULE.bazel` | the same, for the module the registry presubmit runs — no lock, for the reason below |
 
-The consumer module is a second Bazel module with its own root. It depends on
-the ruleset through a non-registry override pointing at the repository root,
-which is why it has its own module file and its own lock rather than
+`MODULE.bazel` also declares `bazel_compatibility = [">=8.3.0"]`, which pins
+the other direction: not what this repository depends on, but the oldest Bazel
+a consumer may bring. Below it Bazel refuses the module while resolving,
+naming the ruleset, rather than failing inside it.
+
+The two other modules are separate Bazel modules with their own roots. Each
+depends on the ruleset through a non-registry override pointing at the
+repository root, which is why each has its own module file rather than
 participating in the root module's resolution.
 
 ## The Yarn digest table
@@ -60,29 +72,34 @@ build silently gets a different Yarn than the one named.
 
 ## Lockfile enforcement is declared per module root
 
-The root `.bazelrc` sets `common --lockfile_mode=error`. In that mode Bazel
-fails the build when anything consulted during resolution is missing from or
-stale in the lockfile, instead of quietly updating it. The committed lock is
-therefore authoritative for every checkout.
+Each root states its own mode, because Bazel reads the `.bazelrc` of the
+module root it was invoked in and one root's setting does not reach another.
+A root that states nothing gets Bazel's default, `update`, which rewrites a
+stale lock without reporting anything — or writes one where none was wanted.
 
-The consumer module carries the same setting in its own `.bazelrc`, so both
-roots are guarded. It needs its own copy because Bazel reads the `.bazelrc` of
-the module root it was invoked in: the repository root's setting does not reach
-a separate module. Without that file the consumer module would fall back to the
-default mode, which rewrites a stale lock without reporting anything.
+| Root | Mode | Why |
+| --- | --- | --- |
+| the repository | `error` | the committed lock is authoritative for every checkout |
+| `e2e/smoke` | `error` | the same, for the configuration it checks |
+| `tests/bcr` | `off` | the registry presubmit resolves it under several Bazel versions, and a lock written by one fails under another |
+
+`tests/bcr` keeps no lockfile at all. It had one briefly — Bazel's default
+wrote it and a commit carried it in, while the documentation said the module
+kept none — which is why that root now states `off` rather than relying on
+nobody running Bazel there.
 
 ## Changing a pin
 
 Refreshing the locks after a dependency change is two invocations, one per
-module root:
+root that keeps a lock:
 
 ```shell
 bazel mod deps --lockfile_mode=update
 ```
 
-Run it in the repository root and in `e2e/smoke/`, and commit both locks. The
-error mode makes a forgotten refresh fail loudly on the next build rather than
-producing a drifted checkout.
+Run it in the repository root and in `e2e/smoke/`, and commit both locks.
+`tests/bcr` has nothing to refresh. The error mode makes a forgotten refresh
+fail loudly on the next build rather than producing a drifted checkout.
 
 ## Development-only pins
 

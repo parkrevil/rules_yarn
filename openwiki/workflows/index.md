@@ -1,3 +1,3 @@
 # Files
 
-- [Development workflow](development-workflow.md) - The working rules for changing this repository and the automation that enforces them — the agent instruction contract, OpenSpec planning, pre-commit checks, and the editor hooks that protect generated files and validate the OKF bundle.
+- [Development workflow](development-workflow.md) - The rules a change must satisfy, the OpenSpec planning cycle, and the automation that enforces each — pre-commit, the editor guard, the wiki staleness gate, and CI.

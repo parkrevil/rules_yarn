@@ -10,7 +10,9 @@
   - 2026-09-30: `yarn_cli_test` keeps the host-tools, `yarnPath` and invalid-command checks, which hold whether or not the sandbox blocks anything; `e2e/smoke`'s `yarn_version_test` keeps its version check. The assertion and the offline `--version` check move to `yarn_offline_test` in both roots, tagged `block-network`. Root `bazel test //... --cache_test_results=no` passes 23 of 23, `e2e/smoke` 2 of 2.
 - [x] 2.2 Add a CI step that reports what sandbox the Linux runner allows, so the cause is measured rather than guessed; verify the step is written to explain the outcome either way.
   - 2026-09-30: it prints the two user-namespace sysctls and whether `unshare -Ur` succeeds, addresses one plausible cause, prints both again, then demands `linux-sandbox` from Bazel and prints what Bazel says. If the addressed cause was the right one the before-and-after pair shows it; if not, Bazel's refusal is in the log.
-- [ ] 2.3 Read what the run reports and fix the measured cause, or record that `linux-sandbox` cannot be had on this runner and say what that costs.
+- [x] 2.3 Read what the run reports and fix the measured cause, or record that `linux-sandbox` cannot be had on this runner and say what that costs.
+  - 2026-10-01: run 36852664790, `main` at `c0bba48`, Ubuntu job. The measurement reported `kernel.unprivileged_userns_clone = 1`, `kernel.apparmor_restrict_unprivileged_userns = 1`, `before: unshare -Ur refused`. After `sysctl -w kernel.apparmor_restrict_unprivileged_userns=0`: `after: unshare -Ur ok`, and Bazel reported `8 processes: 7 internal, 2 linux-sandbox` when `linux-sandbox` was demanded. So the cause was the AppArmor restriction on unprivileged user namespaces, not anything in this repository.
+  - The sysctl set by that step persists into the build and test steps of the same job, which the step's comment states is intended: the same run then reported `44 linux-sandbox` for the root test pass and `4 linux-sandbox` for `e2e/smoke`, and every job was green. `yarn_offline_test` passed on both platforms, so nothing was given up.
 
 ## 3. The rules added without review
 

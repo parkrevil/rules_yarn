@@ -5,10 +5,12 @@ description: What consumers of rules_yarn may depend on — the yarn_binary rule
 tags: [public-api, starlark, visibility, bzl-library, consumer-contract]
 verified:
   - by: openwiki/0.5.1
-    at: 2026-09-21T15:40:20.833Z
+    at: 2026-10-03T03:35:17.537Z
 sources:
   - id: openwiki-source-9166404a3cbd4408b80101ce
     resource: repo://e2e/smoke/BUILD.bazel
+  - id: openwiki-source-d92bdd4d3d554717b6869e2d
+    resource: repo://MODULE.bazel
   - id: openwiki-source-b24cb6f741eb257166e5a139
     resource: repo://yarn/BUILD.bazel
   - id: openwiki-source-044df30840b4f85a8f7d705c
@@ -23,7 +25,7 @@ sources:
     resource: repo://yarn/private/repositories.bzl
   - id: openwiki-source-d9081795909674dafc7044aa
     resource: repo://yarn/private/yarn_binary.bzl
-generated: { by: "claude-code", at: "2026-09-21T15:40:20.833Z" }
+generated: { by: "claude-code", at: "2026-10-03T03:12:21.393Z" }
 ---
 
 # Public API surface
@@ -82,6 +84,22 @@ implementation, the rule implementation, and the launcher template are all
 internal. A consumer cannot read the supported version list from Starlark or
 instantiate the repository rule directly; the supported set is reachable only by
 declaring a version and being told whether it is accepted.
+
+## What the consumer has to bring
+
+Two things, and the module says both so a consumer is told rather than left to
+find out.
+
+`MODULE.bazel` declares `bazel_compatibility = [">=8.3.0"]`. Below that, Bazel
+refuses the module while resolving the graph, naming this ruleset and the
+version it needs; without the declaration the same consumer would instead hit
+a Starlark error inside a private file of a ruleset they did not write, about
+an API they never called. The floor is where `repository_ctx.repo_metadata`
+arrives, which the repository rule uses.
+
+A Node.js runtime toolchain, from `rules_nodejs`, has to be registered. The
+rule takes the runtime from `@rules_nodejs//nodejs:runtime_toolchain_type` and
+fails analysis if the resolved toolchain carries only a host path.
 
 ## Stability consequences
 

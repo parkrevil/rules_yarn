@@ -4,7 +4,7 @@ okf_version: "0.2"
 
 # Files
 
-- [Quickstart](quickstart.md) - What rules_yarn is, and which page to open for the common tasks — consuming the ruleset, adding a Yarn version, changing the launcher, running the tests, and following the contributor workflow.
+- [Quickstart](quickstart.md) - What rules_yarn is and is not, and which page answers each common task — depending on it, adding a Yarn version, changing the launcher, running the tests, cutting a release, following the contributor workflow.
 
 # Directories
 

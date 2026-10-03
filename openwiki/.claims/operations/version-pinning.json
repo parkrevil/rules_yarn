@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:1a80f493b503d1b0590502a2d23f994cacc713e249537780b546497d84df0c0e",
+  "pageVersion": "sha256:5ff97a14d8367b1fcac92394b1de73a1db8d79073ddc0548eb2a898a50b5aacd",
   "claims": [
     {
       "id": "claim_f94f369481c3466db1302dc475650602",
@@ -24,7 +24,7 @@
     },
     {
       "id": "claim_ebb91cc4c5ef471189423ab862c801cf",
-      "statement": "The consumer smoke module carries its own .bazelrc with the same lockfile error mode, because Bazel reads the .bazelrc of the module root it is invoked in and the root module's setting does not reach it.",
+      "statement": "Each module root states its own lockfile mode, because Bazel reads the .bazelrc of the root it was invoked in and one root's setting does not reach another: the repository and e2e/smoke set error, and tests/bcr sets off.",
       "evidence": [
         {
           "resource": "repo://.bazelrc",
@@ -32,7 +32,11 @@
         },
         {
           "resource": "repo://e2e/smoke/.bazelrc",
-          "version": "repo-file-v1:sha256:eff408f44f90b05a61423a4bf14027e804d5bd9b0fc02e7481de91e134c7c0f2"
+          "version": "repo-file-v1:sha256:656bcd1d7834a9ab76457877ced52773e646780f5e13c083be84cf64b53ecd1f"
+        },
+        {
+          "resource": "repo://tests/bcr/.bazelrc",
+          "version": "repo-file-v1:sha256:4e8e242194386f4949fae3d99554fde44512b529c3164b90f4758a07eb5db61a"
         }
       ]
     },
@@ -55,7 +59,7 @@
       "statement": "The Node.js toolchain registration, the test Yarn distribution, the platforms module and the testing framework are declared as development dependencies of the root module, so consumers do not inherit them.",
       "evidence": [
         {
-          "resource": "repo://MODULE.bazel#L9-L22",
+          "resource": "repo://MODULE.bazel#L21-L34",
           "version": "repo-lines-v1:sha256:ed7d421e98d743a437c9af3eefa5d1767a2f61e350fb432119c48e3f9d028e5b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlYjAzOWI0NzM0YmM4OWVkYjliNzhhYWM3OTFlNTA3MmY4MzAyMjRhZDY4ZTlmOWQwYzcwNTg2YzYxN2EzMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiYjVmZTNjOTg4NTFkMWE4OGIzNjAyNDI4ODExZjc4OGVhNGQ5N2RlZTQzODE4YWRjYWEwYjg5ZGIyZDU1YzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjNWQ3ZjY3ZWZlYzE4MWQ5MjA3ZTBjYjI4OWI1MzUwOTI4MTdhNDkwMTIyOWQyMmRkNWZmOGQwNWEwNmM4MWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
@@ -69,10 +73,44 @@
           "version": "repo-lines-v1:sha256:815a3543fd57f51ebee788cab0429b2977cb8f2517e8c96d114bbaced2ac81d4:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYTgwZTQwMjFhMTk2ODg3NTBlZjFmZWM5N2U0MjUwNmYyOTg5ZjdhNTNiNzA2YjA5ZDk1NGM5YjkyZmFmYWQxNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWNkYzQ5Njg3ZjI3MDNhMzZhYTQ1NDU2NWVhMWY4ZWE2ZGE1NzIyZTNlZGE3M2ExOGIwMDBmMWRiMDlhMWFhZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTUwYzRkYjM4ZGQ0YWI0MzYxNTExZGZhNTFiMTQ1YjRjZDE5ZGM4YmNkNzFhOWU0YzQ4ZmNkOTAxNmRkMzlmYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjIsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTkxZWNkMGU5MzBlNGJhNjIyNWMyYzRhNzFmNzhlNDQ4NTQ2MmViMmM5OTllYTQ5ZTA5MzRlNzBjYjk2OTQ5ZSJ9"
         }
       ]
+    },
+    {
+      "id": "claim_8804dd4bda1442cb9d3e310cafc4cf52",
+      "statement": "MODULE.bazel pins the oldest Bazel a consumer may bring with bazel_compatibility = [\">=8.3.0\"], so an older Bazel is refused while the module graph resolves.",
+      "evidence": [
+        {
+          "resource": "repo://MODULE.bazel#L3-L12",
+          "version": "repo-lines-v1:sha256:9d16fb0e606a533257eef1c5808e49d9ed7ca3381975f9c8879bb5f3c4d91349:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3N2NlZjQ4ZWY2MTI1MDBkOGMwODhhYTM1MTMyMTEzNGVhNGFmNTU1ZDc5MmY4ZWYzOTE1ZjE3MTdiMjY1ZjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4OWJmNTRiN2NiZjNlNDVjMzlkNjU1NjJhNTg2YzRjYzA2YWViZGE4ZjExMGU3Y2JkYzllZThjZDk2Y2QzOGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY3OTJmODYwYWFkZWY3Mzk3MWIwODAyNjUxMmFlZTlhZGFkMzZjNGVhYjhlOGRiMjc0ZmY1NmM3OTQ1NTMyYTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg3NTYxNzZjZjFkZGQ1Yzg2ZjVmNjI4ZjQ3ZDFmMmVlY2I5YjRjZjliYTY2ODYwMDMyZDlkNDAzNTFlODBjNzYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_488f78c8f11345f7a7d670d9c0036276",
+      "statement": "tests/bcr keeps no lockfile and sets --lockfile_mode=off, because the registry presubmit resolves it under several Bazel versions and a lock written by one fails under another.",
+      "evidence": [
+        {
+          "resource": "repo://.bcr/presubmit.yml",
+          "version": "repo-file-v1:sha256:e19d4ec88852496132642fd885f548dac4a011811a8c863af92d48f8923a1440"
+        },
+        {
+          "resource": "repo://tests/bcr/.bazelrc",
+          "version": "repo-file-v1:sha256:4e8e242194386f4949fae3d99554fde44512b529c3164b90f4758a07eb5db61a"
+        }
+      ]
+    },
+    {
+      "id": "claim_6d2dc243ddbb48de8f6f3a0eb7f3dce1",
+      "statement": "Refreshing locks after a dependency change is one bazel mod deps --lockfile_mode=update per root that keeps a lock, the repository and e2e/smoke; tests/bcr has none to refresh.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md#L21-L26",
+          "version": "repo-lines-v1:sha256:acc36842e8cf6b709d2a43c8cddfdb1227509f07e99127507ebcbf657537e435:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGRiMDBiNjJjYzJiM2Q3NzFkNmY5ZDJlNTdkNWNkOTcyOTExY2IyNDVjNmJiNzBlYjIyNGMyNjBiNmZiMDVjMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGQzOGNhZjZkMTUwYmVlMGQ3ODJmNjc0ZjhkMzFlYzY5N2M4MTg5OTUyZTZhNDA2MWIwMDJkZjgzY2NmNWJkNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjQxNDUwMWEyN2I3ZjE1MjM1MWMzMmM2N2QyYWIxNDJlODBhMDllMzU0OTM4NzZhN2JhZmRlODc1NGI2OWIwZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWFjODcyYWIyNjI5YjA5ZmZiMGVhNjNiNzkwM2EwMDNlMmEzZmYxMGFiMGQ3MGIxMzEwZGY1ZGE3ZDZlYzY4NiJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-09-21T15:40:20.833Z"
+    "at": "2026-10-03T03:35:17.537Z"
   }
 }

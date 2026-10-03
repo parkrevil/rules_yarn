@@ -1,0 +1,162 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:bc6b545f72d0ba24f2907e1a03a2497a34dc14ace82903aec65617f562a07544",
+  "claims": [
+    {
+      "id": "claim_4937ff2c7dfc4c0bb7a1f0824afbd578",
+      "statement": "Nothing is published to the Bazel Central Registry yet, so a consumer adds a non-registry override; because an override only takes effect in the root module, a module depending on rules_yarn cannot pass it on.",
+      "evidence": [
+        {
+          "resource": "repo://README.md#L30-L58",
+          "version": "repo-lines-v1:sha256:ac0598ebe903f910239d6eb91a7095f82d7179887e136b2b7988110fb1f44f24:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3MTkxOTMyOWI1ZjQwYTc0ZGNjZDMzNWI3YjdjNWNkNGE0MmU0NTdhYjAzZjk5NjlmZGZiODJiYzI3YmY4ZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcxYWNiMWMwYzU0MmY1Yjg2ZmViMmE3MTgxY2I1ZDk5NzlkODlhYTVhNmU0MjJjMTRhY2YzZjAwYjVlZjNhOTUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7edaa2148ce149d29bbecf0321e9e16f",
+      "statement": "Pushing a tag matching v*.*.* runs release.yml, which calls the reusable release workflow from bazel-contrib/.github and then the publish workflow.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/release.yml",
+          "version": "repo-file-v1:sha256:d7812eb0de1c441b6df3badccb022cc7f90fcb7a421387523adf376cdde5cfd8"
+        }
+      ]
+    },
+    {
+      "id": "claim_5b0881ca5c204e83b856cc604fcabb3a",
+      "statement": "The reusable release workflow calls .github/workflows/release_prep.sh at a hard-coded path, so the script preparing a release is attestable from the repository rather than supplied at dispatch.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/release_prep.sh#L1-L14",
+          "version": "repo-lines-v1:sha256:47f04391fb9a66c07652e7a0ba75984ff280db3f864c90c7d9c6c5902c9643d7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQwN2Y3NzlhNjkyNGM1NmFmZmU2OGE1YzU5YmY4MmQwODM0MDQzZjEwZTY0NmY2Njc5YjBhZTE2NGM5YTg5NzcifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_dc177761810c4fa59f3ad1a76ca65857",
+      "statement": "release_prep.sh builds the archive with git archive under the prefix rules_yarn-<version>, matching what a GitHub-generated archive would use, and prints release notes carrying the integrity value.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/release_prep.sh#L1-L20",
+          "version": "repo-lines-v1:sha256:f1b6812ff794dc267961b121cc3969b02be9c0777e1f2c1ee7cf5a43091a1d05:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4OTY0NDFiMTRjNjU1ZGIyNjI2ZWU0N2RmYmU3Y2RlNGM2NzIyYjJjMzA2ZThlODE3MWVkOTM0OGEyNDM1YjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3YjkwYTMyNTAxM2ZhOTNhYWE2ZDgyNjVhNDA2YTVlODVlODA4MmRhNjcwYTc3YTEyN2RjYjZmYTQyN2FjMmQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_c8aa5c0ced97446db4c57b962e7b6431",
+      "statement": "The repository builds its own release archive rather than relying on GitHub's generated one, because the registry checks that a GitHub archive URL is stable and the generated ones are not.",
+      "evidence": [
+        {
+          "resource": "repo://.bcr/source.template.json",
+          "version": "repo-file-v1:sha256:6bc9a3ee634445022ab1f54673a8d018f3897a7f697689dca09cda56d2a514d6"
+        },
+        {
+          "resource": "repo://openspec/changes/archive/2026-10-02-publish-to-the-registry/design.md#L30-L45",
+          "version": "repo-lines-v1:sha256:17deffbaec46b117654d928daa523551da046b1f5999c0b4597835daf6c59376:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI4ZWJlN2E0MGQ5YWQxZjNmN2EyNzg5ZTFkYWIzMWI5NjIxOTg0YzViN2Q4NjAxYWQ1MzcxYTVlYzhjZmFmNDgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFjZmMyMWZlODJmMjNkYmQyNThlYmJhZjZkNWJmM2MxMDA1MjhiYjU5YTk3OWYxNWFhNjk2MTAzZjI5OTIyYmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjI4ZWMyOTZmZDViMzZkYjZlZjg3ZTQxMjNkYzM5MmYxODAwMzNjNGE2OTdmOTcwMmM5NTMwNGExZGI0YzFhMjgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAxODMxZDIwNDEwMTViZTZkZGI0NmY3MDk4NGRlMzE1MWVlN2RhMGZmYTAxOWVlMDU3MDVkNTQwYmJhMjUzODIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3842121a2c6a4645a0a2bb33c245ca22",
+      "statement": "`.gitattributes` marks the agent tooling, the OpenSpec planning record and the generated wiki as export-ignore, so the release archive carries the ruleset, both test modules, the consumer example, the documentation and the licence.",
+      "evidence": [
+        {
+          "resource": "repo://.gitattributes",
+          "version": "repo-file-v1:sha256:e88cd1738496f98a2fa2c0794f16bfc26b2a2f63b506389f63d54fd130ce6980"
+        }
+      ]
+    },
+    {
+      "id": "claim_8e5766756a4f4cf48d5a5a5eee5d48f9",
+      "statement": "The .bcr directory holds four files the publishing automation reads: metadata.template.json, source.template.json, presubmit.yml and config.yml.",
+      "evidence": [
+        {
+          "resource": "repo://.bcr/config.yml",
+          "version": "repo-file-v1:sha256:2b99cc518e0c33116b24f9228e00de6adb92867a735001350c79ad93c468568f"
+        },
+        {
+          "resource": "repo://.bcr/metadata.template.json",
+          "version": "repo-file-v1:sha256:b5e62667cb510d29d227634ae6b7e69ce9903890e70a1b0aec8be18e86fc600f"
+        },
+        {
+          "resource": "repo://.bcr/presubmit.yml",
+          "version": "repo-file-v1:sha256:e19d4ec88852496132642fd885f548dac4a011811a8c863af92d48f8923a1440"
+        },
+        {
+          "resource": "repo://.bcr/source.template.json",
+          "version": "repo-file-v1:sha256:6bc9a3ee634445022ab1f54673a8d018f3897a7f697689dca09cda56d2a514d6"
+        }
+      ]
+    },
+    {
+      "id": "claim_a5cc2e9b1e874cb4af761ed38ec5bf02",
+      "statement": "MODULE.bazel declares version = \"0.0.0\" as a placeholder; the publishing automation recognises it and supplies the real version as a generated patch over the released archive.",
+      "evidence": [
+        {
+          "resource": "repo://MODULE.bazel#L3-L12",
+          "version": "repo-lines-v1:sha256:9d16fb0e606a533257eef1c5808e49d9ed7ca3381975f9c8879bb5f3c4d91349:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3N2NlZjQ4ZWY2MTI1MDBkOGMwODhhYTM1MTMyMTEzNGVhNGFmNTU1ZDc5MmY4ZWYzOTE1ZjE3MTdiMjY1ZjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4OWJmNTRiN2NiZjNlNDVjMzlkNjU1NjJhNTg2YzRjYzA2YWViZGE4ZjExMGU3Y2JkYzllZThjZDk2Y2QzOGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY3OTJmODYwYWFkZWY3Mzk3MWIwODAyNjUxMmFlZTlhZGFkMzZjNGVhYjhlOGRiMjc0ZmY1NmM3OTQ1NTMyYTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg3NTYxNzZjZjFkZGQ1Yzg2ZjVmNjI4ZjQ3ZDFmMmVlY2I5YjRjZjliYTY2ODYwMDMyZDlkNDAzNTFlODBjNzYifQ"
+        },
+        {
+          "resource": "repo://openspec/changes/archive/2026-10-02-publish-to-the-registry/design.md#L20-L29",
+          "version": "repo-lines-v1:sha256:1218185162207d3e603ea39221f89cd66e28c31cb26da8dbecc0d30ea3db46c4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzZTFhNDFhODQ2ZDg5ZjMxYTRiNmU4MTc5Y2ZiYjVkYmRhNDk1NmE4NmZjMjFiYmUyOTA5NGZiNTdmYjRjNTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFjYTU4NTIyNzZkNGM5MjM2YzgzY2QxNGJlODUxODBjZTQ0YWU4ZWZhOTc2ZGZkZDRkNzI0ZTFhZTFiYTgxYWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI0ZjgzNjEzNjAyMGIxODJlOTY1ODJkYjljYWNiMWM2NTgzM2JmZmE2YjQwM2MxMTkwOTgwZmIwMWNkNTI1NDYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_32e4140681cd4a1c9a459761c8a599fe",
+      "statement": "presubmit.yml runs the module at tests/bcr across Linux and macOS on Bazel 8.x and 9.x, and that module depends on the module under test with local_path_override(path = \"../..\"), which lands on the extracted archive root.",
+      "evidence": [
+        {
+          "resource": "repo://.bcr/presubmit.yml",
+          "version": "repo-file-v1:sha256:e19d4ec88852496132642fd885f548dac4a011811a8c863af92d48f8923a1440"
+        },
+        {
+          "resource": "repo://tests/bcr/MODULE.bazel",
+          "version": "repo-file-v1:sha256:b49f1b9bc6c24079777036d2e1968364929d4b3dd9f833fc1a7f229639a3ca60"
+        }
+      ]
+    },
+    {
+      "id": "claim_ecb1a7d51c314c43b5f2e3232300d644",
+      "statement": "tests/bcr is separate from e2e/smoke and keeps no lockfile, setting --lockfile_mode=off in its own .bazelrc, because the presubmit runs several Bazel versions and a pinned lockfile would defeat that.",
+      "evidence": [
+        {
+          "resource": "repo://e2e/smoke/.bazelrc",
+          "version": "repo-file-v1:sha256:656bcd1d7834a9ab76457877ced52773e646780f5e13c083be84cf64b53ecd1f"
+        },
+        {
+          "resource": "repo://tests/bcr/.bazelrc",
+          "version": "repo-file-v1:sha256:4e8e242194386f4949fae3d99554fde44512b529c3164b90f4758a07eb5db61a"
+        }
+      ]
+    },
+    {
+      "id": "claim_0f4ac1acecaf44fdb4f6bf1456d4c718",
+      "statement": "Publishing still requires a BCR_PUBLISH_TOKEN secret and a decision about the maintainer email that becomes public with the entry; the registry fork named in publish.yaml already exists.",
+      "evidence": [
+        {
+          "resource": "repo://.bcr/metadata.template.json",
+          "version": "repo-file-v1:sha256:b5e62667cb510d29d227634ae6b7e69ce9903890e70a1b0aec8be18e86fc600f"
+        },
+        {
+          "resource": "repo://.github/workflows/publish.yaml",
+          "version": "repo-file-v1:sha256:946bc2c7ded520aaf943f51b1c787d9de04c3db24978dcec3a77bf0f3f18afce"
+        }
+      ]
+    },
+    {
+      "id": "claim_3f003479e7b24debae671789e8294dc1",
+      "statement": "publish.yaml leaves the pull request as a draft, the automation's default, because the registry auto-approves an entry when its author marks a draft ready for review.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/publish.yaml",
+          "version": "repo-file-v1:sha256:946bc2c7ded520aaf943f51b1c787d9de04c3db24978dcec3a77bf0f3f18afce"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-10-03T03:35:17.537Z"
+  }
+}

@@ -1,9 +1,13 @@
 ---
 type: quickstart
 title: Quickstart
-description: What rules_yarn is, and which page to open for the common tasks — consuming the ruleset, adding a Yarn version, changing the launcher, running the tests, and following the contributor workflow.
+description: What rules_yarn is and is not, and which page answers each common task — depending on it, adding a Yarn version, changing the launcher, running the tests, cutting a release, following the contributor workflow.
 tags: [quickstart, navigation, bazel, yarn]
 sources:
+  - id: openwiki-source-a4bd6b79c62e34a3dbb09576
+    resource: repo://.bazelignore
+  - id: openwiki-source-164e2da859b5277df81c7d94
+    resource: repo://.github/workflows/ci.yml
   - id: openwiki-source-8037e2358a2c4f9b2c722a11
     resource: repo://AGENTS.md
   - id: openwiki-source-9166404a3cbd4408b80101ce
@@ -16,18 +20,19 @@ sources:
     resource: repo://yarn/private/yarn_binary.bzl
   - id: openwiki-source-c20b05d8b903795173b9a3b2
     resource: repo://yarn/private/yarn_binary.sh.tpl
-generated: { by: "claude-code", at: "2026-09-21T10:11:59.468Z" }
+generated: { by: "claude-code", at: "2026-10-03T03:12:21.393Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-09-21T15:40:20.833Z
+    at: 2026-10-03T03:35:17.537Z
 ---
 
 # Quickstart
 
 `rules_yarn` delivers one exact Yarn version to a Bazel workspace and runs it
 with a Bazel-managed Node.js runtime, so nobody needs Node.js, Yarn or Corepack
-installed. Linux x86_64 is the supported platform; the launcher is a POSIX shell
-script, so Windows would need work the ruleset does not do.
+installed. Linux and macOS are supported; the launcher is a Bash script and the
+shell toolchain points at Bash on both, so Windows would need work the ruleset
+does not do.
 
 It delivers the Yarn CLI and nothing more. Yarn commands do not become Bazel
 actions, so they get no caching, sandboxing or dependency-installation
@@ -42,6 +47,7 @@ guarantees from Bazel.
 | add or change a supported Yarn version | [Version pinning and lockfiles](operations/version-pinning.md) |
 | change how Yarn is launched, or debug a run | [Launcher and execution model](architecture/launcher-execution.md) |
 | know which test layer covers a behavior | [Verification strategy](testing/verification-strategy.md) |
+| cut a release or publish to the registry | [Releasing and publishing](operations/publishing.md) |
 | make a change to this repository | [Development workflow](workflows/development-workflow.md) |
 
 ## The shape of a consumer
@@ -52,12 +58,23 @@ toolchain, and a Yarn version through the `yarn` module extension — and one
 target; arguments after `--` reach Yarn unchanged, and Yarn runs in the
 directory Bazel was invoked from.
 
-The ruleset is not published to a registry, so a consumer depends on it through
-a non-registry override. `e2e/smoke` is a working example that uses only the
-public API.
+Bazel 8.3.0 or newer. The ruleset declares that, so an older Bazel is turned
+away while the module graph resolves rather than failing somewhere inside the
+ruleset.
 
-## Two build roots
+The ruleset is not in the Bazel Central Registry yet, so until it is, a
+consumer adds a non-registry override next to the `bazel_dep` — an
+`archive_override` on a release archive, whose integrity value is in that
+release's notes, or `git_override`, or `local_path_override`. An override only
+takes effect in the root module, so a module depending on `rules_yarn` cannot
+pass it on and every root module downstream has to repeat it. That is what
+publishing removes, and the apparatus for it is already in place.
 
-The repository root and `e2e/smoke` are separate Bazel modules, and the root
-excludes `e2e/` from package discovery. Building or testing everything means two
-invocations, one in each directory.
+`e2e/smoke` is a working consumer that uses only the public API.
+
+## Three build roots
+
+The repository root, `e2e/smoke` and `tests/bcr` are separate Bazel modules,
+and the root excludes the other two from package discovery. Building or testing
+everything means three invocations, one in each directory — which is also what
+CI does, on Linux and macOS.

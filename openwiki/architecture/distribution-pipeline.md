@@ -5,7 +5,7 @@ description: How rules_yarn turns a version string in MODULE.bazel into a Bazel 
 tags: [module-extension, repository-rule, bzlmod, integrity, version-selection]
 verified:
   - by: openwiki/0.5.1
-    at: 2026-09-21T10:11:59.468Z
+    at: 2026-10-03T03:35:17.537Z
 sources:
   - id: openwiki-source-42fff598a74b8a8cf6e6de47
     resource: repo://tests/extensions/extensions_tests.bzl
@@ -17,7 +17,7 @@ sources:
     resource: repo://yarn/private/repositories.bzl
   - id: openwiki-source-847ceba95f7fcfa239c5f25b
     resource: repo://yarn/private/versions.bzl
-generated: { by: "claude-code", at: "2026-09-21T10:11:59.468Z" }
+generated: { by: "claude-code", at: "2026-10-03T03:12:21.393Z" }
 ---
 
 # Yarn distribution pipeline
@@ -94,9 +94,33 @@ rule or provider is generated — the distribution is just a file that something
 else knows how to run.
 
 Because the bundle is platform-independent JavaScript, the extension declares
-`os_dependent = False` and `arch_dependent = False` and returns
-`module_ctx.extension_metadata(reproducible = True)`. There is nothing about the
-host that could change what this extension produces.
+`os_dependent = False` and `arch_dependent = False`, and its metadata is marked
+reproducible. There is nothing about the host that could change what this
+extension produces.
+
+## What the extension tells Bazel about itself
+
+Alongside reproducibility, the extension reports which repositories the root
+module asked it to create. Bazel checks that report against the root module's
+`use_repo` line, and `bazel mod tidy` writes the line from it — so a consumer
+who forgets `use_repo(yarn, "yarn")` can have it filled in rather than having
+to work out the name.
+
+The report is split in two, regular and development-only, because Bazel keeps
+those apart and a repository has to appear in the list matching how the root
+module declared the extension. `root_repositories` makes that split with
+`module_ctx.is_dev_dependency`, considering only the root module's tags — a
+repository a dependency asked for is not a direct dependency of the root — and
+counting a repository declared both ways as regular.
+
+The split is not a nicety. This repository's own root module declares the
+extension with `dev_dependency = True`, so reporting every root declaration as
+regular fails its build outright, with Bazel refusing a non-empty regular list
+when the root has no regular usage.
+
+What the report does not change is the error a consumer sees when `use_repo` is
+missing: that is still Bazel's own "no repository visible as `@yarn`", raised
+before the report is consulted.
 
 ## Failure behavior
 
@@ -107,11 +131,15 @@ rather than producing a repository with unexpected contents.
 
 ## Tests that hold this
 
-`tests/extensions/extensions_tests.bzl` covers selection with hand-built module
-and tag structs — default naming, duplicate identical declarations, root beating
-a dependency, closest-dependency-wins when the root is silent, ignored
-declarations escaping validation, root-only custom names, and the three failure
-messages verbatim.
+`tests/extensions/extensions_tests.bzl` covers both halves with hand-built
+module and tag structs. For selection: default naming, duplicate identical
+declarations, root beating a dependency, closest-dependency-wins when the root
+is silent, ignored declarations escaping validation, root-only custom names,
+and the three failure messages verbatim. For the report: a regular
+declaration, a development-only one, the same repository declared both ways, a
+declaration by a dependency rather than the root, a declaration for a
+repository the extension did not create, and the same repository declared
+twice.
 
 `tests/repositories/repositories_tests.bzl` drives the repository
 implementation against a mock context, asserting the call order (`download` then

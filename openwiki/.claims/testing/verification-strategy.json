@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:c2f708dbc033ab310131eb3b981dd33dadbba67a86bc63535d336fda8bec4911",
+  "pageVersion": "sha256:7ed2e06837745132b1c74742210003780c99b1a077641ac644e7be0ec271f624",
   "claims": [
     {
       "id": "claim_80120293013247f8b2a4c96dba175e61",
       "statement": "Version-selection failures are testable because select_distributions takes its failure handler as a parameter, and the unit tests pass a list append in place of fail so every rejection path returns an observable message instead of aborting.",
       "evidence": [
         {
-          "resource": "repo://tests/extensions/extensions_tests.bzl#L22-L32",
-          "version": "repo-lines-v1:sha256:da858c98f9964052caaa9c9997c47b83e21beff77aadb04b9ad5414408f6ee6e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjNThjYmI4NmViZWZmYWZlNTM1MWQ5OTg2ZDRiNDNiZTYzOTQyNWU3MTE5NDUyNGU3ODhhMjRiOTE4YjMwNzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQyZWExYWRmOGJlM2M5NzAwZTZmNjMxZTJlNWU4MDQ3MmM1OGM1MGYwM2IxODRlNzAwOGJkMjc2NDdiZmJkNWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjdiYmQ5NjZhZjMxY2VkYjgzYTRjY2VkYWRmNWVmMDBhYmQ0NmQ2MWEyM2EzZGZhNzAwYzUyNzk4YWM2Mzk0ZjgifQ"
+          "resource": "repo://tests/extensions/extensions_tests.bzl#L23-L33",
+          "version": "repo-lines-v1:sha256:da858c98f9964052caaa9c9997c47b83e21beff77aadb04b9ad5414408f6ee6e:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjZjNThjYmI4NmViZWZmYWZlNTM1MWQ5OTg2ZDRiNDNiZTYzOTQyNWU3MTE5NDUyNGU3ODhhMjRiOTE4YjMwNzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImQyZWExYWRmOGJlM2M5NzAwZTZmNjMxZTJlNWU4MDQ3MmM1OGM1MGYwM2IxODRlNzAwOGJkMjc2NDdiZmJkNWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJkZjgzZjVlODIzY2ZkNTQzYmMxNWY5OTRmYmY3MzVmNjJkZWQyOTc3NmUzYWZiMDlmNmRiMjE2ZDc4MDhhZDAifQ"
         },
         {
           "resource": "repo://yarn/private/extensions.bzl#L15-L31",
@@ -21,12 +21,12 @@
       "statement": "The module graph used by the selection tests is faked with plain structs mirroring Bazel's shape, which is what allows orderings such as near-versus-far dependency to be covered without building real module graphs.",
       "evidence": [
         {
-          "resource": "repo://tests/extensions/extensions_tests.bzl#L62-L70",
-          "version": "repo-lines-v1:sha256:fd68ae2728f58da592f7c2dc59f995ca3cde282ae4f538a54b6ec1d70306dac0:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTk1OTFkYWQ5NTVjYWRiN2U5NWM0YzA2YzVkMzYyNjJiMTE5NWRkYzdmYTA3MjhkM2FhNzk2ZThkZDBjMWEwMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZGYxNzA4YTgyNzVhOThhYTBjYmE3ZjYwMjNjOGVmMGNjYTg3MmE5ZDFjMzcyZDdmMGUzOGIwODA3NGViYzkxYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGI1NzU1YjIwOGM1NzRmZWY3ZDMxZDkzNjI2NmRlZmE5MDM0ZWE2ZjNjMDk4ODYxODYwZjc1ZTUxZWQ2NGZlZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGM1NzQzMWE2YzUxMWJkOTUwYzEyOTk2ZjlkNTRhMjRkZjE4MGViYTgyYzc5NzJlOTViM2ZkMGQwMzU0OWI1ZCJ9"
+          "resource": "repo://tests/extensions/extensions_tests.bzl#L135-L144",
+          "version": "repo-lines-v1:sha256:355bee44f3df0fde0c0d70da215f7bc09dc8335b6cd3546af2e9ac41e7922041:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5NTkxZGFkOTU1Y2FkYjdlOTVjNGMwNmM1ZDM2MjYyYjExOTVkZGM3ZmEwNzI4ZDNhYTc5NmU4ZGQwYzFhMDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRiNTc1NWIyMDhjNTc0ZmVmN2QzMWQ5MzYyNjZkZWZhOTAzNGVhNmYzYzA5ODg2MTg2MGY3NWU1MWVkNjRmZWQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ5MjEwZGU0ZGQ4Yjk4OWU5NjU3OGY3MjFkYmZlZDVkMzNhYTYyNTgwZDgyNDU2ZGVkYWVhYTljMTRlYzAwNTcifQ"
         },
         {
-          "resource": "repo://tests/extensions/extensions_tests.bzl#L8-L20",
-          "version": "repo-lines-v1:sha256:0d244084635d26482d13cb431442f4385783b05c40b3ec77340321b03beeb3e4:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYzMDg3OWNkMDBlZDU2Zjg0N2Y1NjBiNDY4MzhhNmJhOWEyNjFlNWVkNDY3YzUzZWI5M2Q3YmU1NzQzMjA4NWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJlOGY0MjFiOWY4YzcyMzM4ZTVlYTM1ZWY0MjRlY2Y3NDczYmJjYWQ2ZmI4NDJhNDE1YmY2NGYxOGU3ZGI2ZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkZWFiMmVjNmQxOTQ0N2ZiNzAwNDAzODdhMTc4ZTliNzMzOTNkNjAxNDIyZDc2YzliZWExMTM1NTczZjA0NmQifQ"
+          "resource": "repo://tests/extensions/extensions_tests.bzl#L8-L21",
+          "version": "repo-lines-v1:sha256:887ca1da31f66d74b201a49394a6e552165e62a1e14fe0395c33689d10017cf2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYzMDg3OWNkMDBlZDU2Zjg0N2Y1NjBiNDY4MzhhNmJhOWEyNjFlNWVkNDY3YzUzZWI5M2Q3YmU1NzQzMjA4NWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJlOGY0MjFiOWY4YzcyMzM4ZTVlYTM1ZWY0MjRlY2Y3NDczYmJjYWQ2ZmI4NDJhNDE1YmY2NGYxOGU3ZGI2ZTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImRkZWFiMmVjNmQxOTQ0N2ZiNzAwNDAzODdhMTc4ZTliNzMzOTNkNjAxNDIyZDc2YzliZWExMTM1NTczZjA0NmQifQ"
         }
       ]
     },
@@ -59,44 +59,48 @@
       "statement": "The no-host-tools guarantee is verified by execution: fake node, yarn and corepack executables are placed on PATH that record any invocation, and the test asserts the selected version is printed while the marker file never appears.",
       "evidence": [
         {
-          "resource": "repo://e2e/smoke/yarn_version_test.sh#L29-L45",
-          "version": "repo-lines-v1:sha256:95dee6ace2303987be1f9c2c910da16826e3f44be4788fafb07489eccf13bfb8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3ODlkYmFhMTUxYjQyYTUyNzBiNmVlYTIzMTc0NGE5MjkzYTQyNzQyYWUwMWY0MDM5YzAxMmY3ZjFmNGE4ZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5MGVjYmM2MjVmYTIzMDVmNGUzMjJmZmFjMjk2YjQzZTYyOTZiZGZkNTIxN2M2YTNiYTNkNTZmMDQ3OGViNTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRmZTg0MWU4NjMxZjM2MWU4ZGU2ZjhmY2UxZmFlODA4ZDM5YjNjMmQzZjEwYzRkY2I4NmYxNDI2MjBiM2FhMGYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://e2e/smoke/yarn_version_test.sh#L27-L42",
+          "version": "repo-lines-v1:sha256:7f7706f0aa3399edf3d7222e23baefc3f89e106a4cb918fd6e511c7b96f3cb82:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3ODlkYmFhMTUxYjQyYTUyNzBiNmVlYTIzMTc0NGE5MjkzYTQyNzQyYWUwMWY0MDM5YzAxMmY3ZjFmNGE4ZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxMDk4ZDNkYmUwNzIyMjYwNjE2OGU2OGU2NmYwNDgyNTBiODg3MTRmMWUxMjc1N2U3YjYxNjIxZTAwY2M4MjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3NGY2MjZmYzA5YTlmYmEzZTY4MmMyMWQ2NTM1ZGNmMmVjOWRjMzUwZTYxOTAyYTBmMWQyYjAwMTQ2OGE2OGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE5MGVjYmM2MjVmYTIzMDVmNGUzMjJmZmFjMjk2YjQzZTYyOTZiZGZkNTIxN2M2YTNiYTNkNTZmMDQ3OGViNTgifQ"
         },
         {
-          "resource": "repo://tests/launcher/yarn_cli_test.sh#L35-L52",
-          "version": "repo-lines-v1:sha256:92ea5f82ba5ce7a0279c625313be14a593812ba1110c363989a46529c4b4192f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxZTdmNzRhMzY0NDA3ZDY5OTEyZWM5MjRhNGMxNjYyNjRkNDkwMTIxODJiNzEwMDg4MWE5YTEwYWVkYzY2NDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZkNzJiZDkxNDQwMzA4ZTgzYjg1ZWE0MmRiMTEyYjNkNThkY2IyZjg1NGZhYTBjNDIwOGYyZDkwZWY5YjVmZGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMwMTE5YTNlNmI4NzUzYmY0ZWQ5NDU2ODU1NjVhNmM0MDlhNjJiYThhYmQyYzZlMWJmYTQ4ZjM1N2RmN2Q3ODYifQ"
+          "resource": "repo://tests/launcher/yarn_cli_test.sh#L31-L48",
+          "version": "repo-lines-v1:sha256:92ea5f82ba5ce7a0279c625313be14a593812ba1110c363989a46529c4b4192f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxZTdmNzRhMzY0NDA3ZDY5OTEyZWM5MjRhNGMxNjYyNjRkNDkwMTIxODJiNzEwMDg4MWE5YTEwYWVkYzY2NDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhNjhlMTIyYjgwYTllYTQyMjRkYzdjMWVlMmQ0ZmMxMTVlYThhM2JhNTg3YmU0MDRiMzNkNzk3Y2JjOWE4OTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMwMTE5YTNlNmI4NzUzYmY0ZWQ5NDU2ODU1NjVhNmM0MDlhNjJiYThhYmQyYzZlMWJmYTQ4ZjM1N2RmN2Q3ODYifQ"
         }
       ]
     },
     {
       "id": "claim_0e25f1d568e84572b036b458c58db45c",
-      "statement": "Tests that execute the real Yarn distribution are tagged block-network and each asserts the network is actually unreachable first, so they fail loudly rather than passing in an environment that ignores the tag.",
+      "statement": "The assertion that the sandbox blocks the network lives in its own yarn_offline_test target in both consumer-facing roots; the other Yarn-executing tests no longer carry the block-network tag, because what they assert holds whether or not the network is reachable.",
       "evidence": [
         {
-          "resource": "repo://e2e/smoke/BUILD.bazel#L9-L17",
-          "version": "repo-lines-v1:sha256:7136f49245d69c68d9244f5f06e08aa24dee050fec44c95e9f7faa5fc53462c8:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDA3NzZjMTljZGIwMjg0ZmY3ZWE5NTA0NTM2Y2EzOTNhNzk2Yzg3NDQzYzAyM2JmZGQwOWU3M2Y5MDllMWQxYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzFkYTg2OTQ5ZGQ2ODk2NDFjOWZhYTg5Zjk5YWM3YzdjYjJiMzEyNmQ0OWViMDJmYjQxZWE1MGZmMWJlNzQ5ZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+          "resource": "repo://e2e/smoke/BUILD.bazel#L9-L31",
+          "version": "repo-lines-v1:sha256:5d3a8b1b1440b9db27cbd9aecf2f1d8abe90f695d1b72618098ec5df8d96114b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwNzc2YzE5Y2RiMDI4NGZmN2VhOTUwNDUzNmNhMzkzYTc5NmM4NzQ0M2MwMjNiZmRkMDllNzNmOTA5ZTFkMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMxZGE4Njk0OWRkNjg5NjQxYzlmYWE4OWY5OWFjN2M3Y2IyYjMxMjZkNDllYjAyZmI0MWVhNTBmZjFiZTc0OWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://tests/launcher/BUILD.bazel#L46-L54",
-          "version": "repo-lines-v1:sha256:05e71e9bc21f58860ac616d6010d4ac3ebe01c9d47b8da408682690dc51d01fe:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDA3NzZjMTljZGIwMjg0ZmY3ZWE5NTA0NTM2Y2EzOTNhNzk2Yzg3NDQzYzAyM2JmZGQwOWU3M2Y5MDllMWQxYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZmY2MjYxMWQwZGQ4MTg5ZDNhYTMwOGI0NTE5MzZhZTRiYTU0OTUyYzgyZGEwNjA1NDlkZWIzYmM1MDQzNDVhNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+          "resource": "repo://tests/launcher/BUILD.bazel#L46-L68",
+          "version": "repo-lines-v1:sha256:806d391b55f8884aa3cd698a2b330590e5bf28cf445ac52f9b94e81e0f86d2af:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwNzc2YzE5Y2RiMDI4NGZmN2VhOTUwNDUzNmNhMzkzYTc5NmM4NzQ0M2MwMjNiZmRkMDllNzNmOTA5ZTFkMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmNjI2MTFkMGRkODE4OWQzYWEzMDhiNDUxOTM2YWU0YmE1NDk1MmM4MmRhMDYwNTQ5ZGViM2JjNTA0MzQ1YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://tests/launcher/yarn_cli_test.sh#L29-L33",
-          "version": "repo-lines-v1:sha256:b3ec6eb9fc322e9899f9247bab40e85a2aa451c444a73a75813ddbc591d3082a:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDBkODJhNDZkNGY3ZmYzMjk2NzhjZGVmN2Y0NTFiMTE0YzZhYzM1NTQ1ZTE1ZGZjNjgzNmJhZmY0MTg5MDNhOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGE2OGUxMjJiODBhOWVhNDIyNGRjN2MxZWUyZDRmYzExNWVhOGEzYmE1ODdiZTQwNGIzM2Q3OTdjYmM5YTg5MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzI4ZDIzZGJhNjkwMzRlZTAyYzJmYmVkOWE3MTc1NjdhNWI0YzRlMDcxNjQyNjY0N2I3NzUyZmFlMzFkZjY3NyJ9"
+          "resource": "repo://tests/launcher/yarn_offline_test.sh#L30-L35",
+          "version": "repo-lines-v1:sha256:43a4e1dd1b00e5d59bbcffbaa97d184b5bb776ab46bdee648580a89fff52b72b:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmYzOTE2NTZhNjMwYjljZDY5OTJmZmRjNGU1Mzk1ZjAzZDU4YTY0Zjk3N2I2YTkxYmExNjYxNmM0YzUzOGZlYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGYzZDg1YmQ1YzczMDgwYjc1NjdkODk3Y2IzOTZkZTAwNzM2YjVmY2M1ODk0MWNjMDlhOTJhYjdkOWMzNmUyMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWM2OTFmYmE0NzE1NjA0YmRlYTA3NjI5N2Q1MGY1ZTYyNjFhM2Q3OGQ2YzBjOWM4Y2Q2MDE2YjI0MGQ5ZTdiYiJ9"
         }
       ]
     },
     {
       "id": "claim_a489b4732d0e468b82d77d3aefcad571",
-      "statement": "The consumer smoke module is excluded from the repository root's package discovery via .bazelignore, so it must be built and tested by a separate invocation in its own directory.",
+      "statement": "Both the consumer smoke module and the registry test module are excluded from the repository root's package discovery via .bazelignore, so each is built and tested by its own invocation in its own directory.",
       "evidence": [
         {
           "resource": "repo://.bazelignore",
-          "version": "repo-file-v1:sha256:3ba112c997e891d8cdd7821a011240131b791e1933df02d77732bc3632ae3680"
+          "version": "repo-file-v1:sha256:e9a93a6a6541e1ffd5ff2379d04d03d61a5c505cc9f19cecb050f0a97b8189c0"
         },
         {
-          "resource": "repo://e2e/smoke/BUILD.bazel#L1-L17",
-          "version": "repo-lines-v1:sha256:f3dd3823705f5ff9733efe8470e05ca35b2c892c39f0aa0da929f1a67a13e226:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5M2I2MjM0MWU3YzcxYmEyZmVlMDA5Y2ZiZDUwZjc2NGNlMzgyYmRiNjVhNzU2NmI5NjVmOTQ2NjBkYWUwOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://e2e/smoke/BUILD.bazel#L1-L31",
+          "version": "repo-lines-v1:sha256:abaf6e5772585477f39bb82a40aa3ed36fe4dceae22bed3d7fc45d0b38fc5d9b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5M2I2MjM0MWU3YzcxYmEyZmVlMDA5Y2ZiZDUwZjc2NGNlMzgyYmRiNjVhNzU2NmI5NjVmOTQ2NjBkYWUwOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/bcr/BUILD.bazel",
+          "version": "repo-file-v1:sha256:14be89cb29a40708c5258e5e23f745ecc8bfef22e71364fc6b616bf34ddd3694"
         }
       ]
     },
@@ -105,14 +109,84 @@
       "statement": "A launcher test removes the runfiles directory from the environment and supplies a generated manifest instead, verifying that manifest-only runfiles lookup works.",
       "evidence": [
         {
-          "resource": "repo://tests/launcher/launcher_test.sh#L96-L112",
-          "version": "repo-lines-v1:sha256:9400a8d4de45bed7654446b14562c19ff4987b20c3d99a4b17f42d70abf2464c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiYzdhYzgxZjZmNzUyMmQzNGE0NThiNjA4NTVlYTBjOGYxZjc3NmNlMTI0MzUyNjY3NjRjMWJjMTIyMTcyNTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwZWRmNTA5NDYxYzRkM2JjY2RlNGIyNGQ1OTM1YmE5Yzk4YzgwM2VlZmM3NWQ3MmU1Mzc1YTYwYWRlY2I3ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3ZDA2NDJmZmM4ZWU2NTQ3YmU4M2M4YzczODEzNzJjNWI5OGMwZDE1YTU1ZjczZTg4ODJmYjRlYzg2ZTdhZWYifQ"
+          "resource": "repo://tests/launcher/launcher_test.sh#L96-L113",
+          "version": "repo-lines-v1:sha256:a9773c1d6f24e8e2a89752ea67fc0ff23f18ca52deff0a46c3ce323a17603fb3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFiYzdhYzgxZjZmNzUyMmQzNGE0NThiNjA4NTVlYTBjOGYxZjc3NmNlMTI0MzUyNjY3NjRjMWJjMTIyMTcyNTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwZWRmNTA5NDYxYzRkM2JjY2RlNGIyNGQ1OTM1YmE5Yzk4YzgwM2VlZmM3NWQ3MmU1Mzc1YTYwYWRlY2I3ZDUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImI3ZDA2NDJmZmM4ZWU2NTQ3YmU4M2M4YzczODEzNzJjNWI5OGMwZDE1YTU1ZjczZTg4ODJmYjRlYzg2ZTdhZWYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5c55e775a7234bbba6333d07c0106aa4",
+      "statement": "The extension's report to Bazel is unit-tested with a fake module_ctx whose is_dev_dependency reads a flag off the tag, covering a regular declaration, a development-only one, one declared both ways, one by a dependency, one naming a repository the extension did not create, and a duplicate.",
+      "evidence": [
+        {
+          "resource": "repo://tests/extensions/extensions_tests.bzl#L35-L106",
+          "version": "repo-lines-v1:sha256:48c16661d072895fd40b339fa9444968e12e0172a09c65b1de58ec916fd20037:eyJzZWxlY3RlZExpbmVDb3VudCI6NzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0M2E2OGI5MjgwYjAwNGMyNWQ4NjkwMzMwZTQ3ZTJmYTk0NDZmZjIxODQ3OWU4YjRlZmQxMGZiMWZjYmU0MjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3M2NiMWZjMWZkMzZkY2JhNWIyYzUzNjdkMmRmNDQ2Nzg1NGZjOTk2MjI1ODYxMDA5OWY0YTA3ZDEyOWNhOWIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYwMDQ2NGQ1NDY3NDViNmMxMDIzMTI0MjdhZjI3ZWRhYzZmOWNjNTYwYzVhY2EzZWVmNzkzNGEwY2IzM2YxMjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e50aa295c42f4d0ea2040e1e107df9d5",
+      "statement": "tests/bcr is a second consumer module, kept minimal and lockfile-free, because it is what the registry presubmit runs under several Bazel versions rather than a place to re-run the repository's suite.",
+      "evidence": [
+        {
+          "resource": "repo://.bcr/presubmit.yml",
+          "version": "repo-file-v1:sha256:e19d4ec88852496132642fd885f548dac4a011811a8c863af92d48f8923a1440"
+        },
+        {
+          "resource": "repo://tests/bcr/.bazelrc",
+          "version": "repo-file-v1:sha256:4e8e242194386f4949fae3d99554fde44512b529c3164b90f4758a07eb5db61a"
+        },
+        {
+          "resource": "repo://tests/bcr/MODULE.bazel",
+          "version": "repo-file-v1:sha256:b49f1b9bc6c24079777036d2e1968364929d4b3dd9f833fc1a7f229639a3ca60"
+        }
+      ]
+    },
+    {
+      "id": "claim_a4680c64fab84820a5937baae2224a81",
+      "statement": "CI runs on every push and pull request over Linux and macOS with three jobs: build and test across all three roots, a consumer probe at the declared Bazel floor, and checks covering pre-commit, both harness hooks' contract tables and the wiki staleness gate itself.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml",
+          "version": "repo-file-v1:sha256:a131a33b7fa90fbaa67cdbbedcfb8ea79333b09ff125ef75e5009e7e71d1f3c6"
+        }
+      ]
+    },
+    {
+      "id": "claim_f8cf71885c594ba59f5df3fb2f4064d9",
+      "statement": "tools/ci/minimum_bazel.sh reads the Bazel floor from MODULE.bazel and the Yarn version from yarn/private/versions.bzl, so the floor check cannot drift from what the ruleset declares, and it uses a throwaway consumer module because the repository's own roots fail on their lockfiles under an older Bazel.",
+      "evidence": [
+        {
+          "resource": "repo://tools/ci/minimum_bazel.sh",
+          "version": "repo-file-v1:sha256:315bdb35acabf6fb49d66a8ab761bcaf391c9432009a305f99b9c84e5cbe235c"
+        }
+      ]
+    },
+    {
+      "id": "claim_bf245540c1364794a6f152376765c414",
+      "statement": "Neither harness hook is built by Bazel, so each carries a plain test script naming the decisions it is supposed to make — forty cases for the generated-file guard and fifty-six rows for the wiki staleness gate, mostly refusals, the latter including injected failures of the commands the gate depends on — and CI runs both.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L108-L114",
+          "version": "repo-lines-v1:sha256:80b928a3aef7616b25d39c5c4aab94a42ac1d8c3cd526602327162de2f0bbff3:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGRkNTg0YjM3NjAwYjg2MTE3NTFlZTg1NTZjOTA4ZmRiYWIyYTM0NjljZWU0YmFiMmNkMjM2YTRmYTZmMDRkOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjIwNTRmMjcwMjNjZDUzZGY3MWFjZTkyMzRiYWM3NDhiMzNmM2E4MGFmMjU0ZDIyNTVlNTY5ZGExNzgwZTZlNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGRjOWEyZDk2ZjY4ZjAzMTY3MGQwNGI5MDUzMjgzMWYxOTgzOTRlM2U3NGYyNjI1MjAxOGVmMWJiY2NkNDM2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzg4NWMxYmM1ZDY5MWZiM2EyNWE5NzRiMDQyOGQwZDE2N2Q1MTE3ZDNlN2NkNTY1NzA2ODk2YjgyN2RiNGNkYiJ9"
+        },
+        {
+          "resource": "repo://tools/hooks/openwiki_staleness_test.sh#L1-L12",
+          "version": "repo-lines-v1:sha256:a79a29bd69c8f4839ea966b3e0bc9fbb9488e3e99862791c25fb41dbcb42f205:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3NTFlYzU2Mjc1YzEzMWEyNjQ4ZjU5MDdmZjliOTRhMjdjMWNhMThiYWUwYWY3YzVhNjVjNGRhNzU0YjBlYzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc5ZjY0Yjc3YjUyM2VhMjY0M2E3M2JmZTZiNjE3MGNkMThjMGI2MzdmMTI2NTZjNWIwYzgzZDNiN2IzNjMyMjQifQ"
+        },
+        {
+          "resource": "repo://tools/hooks/openwiki_staleness_test.sh#L125-L142",
+          "version": "repo-lines-v1:sha256:fd57999a93628059de98bfdcf59d976478696deefc84a093b23cc824535c67bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2NmEwMmQ5NzY1ODkxMDJmYTc3ZmVmYWNhNDcyMzEzMWVjMDVjZWM0ZDk3NDc3MWU2NGUwZWQ2ZDI2YWJmMjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiNDlmMjlkZjg5ZDAzNmY1MjQ5YjU5Y2Q0Njk4NDgwMTQ3ZTMxM2ZkMTRmNGIzODY2M2E4YTExZDM1M2JiYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5ODExMTQ5NzEyNDY3ZWI0ZDYxM2NlNGEzNTlkNDJlNmU1N2IzYmY0ZDE5ZDc2ZThlYTFmY2VjOThlZGY1NWIifQ"
+        },
+        {
+          "resource": "repo://tools/hooks/protect_generated_test.sh#L1-L12",
+          "version": "repo-lines-v1:sha256:d47568cb51f0273df1d224507aa2a02f79e8fd774bbf8891d72aef7e774ed1a6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE4ZmJjMTViNmMzZjZkNDEyYWMzMTM4ZDkzODg0MTMzMjU0NjA3YWM5NmU1ZmE3OGNkMTU2M2UwMjc3MWI1MGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFkYzhiMjVlMDNiOTA0MzQyZjU5ZjVmNDA0ZTVjNDQ4MjMzODAzMzk4YjY5YzA2MDI1NzYxZDE0MWU1OWJhZTcifQ"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-09-21T15:40:20.833Z"
+    "at": "2026-10-03T09:50:46.826Z"
   }
 }
