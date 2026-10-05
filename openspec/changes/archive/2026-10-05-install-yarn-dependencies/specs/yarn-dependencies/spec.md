@@ -1,3 +1,6 @@
+## Purpose
+Install a Yarn project's locked dependencies as Bazel artifacts, every registry package fetched by Bazel with a pinned integrity and laid out by the pinned Yarn offline, isolated from the host, so that builds and tests can take the installed tree as an input.
+
 ## ADDED Requirements
 
 ### Requirement: Pinned acquisition

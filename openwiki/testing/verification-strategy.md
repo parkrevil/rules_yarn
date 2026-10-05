@@ -18,10 +18,10 @@ sources:
     resource: repo://e2e/smoke/BUILD.bazel
   - id: openwiki-source-30a0b6b2b81e4795cac4f928
     resource: repo://e2e/smoke/yarn_version_test.sh
-  - id: openwiki-source-8adfa3d49af08ea28af3c204
-    resource: repo://openspec/changes/install-yarn-dependencies/design.md
-  - id: openwiki-source-3e1067e49cd8ec88be61599d
-    resource: repo://openspec/changes/install-yarn-dependencies/tasks.md
+  - id: openwiki-source-60333732fb171617af73e98d
+    resource: repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/design.md
+  - id: openwiki-source-8fb8a65196be59b25e803b94
+    resource: repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/tasks.md
   - id: openwiki-source-01bd775b2b199eca72dcc70e
     resource: repo://tests/bcr/.bazelrc
   - id: openwiki-source-fc991def903a3901c3cc2810
@@ -65,7 +65,7 @@ sources:
 generated: { by: "claude-code", at: "2026-10-05T05:14:35.586Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-05T05:14:35.586Z
+    at: 2026-10-05T05:22:56.641Z
 ---
 
 # Verification strategy

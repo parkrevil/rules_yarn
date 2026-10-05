@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:33e6900437d440058c161c446e594f482428d762fd3e0a780020530ee20c0a8f",
+  "pageVersion": "sha256:cdd339f25a0c8d9a67a99b28b77fa675f618c9d0a3156f338a3e47e8cda18482",
   "claims": [
     {
       "id": "claim_80120293013247f8b2a4c96dba175e61",
@@ -247,7 +247,7 @@
       "statement": "A 717-entry project's installation is recorded as a measurement in the change's task list.",
       "evidence": [
         {
-          "resource": "repo://openspec/changes/install-yarn-dependencies/tasks.md",
+          "resource": "repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/tasks.md",
           "version": "repo-file-v1:sha256:e2a852ff102f4dbda2a6ad9c040af83fd3df36f587a4d1e6547ca79de5bd6f0f"
         }
       ]
@@ -257,11 +257,11 @@
       "statement": "The change's task list maps each evidence paragraph of the design to the test that reproduces it and lists the facts read from Yarn's source instead.",
       "evidence": [
         {
-          "resource": "repo://openspec/changes/install-yarn-dependencies/design.md",
+          "resource": "repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/design.md",
           "version": "repo-file-v1:sha256:c3dca600f33e3c2e5d88f8ee54cf7eeb8a6dec33aca4e0939ea5c70b4005f3ba"
         },
         {
-          "resource": "repo://openspec/changes/install-yarn-dependencies/tasks.md",
+          "resource": "repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/tasks.md",
           "version": "repo-file-v1:sha256:e2a852ff102f4dbda2a6ad9c040af83fd3df36f587a4d1e6547ca79de5bd6f0f"
         }
       ]
@@ -269,6 +269,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-05T05:14:35.586Z"
+    "at": "2026-10-05T05:22:56.641Z"
   }
 }

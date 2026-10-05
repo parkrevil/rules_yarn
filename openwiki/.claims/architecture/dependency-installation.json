@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:05d5dba35b550be5e5618184ec859b8ef00f15b19330141d3b93d9b4a9d29b92",
+  "pageVersion": "sha256:b613d81003cc015650b9f39b20a14bf63de8fc7b6f3022bded3f0879a845b5d9",
   "claims": [
     {
       "id": "claim_54350d03825b4543a2e34ff911ba1463",
@@ -285,7 +285,7 @@
       "statement": "A 717-entry project installed as 732 packages, 2,234 links and 11 .bin entries, with archives of 409 MB and an unpacked tree of 501 MB.",
       "evidence": [
         {
-          "resource": "repo://openspec/changes/install-yarn-dependencies/tasks.md",
+          "resource": "repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/tasks.md",
           "version": "repo-file-v1:sha256:e2a852ff102f4dbda2a6ad9c040af83fd3df36f587a4d1e6547ca79de5bd6f0f"
         }
       ]
@@ -309,7 +309,7 @@
       "statement": "Configuration outside the project is not read; a packageExtensions entry there that only changes the layout is not reproduced and not detected, because Yarn records an extension's added dependencies only in the layout.",
       "evidence": [
         {
-          "resource": "repo://openspec/changes/install-yarn-dependencies/design.md",
+          "resource": "repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/design.md",
           "version": "repo-file-v1:sha256:c3dca600f33e3c2e5d88f8ee54cf7eeb8a6dec33aca4e0939ea5c70b4005f3ba"
         },
         {
@@ -321,6 +321,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-05T04:56:13.533Z"
+    "at": "2026-10-05T05:22:56.641Z"
   }
 }
