@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:0fe04cfc59abbb574421c851df16c3715b30268c0364ffb4bf9a9cb02e6f0010",
+  "pageVersion": "sha256:c34adf41e4b9b2542ed4419c51ca7ed18416246f3b4bf83fb14b8b9b5ef73437",
   "claims": [
     {
       "id": "claim_54350d03825b4543a2e34ff911ba1463",
@@ -370,13 +370,27 @@
       "evidence": [
         {
           "resource": "repo://openspec/changes/extract-packages-from-tarballs/tasks.md",
-          "version": "repo-file-v1:sha256:a243d617a10b644741d20ddc4e29dfa0b4014711b5108e60179a7d0a8032ec9e"
+          "version": "repo-file-v1:sha256:0f506e3b03f46f01a6eb61e08acff81271b6ea82ba21ea2e113f1e3c4311a13a"
+        }
+      ]
+    },
+    {
+      "id": "claim_16e821c69d7845beac8226b1762b914c",
+      "statement": "A package holding two names that differ only by case cannot be installed on a filesystem that folds case, because Yarn itself cannot lay it out there, and the install reports Yarn's error.",
+      "evidence": [
+        {
+          "resource": "repo://openspec/changes/extract-packages-from-tarballs/design.md",
+          "version": "repo-file-v1:sha256:2fed178c7163d6c76d33635344eb59e7cf0dac7e480f06061da3de5bef5fcbe7"
+        },
+        {
+          "resource": "repo://openspec/changes/extract-packages-from-tarballs/tasks.md",
+          "version": "repo-file-v1:sha256:0f506e3b03f46f01a6eb61e08acff81271b6ea82ba21ea2e113f1e3c4311a13a"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-05T14:30:59.099Z"
+    "at": "2026-10-05T14:46:32.438Z"
   }
 }

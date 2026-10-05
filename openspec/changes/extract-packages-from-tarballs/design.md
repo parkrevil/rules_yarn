@@ -193,3 +193,8 @@ provider is unchanged.
   configuration or a mirror sees one more host.
 - The disk figures to compare are the install repository, the tarball
   repositories and the built tree together, before and after.
+- Limit: a package holding two names that differ only by case cannot be
+  installed on a host whose filesystem folds case, macOS's APFS by default.
+  Yarn itself cannot lay it out there — its link step fails with EEXIST (CI
+  run 37325793262) — and the install reports Yarn's error, as for anything
+  Yarn cannot install. Only where Yarn lays it out does it keep its archive.

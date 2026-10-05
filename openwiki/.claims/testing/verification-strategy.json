@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:be244ddf5ef2c4a2b66eb0f2bc632397b3b1af85c95bb9830ac348b0ca720d62",
+  "pageVersion": "sha256:144326aaa636a387052f64b90ff18a910ead558ddbf70f4f0d27e62e1a5bed46",
   "claims": [
     {
       "id": "claim_80120293013247f8b2a4c96dba175e61",
@@ -238,7 +238,7 @@
         },
         {
           "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:5fdc8a76b77ac3f23d463a84b508a6367d726f81e9dd56ecbdae6aa8bc9200e4"
+          "version": "repo-file-v1:sha256:9eb2b4694c6f029cde6c866038e8717740c838e094a1d31f2315481fef758a93"
         }
       ]
     },
@@ -279,10 +279,24 @@
           "version": "repo-file-v1:sha256:74f82bfc560c885dd1591c3aea39d3fe0f07c0dc6e2189937bc209d2eb76f0f7"
         }
       ]
+    },
+    {
+      "id": "claim_6c7bba9f87244fafbba5640e8cb60ee8",
+      "statement": "The scenario with crafted tarball shapes adds the tarball holding names that differ only by case only where the work filesystem keeps case apart, because on a case-folding filesystem Yarn itself cannot lay that package out.",
+      "evidence": [
+        {
+          "resource": "repo://openspec/changes/extract-packages-from-tarballs/tasks.md",
+          "version": "repo-file-v1:sha256:0f506e3b03f46f01a6eb61e08acff81271b6ea82ba21ea2e113f1e3c4311a13a"
+        },
+        {
+          "resource": "repo://tools/ci/install_scenarios.sh",
+          "version": "repo-file-v1:sha256:9eb2b4694c6f029cde6c866038e8717740c838e094a1d31f2315481fef758a93"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-05T14:22:28.209Z"
+    "at": "2026-10-05T14:46:32.438Z"
   }
 }

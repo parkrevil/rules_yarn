@@ -22,6 +22,8 @@ sources:
     resource: repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/design.md
   - id: openwiki-source-8fb8a65196be59b25e803b94
     resource: repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/tasks.md
+  - id: openwiki-source-ac0611a35be203b30b8316c2
+    resource: repo://openspec/changes/extract-packages-from-tarballs/tasks.md
   - id: openwiki-source-01bd775b2b199eca72dcc70e
     resource: repo://tests/bcr/.bazelrc
   - id: openwiki-source-fc991def903a3901c3cc2810
@@ -69,7 +71,7 @@ sources:
 generated: { by: "claude-code", at: "2026-10-05T14:22:28.209Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-05T14:22:28.209Z
+    at: 2026-10-05T14:46:32.438Z
 ---
 
 # Verification strategy
@@ -242,8 +244,10 @@ cover building packages from their tarballs: plain packages are extracted at
 build time with no archive kept, and nine tarballs shaped the way some registry
 tarballs are — directories without an execute bit, a mode-0000 file, a hard
 link, a contiguous file, an absolute path, a `./package/` prefix, a `..`
-entry, a FIFO, names differing only by case — each install Yarn's tree, the
-first two from their tarballs and the rest from archives.
+entry, a FIFO, and, where the filesystem keeps case apart, names differing
+only by case — each install Yarn's tree, the first two from their tarballs and
+the rest from archives. On a filesystem that folds case Yarn itself cannot lay
+out that last package, so it is left out there.
 
 The last eleven are the measurements the design rests on, kept as tests rather
 than as notes: a dependency cycle and a file named `col:on.js` used from a

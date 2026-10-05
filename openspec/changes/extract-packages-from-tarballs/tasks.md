@@ -122,7 +122,16 @@
     macOS's case-insensitive APFS — the scenario required both `README` and
     `readme` in one package, which Yarn cannot write there; it now checks both
     files only where the filesystem keeps case apart, and that the package is
-    archived and installs everywhere. Should-fixes, confirmed: the spec now
+    archived and installs everywhere. The macOS CI run of the merged commit
+    (37325793262) showed more: Yarn cannot lay that package out at all on a
+    case-folding filesystem — its link step fails with EEXIST on `README` —
+    so the install reports Yarn's error there, as it does for anything Yarn
+    cannot install. The scenario now adds that tarball only where the work
+    filesystem keeps case apart. Its review found no blocker; its two
+    should-fixes are taken: the branch's macOS CI job runs the other shapes
+    before the merge, and the spec scenario, design.md's risks and the wiki's
+    limits state that such a package cannot be installed where the filesystem
+    folds case. Should-fixes, confirmed: the spec now
     names the case and normalisation exception and says the build-time
     scenario concerns an execution platform other than the deciding host;
     `caseCollisions` folds Unicode normalisation (NFD) as well as case, as APFS

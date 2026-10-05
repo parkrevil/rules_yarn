@@ -267,28 +267,27 @@ plain=$?
 [ "$plain" = 0 ] && [ "$(source_of left)" = tarball ] && [ "$(source_of right)" = tarball ] && [ "$(source_of @fx-scoped)" = tarball ]
 record $? "Package built from its tarball: plain packages are extracted at build time, and the install keeps no archive of them"
 
-# A filesystem that folds case — macOS's APFS by default — lets Yarn write one
-# of README and readme; one that does not keeps both. Either way the package is
-# archived, which the sources above check.
+# On a filesystem that folds case — macOS's APFS by default — Yarn itself
+# cannot lay out a package holding both README and readme (its link step fails
+# with EEXIST), so that tarball is tried only where the filesystem keeps case
+# apart.
 printf 'x' >"$work/case-probe"
+if [ -e "$work/CASE-PROBE" ]; then case_shape=; else case_shape=', "shape-case": "1.0.0"'; fi
 case_tree_ok() {
-  if [ -e "$work/CASE-PROBE" ]; then
-    [ -f "$(store shape-case-npm)/index.js" ]
-  else
-    [ "$(cat "$(store shape-case-npm)/README")" = "upper" ] && [ "$(cat "$(store shape-case-npm)/readme")" = "lower" ]
-  fi
+  [ -z "$case_shape" ] || { [ "$(source_of shape-case)" = archive ] \
+    && [ "$(cat "$(store shape-case-npm)/README")" = "upper" ] && [ "$(cat "$(store shape-case-npm)/readme")" = "lower" ]; }
 }
-shapes='"shape-dirmode": "1.0.0", "shape-mode0": "1.0.0", "shape-hardlink": "1.0.0", "shape-contiguous": "1.0.0", "shape-absolute": "1.0.0", "shape-dotslash": "1.0.0", "shape-dotdot": "1.0.0", "shape-fifo": "1.0.0", "shape-case": "1.0.0"'
+shapes='"shape-dirmode": "1.0.0", "shape-mode0": "1.0.0", "shape-hardlink": "1.0.0", "shape-contiguous": "1.0.0", "shape-absolute": "1.0.0", "shape-dotslash": "1.0.0", "shape-dotdot": "1.0.0", "shape-fifo": "1.0.0"'"$case_shape"
 project "\"left\": \"1.0.0\", \"@fx/scoped\": \"1.0.0\", \"tool\": \"1.0.0\", \"right\": \"2.0.0\", $shapes"
 lock && pin || die "locking and pinning the tarball shapes failed: $(tail -20 "$work/pin.log")"
 build
 shaped=$?
 {
   for shape in dirmode mode0; do echo "shape-$shape $(source_of "shape-$shape")"; done
-  for shape in hardlink contiguous absolute dotslash dotdot fifo case; do echo "shape-$shape $(source_of "shape-$shape")"; done
+  for shape in hardlink contiguous absolute dotslash dotdot fifo; do echo "shape-$shape $(source_of "shape-$shape")"; done
   echo "dirmode files: $(installed_files shape-dirmode)"
   echo "hardlink files: $(installed_files shape-hardlink)"
-  echo "case files: $(installed_files shape-case)"
+  [ -z "$case_shape" ] || echo "case files: $(installed_files shape-case)"
 } >"$work/build.err"
 expected_sources="shape-dirmode tarball
 shape-mode0 tarball
@@ -297,9 +296,8 @@ shape-contiguous archive
 shape-absolute archive
 shape-dotslash archive
 shape-dotdot archive
-shape-fifo archive
-shape-case archive"
-[ "$shaped" = 0 ] && [ "$(head -9 "$work/build.err")" = "$expected_sources" ] \
+shape-fifo archive"
+[ "$shaped" = 0 ] && [ "$(head -8 "$work/build.err")" = "$expected_sources" ] \
   && [ "$(cat "$(store shape-dirmode-npm)/lib/x.js")" = "module.exports = 'x';" ] \
   && [ "$(cat "$(store shape-mode0-npm)/secret.js")" = "module.exports = 's';" ] \
   && [ ! -e "$(store shape-hardlink-npm)/again.js" ] && [ ! -e "$(store shape-contiguous-npm)/contiguous.js" ] \

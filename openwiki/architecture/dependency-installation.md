@@ -5,7 +5,7 @@ description: How yarn.install turns a project's yarn.lock into Bazel artifacts â
 tags: [yarn-install, repository-rule, module-extension, integrity, isolation, node-modules]
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-05T14:30:59.099Z
+    at: 2026-10-05T14:46:32.438Z
 sources:
   - id: openwiki-source-6baa3bd517a8e6434ec03836
     resource: repo://e2e/install/BUILD.bazel
@@ -17,6 +17,8 @@ sources:
     resource: repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/design.md
   - id: openwiki-source-8fb8a65196be59b25e803b94
     resource: repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/tasks.md
+  - id: openwiki-source-7d6972c52442e9e43f7909fb
+    resource: repo://openspec/changes/extract-packages-from-tarballs/design.md
   - id: openwiki-source-ac0611a35be203b30b8316c2
     resource: repo://openspec/changes/extract-packages-from-tarballs/tasks.md
   - id: openwiki-source-3a9d47c216ac83ae687d3e65
@@ -359,6 +361,8 @@ Limits of the approach: for a 717-entry project, the install repository keeps
 manifests, beside the 501 MB tree; before packages were built from their
 tarballs it kept 409 MB of archives. Deciding and extracting cost time
 instead: fetching took 19.0 s rather than 11.7 s, and a cold build of the tree
-8.1 s rather than 2.0 s.
+8.1 s rather than 2.0 s. A package holding two names that differ only by
+case cannot be installed on a filesystem that folds case: Yarn itself cannot
+lay it out there, and the install reports Yarn's error.
 Installation runs on Linux and macOS, x86-64 and ARM64, and remote execution
 is not established by any measurement.

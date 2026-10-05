@@ -29,7 +29,7 @@ Each installed package SHALL be a Bazel artifact and each link between packages 
 - **THEN** the install repository holds no copy of its files, and the built package's files are the ones Yarn laid out
 
 #### Scenario: Tarball that does not give Yarn's tree
-- **WHEN** a package's pinned tarball, extracted and normalised as the build does, gives a tree other than Yarn's, or holds two entries differing only by case or Unicode normalisation
+- **WHEN** Yarn lays out a package whose pinned tarball, extracted and normalised as the build does, gives a tree other than Yarn's, or holds two entries differing only by case or Unicode normalisation
 - **THEN** the package is built from its archive, and the built package's files are the ones Yarn laid out
 
 #### Scenario: Extraction at build time that differs from Yarn's layout
