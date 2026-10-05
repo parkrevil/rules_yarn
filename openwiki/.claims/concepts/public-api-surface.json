@@ -1,10 +1,10 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:9d66eec2b38e38e21dfee038175d6e2ae2cc377f0dd74d82233e8d64702c1721",
+  "pageVersion": "sha256:b7648b3af9251df635aa3dbb4a8103c42419e5f114634a8cb07446f5c233bccb",
   "claims": [
     {
       "id": "claim_982785d0fd074cf9afca2ef0e4673dd2",
-      "statement": "The public Starlark surface is exactly two symbols: yarn_binary re-exported from yarn/defs.bzl and the yarn module extension re-exported from yarn/extensions.bzl, each a thin rebinding of a private implementation.",
+      "statement": "The public Starlark surface is three symbols: yarn_binary re-exported from yarn/defs.bzl, the yarn module extension re-exported from yarn/extensions.bzl, each a thin rebinding of a private implementation, and YarnNodeModulesInfo defined in yarn/providers.bzl.",
       "evidence": [
         {
           "resource": "repo://yarn/defs.bzl",
@@ -12,7 +12,11 @@
         },
         {
           "resource": "repo://yarn/extensions.bzl",
-          "version": "repo-file-v1:sha256:47a7b36739f47572d83b112e4acae05f7ba03fb135c8b416e2dc43b259c9bd0b"
+          "version": "repo-file-v1:sha256:5d8bc386121e602b68abbb534c35b4a01a99dcae16a247a3db139b5e7844a503"
+        },
+        {
+          "resource": "repo://yarn/providers.bzl",
+          "version": "repo-file-v1:sha256:95a4c37cf96e28ef9d260ca3fbefca52ae0a6b4f3797475a5615045fb893dbf4"
         }
       ]
     },
@@ -21,8 +25,8 @@
       "statement": "Load visibility on the private Starlark files is enforced by Bazel during loading, so a package outside //tests/... and //yarn/... that loads one fails with a .bzl load visibility violation.",
       "evidence": [
         {
-          "resource": "repo://yarn/private/extensions.bzl#L6-L6",
-          "version": "repo-lines-v1:sha256:2b1ac1272dbf10f352b80c0f7255bdc14efe84cfe43ae4513843999fabc7adb2:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODhhNDY2YmM4ZDBlYzNlMWFkMjA4OTA2ZGJkMjE5YjEwNzdlZjhhOTc0YzVjNTlmMDJjNTgyZTU2ZTUwYThlZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWUwNjk5MmZmMjBlZWU5NjhmNGU2MDdkMzVlOThkZTE5YzYwOTBkNWNiNWZkMzU4Zjc1MDliMGM2ZDI2OTkyOSJ9"
+          "resource": "repo://yarn/private/extensions.bzl#L8-L8",
+          "version": "repo-lines-v1:sha256:2b1ac1272dbf10f352b80c0f7255bdc14efe84cfe43ae4513843999fabc7adb2:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmIxYWMxMjcyZGJmMTBmMzUyYjgwYzBmNzI1NWJkYzE0ZWZlODRjZmU0M2FlNDUxMzg0Mzk5OWZhYmM3YWRiMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYTY2MTEwNWM0ZGVhYTk5MWRjZTczOTNjNGM0ODFjZjQxYmUyNDY3YTU5ZDdkZDQ3NDVhZmY2ZTc1YmI2MDc2OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOWUwNjk5MmZmMjBlZWU5NjhmNGU2MDdkMzVlOThkZTE5YzYwOTBkNWNiNWZkMzU4Zjc1MDliMGM2ZDI2OTkyOSJ9"
         },
         {
           "resource": "repo://yarn/private/repositories.bzl#L3-L3",
@@ -36,19 +40,11 @@
     },
     {
       "id": "claim_3efad35e39f4402f9f26c09bade8e7c2",
-      "statement": "Only the extension and rule bzl_library targets are visible to //yarn; the repository and version libraries declare no visibility and so remain private to //yarn/private, reachable only from within that package, and the launcher template is exported privately.",
+      "statement": "Only the extension and rule bzl_library targets are visible to //yarn; the repository and version libraries declare no visibility and so remain private to //yarn/private, and the launcher template is exported privately.",
       "evidence": [
         {
-          "resource": "repo://yarn/private/BUILD.bazel#L28-L33",
-          "version": "repo-lines-v1:sha256:d4fb1e5317deb913c54f7ea03b3e8568667140c1cd9891e4fdff6e1e90511cfa:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTZhMDZmM2NmM2QwMTRhNzhhODAyMGUxMGZiM2U3ZWQ3MzhkMzE5MWE0N2IwMWQzNGE5NDUyYjg1ZmRkNTE5NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODQ0YjJlNzVkNGUzOGY3YTg2ODI2ZGNmNDA0NTQ5ZTQ4YzliMjVmMjk2YTIyMzI2ZWJhNGZjZWUzOWY3YjA2YyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
-        },
-        {
-          "resource": "repo://yarn/private/BUILD.bazel#L3-L6",
-          "version": "repo-lines-v1:sha256:05d6d97e156a2a3358ca954281cd53c54ad5d044ddb025d8fc0a6f7398ef27f2:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmUxM2NhMmE4ZTU2YTI5ZDIzMzE4YWJjMTdhMWJjM2M0MmI1M2U3ZWRjMjg1NDMyY2MyMDFlYTBhNTBmODI4ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjIsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODE3MGVkYjAwZjRiMTlkYzBlODhjM2UxNTkwOGI2MTNmY2E2NzgyY2JhODQ2N2U4NmUxMTRiYjJkMmMzOTIwYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDU3YTYxMDAzYjMxNDk0MDc4NTMxOGZiZDI1YjQ3NWI5MzgwNmFiMzZlYmExODhmZGQ4ZTBiZDIzM2Y1OTI0YiJ9"
-        },
-        {
-          "resource": "repo://yarn/private/BUILD.bazel#L8-L26",
-          "version": "repo-lines-v1:sha256:ccc672d714f03f66dcfd16e7d10646f9ebb4ebde58a53ada6832a87a0b7868a1:eyJzZWxlY3RlZExpbmVDb3VudCI6MTksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk2YTA2ZjNjZjNkMDE0YTc4YTgwMjBlMTBmYjNlN2VkNzM4ZDMxOTFhNDdiMDFkMzRhOTQ1MmI4NWZkZDUxOTciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIxODdiYzcyNjMxMmVkYTFlNjMzYjdmNDgxM2QwYjFkYjlhOWE4ZTMzODVkNzBhNjhmMGY5NDNhMWJiNGYwNzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEwMzQ2Y2M1MTk2ZWIxYTRkYzkxNGU1YWQxMjU0ODM0ZGMxNDIwYjUyZmNhOTc0MjkyNzkwNGZhZmJjZDFjODQifQ"
+          "resource": "repo://yarn/private/BUILD.bazel",
+          "version": "repo-file-v1:sha256:ae83e2e91bfc988977dae99af1ebced6d47bcc2639aa2fcbedf93af6b518d697"
         }
       ]
     },
@@ -58,21 +54,21 @@
       "evidence": [
         {
           "resource": "repo://yarn/BUILD.bazel",
-          "version": "repo-file-v1:sha256:2c434d68ef18d66c359831e32285e6706b67f8d23b3cd06593d9a7aaab7db894"
+          "version": "repo-file-v1:sha256:43fbf76bf76b648cdef0a334695daca26f2c3d3d158fada5f96df0afeb475a5c"
         }
       ]
     },
     {
       "id": "claim_7e4998e82faf4785a758ce754c1361b2",
-      "statement": "Consumer-facing documentation lives on the public symbols themselves: the extension file documents the MODULE.bazel snippet, and the rule and tag class carry doc strings covering attributes, repository naming, and the limits of the hermeticity guarantee.",
+      "statement": "Consumer-facing documentation lives on the public symbols themselves: the extension file documents the MODULE.bazel snippets for a distribution and an install, and the rule and tag classes carry doc strings covering attributes, repository naming, and guarantees.",
       "evidence": [
         {
-          "resource": "repo://yarn/extensions.bzl#L1-L10",
-          "version": "repo-lines-v1:sha256:b2da6202e39fb25ade3aa694bee1ba5acf3000116454840e8a713de25741bdad:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4MTczMDJiNDZmYTVhNWJkMThkMDc0M2VlNjdlNTM1NjhmYzZmMjk1NjQ5M2YwZmFmNGEyYmMxZTFhNjZlMDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMDNlY2RkNGE0ZDEwZjE5YzczZmQ0MmZkMTI0MzdmZDMzNTRhODI2ODE2MDVkYTUyNTVhOTdhMzkwNjhkYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZhMmUzZDI0MDNkZDk0MGFmZTZlMDkyNDdkMzJjMDAwODNkOGQ0OTM2OGFhMjE4ZjE2MWUzN2MwNTYxZDkwYmMifQ"
+          "resource": "repo://yarn/extensions.bzl#L1-L24",
+          "version": "repo-lines-v1:sha256:e22d2a9aba79c9b201810636da7ad61d902eb293829ac2e4ba11cdf68686cab3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY4MTczMDJiNDZmYTVhNWJkMThkMDc0M2VlNjdlNTM1NjhmYzZmMjk1NjQ5M2YwZmFmNGEyYmMxZTFhNjZlMDUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEzMDNlY2RkNGE0ZDEwZjE5YzczZmQ0MmZkMTI0MzdmZDMzNTRhODI2ODE2MDVkYTUyNTVhOTdhMzkwNjhkYmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjZhMmUzZDI0MDNkZDk0MGFmZTZlMDkyNDdkMzJjMDAwODNkOGQ0OTM2OGFhMjE4ZjE2MWUzN2MwNTYxZDkwYmMifQ"
         },
         {
-          "resource": "repo://yarn/private/extensions.bzl#L124-L143",
-          "version": "repo-lines-v1:sha256:16c4f322fa5214c72d71f038f9ddb44433f3d873376e781b61bc87b9133247de:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhZDVjODVjZmQ4ZDA2YjdmNzhhMzczNTRlOWY5OTcyYjE0ZDBiMmE5NWQzODA4MTZiNzYxYWIxYjMzNzIzYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5NjE1ODY4OGZkYzJjM2UyMGFjNWE0OTczYTRmOGY5ZDk1MmU4OTc5NTMzNzFhMGU4ZDE5NmZjYmNhZTEwMTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1ZmFlZDk4ZmNjMmU5MmFjMTBhYmY5MzFhN2E2ODNjZGM5MTJhNDA5YmQwNzBiNTZhMjZjYTUxZWFmMGYxMDYifQ"
+          "resource": "repo://yarn/private/extensions.bzl#L231-L296",
+          "version": "repo-lines-v1:sha256:6fef3fabf0696e910edca1d602918e10e1807d19e7317f197b84a06a384830e2:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNhZDVjODVjZmQ4ZDA2YjdmNzhhMzczNTRlOWY5OTcyYjE0ZDBiMmE5NWQzODA4MTZiNzYxYWIxYjMzNzIzYzkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ5NjE1ODY4OGZkYzJjM2UyMGFjNWE0OTczYTRmOGY5ZDk1MmU4OTc5NTMzNzFhMGU4ZDE5NmZjYmNhZTEwMTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1ZmFlZDk4ZmNjMmU5MmFjMTBhYmY5MzFhN2E2ODNjZGM5MTJhNDA5YmQwNzBiNTZhMjZjYTUxZWFmMGYxMDYifQ"
         },
         {
           "resource": "repo://yarn/private/yarn_binary.bzl#L59-L96",
@@ -131,10 +127,64 @@
           "version": "repo-lines-v1:sha256:1ac98d94e60235dc339f58234e22956b7368b014f44ccf7bdd05e60bf3370e58:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYWU4ZTcyOGJhYTIxYzUzNmEwMTFhMWIyNjhmNThlZDU2YWRmOGIxMzZlZmRkNjg1NjkwNDIzMTZiMWIzY2Y5ZCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGQ5OWE0NDJjOTc1MTExMGY5NDY4ZjVhNmZhOWEwODQzY2QyZDUyYjhhODJiMTU2MWVjNzA5NzE3ZTA4MjUwNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
         }
       ]
+    },
+    {
+      "id": "claim_fe1ee871c909415d8a2c8cd487d14a52",
+      "statement": "An install repository provides :node_modules, carrying YarnNodeModulesInfo, and :pin.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/node_modules.bzl#L53-L64",
+          "version": "repo-lines-v1:sha256:0d6b90db511e3859357a64f28d5351a05bc48ec9785ee50f8299e0bca6ad6f1f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0NzRiYTFiYjE5NWNlNTc2YTFhZGRkNGRkYzIyMDI1NjllMDhmYmM0YzUzOTRjMmQzNzI1ODIxMmU2ZDIwNzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkZDI0NDU4MmI2ZmIwM2QyM2I4NDE1YWJlY2QzNDZiMGM5ZjQ2NmI2Zjc1MmIwNjgxODljZTdlOWEyZGMzNTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI1N2YwOWUzYzIyZjk1ZDViNzgzYjFlYTEyZDAzZTIwMjEzZTI0MjQyMTE5ZTRhNjUzOWUxNjBiMzI2MjBiM2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM0MTE4ODMwOGIxZTcxZmMzNDhjYzczNjY5ODc4MmEwNzcxMWVjM2EwMWYyNTg1YTRjZDdhYjQ4NmEzODBhMTQifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L189-L210",
+          "version": "repo-lines-v1:sha256:2e1968400c89215d85ed892f29b2c91eab93d58285c5da8acf1273a87a5e5594:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzOWRlNDAwMDQzZDQzNmY0NjYyM2JmYzUxOThiYTY2ZDc5ZWNiZTkwNTIxMjYyYTdhNWQyZmEzYjJlYzU3YWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2NjMzNWIzMmEyYjZhM2U4ZWQ3MGJjZWFjOWJkZTEzYjQzMzIyMTM2MDA0OTA3Yjc3YzNmYzkzYWQxY2EyNDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFmZDEwMWNiODFlZWFlYzBiY2NmZTQ3ODlkYzc4OTg0ODMyZGEzMGNlOGViNTYyYTE1MmM1NzU5MzY3YTRiOTEifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L68-L90",
+          "version": "repo-lines-v1:sha256:57785ee451990d039dff275059ca8fd89343519f742027a53c13170925aa3dc2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwOGEzY2I5MmMxODAwMzRhZjg2MjU4YmMwYzliOTFjYTk3MGU4MWIzYTk1Y2ZiMTk4ZmM5M2M0MzRiMTFkMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiOWEyOGMwN2Y2YTE3YzExNDQ1YzMyMDU2NzUxMGJjYmVhOTc0ZDgyOWI0MTNkYmM0ODU4NTFjZjhhMDJlMTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzM2I1ODlhZDBiNmFhMDgwNWExZDg5YjJkZjBkOGY5NjU5NTIwYmFkMTAzMzUzZTBkZTUzOGZiYjZhOTIxMGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhhNTg5ZGI4ZjI0OWRhOTg2ZTdmMTIyNzg1MzRmZmZmMjg0MTg4NjM0MTdhNjRiZmI0YmZjYzA2MWI3MWMxZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_eb9dc1fc390341a2b00a995b6c6dca97",
+      "statement": "node_modules.bzl declares visibility(\"private\") and each install repository loads it through a symlink at its own root.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/node_modules.bzl#L1-L11",
+          "version": "repo-lines-v1:sha256:713b705f2e3ef9cfd4065786900dc0c86227c598a24d4057c15e235f5d46ccd3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzNDVkNTNlOGQ0ZDdlY2ExMGIwYTY2ZGIzZjA2MTE5M2NkMzE2NjNkNmM4NGI2ZTNjZjdiOWY1MDEzZTNjMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZWYxOGNmMDhmOGFiMTU4NTAxZDY1OTRjZjE4OTM1YTc2Yjk4ODhkZGFhZjRmYzJhNzFkYTFiMDYzYTkwNDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI4MTU3MmYxZTMwYTU1NjcwYzgzNzcwMDhmZDZlMTJlZmVhZDQyYWEwZWFmODljNGI1MGQ3OGEwNzA1NDRjMGIifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L111-L113",
+          "version": "repo-lines-v1:sha256:d0166876e6cebb709a6b14243a85ef71ef9620835a216c90cf1de32885d1e0f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2JhNzE0OTA1YjZmM2YzZjJiNzU0NjE4NDRlYTNmNzRmM2FlYTE5MmJjZWQ0MWVlNGZkMDNhZjA5OGNiMzUyMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjQyNmJkYWNjYTY2NWY2NjIzZjRiYjAzNDNiZWViZDNmYWQyMmYzZmI2Y2MwMTc3OGJmY2ZlYWI1NTJlMGZmNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTg3MWZkMjJiYjQxYzMxMDgwZmM4MThmNmJlYWQwM2Q2ODE3OGYwZmE2YWM4ZGEzODE4ODBlZjU4ZDc4NDc3MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2M3YTdhZTM3OWRhNGE0YTlmYTU4YTYxYmJmZDgzYWY0NTJlZDYyNWJkZGVmZDU0MmFjNmRjNWJlNTkyZDE0NiJ9"
+        },
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L68-L74",
+          "version": "repo-lines-v1:sha256:238e68e0a23a74b6b50d73ddc4f9aa71cc8611a37042c9ac64810eb6803947ce:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODA4YTNjYjkyYzE4MDAzNGFmODYyNThiYzBjOWI5MWNhOTcwZTgxYjNhOTVjZmIxOThmYzkzYzQzNGIxMWQzMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTMzYjU4OWFkMGI2YWEwODA1YTFkODliMmRmMGQ4Zjk2NTk1MjBiYWQxMDMzNTNlMGRlNTM4ZmJiNmE5MjEwYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDMwMGMwOWUxMjgwZjY5YjFlZmRiNGY3OWQxMThmOTI2MzE2ZGIyZWRhZjRhZmU2MjBmN2UwZGQ5YWI1NTZiYiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_a6b165080bb14c6ba78c42a2f82698e4",
+      "statement": "An install unpacks packages on the exec Node.js toolchain and refuses a host-path-only toolchain; the install repository takes Node.js from the four per-platform rules_nodejs repositories rules_yarn names in its MODULE.bazel.",
+      "evidence": [
+        {
+          "resource": "repo://MODULE.bazel#L24-L34",
+          "version": "repo-lines-v1:sha256:7112b9df886c8066588c0edf0013bfdf5f675fab8ee680e7854372708227e4d0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE2MDE3N2Q2NzIxOWU3YzliYmI1ODllMTI1ZGQ0ZDRhMGZmNjVkZGZmODM5ZTBiMzhkNWY0MTRiYTY0MTg0MWQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjFkMDA2N2YzNjYxN2U3NzI5M2YyMTEwNWI4MGEyODAwNzI0ZTU3MzgzNzgwYTdmNTA3MzMyYzU1NWRmYWI3NmUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzMThhZGE2NmM2NDdmMWE0Yjg0MDg2YWQ1ZTFmYjFhZjUyNzVjNDhhZTVkZWY1ZTcxYWI4NjdiMjhlMjQzZTQifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/node_modules.bzl#L13-L22",
+          "version": "repo-lines-v1:sha256:d5ab985f560d53d0f419c62cbab864eeb2fca59f7ce45628cce164e2881c27fe:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljOTVlNDdlYmE2NDVhZmI1MzA3OWMxNjFjNzUzZmIxNjU1YThiYTJkNDNjYzQ4ZWFlNDVjMmY5MDMwNDVlYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM2NjdmZDFhNTU3Yzk2MjY5MTA2ZmRjNDQ2NGE5NzYxNmVmYWY3MmE0NDk5ZTdhNTVhODUzMGJkODY3YzQ5OWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYwYTc2YWQzOTU0YzZjM2EwZWMyMzFiODM4ODE0N2ZlZWUyMTQ3M2FkNDA2YjNmZGRlZGFlZjQ1YzljZDQwZjgifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L5-L10",
+          "version": "repo-lines-v1:sha256:c34317fbd7f4992742a4be3f852b6411fbbbb2e6ad37c08bc2b296afc72aaa9d:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYjMyZWU0MjRjMDA3ZDU2NDg2NDU4OGYxOTYxNDc1ZjY5ZWVmM2FlMDE1NGM1M2NjNmJlZTNlNTk5NzYyNWVlNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjk1ZDBmMDFlMmYzYTEwYzkzZjhlMTVhMzk0NDZmMjFkNTU3ZWRmZjVlMjE2MTk4YjE1ZWJiOGExZjI0YzE0MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODg0Yzk3OGM0MzBmZDI4MzJjMzFjNjMwNWYyNTljYTM1NWM5OTE2MDZlYzBjNzUwYjQ0MDlhNzhiMDBhMTgxOSJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-03T03:35:17.537Z"
+    "at": "2026-10-04T18:04:16.838Z"
   }
 }

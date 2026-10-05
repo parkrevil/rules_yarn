@@ -1,0 +1,36 @@
+load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
+
+# The Node.js programs. archive.js is also the default of an attribute of the
+# rule each install repository instantiates, so it is visible to them.
+exports_files(
+    ["archive.js"],
+    visibility = ["//visibility:public"],
+)
+
+exports_files(
+    [
+        "check.js",
+        "conditions.js",
+        "driver.js",
+        "layout.js",
+        "lockfile.js",
+        "syml.js",
+        "node_modules.bzl",
+        "pin.cjs",
+        "repository.bzl",
+        "yarnrc.js",
+    ],
+    visibility = ["//tests:__subpackages__"],
+)
+
+bzl_library(
+    name = "repository",
+    srcs = ["repository.bzl"],
+    visibility = ["//yarn/private:__pkg__"],
+)
+
+bzl_library(
+    name = "tarball",
+    srcs = ["tarball.bzl"],
+    visibility = ["//yarn/private:__pkg__"],
+)

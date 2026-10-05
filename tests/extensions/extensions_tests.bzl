@@ -1,17 +1,33 @@
 """Unit tests for selecting Yarn distributions in the `yarn` module extension."""
 
 load("@rules_testing//lib:analysis_test.bzl", "analysis_test")
-load("//yarn/private:extensions.bzl", "root_repositories", "select_distributions")
+load("//yarn/private:extensions.bzl", "root_repositories", "select_distributions", "select_installs")
 
 _SUPPORTED_VERSIONS = ["1.0.0", "2.0.0"]
 
-def _module(*, distributions, name = "dep", version = "1.2.3", is_root = False):
+def _module(*, distributions, installs = [], name = "dep", version = "1.2.3", is_root = False):
     return struct(
         is_root = is_root,
         name = name,
-        tags = struct(distribution = distributions),
+        tags = struct(distribution = distributions, install = installs),
         version = version,
     )
+
+def _install(name, distribution = "yarn", dev = False):
+    return struct(
+        dev = dev,
+        distribution = distribution,
+        name = name,
+    )
+
+def _installs(selected_distributions, *modules):
+    errors = []
+    installs = select_installs(
+        struct(modules = list(modules)),
+        distributions = selected_distributions,
+        _fail = errors.append,
+    )
+    return struct(errors = errors, installs = installs)
 
 def _distribution(version, name = "yarn", dev = False):
     return struct(
@@ -199,6 +215,73 @@ def _test_unsupported_version_fails(env):
     ])
     env.expect.that_bool(result.selected == None).equals(True)
 
+def _test_root_install_is_selected(env):
+    result = _installs(
+        {"yarn": "1.0.0"},
+        _module(is_root = True, name = "", distributions = [_distribution("1.0.0")], installs = [_install("npm")]),
+    )
+
+    env.expect.that_collection(result.errors).contains_exactly([])
+    env.expect.that_collection(result.installs.keys()).contains_exactly(["npm"])
+    env.expect.that_str(result.installs["npm"].distribution).equals("yarn")
+
+def _test_install_in_a_dependency_fails(env):
+    result = _installs(
+        {"yarn": "1.0.0"},
+        _module(is_root = True, name = "", distributions = [_distribution("1.0.0")]),
+        _module(name = "dep", version = "0.1.0", distributions = [], installs = [_install("npm")]),
+    )
+
+    env.expect.that_collection(result.errors).contains_exactly([
+        "yarn.install(name = \"npm\") in module dep@0.1.0: only the root module may declare installs.",
+    ])
+    env.expect.that_bool(result.installs == None).equals(True)
+
+def _test_duplicate_install_name_fails(env):
+    result = _installs(
+        {"yarn": "1.0.0"},
+        _module(is_root = True, name = "", distributions = [_distribution("1.0.0")], installs = [
+            _install("npm"),
+            _install("npm"),
+        ]),
+    )
+
+    env.expect.that_collection(result.errors).contains_exactly([
+        "yarn.install declares the repository \"npm\" more than once in the root module. Give each install its own name.",
+    ])
+    env.expect.that_bool(result.installs == None).equals(True)
+
+def _test_install_named_like_a_distribution_fails(env):
+    result = _installs(
+        {"yarn": "1.0.0"},
+        _module(is_root = True, name = "", distributions = [_distribution("1.0.0")], installs = [_install("yarn")]),
+    )
+
+    env.expect.that_collection(result.errors).contains_exactly([
+        "yarn.install(name = \"yarn\") in the root module: \"yarn\" is already the name of a yarn.distribution repository.",
+    ])
+    env.expect.that_bool(result.installs == None).equals(True)
+
+def _test_install_naming_an_unknown_distribution_fails(env):
+    result = _installs(
+        {"yarn": "1.0.0"},
+        _module(is_root = True, name = "", distributions = [_distribution("1.0.0")], installs = [_install("npm", distribution = "yarn_two")]),
+    )
+
+    env.expect.that_collection(result.errors).contains_exactly([
+        "yarn.install(name = \"npm\") in the root module names the distribution \"yarn_two\", which no yarn.distribution declares. Declared distributions: yarn.",
+    ])
+    env.expect.that_bool(result.installs == None).equals(True)
+
+def _test_install_is_reported_like_a_distribution(env):
+    result = _report(
+        {"yarn": "1.0.0", "npm": None},
+        _module(is_root = True, name = "", distributions = [_distribution("1.0.0", dev = True)], installs = [_install("npm")]),
+    )
+
+    env.expect.that_collection(result.direct).contains_exactly(["npm"])
+    env.expect.that_collection(result.dev).contains_exactly(["yarn"])
+
 # `rules_testing`'s `unit_test` takes no size, so its tests default to
 # MODERATE and every run warns that a test finishing instantly is oversized.
 # Driving `analysis_test` directly is the same thing with the size set, over
@@ -219,6 +302,11 @@ def extensions_test_suite(name):
         "test_conflict_in_deciding_module_fails": _test_conflict_in_deciding_module_fails,
         "test_dependency_custom_name_fails": _test_dependency_custom_name_fails,
         "test_dependency_declaration_is_not_reported": _test_dependency_declaration_is_not_reported,
+        "test_duplicate_install_name_fails": _test_duplicate_install_name_fails,
+        "test_install_in_a_dependency_fails": _test_install_in_a_dependency_fails,
+        "test_install_is_reported_like_a_distribution": _test_install_is_reported_like_a_distribution,
+        "test_install_named_like_a_distribution_fails": _test_install_named_like_a_distribution_fails,
+        "test_install_naming_an_unknown_distribution_fails": _test_install_naming_an_unknown_distribution_fails,
         "test_development_declaration_is_reported_as_development": _test_development_declaration_is_reported_as_development,
         "test_each_repository_is_reported_once": _test_each_repository_is_reported_once,
         "test_identical_declarations_create_one_repository": _test_identical_declarations_create_one_repository,
@@ -228,6 +316,7 @@ def extensions_test_suite(name):
         "test_repository_the_extension_did_not_create_is_not_reported": _test_repository_the_extension_did_not_create_is_not_reported,
         "test_root_module_decides_over_dependency": _test_root_module_decides_over_dependency,
         "test_root_module_may_use_custom_name": _test_root_module_may_use_custom_name,
+        "test_root_install_is_selected": _test_root_install_is_selected,
         "test_root_module_uses_default_name": _test_root_module_uses_default_name,
         "test_unsupported_version_fails": _test_unsupported_version_fails,
     }

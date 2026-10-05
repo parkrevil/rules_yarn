@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:92739635926121b760a450061b1cf98bf7659d7a0b3a59ab99c600c3d2788435",
+  "pageVersion": "sha256:48731ed87733eb8f6eb65c08b0d14db9968b1f0a50105c325fd7523659597826",
   "claims": [
     {
       "id": "claim_0d817a7a3b964d06937894529d820b10",
@@ -8,7 +8,7 @@
       "evidence": [
         {
           "resource": "repo://AGENTS.md",
-          "version": "repo-file-v1:sha256:3eedf78c578453bb989960394e52aaa304a9405892d69b3f7dfe9c2444bb83c1"
+          "version": "repo-file-v1:sha256:38c2ece6eed674edaaf3563f91c555f8005ddd6632ce34cfcd231f9db95a9bc7"
         },
         {
           "resource": "repo://CLAUDE.md",
@@ -22,7 +22,7 @@
       "evidence": [
         {
           "resource": "repo://AGENTS.md",
-          "version": "repo-file-v1:sha256:3eedf78c578453bb989960394e52aaa304a9405892d69b3f7dfe9c2444bb83c1"
+          "version": "repo-file-v1:sha256:38c2ece6eed674edaaf3563f91c555f8005ddd6632ce34cfcd231f9db95a9bc7"
         },
         {
           "resource": "repo://openspec/config.yaml#L1-L1",
@@ -88,15 +88,15 @@
       "evidence": [
         {
           "resource": "repo://.github/workflows/ci.yml#L1-L10",
-          "version": "repo-lines-v1:sha256:2dfcc5b21e0999985ec8f66a173d422ffbe7d0ffa0838aedf8992045fb737647:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2ZTFiMzJmYTA5MDc5YWUyZjAwMDFmZmYwZWNhMjdiNDk4NTk1N2Q0ZWI0ODU3OTI5YjNjZjA1OGZhYWU1NDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNhZTMwYjFlYmRlMDUwMDI2NDBkZTA1ZjZjMTJkOGJlYjdjMWI0ODA5N2I2NjQ5YzhlZDI1ZDQyZTEyMDg2NzEifQ"
+          "version": "repo-lines-v1:sha256:2dfcc5b21e0999985ec8f66a173d422ffbe7d0ffa0838aedf8992045fb737647:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA2ZTFiMzJmYTA5MDc5YWUyZjAwMDFmZmYwZWNhMjdiNDk4NTk1N2Q0ZWI0ODU3OTI5YjNjZjA1OGZhYWU1NDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5ODFiYjdlNjE2MTg5N2U2ZmU4ZWUyNTk0MGUzMTc3ZGYzMDBiMDYzNjk0OTM3ZjgzNjNhN2U0NTE0OGY3NzMifQ"
         },
         {
-          "resource": "repo://.github/workflows/ci.yml#L79-L119",
-          "version": "repo-lines-v1:sha256:d6bb4f08b56c7789d2c4878a793472c149b2c3ba98bdf7ea663b37e0d4f49402:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyMTJjMDM0ZDQzNjQ4ZDFiMGUzZWNkYjE3ZmQ1ZDJjMjNhYjNkYjRmOTZmNDE0NDBmMjJkY2FiY2FiYmJkOTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhZmUyZTBjNjRmN2ViOTVjN2Q5YTdmNDVhNDVlNmZjNWI0NWZkZDBiNDQ5ODk1M2Y4MmNhNzdlNGExYmQ5ODUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImYzNTczZjM5NDdlOTVlMTlkNDMzYzYzZWMyNjNkMzBmODljNzgyZDFjNDVjOTFjYjYxNGJkYmQyZGU0Mjc4MzUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://.github/workflows/ci.yml#L100-L140",
+          "version": "repo-lines-v1:sha256:d6bb4f08b56c7789d2c4878a793472c149b2c3ba98bdf7ea663b37e0d4f49402:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyMTJjMDM0ZDQzNjQ4ZDFiMGUzZWNkYjE3ZmQ1ZDJjMjNhYjNkYjRmOTZmNDE0NDBmMjJkY2FiY2FiYmJkOTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhZmUyZTBjNjRmN2ViOTVjN2Q5YTdmNDVhNDVlNmZjNWI0NWZkZDBiNDQ5ODk1M2Y4MmNhNzdlNGExYmQ5ODUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJlNGI5ZmIwMDRmY2FlMGI4OGNjZDBmYWI3MTlmYTFkYmYyM2YzMzViMTNiNTlmZWNhYTEyYTNiNGUwN2UzNDEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://AGENTS.md#L14-L17",
-          "version": "repo-lines-v1:sha256:ee5df00b7fda0a570b8611ebd9b3e242e3af54d913e83a3dec104af6db086a50:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmM2MWQ5ZjM3NjBjYjRjYmM2NDI0NjQ1ZDVjNTVjMzA3NWRlZWNkYzkzYmJiOGExOTkyMTU1NDZjM2FjYzkwNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTU1OGIxOTFmYTAwNjc3MWIwMWRiMDZmYjdiOTkyMDEwMjg0ODIzMDEyYjZjMjNhZGYwZWU2MmQ4MTg3NTkwMiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNGZjZDhlMTdmOGY5OTM2ZWYzMWJhZWExYzEyOTFmNmYwNmU5MzY3NDZmNTFiYjA4MTUwY2NkZWFmZjEzNzEwNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjQxNDUwMWEyN2I3ZjE1MjM1MWMzMmM2N2QyYWIxNDJlODBhMDllMzU0OTM4NzZhN2JhZmRlODc1NGI2OWIwZiJ9"
+          "resource": "repo://AGENTS.md",
+          "version": "repo-file-v1:sha256:38c2ece6eed674edaaf3563f91c555f8005ddd6632ce34cfcd231f9db95a9bc7"
         }
       ]
     },
@@ -137,7 +137,7 @@
       "statement": "tools/hooks/protect_generated_test.sh states the guard's contract as a table of cases covering generated paths, neighbouring paths that must stay editable, alternative spellings, symlinks built in a throwaway repository, and payloads with no usable path; it is a plain script with no Bazel target and CI runs it.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/ci.yml#L108-L111",
+          "resource": "repo://.github/workflows/ci.yml#L129-L132",
           "version": "repo-lines-v1:sha256:dc8e2c608068e91569b576b177065f4e50c2d95535c8d91d5d3dc011522f9b1a:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGRkNTg0YjM3NjAwYjg2MTE3NTFlZTg1NTZjOTA4ZmRiYWIyYTM0NjljZWU0YmFiMmNkMjM2YTRmYTZmMDRkOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTY3MDY5NGEyZGUwZjVkYWI5OTU2NDIyM2M5MjgyZjViNzg0Zjg5MmM1YWZhMGU2NjdjNWVkM2Q2Y2IxNzA4OCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGRjOWEyZDk2ZjY4ZjAzMTY3MGQwNGI5MDUzMjgzMWYxOTgzOTRlM2U3NGYyNjI1MjAxOGVmMWJiY2NkNDM2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWQzNjMyMzEyNjQyYTg5ZGU3ODg0YzBkNTkyM2I2OGEwOGZlOTJiYjgzZjZlNjZiMmE2MDljNGQwYjk4YTc4NCJ9"
         },
         {
@@ -169,8 +169,8 @@
       "statement": "Four of AGENTS.md's five pre-commit rules were added after each was broken: the reviewer rule now states in the file that it covers a commit changing that file, two require fixing what the change is for rather than recording it as a limit and applying a stated rule to everything the change touches, and the newest requires regenerating the wiki and carries the correction to the generated OpenWiki paragraph below it.",
       "evidence": [
         {
-          "resource": "repo://AGENTS.md#L26-L32",
-          "version": "repo-lines-v1:sha256:e3639cf3ea8dd4e245330b66b3f7e4e62f33b71dc65543c5a6ef610f419cc1dd:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGQzOGNhZjZkMTUwYmVlMGQ3ODJmNjc0ZjhkMzFlYzY5N2M4MTg5OTUyZTZhNDA2MWIwMDJkZjgzY2NmNWJkNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTc1NmVjMzI5ZjlhM2VkZWNlOWE4ZjA1NGZhZWYwYWE3NTViNjc3NzMwN2Q0YTI2NDAzMTI2NmJkNTQ2NTViMyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMzdjMGM5ZjI3Y2RhZDRlZDViNjY1MzVkYzk5OWVlZGUyMDY5MzU2Njc2NzllNTZjNTZhM2Y1YmYxNmMxZDQxZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWIxYmM1YmM0YTIzN2Y1NzhlNmFmNGE0MTVkMDY0N2Y5OTEwYjAzYjM2NGUxZTI3YzFmMWRiYWE3NDNkMDNiYSJ9"
+          "resource": "repo://AGENTS.md",
+          "version": "repo-file-v1:sha256:38c2ece6eed674edaaf3563f91c555f8005ddd6632ce34cfcd231f9db95a9bc7"
         }
       ]
     },
@@ -189,12 +189,12 @@
       "statement": "The staleness gate compares recorded digests rather than commits, which is what lets it run in CI at all: the checkout step asks for no history, so no commit but HEAD is present and a diff against a recorded earlier one could not resolve.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/ci.yml#L116-L119",
-          "version": "repo-lines-v1:sha256:13424b5bceeccde5476be50c41350e3ac774bd956001a43aac1583b038c93fbf:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQ4YjU0OTVhNjgzMWNiZDVjMmViYWY0YmMzMDFkYzFmNDg4MjgxZjMyNzlmNTQ5YTVlZDcxYzYwY2M3ZjYxMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmFmZTJlMGM2NGY3ZWI5NWM3ZDlhN2Y0NWE0NWU2ZmM1YjQ1ZmRkMGI0NDk4OTUzZjgyY2E3N2U0YTFiZDk4NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDcwNzI4MWU4YzQyNDI1N2ExNzFjYzgyM2NiMjQ1YmZlZWQ4N2ViZDAxMzg5YzIzYzdlMmEwZGY2ZTliZTg5MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+          "resource": "repo://.github/workflows/ci.yml#L104-L105",
+          "version": "repo-lines-v1:sha256:4933f509bf554d33d4668677b94e9cfb2bef0ccde58b71b0fb575eae1983d773:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDVkNmNmN2Q0MjhjYTgxMTVmYzRiYWJiNjgwNzM5MDIzMzI3YTdhOWQ5MTYzZjcwNmEyNzY4N2RkNTE2ZjM5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTYxZjEwMDgwYzM2NmZlMWMyYWU2MWIzMmZlZjgyMzUzZTU2ZjgxMjI3MGZhMjMxM2M5YjQzZDhiZjI1ZjdkZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjliODA2MDMxOTMxOGU1YjdkYWNmZGU3YjljZWQ3OTc0NDM5ZWU5MTQwNDFiM2VkMjg0ZmFlNTFlZGUyMGI3MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjU2ZGRiMzU3MzJmYTZjYTM3ZGM5NThlZjExYzI0NDI5MjU3MWVmNjRhOTU4ZWZiMzQyZWRkZTk3NTBjZjMzNCJ9"
         },
         {
-          "resource": "repo://.github/workflows/ci.yml#L83-L84",
-          "version": "repo-lines-v1:sha256:4933f509bf554d33d4668677b94e9cfb2bef0ccde58b71b0fb575eae1983d773:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDVkNmNmN2Q0MjhjYTgxMTVmYzRiYWJiNjgwNzM5MDIzMzI3YTdhOWQ5MTYzZjcwNmEyNzY4N2RkNTE2ZjM5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNTYxZjEwMDgwYzM2NmZlMWMyYWU2MWIzMmZlZjgyMzUzZTU2ZjgxMjI3MGZhMjMxM2M5YjQzZDhiZjI1ZjdkZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjliODA2MDMxOTMxOGU1YjdkYWNmZGU3YjljZWQ3OTc0NDM5ZWU5MTQwNDFiM2VkMjg0ZmFlNTFlZGUyMGI3MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNjU2ZGRiMzU3MzJmYTZjYTM3ZGM5NThlZjExYzI0NDI5MjU3MWVmNjRhOTU4ZWZiMzQyZWRkZTk3NTBjZjMzNCJ9"
+          "resource": "repo://.github/workflows/ci.yml#L137-L140",
+          "version": "repo-lines-v1:sha256:13424b5bceeccde5476be50c41350e3ac774bd956001a43aac1583b038c93fbf:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDQ4YjU0OTVhNjgzMWNiZDVjMmViYWY0YmMzMDFkYzFmNDg4MjgxZjMyNzlmNTQ5YTVlZDcxYzYwY2M3ZjYxMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMmFmZTJlMGM2NGY3ZWI5NWM3ZDlhN2Y0NWE0NWU2ZmM1YjQ1ZmRkMGI0NDk4OTUzZjgyY2E3N2U0YTFiZDk4NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMDcwNzI4MWU4YzQyNDI1N2ExNzFjYzgyM2NiMjQ1YmZlZWQ4N2ViZDAxMzg5YzIzYzdlMmEwZGY2ZTliZTg5MSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
         },
         {
           "resource": "repo://tools/hooks/openwiki_staleness.sh#L1-L21",
@@ -243,7 +243,7 @@
       "statement": "tools/hooks/openwiki_staleness_test.sh states the staleness gate's contract as fifty-six rows, each built in a throwaway repository laid out like this one; a row counts only when the gate exits with exactly 0 or exactly 1 and a refusal only when its message names what the row is about, and seven rows inject a failure into a command the gate depends on after that command has done its work; CI runs it.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/ci.yml#L113-L114",
+          "resource": "repo://.github/workflows/ci.yml#L134-L135",
           "version": "repo-lines-v1:sha256:5323fd5ca7b79b2c31c74c315af88e8a2f9b28d09d5c4890a2c844ed2106d07a:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDUxZGU4MWU5ZmU3YzU1ZTZlYzRkYjhiMDllZmYxOGIxNjA1OWJhYzRiM2E3OTcyMjlmZWNjMjc3ZmQzN2U1YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjIwNTRmMjcwMjNjZDUzZGY3MWFjZTkyMzRiYWM3NDhiMzNmM2E4MGFmMjU0ZDIyNTVlNTY5ZGExNzgwZTZlNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTZhNzU3MjI1MTkzMmU1MmYwODBhZjc3NGQ4ODE0YTViNDQxZDUyNzA2NGQ5OTRjNjkzN2I2MDllZWNhYWZmYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzg4NWMxYmM1ZDY5MWZiM2EyNWE5NzRiMDQyOGQwZDE2N2Q1MTE3ZDNlN2NkNTY1NzA2ODk2YjgyN2RiNGNkYiJ9"
         },
         {
@@ -259,10 +259,20 @@
           "version": "repo-lines-v1:sha256:b87e327a6f1911ee870933ef8a49f2a27b1da33f2b2c0a5a3ef059fa30d97bde:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkYzcxMDI4OTc2MGVmNDViZjlkZmU0MWI3NWJmOTAzNjJiMTRkNDY3ZDAyNjhiYWVmNzdkZjAxOTI4MTk0MGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZjIyZGFjNTU4N2QxODIzOWM2MDY4MzU3MzI1NDdhMDYwOTkyZGI2MzdhNDBmMTUzZmM1ZGYyYTY2NmI1MTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEwZmRkNzc1OGZkMjQwNzU3N2E5NGVhMjRkY2ViMzkxMThhZWJlNjM2ZGNhYzdhMmYxNzZiZGJjNWRhZDY1ZjYifQ"
         }
       ]
+    },
+    {
+      "id": "claim_0b28bff87a9b426497763cdd98bedd01",
+      "statement": "The pre-commit gate is build and test in the root, e2e/smoke, e2e/install and tests/bcr, plus tools/ci/install_scenarios.sh.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md",
+          "version": "repo-file-v1:sha256:38c2ece6eed674edaaf3563f91c555f8005ddd6632ce34cfcd231f9db95a9bc7"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-03T09:50:46.826Z"
+    "at": "2026-10-04T18:04:16.838Z"
   }
 }

@@ -12,6 +12,8 @@ bzl_library(
     deps = [
         ":repositories",
         ":versions",
+        "//yarn/private/install:repository",
+        "//yarn/private/install:tarball",
     ],
 )
 

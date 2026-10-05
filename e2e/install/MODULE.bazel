@@ -1,0 +1,33 @@
+"""Consumer module that installs a real Yarn project with yarn.install."""
+
+bazel_dep(name = "rules_yarn")
+bazel_dep(name = "rules_nodejs", version = "6.7.5")
+
+local_path_override(
+    module_name = "rules_yarn",
+    path = "../..",
+)
+
+node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
+node.toolchain(node_version = "24.21.0")
+
+yarn = use_extension("@rules_yarn//yarn:extensions.bzl", "yarn")
+yarn.distribution(version = "4.18.0")
+yarn.install(
+    name = "npm",
+    lockfile = "//:yarn.lock",
+    package_json = "//:package.json",
+    patches = ["//:patches/is-number.patch"],
+    pins = "//:yarn_pins.json",
+    workspaces = [
+        "//:packages/app/package.json",
+        "//:packages/lib/package.json",
+    ],
+    yarnrc = "//:.yarnrc.yml",
+)
+use_repo(yarn, "npm", "yarn")
+
+# Bazel-managed Node.js for the host platform, which the tests run.
+use_repo(node, "nodejs")
+
+bazel_dep(name = "rules_shell", version = "0.8.0", dev_dependency = True)

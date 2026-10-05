@@ -24,10 +24,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-1182253f19cc7fc5a1a4410d
     resource: repo://tools/hooks/protect_generated.sh
-generated: { by: "claude-code", at: "2026-10-03T09:26:35.806Z" }
+generated: { by: "claude-code", at: "2026-10-04T12:22:38.266Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-03T09:50:46.826Z
+    at: 2026-10-04T18:04:16.838Z
 ---
 
 # Development workflow
@@ -49,7 +49,8 @@ against the defining ruleset at the pinned version and cited; a missing release
 or API is reported rather than worked around; the launcher template is the only
 generated script; generated directories are not hand-edited.
 
-Before committing, five things: the build-and-test gate across all three roots;
+Before committing, five things: the build-and-test gate across all four roots
+and the install scenario script;
 a reviewer who was not in the implementation conversation, **including for a
 commit that changes `AGENTS.md` itself**; fixing what the change is for instead
 of recording it as a known limit; applying a rule the change states to
@@ -211,16 +212,17 @@ the repository cannot hold an edit to it.
 `.github/workflows/ci.yml` runs on every push and pull request, with read-only
 permissions, in three jobs.
 
-**build and test** runs the gate `AGENTS.md` asks for — all three roots, each
-in its own invocation because `.bazelignore` keeps two of them out of the root
-run — on `ubuntu-latest` and `macos-latest`, with `fail-fast` off so one
+**build and test** runs the gate `AGENTS.md` asks for — all four roots, each
+in its own invocation because `.bazelignore` keeps three of them out of the root
+run, and the install scenario script — on `ubuntu-latest` and `macos-latest`, with `fail-fast` off so one
 platform's failure does not hide the other's result. Both runner images ship
 Bazelisk as `bazel`, so each root's `.bazelversion` decides the version and no
 setup action is needed.
 
 **oldest supported Bazel** builds a throwaway consumer at the floor
-`MODULE.bazel` declares. The repository's own roots cannot check this: their
-lockfiles are written by a newer Bazel and both set `--lockfile_mode=error`.
+`MODULE.bazel` declares, and installs `e2e/install` at the same floor with its
+lock off. The repository's own roots cannot check this as they stand: their
+lockfiles are written by a newer Bazel and set `--lockfile_mode=error`.
 
 **checks** runs the pre-commit hooks over all files, both hooks' contract
 tables, and the staleness gate itself.

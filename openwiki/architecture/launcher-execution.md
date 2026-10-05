@@ -10,14 +10,16 @@ sources:
     resource: repo://tests/launcher/yarn_cli_test.sh
   - id: openwiki-source-eb3dcfac0b874f311a6353ac
     resource: repo://tests/yarn_binary/yarn_binary_tests.bzl
+  - id: openwiki-source-6da6376cacb3a4c5f3725a78
+    resource: repo://yarn/private/install/repository.bzl
   - id: openwiki-source-d9081795909674dafc7044aa
     resource: repo://yarn/private/yarn_binary.bzl
   - id: openwiki-source-c20b05d8b903795173b9a3b2
     resource: repo://yarn/private/yarn_binary.sh.tpl
-generated: { by: "claude-code", at: "2026-09-21T10:11:59.468Z" }
+generated: { by: "claude-code", at: "2026-10-04T12:22:38.266Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-03T03:35:17.537Z
+    at: 2026-10-04T12:22:38.266Z
 ---
 
 # Launcher and execution model
@@ -98,6 +100,14 @@ Running Yarn this way is hermetic in exactly one dimension: which Node.js and
 which Yarn execute. It is not hermetic in any other sense. Yarn still reads and
 writes the project directory, its caches, and the network exactly as it would
 outside Bazel, and the rule's own documentation says so.
+
+That is also why the one `yarn_binary` the ruleset itself generates is a tool
+run by hand rather than part of a build: each install repository declares
+`pin`, a `yarn_binary` whose entry point is the pin program, so that
+`bazel run @<name>//:pin` runs it with the selected Yarn beside it, in the
+developer's checkout, with the developer's configuration — what refreshing a
+pin file needs. See [Installing a project's
+dependencies](dependency-installation.md).
 
 ## Tests that hold this
 

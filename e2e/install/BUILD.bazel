@@ -1,0 +1,59 @@
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
+load(":provider_root.bzl", "provider_root")
+
+exports_files([
+    ".yarnrc.yml",
+    "package.json",
+    "packages/app/package.json",
+    "packages/lib/package.json",
+    "patches/is-number.patch",
+    "yarn.lock",
+    "yarn_pins.json",
+])
+
+sh_test(
+    name = "installed_test",
+    size = "small",
+    srcs = ["installed_test.sh"],
+    args = [
+        "$(rlocationpath @nodejs//:node_bin)",
+        "$(rlocationpaths @npm//:node_modules)",
+    ],
+    data = [
+        "@nodejs//:node_bin",
+        "@npm//:node_modules",
+    ],
+    deps = ["@rules_shell//shell/runfiles"],
+)
+
+# Only a sandbox that blocks the network can show the tree does not need it.
+sh_test(
+    name = "offline_test",
+    size = "small",
+    srcs = ["offline_test.sh"],
+    args = [
+        "$(rlocationpath @nodejs//:node_bin)",
+        "$(rlocationpaths @npm//:node_modules)",
+    ],
+    data = [
+        "@nodejs//:node_bin",
+        "@npm//:node_modules",
+    ],
+    tags = ["block-network"],
+    deps = ["@rules_shell//shell/runfiles"],
+)
+
+# An action that finds a package through YarnNodeModulesInfo.root.
+provider_root(
+    name = "provider_root",
+    node_modules = "@npm//:node_modules",
+)
+
+sh_test(
+    name = "provider_root_test",
+    size = "small",
+    srcs = ["provider_root_test.sh"],
+    args = ["$(rlocationpath :provider_root)"],
+    data = [":provider_root"],
+    deps = ["@rules_shell//shell/runfiles"],
+)

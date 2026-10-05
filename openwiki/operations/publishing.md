@@ -3,9 +3,6 @@ type: operations
 title: Releasing and publishing
 description: How a release is cut and offered to the Bazel Central Registry — the .bcr templates, the archive the repository builds rather than taking from GitHub, the module the registry presubmit runs, and what is still missing before a first publication.
 tags: [release, registry, bcr, distribution, bzlmod]
-verified:
-  - by: openwiki/0.5.1
-    at: 2026-10-03T03:35:17.537Z
 sources:
   - id: openwiki-source-d3c2a83adfd3b7d09ba44bdc
     resource: repo://.bcr/config.yml
@@ -35,7 +32,12 @@ sources:
     resource: repo://tests/bcr/.bazelrc
   - id: openwiki-source-9396675ac7636781156cad60
     resource: repo://tests/bcr/MODULE.bazel
-generated: { by: "claude-code", at: "2026-10-03T03:12:21.393Z" }
+  - id: openwiki-source-e8d8326f8a04a478f4895424
+    resource: repo://yarn/private/extensions.bzl
+generated: { by: "claude-code", at: "2026-10-04T12:22:38.266Z" }
+verified:
+  - by: openwiki/0.5.1
+    at: 2026-10-04T18:04:16.838Z
 ---
 
 # Releasing and publishing
@@ -45,8 +47,8 @@ because an override only takes effect in the root module, a module that
 depends on `rules_yarn` cannot pass it on — every root module downstream has
 to repeat it. Removing that is what this apparatus exists for.
 
-Everything below is in place and was exercised; the two steps that need
-credentials nobody has yet are named at the end.
+Everything below is in place and was exercised; the one step that needs a
+credential nobody has yet is named at the end.
 
 ## What a tag sets off
 
@@ -80,8 +82,9 @@ without changing `strip_prefix`.
 `.gitattributes` decides what the archive carries. The agent tooling, the
 OpenSpec planning record and the generated wiki are marked `export-ignore`:
 they are how the repository is developed, not what a consumer builds against.
-What remains is the ruleset, both test modules, the consumer example, the
-documentation and the licence.
+What remains is the ruleset, its tests and the registry's test module, both
+consumer examples — `e2e/smoke` and `e2e/install` — the documentation and the
+licence.
 
 ## The `.bcr` templates
 
@@ -132,14 +135,14 @@ fail for reasons that say nothing about the module.
 
 ## Before a first publication
 
-Two things, neither of which can be done from a checkout.
+One thing, which cannot be done from a checkout: a `BCR_PUBLISH_TOKEN` secret
+that can push to the registry fork and open pull requests. The fork it pushes
+to, named in `publish.yaml`, already exists.
 
-A `BCR_PUBLISH_TOKEN` secret that can push to the registry fork and open pull
-requests. The fork it pushes to, named in `publish.yaml`, already exists.
-
-A decision about the maintainer email in `metadata.template.json`. The
+The maintainer email in `metadata.template.json` was the other open item. The
 registry emails maintainers when a release fails, so it has to be an address
-that receives mail, and it becomes public with the entry.
+that receives mail, and it becomes public with the entry. The maintainer chose
+the personal address now recorded there.
 
 `publish.yaml` leaves the pull request as a draft, which is the automation's
 default. The registry auto-approves an entry when its author marks a draft
@@ -149,9 +152,9 @@ gives that up.
 
 ## What publishing does not change
 
-The ruleset still delivers the Yarn CLI and nothing more. Being in a registry
-makes it dependable — pinnable, and usable through a dependency rather than
-only from a root module — but a Yarn command run through `yarn_binary` still
-gets no caching, sandboxing or dependency-installation guarantees from Bazel.
-Windows is still unsupported, and the version table still records one Yarn
-version.
+Being in a registry makes the ruleset dependable — pinnable, and usable
+through a dependency rather than only from a root module — but changes nothing
+about what it does. A Yarn command run through `yarn_binary` still gets no
+caching, sandboxing or dependency-installation guarantees from Bazel; those
+come only from `yarn.install`, which only a root module may declare. Windows
+is still unsupported, and the version table still records one Yarn version.

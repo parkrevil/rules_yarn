@@ -1,0 +1,326 @@
+{
+  "schemaVersion": 1,
+  "pageVersion": "sha256:05d5dba35b550be5e5618184ec859b8ef00f15b19330141d3b93d9b4a9d29b92",
+  "claims": [
+    {
+      "id": "claim_54350d03825b4543a2e34ff911ba1463",
+      "statement": "The pin target asks the pinned Yarn's `yarn npm info` for name, version and dist, in batches of 100 locators, in the developer's checkout.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/pin.cjs#L25-L68",
+          "version": "repo-lines-v1:sha256:97fc9a8e65c9f7e7adaf27114c53060d64af993769748a6554edd6cf304f6cd7:eyJzZWxlY3RlZExpbmVDb3VudCI6NDQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhMzhmNTU4ZTYyNTE3ODNjNjhiNzc2ODcyZDgyMjgxYjkyNTVlMjhmYzc3YTFiOTUxYmJkNzMyYTk1OGEzZGQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjEwZWFiOWJkN2Y2MjYzNDcwNDVhNmZmMTdlZjYzNzk4OTE4MWUyNjdhNzBhZTQ5OGM4OWU0MmE0ZDZjMzJmOGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3ZDFkMTNhMjkzMDNiNTBhMzM5M2U2NDIwZTFjZTg2NTE3YWE4MTdjNWQyMTgwY2UxZjdhYWVjNDM3ZWNiYWIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_4d99adce29814a04ba32b90106942993",
+      "statement": "The pin target records the registry's published SHA-512 integrity and downloads and hashes a tarball only when no SHA-512 integrity is published, naming those packages; it writes a sorted version 1 pin file.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/pin.cjs#L70-L93",
+          "version": "repo-lines-v1:sha256:fc4e970d2db1e77fce8486e353209d828429409bbab805c004bd4fc91e4e8423:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQyYzBiMmFlMTAxM2YzZGY4NTk5MzIwN2MyYzllM2ZmOTg1OWFjMzc4NGE2ZmNhZGI1YzI5YTgyYzZiYWIxMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjI3ZTU3ODhkNWQ5ZDczZDI0YTgxZGJjMGE1YTc0YmZhODJjOWMzYjNhZjk5ZTUyYWY3OTZlOTBiNDY4YThhM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3ZDg2MzJlNTRlOTI5OGFiYjk1ODcyN2UyZDUxNDA4YWJhZjEzNjYwMzUzNzkxMDE0MGFiZjY1YjMwYWI2MTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcyYTBiYTM5NGYyODJkMDljZGJkYjY3N2MwNTE4MmM4MjBiYzUwNDYwMjdlOGQxNWY2M2MwZmQ2MTk1YTBmNWUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0428dbed522741aca5d0813f0ca62409",
+      "statement": "The extension watches the pin file's path, reads it only if it exists, skips malformed pins, and creates one yarn_tarball repository per pin plus one yarn_install_repository per install.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/extensions.bzl#L180-L211",
+          "version": "repo-lines-v1:sha256:42ef0975ae475c1d1836443f37ef27a943aee547106d0a31bf574df4a0c3f18e:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0OTRlOWFmMmQzYjBmZGRjZmYzNjA0MzQyZWQwNGE4ZDMwZGFjN2UzYTVkOWFhNjRjYTJhOGE1YjVkMDgwMTAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMwYzFmMTg4ZjE0MmVkN2E4MjQ2ODBiMjA3MTcyYzU1MTliYzYxNGE0OGZkYTdjZjE2N2VkYjhkZGY3OTk1NmMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImU1YmU2ZjBmODU2YWEzMjUwZTYwZmYzNDcwZjFjNGNhNWZmZDZkMTVlZTY3OTJkYTA3MjIxZjliYTJjZDY3Y2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjRkMmUzNzMwZTA4MjlmMmQxZTdhNGU3YTFmYjM0OTMwMDVlNmQ3ZWM3NmE5NTUxNDhjYTAyMmQzMTkzMzVkYTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_d0cad6b7912f4a9ba87b72b375314963",
+      "statement": "Each yarn_tarball repository downloads package.tgz with the pinned integrity through repository_ctx.download and is marked reproducible.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/tarball.bzl#L5-L16",
+          "version": "repo-lines-v1:sha256:b0b3de61b75662e6f744912608fe941ce8d2db0bcdbb2f817d7865b9f8c7ecd2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNjNjQ5MmMxOTA5MzY1MGE3ODI4ZmUyMzI4YmY4M2FiMDczY2I5ZGQ5NmE1Zjc3YjUzZmRjYjI4ODdkYmNjOGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk5Zjc0NjBiZWUwOTVlYzcxZThkOTRiMTQ5N2U2OTJiYzRkMTY2NTZjMzc0NjFjNDYzYjFjMGY4NTBmOTdmMTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5NWQwZjAxZTJmM2ExMGM5M2Y4ZTE1YTM5NDQ2ZjIxZDU1N2VkZmY1ZTIxNjE5OGIxNWViYjhhMWYyNGMxNDIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImZlOGZlZjliZGU4MWExYzkwMGI4M2Y3Yzg2MmQ1ODIyN2Y0MDliMWE2Zjg1YmUyNWJhMDYyYzk5NTlmNDk3MDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_dfc6999c3af647058668a46ea5c3f3d3",
+      "statement": "The install repository stages each declared input through repository_ctx.watch, watches the driver and every module it loads plus the js-yaml tree, and removes Bazel's whole environment before running the driver.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L50-L66",
+          "version": "repo-lines-v1:sha256:92370548a3275f56341a832d5d180ccc6ecb4da95726559cb90be9ab11e5c7db:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImVlMzJjZjUwZjM5M2RhZDY4YzBiY2Q4OGQ1N2U5ODRhZDcyMjI2YWFjYTkxNWJhYjRlODk2YWRlZTRiMTQzMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjliZWE4YjdjMWE5MTkyMjlkNTFmNzA4Nzk1NWI1MzU4MjMyODU4Y2FmNWM4YmFlZWVlNjNiODg1Njg0MjIxZDIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY4MmQwYzg2MDE4MWY1MjA1NzRiYjcyMDkzYzEyMTBhOWRkN2NjMDJjZGRiMThlMjY1ODY5MjJiNzg4ZjkwNDMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUwYzNmNTdmNTcwMzUyMTJhNjI1NTk1OGM3MzNjNjNjNzdiZWZjMjc5YzI5NDIzMjNiYjg5YjFhOTkzZWVlNGEifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L92-L145",
+          "version": "repo-lines-v1:sha256:5daa81655b0296143203fe6fb6fa75dea9f319b93c6ad13e9dc847140f37e148:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdhY2U0MmY2NDYzNDY2NDc0ODY3MmRlY2I0NzUyM2ZmM2MyZThmYjhkYzQzNjMwYTZkZDcxMmJmMWEzYjdjMDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA1YzQzY2U1NWU0YjJjNzY1ZjI3ZWRjZTJjYmQwM2RiZTFhYTc4MjY1YjVmZmY4MWEyZjhmNWIzNTRhNTBmOWQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ1MDI5OTNmM2VjMjFkNzYzM2NmNDcxMDNhYmRhZDIwNmQ5NGNjMWM0ZjhmMzgyYzI5YzkwMTFhYmU1YmE4YzgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijk0YTBiYTBlNGM1OWRmYzhjODE1MTgzY2MxMGU1NmY3OGM5MWI1YzkzYTNhMmUwM2Q5MDIwYTlhMzcwMWMxZjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_f5cbed0fbbf6471992b64d12d2b80371",
+      "statement": "A test checks that the repository rule's watched program list equals the modules driver.js loads, followed transitively.",
+      "evidence": [
+        {
+          "resource": "repo://tests/install/watched_test.js",
+          "version": "repo-file-v1:sha256:a87bdf112ecb0566fe3092a3c1eec4e2df5038e4ded63e3129ab964f5206533f"
+        }
+      ]
+    },
+    {
+      "id": "claim_c37780ff2b5a4622abb8595003975930",
+      "statement": "The driver reports unreadable inputs, unparseable conditions and inputs the checks cannot handle as errors instead of throwing, and its entry point turns anything either step throws into a reported error, so the repository and its pin target survive them.",
+      "evidence": [
+        {
+          "resource": "repo://tests/install/driver_test.js",
+          "version": "repo-file-v1:sha256:95ead94217af9e25a183a2c27a318834b4d27124cc6726f509f5b815b0c2d19c"
+        },
+        {
+          "resource": "repo://yarn/private/install/driver.js#L351-L387",
+          "version": "repo-lines-v1:sha256:60404227d7a6e1f3d94b6c40b3e7b68206d0655764b9785f3dcb06e85aaa9730:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNlODIwMGViZDE3MDliNmE2NzViZWNiM2JlOWYzOWU1M2JiYWMwMmNjOTI3MjM0NjJjMDU0NjhlYjBkYTZhMTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBhY2IzNDhmM2Y1NDhhM2Y4YmQ4NmYwZjhkMWNjNWY3YTIxYjY4NTE4YzdmZTgxYzQyMTE1ZjkzMTZlOGMwNDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/driver.js#L70-L147",
+          "version": "repo-lines-v1:sha256:56a1d0cb5fadb9251793484650bd66039bb7d7910b269388294b25a581a7cb57:eyJzZWxlY3RlZExpbmVDb3VudCI6NzgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImMzNjE2NDE0MTE5NjIxMDlmMjY0N2RmYWFjMTVhMmQ4MTMxNjQ0MGJkMWZiMWY2MDRiNjI4MDBiZDlhNjZlNGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjU1ZWNiMzY2MWUxNDM3MmJmZjY4YjQ4YzI4OTM2ODAxODhhNjc3YWVhNjZhYmQ5ZTE3MDMwZTA3MGQ2NWUyOTIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY0NzQxMTI0MGViYjk4Y2U3NTA1YmU0MjRiODgyZWE4M2YxZWMwYTFhNjQyMDA1OThmZTNjODY2NDMzMWJiNDAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_5e74194ea939428eb79b4617ffb4d23f",
+      "statement": "The checks refuse a cache key that is not a string, a packageManager naming another Yarn or not a string, unsupported protocols, entries with their own archive URL, and pin files that are malformed or do not match the lockfile, naming the pin command; the cache key is checked against the compression level Yarn reports.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/check.js#L82-L224",
+          "version": "repo-lines-v1:sha256:205349c5ac60ea19f5688c30ad7212570056afcebf2d24c09a4a5a57e5d14f87:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQzLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiJiOWFmZmQ4NGRjOTEzNzVhNzA1OGI1ZmMzZWVjMzMyNDAzNjkyNTc2OWFlNWI3OWI2MWQ4MDY5MjQ1M2MzYmViIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiI4YzgzNGNhNWYzNjU2YmZkMGMxOTM5OTg4MTA3YmI1Njk0YmZmN2NkZjFjMDI2MjE3NjBkZWU3ZTgxZTI3YWQyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJkZTk1YTVmNWExZTJlZTVkOGM2N2Y3MTYzMjMzZWEyOTIwZDQ0OWUwOTI0ZWZjYWVmZjE1ODY5ZTE5ZDUyZTBkIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
+        }
+      ]
+    },
+    {
+      "id": "claim_2389615af0a24be699c568b25182da1c",
+      "statement": "The loopback server listens on 127.0.0.1 at a system-assigned port, serves only the selected tarballs at the paths Yarn requests, and records every other request.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/check.js#L56-L66",
+          "version": "repo-lines-v1:sha256:7109d4ae605d20ea95f3583a89baa1e3a3a66239df8e53f086cdf64e4a5890c3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc2Y2EwYmZjNGUxYjdmZjg5YmM4ZmZjMTdhNjUyNTVmMjNhNmQyNTNlMTY3ZDFjMDJjZWYxMzY4OTlmMGJkNzYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNjZThkZGMwZDA4OWVjMGU0NTg3ZThmZTMxMTBiYzhkYWE2NDU0MzRhMTJiMmFhOTdmNDdmMzhmYTFkYmY3NzgifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/driver.js#L155-L177",
+          "version": "repo-lines-v1:sha256:54035d62bf72d07ef3a4119769a809828ba2fa6e03cad356bca5e73deb417030:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjllOWY2YjM2MjhkNWEzNjczMjBiZTVmYzBmZjA0ODI5OWY5Zjg3ZjQ2MzFhOTc1ZjZhMWUwNjliNGIyMDI1NjkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImIyYmQwZjgxZTYwOTlkNDI4MGY5N2Q1YzU0MTA3NTFjNzkzOTUwNGYyZmQzMjVlNDVlZDNkMjQ0NGJiNTVmM2UiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIwMjUyMzJlYmQ5ZjljMjFlYmM3Y2M5YTNjMDI1M2U4MmE4MGYxZWRmNDRkYTU1MDg0MzJiNjRiZTM0ZDY5NjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_359deee17a694dffb949f8cd8151606d",
+      "statement": "Before installing, the driver has Yarn report each carried setting for the carried part of the project's document alone and for the install's configuration, refuses the install unless Yarn accepts the first and both agree, checks the lockfile's cache key against Yarn's compression level, then runs `install --immutable --mode=skip-build --check-cache`; a refused metadata request is reported as a lockfile that would have to change and a refused tarball request as an unselected package.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/driver.js#L217-L310",
+          "version": "repo-lines-v1:sha256:73a64bf79fe1b7abdffcd61158257f176f43bd7c72c9e784587083b8cbd06ec0:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxNGYyYzYzNDZjYjcxOWI2ZjAzYjRjMWIxNWRkZmM1OGQ3OWY5MTQxYTg5NmYyMWM1NzRjZGYxMmQ2ZmU3NTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2YjlhYmYwYmEyZTFiOTFjN2Q4N2EyODM2NDE3MTU1NzU2NjIyYjBlZjljYzEzNmFlYTY4NWU3NGIzYjE4MjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2NGZiNzYyNDUwYzZkNjA0ODU3ZGU2MWM1YjFiN2M5MDkyZDUwZmE0MmEwMjQ0Nzg3NzAwMDI2ODczMzUzZjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM4YmE5NDkzOThmOTdiOTQ4NTZlODY0MWEzN2I4ZjYzZTc5M2M4NTQ3NWI5ZWMzOWU1M2RmNjhmMjBhZjViYjQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_576a3b26eea04e8ebc2c95cc969b5b51",
+      "statement": "The configuration files Yarn reads are named with 128 random bits per run through YARN_RC_FILENAME, because Yarn searches every directory above the project for that name and loads plugins it names.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/driver.js#L194-L211",
+          "version": "repo-lines-v1:sha256:940cf9e55651f481fcc6c1a1e41eb0fe88eb68995c040323055742f1e89017a2:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhMjE3ZDNlNGNhOWRjZmI5MjBmZjY0ZTdkNjZlMTAzNTdjMWY4MWEyYmEwNmY4MDY2YjlkMTU5YjgxNDA5MGUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjVkOTAwMDI3ZmZjMTY1NGQ2NWIwOWNjMGI2MzhmNTlmMjg0YTQxOGZjNGM0ODFiMjI0NDAyM2FmNmEzOWUzMzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyMDY4N2Q2NjkxZTlhMDE3Y2U3MWQ5ZmM3NTgwYzU1NWVjNzdkYzgwYzE2YzA2Y2ZiZTNhYmI2NmM4MTVkOGMifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/driver.js#L32-L38",
+          "version": "repo-lines-v1:sha256:0a1faaf2f4cb0089b3c89ace11bfb99633e893a89a03b7db31ee81cbc69e7e01:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2IyY2E4NmIzMjEzMDMwNjQ4OTZhOWI5NjQ2NDc0N2IzNTdmMWJkYWVmOWRhZWQ0YzJjZjY5ZmRjNjgzOTJiZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMjQzOTU4ZDIxNGQ3MmIwMzlhODY3OGY1MDczZGRiNzlmZjA1NDZlNzU2YzJiMGQ1MjY1Yzc5MWQ5MTYxMjQyOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzFkNDEyYmNhYjRiM2I1ZWNjZGFkMDY1NDBhMjA3ZjhhN2NhNTYyMzNmNjkzZjQyMzkyNTEwMGI2ZjlmZTk1MyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_6578dca6d739426796f42238d905d747",
+      "statement": "Yarn runs with a fixed environment: the Node.js directory as PATH, a private HOME, global and cache folders, global cache and mirror off, immutable installs, checksum mismatches thrown, the pnpm linker, scripts off and telemetry off; the install's own configuration file disables the network except 127.0.0.1, points the registry at the loopback server and injects no environment files.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/driver.js#L179-L211",
+          "version": "repo-lines-v1:sha256:52db1de7a6992a3d758d08c01a17e7b673b2708a53aaff4616e46c3155f1df01:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJhNTRjYjM0ZTY2MjU1NDhiMGQwNGIwNDc2MWM2ZWI1ZTczNDNjMjcwMDllYjE1YTc4NDZiNDQ0ZjFhZTJmYTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJkMGYyZDNhM2FhZGEyNzU4NjQ1NzhkMGE0MzkxNTYzOGQ1NDNmZWNhMmM5NDg1OGRiOTQxMjExZTg2Y2VmMmIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImYyMDY4N2Q2NjkxZTlhMDE3Y2U3MWQ5ZmM3NTgwYzU1NWVjNzdkYzgwYzE2YzA2Y2ZiZTNhYmI2NmM4MTVkOGMifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_ad15bedb09f14f42bf5d58f8c46fbf4c",
+      "statement": "Only packageExtensions, enableTransparentWorkspaces, defaultProtocol and compressionLevel are carried, kept as Yarn parsed them, in a layered file Yarn resolves itself one directory above the install's own file and in a file in their own shape that Yarn must accept; a root marker whose value is not a mapping is left out of the layered file, and a carried value holding `${` is refused.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/driver.js#L217-L310",
+          "version": "repo-lines-v1:sha256:73a64bf79fe1b7abdffcd61158257f176f43bd7c72c9e784587083b8cbd06ec0:eyJzZWxlY3RlZExpbmVDb3VudCI6OTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIxNGYyYzYzNDZjYjcxOWI2ZjAzYjRjMWIxNWRkZmM1OGQ3OWY5MTQxYTg5NmYyMWM1NzRjZGYxMmQ2ZmU3NTMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImY2YjlhYmYwYmEyZTFiOTFjN2Q4N2EyODM2NDE3MTU1NzU2NjIyYjBlZjljYzEzNmFlYTY4NWU3NGIzYjE4MjIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk2NGZiNzYyNDUwYzZkNjA0ODU3ZGU2MWM1YjFiN2M5MDkyZDUwZmE0MmEwMjQ0Nzg3NzAwMDI2ODczMzUzZjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM4YmE5NDkzOThmOTdiOTQ4NTZlODY0MWEzN2I4ZjYzZTc5M2M4NTQ3NWI5ZWMzOWU1M2RmNjhmMjBhZjViYjQifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/yarnrc.js",
+          "version": "repo-file-v1:sha256:a33fbce783ed8e5a5c99fe02c91cdd39820ceee49d9bb5445e8af374d3f4fed8"
+        }
+      ]
+    },
+    {
+      "id": "claim_74d13eaef1554fd38d95617e4fd2dbb1",
+      "statement": "yarn.lock and .yarnrc.yml are read with js-yaml 4.3.0, FAILSAFE_SCHEMA and json mode through a port of Yarn's parseSyml that refuses the Yarn 1 format; js-yaml is fetched by http_archive with the npm registry's integrity.",
+      "evidence": [
+        {
+          "resource": "repo://MODULE.bazel#L36-L56",
+          "version": "repo-lines-v1:sha256:7d8ec100c3f4098a3fe91658816f6782d3bb746b71f9785f88326198317bc43b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhZTYyMDViYTA0YzM5ZmFlOTE5Nzk1MDYzZTQ0NjFjOWE3ZmJiMjhhNzk5ODFiN2FkNzNkZDU4MTYzNTk0N2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjliMDBmY2I0NGY3ZTg3Y2M2NGRjMmQ0MDYyNzVkN2YzNmQ4ZTcxOTYzNWY4N2FkYTY5NzY3NTZmZDRmYWI2MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2NTViNDNhZGUyZDJiODk2ZTc1YTIyYzlmYWY5ZGE2NjQ5ODgyNDg0YzYwZDJlOGQ1NmQzMTk4NDA0Y2EyMDQifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/syml.js",
+          "version": "repo-file-v1:sha256:5e7a864797c8415f236aeca298969e409f1aefd5c26d44a93abf5115c8589368"
+        }
+      ]
+    },
+    {
+      "id": "claim_096c4590ebfb4fba92599547285f926b",
+      "statement": "The YAML cases reviews found the former reader getting wrong are tests stating what Yarn reads, and a test asks the pinned Yarn for every carried and install setting from the project's file and from the driver's files, and requires Yarn to fail on the carried part of each document it fails on.",
+      "evidence": [
+        {
+          "resource": "repo://tests/install/yarnrc_test.js",
+          "version": "repo-file-v1:sha256:2b9c7e55b51f01c8b326598a58f811ac455a18ca72a41c9de304df6b871b0e85"
+        },
+        {
+          "resource": "repo://tests/install/yarnrc_yarn_test.js",
+          "version": "repo-file-v1:sha256:5c03b16f90e8f3e88626fcb73e4d051c20badebc99ce9f759cea473ba6ad6dfa"
+        }
+      ]
+    },
+    {
+      "id": "claim_0ec661badc3d42b883ba915950b34b5e",
+      "statement": "A conditional npm: entry is left unfetched only when it has no recorded checksum, every dependency on it is optional, and it is incompatible with the architecture set; os, cpu and libc are independent sets.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/conditions.js#L74-L127",
+          "version": "repo-lines-v1:sha256:72647ad538ba5b2a4bb67aac0903cf4c7f6b84c8b89cb1843ace3383b19497c9:eyJzZWxlY3RlZExpbmVDb3VudCI6NTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImE5YmZkNzFjOTExYmFhZTk5Y2Y1ZWYxODg4Nzk4YmUxN2NhNDViOTQ3NGQyY2Y3NGM3MzAwNmIxNjhlYWRjMDMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJmNmViNTM2ZGEzOTc2ZDkzYTc0NDE3MWE5YTZiMjkwNzliZTVjOTk0Y2U4ZWZiZTViMTg3MDM2OTkzMDFlNWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQxODkxZjVhNzdkNGQ0ZDcxMjA2M2JmZDZiNTNkZTZiYzJkMTg0YTFkOTEyM2ZjMWY2OTAyODc1ZDBmOTYxYTkifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_b3e0f144015f409a85ec09b8f69a4fca",
+      "statement": "A package containing a symbolic link is refused when packed, and unpacking refuses entries that collide on the filesystem.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/archive.js#L100-L160",
+          "version": "repo-lines-v1:sha256:ef9b0db840b63d2fcd48a3f8f8029b5a373d6db11d7b3bd64040b402102561c1:eyJzZWxlY3RlZExpbmVDb3VudCI6NjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQxZWZiMzU1YjE0NjY1MTFlZmQ1Y2QyZDQ5MTQxOWY1MjYyNDBmYmVlYTJjODAzNThiMzM5MmJhNGY0MDcwNjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3YThmZDBkMTQ3ODg5NzgyMWQwZTA4MDhlZTE4ZmQ2ZDljZDQ5Yjg0ZDczNzk3NTM5ZDFkZmExODk0MGJhMGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjkyZjYyNzA0MzQyYTU1Yzk0Y2FmNzQ5ODUyZDUzZDRjODg5MzQwOTBhMTM2MjU4MjI0ZjAwNmI2YTQ4YzM0OTgifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e92bf861866648139fbbd47331189843",
+      "statement": "The install repository is not marked reproducible, because its contents depend on the host and hold absolute paths into the output base.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L189-L218",
+          "version": "repo-lines-v1:sha256:c2a74b7f6129a9e9db16e05c306f4cd8bcd09a0506952c16ad59fdbbc8eb0148:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzOWRlNDAwMDQzZDQzNmY0NjYyM2JmYzUxOThiYTY2ZDc5ZWNiZTkwNTIxMjYyYTdhNWQyZmEzYjJlYzU3YWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2NjMzNWIzMmEyYjZhM2U4ZWQ3MGJjZWFjOWJkZTEzYjQzMzIyMTM2MDA0OTA3Yjc3YzNmYzkzYWQxY2EyNDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY0M2YwYzE0OTFjOTIzOTVjMzE1ODFkZjc0ZDUyNzEyM2U5Njg0Y2ZkNjE4ZDk5NGZjOWE5NmM2OWExNjJmODAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_6508df2444bd4b34a47c1fee6237c37f",
+      "statement": "yarn_node_modules declares one directory artifact per package filled by a YarnUnpack action on the exec Node.js toolchain, and one symlink artifact per link and .bin entry.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/node_modules.bzl#L13-L52",
+          "version": "repo-lines-v1:sha256:172c791f60bbef49795254b36fbef5902a6a77f7ae91be3a2d3dd3ffa9e6b36b:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljOTVlNDdlYmE2NDVhZmI1MzA3OWMxNjFjNzUzZmIxNjU1YThiYTJkNDNjYzQ4ZWFlNDVjMmY5MDMwNDVlYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwNTM0MTMzYjI2NDg4OTljY2IwMDVmMTA0YzNiMWNkNjIyNzA1YTk5OTc2ZTVjNGYyNTQ1YTMwY2E0MDc0YmUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM2NjdmZDFhNTU3Yzk2MjY5MTA2ZmRjNDQ2NGE5NzYxNmVmYWY3MmE0NDk5ZTdhNTVhODUzMGJkODY3YzQ5OWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ1NjAyOWFmMDYyMDkxYjBjM2JhNzYxOWNkYTE4ZTcxZGQxY2JhNjcxZTQ5NTg1MGJlZWE5NjZmYTFjM2E4ZjUifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e5c2b765a96e4f6d9aeda654a0f2ea7b",
+      "statement": "When checks fail, the generated BUILD instantiates yarn_install_error, which fails analysis with the errors while the pin target stays available.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L180-L187",
+          "version": "repo-lines-v1:sha256:2508124eab2cc40936fef4d80e95b993bba9be2f20845110b8c1704a81ab8b21:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmU2OTRiNmUwNDAyMTExNjE0ZDViNTIxOWQwOWZjMGJkODBkMDQ3YjRkNWMyNzQxMTA2ODA4MjMxZWQ1YTY5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWU3Yzk1N2JjYjQ0ZmI2NzNjOThiMDA1MGE3NWQzODA4MmRiODFkOTE4ZGUzMTNhM2YwN2MxMjM1MzA2ZDdlYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGVjZTg5ZmQ1MzU1ZmE2Y2VmM2Q3YjcxNjUxOTRmZWZkM2VmNTBmMzQ5ZjEyMjE2ZjFkZWMyMWU4NjYyZTIxOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzkyODNjOGU3MTY4MjBjZGFkODlmMmY1OWE2YjM3YmJhOWQ5NTQ1MDU5ZTExZTI5YzVmNzNiMGVmZjc1NzE4NSJ9"
+        },
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L68-L90",
+          "version": "repo-lines-v1:sha256:57785ee451990d039dff275059ca8fd89343519f742027a53c13170925aa3dc2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwOGEzY2I5MmMxODAwMzRhZjg2MjU4YmMwYzliOTFjYTk3MGU4MWIzYTk1Y2ZiMTk4ZmM5M2M0MzRiMTFkMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiOWEyOGMwN2Y2YTE3YzExNDQ1YzMyMDU2NzUxMGJjYmVhOTc0ZDgyOWI0MTNkYmM0ODU4NTFjZjhhMDJlMTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzM2I1ODlhZDBiNmFhMDgwNWExZDg5YjJkZjBkOGY5NjU5NTIwYmFkMTAzMzUzZTBkZTUzOGZiYjZhOTIxMGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhhNTg5ZGI4ZjI0OWRhOTg2ZTdmMTIyNzg1MzRmZmZmMjg0MTg4NjM0MTdhNjRiZmI0YmZjYzA2MWI3MWMxZDIifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_8f5d0581fc8745d2a87701b2c5d7eb62",
+      "statement": "node_modules.bzl declares private visibility and is loaded by each install repository through a symlink at its root.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/node_modules.bzl#L1-L11",
+          "version": "repo-lines-v1:sha256:713b705f2e3ef9cfd4065786900dc0c86227c598a24d4057c15e235f5d46ccd3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzNDVkNTNlOGQ0ZDdlY2ExMGIwYTY2ZGIzZjA2MTE5M2NkMzE2NjNkNmM4NGI2ZTNjZjdiOWY1MDEzZTNjMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZWYxOGNmMDhmOGFiMTU4NTAxZDY1OTRjZjE4OTM1YTc2Yjk4ODhkZGFhZjRmYzJhNzFkYTFiMDYzYTkwNDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI4MTU3MmYxZTMwYTU1NjcwYzgzNzcwMDhmZDZlMTJlZmVhZDQyYWEwZWFmODljNGI1MGQ3OGEwNzA1NDRjMGIifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L111-L113",
+          "version": "repo-lines-v1:sha256:d0166876e6cebb709a6b14243a85ef71ef9620835a216c90cf1de32885d1e0f3:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2JhNzE0OTA1YjZmM2YzZjJiNzU0NjE4NDRlYTNmNzRmM2FlYTE5MmJjZWQ0MWVlNGZkMDNhZjA5OGNiMzUyMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjQyNmJkYWNjYTY2NWY2NjIzZjRiYjAzNDNiZWViZDNmYWQyMmYzZmI2Y2MwMTc3OGJmY2ZlYWI1NTJlMGZmNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTg3MWZkMjJiYjQxYzMxMDgwZmM4MThmNmJlYWQwM2Q2ODE3OGYwZmE2YWM4ZGEzODE4ODBlZjU4ZDc4NDc3MyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiN2M3YTdhZTM3OWRhNGE0YTlmYTU4YTYxYmJmZDgzYWY0NTJlZDYyNWJkZGVmZDU0MmFjNmRjNWJlNTkyZDE0NiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_77c4a369bcd340e08663d3ebf9d31af7",
+      "statement": "YarnNodeModulesInfo is defined in the public //yarn:providers.bzl, and its root is the execution path of node_modules derived from a declared artifact, or None when nothing is installed.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/node_modules.bzl#L53-L64",
+          "version": "repo-lines-v1:sha256:0d6b90db511e3859357a64f28d5351a05bc48ec9785ee50f8299e0bca6ad6f1f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA0NzRiYTFiYjE5NWNlNTc2YTFhZGRkNGRkYzIyMDI1NjllMDhmYmM0YzUzOTRjMmQzNzI1ODIxMmU2ZDIwNzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkZDI0NDU4MmI2ZmIwM2QyM2I4NDE1YWJlY2QzNDZiMGM5ZjQ2NmI2Zjc1MmIwNjgxODljZTdlOWEyZGMzNTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI1N2YwOWUzYzIyZjk1ZDViNzgzYjFlYTEyZDAzZTIwMjEzZTI0MjQyMTE5ZTRhNjUzOWUxNjBiMzI2MjBiM2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM0MTE4ODMwOGIxZTcxZmMzNDhjYzczNjY5ODc4MmEwNzcxMWVjM2EwMWYyNTg1YTRjZDdhYjQ4NmEzODBhMTQifQ"
+        },
+        {
+          "resource": "repo://yarn/providers.bzl",
+          "version": "repo-file-v1:sha256:95a4c37cf96e28ef9d260ca3fbefca52ae0a6b4f3797475a5615045fb893dbf4"
+        }
+      ]
+    },
+    {
+      "id": "claim_673208035d41451080618d3ad864f644",
+      "statement": "e2e/install has an action that requires a package through the provider's root path.",
+      "evidence": [
+        {
+          "resource": "repo://e2e/install/BUILD.bazel#L46-L59",
+          "version": "repo-lines-v1:sha256:fd63a52d5225d5bea75f5ff8ed85da0e306141562eacdc3b2fb83a8e70c0ca0f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg3ZmQ1MDhjODNmYTY4YjBlMmNlN2IwNjU5OTVhNGMwYWI1MTUyMjcwNGNkMmUyZGVjNDI3YThhODlkZWViZTkiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmNjI2MTFkMGRkODE4OWQzYWEzMDhiNDUxOTM2YWU0YmE1NDk1MmM4MmRhMDYwNTQ5ZGViM2JjNTA0MzQ1YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://e2e/install/provider_root.bzl",
+          "version": "repo-file-v1:sha256:049b60303e281e9d5db4d011e764460b8ee46be5fc4a105fc5600dc048a6fe66"
+        }
+      ]
+    },
+    {
+      "id": "claim_2b75bd478f064e23b83ac1488e8271bc",
+      "statement": "A 717-entry project installed as 732 packages, 2,234 links and 11 .bin entries, with archives of 409 MB and an unpacked tree of 501 MB.",
+      "evidence": [
+        {
+          "resource": "repo://openspec/changes/install-yarn-dependencies/tasks.md",
+          "version": "repo-file-v1:sha256:e2a852ff102f4dbda2a6ad9c040af83fd3df36f587a4d1e6547ca79de5bd6f0f"
+        }
+      ]
+    },
+    {
+      "id": "claim_3f87d10aab174d7dabba997e18e88f7a",
+      "statement": "A layout reads each manifest's bin as Yarn's Manifest.load does: null, empty and non-string entries give nothing, a scoped key gives its name, backslashes become slashes, and a command named __proto__ is kept like any other.",
+      "evidence": [
+        {
+          "resource": "repo://tests/install/layout_test.js",
+          "version": "repo-file-v1:sha256:11667d41d904c9adce88183ae2ccf04a76dba553f64c3cdfaa514e8d43ae17ad"
+        },
+        {
+          "resource": "repo://yarn/private/install/layout.js#L37-L62",
+          "version": "repo-lines-v1:sha256:bd181beb7a4afb6152334ef491a50e642775b8787c26d13ffda6f4377f4e1446:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjOTcxOTY3NzBkZTIwMjhkYzA0ZDQ4M2UzODU1YThkNDdjMGU5NDlhZGE3ZDQ2MTgyNGQwOWJlZjAyODZkNzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdhZmVjYWE0NGMzMmIyYjUyNzViMWVkODUyNzRlZWE1MDQzN2I4ZjY2NjkwYTJmM2RjZDllMGM4MWU0Y2I3MmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlNTA1NzM1Njg5ZDY3NGM5NzQzNDllNjUyNTYzZDUyODZkOTI1MzM2ZDIxNzg0MGVmYmMyY2FjMmU3N2M3OGYifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7556ba7428eb4abb8fc2998c19c653f0",
+      "statement": "Configuration outside the project is not read; a packageExtensions entry there that only changes the layout is not reproduced and not detected, because Yarn records an extension's added dependencies only in the layout.",
+      "evidence": [
+        {
+          "resource": "repo://openspec/changes/install-yarn-dependencies/design.md",
+          "version": "repo-file-v1:sha256:c3dca600f33e3c2e5d88f8ee54cf7eeb8a6dec33aca4e0939ea5c70b4005f3ba"
+        },
+        {
+          "resource": "repo://yarn/private/install/yarnrc.js",
+          "version": "repo-file-v1:sha256:a33fbce783ed8e5a5c99fe02c91cdd39820ceee49d9bb5445e8af374d3f4fed8"
+        }
+      ]
+    }
+  ],
+  "verification": {
+    "by": "openwiki/0.5.1",
+    "at": "2026-10-05T04:56:13.533Z"
+  }
+}

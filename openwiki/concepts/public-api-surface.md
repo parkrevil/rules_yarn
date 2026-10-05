@@ -3,9 +3,6 @@ type: concept
 title: Public API surface
 description: What consumers of rules_yarn may depend on — the yarn_binary rule, the yarn module extension, and the repository they produce — and the load-visibility boundary that keeps everything else internal.
 tags: [public-api, starlark, visibility, bzl-library, consumer-contract]
-verified:
-  - by: openwiki/0.5.1
-    at: 2026-10-03T03:35:17.537Z
 sources:
   - id: openwiki-source-9166404a3cbd4408b80101ce
     resource: repo://e2e/smoke/BUILD.bazel
@@ -21,36 +18,53 @@ sources:
     resource: repo://yarn/private/BUILD.bazel
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
+  - id: openwiki-source-9e1e67b90ea3e259fedb1f39
+    resource: repo://yarn/private/install/node_modules.bzl
+  - id: openwiki-source-6da6376cacb3a4c5f3725a78
+    resource: repo://yarn/private/install/repository.bzl
   - id: openwiki-source-77af9b38275467de97821b41
     resource: repo://yarn/private/repositories.bzl
   - id: openwiki-source-d9081795909674dafc7044aa
     resource: repo://yarn/private/yarn_binary.bzl
-generated: { by: "claude-code", at: "2026-10-03T03:12:21.393Z" }
+  - id: openwiki-source-60f4d0e18953b7fc477fc496
+    resource: repo://yarn/providers.bzl
+generated: { by: "claude-code", at: "2026-10-04T12:22:38.266Z" }
+verified:
+  - by: openwiki/0.5.1
+    at: 2026-10-04T18:04:16.838Z
 ---
 
 # Public API surface
 
-The ruleset exposes two symbols and one generated repository. Everything else is
-an implementation detail, and that statement is enforced by the build rather
-than by convention.
+The ruleset exposes three symbols and two kinds of generated repository.
+Everything else is an implementation detail, and that statement is enforced by
+the build rather than by convention.
 
 ## The surface
 
 | Entry point | Symbol | What a consumer does with it |
 | --- | --- | --- |
 | `@rules_yarn//yarn:defs.bzl` | `yarn_binary` | declares a runnable Yarn target in a `BUILD.bazel` file |
-| `@rules_yarn//yarn:extensions.bzl` | `yarn` | declares which Yarn version to fetch, in `MODULE.bazel` |
-| the extension's repository | `@yarn` | the label passed to `yarn_binary`'s `yarn` attribute |
+| `@rules_yarn//yarn:extensions.bzl` | `yarn` | declares which Yarn version to fetch (`yarn.distribution`) and which projects to install (`yarn.install`), in `MODULE.bazel` |
+| `@rules_yarn//yarn:providers.bzl` | `YarnNodeModulesInfo` | reads an installed tree from a rule of its own |
+| a distribution repository | `@yarn` | the label passed to `yarn_binary`'s `yarn` attribute |
+| an install repository | `@<name>//:node_modules`, `@<name>//:pin` | the installed tree as artifacts, carrying `YarnNodeModulesInfo`; the command that writes the pin file |
 
-Both `.bzl` files are thin: each loads the private implementation and rebinds
-it under a public name. That indirection is the seam — the implementation can
+`defs.bzl` and `extensions.bzl` are thin: each loads the private
+implementation and rebinds it under a public name. That indirection is the seam — the implementation can
 move or change shape inside `yarn/private/` without changing the label a
 consumer loads.
 
+`providers.bzl` is different: it defines the provider itself rather than
+rebinding one. A provider's identity is the file that defines it, so a
+provider defined in a private file could not be named by a consumer's rule at
+all; defining it in the public directory is what makes the installed tree
+usable from outside.
+
 The public files carry the consumer-facing documentation. The extension file
-documents the `MODULE.bazel` snippet; the rule and tag class carry `doc` strings
-describing attributes, repository naming, and the guarantees and non-guarantees
-of running Yarn this way.
+documents the `MODULE.bazel` snippets for a distribution and an install; the
+rule and both tag classes carry `doc` strings describing attributes,
+repository naming, and the guarantees and non-guarantees of each.
 
 ## The boundary
 
@@ -69,19 +83,29 @@ layers:
 - **Package layout.** The public directory contains no implementation, so there
   is nothing in it to depend on accidentally.
 
+One private file has to be loaded from outside the ruleset: the rule an install
+repository instantiates, `node_modules.bzl`, which declares
+`visibility("private")`. A generated repository is not a package of the
+ruleset, so no load-visibility list could admit it without admitting every
+consumer. Instead each install repository holds a symlink to the file at its
+own root and loads it from its own root package — a load from the same
+package, which private visibility allows. A consumer's package loading it is
+still refused.
+
 ## Dependency description
 
 Each public file has a matching `bzl_library` target declaring its transitive
 `.bzl` dependencies — `defs` depends on the private rule library, `extensions`
 on the private extension library, which in turn depends on the repository and
-version libraries. These targets are publicly visible and exist so downstream
+version libraries and the two install repository rules; `providers` has no
+dependencies. These targets are publicly visible and exist so downstream
 tooling can describe the Starlark dependency graph.
 
 ## What is deliberately not public
 
-The version table, the URL template, the repository rule, the module extension
-implementation, the rule implementation, and the launcher template are all
-internal. A consumer cannot read the supported version list from Starlark or
+The version table, the URL template, the repository rules, the module
+extension implementation, the rule implementations, the install driver and its
+modules, and the launcher template are all internal. A consumer cannot read the supported version list from Starlark or
 instantiate the repository rule directly; the supported set is reachable only by
 declaring a version and being told whether it is accepted.
 
@@ -99,7 +123,12 @@ arrives, which the repository rule uses.
 
 A Node.js runtime toolchain, from `rules_nodejs`, has to be registered. The
 rule takes the runtime from `@rules_nodejs//nodejs:runtime_toolchain_type` and
-fails analysis if the resolved toolchain carries only a host path.
+fails analysis if the resolved toolchain carries only a host path. An install
+unpacks its packages with actions on `@rules_nodejs//nodejs:toolchain_type`,
+the exec toolchain, and refuses a host-path toolchain the same way. The install
+repository itself runs before toolchain resolution exists, so it takes Node.js
+from the four per-platform repositories `rules_nodejs` creates for its default
+toolchain, which `rules_yarn` names itself.
 
 ## Stability consequences
 

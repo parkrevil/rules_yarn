@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:5ff97a14d8367b1fcac92394b1de73a1db8d79073ddc0548eb2a898a50b5aacd",
+  "pageVersion": "sha256:f073aa1602c8c633186b03824ae01e1716393ce5634a3ebfd83f3536eca2fe58",
   "claims": [
     {
       "id": "claim_f94f369481c3466db1302dc475650602",
@@ -56,11 +56,11 @@
     },
     {
       "id": "claim_80b561828663453a8744bff1db2a6b94",
-      "statement": "The Node.js toolchain registration, the test Yarn distribution, the platforms module and the testing framework are declared as development dependencies of the root module, so consumers do not inherit them.",
+      "statement": "The Node.js toolchain registration, the test Yarn distribution, the platforms module and the testing framework are declared as development dependencies of the root module, so consumers do not inherit them; the per-platform Node.js repositories and js-yaml are not development-only.",
       "evidence": [
         {
-          "resource": "repo://MODULE.bazel#L21-L34",
-          "version": "repo-lines-v1:sha256:ed7d421e98d743a437c9af3eefa5d1767a2f61e350fb432119c48e3f9d028e5b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlYjAzOWI0NzM0YmM4OWVkYjliNzhhYWM3OTFlNTA3MmY4MzAyMjRhZDY4ZTlmOWQwYzcwNTg2YzYxN2EzMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiYjVmZTNjOTg4NTFkMWE4OGIzNjAyNDI4ODExZjc4OGVhNGQ5N2RlZTQzODE4YWRjYWEwYjg5ZGIyZDU1YzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjNWQ3ZjY3ZWZlYzE4MWQ5MjA3ZTBjYjI4OWI1MzUwOTI4MTdhNDkwMTIyOWQyMmRkNWZmOGQwNWEwNmM4MWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://MODULE.bazel#L21-L72",
+          "version": "repo-lines-v1:sha256:3f15aefe1d155e1b34b7e81dfaa28d44b36fb0e456a6d23a4f3518b7240e9a14:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlYjAzOWI0NzM0YmM4OWVkYjliNzhhYWM3OTFlNTA3MmY4MzAyMjRhZDY4ZTlmOWQwYzcwNTg2YzYxN2EzMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiYjVmZTNjOTg4NTFkMWE4OGIzNjAyNDI4ODExZjc4OGVhNGQ5N2RlZTQzODE4YWRjYWEwYjg5ZGIyZDU1YzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjNWQ3ZjY3ZWZlYzE4MWQ5MjA3ZTBjYjI4OWI1MzUwOTI4MTdhNDkwMTIyOWQyMmRkNWZmOGQwNWEwNmM4MWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -100,17 +100,47 @@
     },
     {
       "id": "claim_6d2dc243ddbb48de8f6f3a0eb7f3dce1",
-      "statement": "Refreshing locks after a dependency change is one bazel mod deps --lockfile_mode=update per root that keeps a lock, the repository and e2e/smoke; tests/bcr has none to refresh.",
+      "statement": "Refreshing locks after a dependency change is one bazel mod deps --lockfile_mode=update per root that keeps a lock — the repository, e2e/smoke and e2e/install; tests/bcr has none, and changing e2e/install's dependencies also means regenerating its yarn.lock and pins.",
       "evidence": [
         {
-          "resource": "repo://AGENTS.md#L21-L26",
-          "version": "repo-lines-v1:sha256:acc36842e8cf6b709d2a43c8cddfdb1227509f07e99127507ebcbf657537e435:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZGRiMDBiNjJjYzJiM2Q3NzFkNmY5ZDJlNTdkNWNkOTcyOTExY2IyNDVjNmJiNzBlYjIyNGMyNjBiNmZiMDVjMiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMGQzOGNhZjZkMTUwYmVlMGQ3ODJmNjc0ZjhkMzFlYzY5N2M4MTg5OTUyZTZhNDA2MWIwMDJkZjgzY2NmNWJkNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjQxNDUwMWEyN2I3ZjE1MjM1MWMzMmM2N2QyYWIxNDJlODBhMDllMzU0OTM4NzZhN2JhZmRlODc1NGI2OWIwZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYWFjODcyYWIyNjI5YjA5ZmZiMGVhNjNiNzkwM2EwMDNlMmEzZmYxMGFiMGQ3MGIxMzEwZGY1ZGE3ZDZlYzY4NiJ9"
+          "resource": "repo://AGENTS.md#L19-L24",
+          "version": "repo-lines-v1:sha256:413c79e58bc0643c12fc3ca1ac909f6d20c47b2d39bd2fdfa663225d917cc693:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjc0NDk3M2RiYWY4NTU3NTdhMzQ3MzdmODI0Mjc3NGRhNWE5ZDQ5MGE0ZDJlODFhYWNkMDkwYmY5NGZmNDVkNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDllZWQ4ZmE0M2U5MGU5YTZlZjRiNWZiZWUzZWVhOGRiOGFmNGI1NTY5N2NhN2YyYjI1YTU3MTcxY2NlNGMwZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjgxZGUxODM3YWRhNmM4NjYyOGU4Y2I5MzYyNGQ5NTNjN2ZjYTYyNWU5MGEwMTIwNTBhYjM0MzAyZDQzOTk4YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODgxNTM0ZTI2MTAwNjkzNWU3ODUwYzk3MGQzZGM4YWQxYzUwODc5MzIwODNhNmJkMmU2ZGU1NWI3MjU1ZDg2MiJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_3348355e777646aea7b6f5d3289be3d9",
+      "statement": "MODULE.bazel pins js-yaml 4.3.0 by URL and the npm registry's integrity through http_archive.",
+      "evidence": [
+        {
+          "resource": "repo://MODULE.bazel#L36-L56",
+          "version": "repo-lines-v1:sha256:7d8ec100c3f4098a3fe91658816f6782d3bb746b71f9785f88326198317bc43b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhZTYyMDViYTA0YzM5ZmFlOTE5Nzk1MDYzZTQ0NjFjOWE3ZmJiMjhhNzk5ODFiN2FkNzNkZDU4MTYzNTk0N2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjliMDBmY2I0NGY3ZTg3Y2M2NGRjMmQ0MDYyNzVkN2YzNmQ4ZTcxOTYzNWY4N2FkYTY5NzY3NTZmZDRmYWI2MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2NTViNDNhZGUyZDJiODk2ZTc1YTIyYzlmYWY5ZGE2NjQ5ODgyNDg0YzYwZDJlOGQ1NmQzMTk4NDA0Y2EyMDQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_7be51694d0864020ab7dde596cd32ff9",
+      "statement": "versions.bzl records a cache version beside each Yarn version.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/versions.bzl#L21-L23",
+          "version": "repo-lines-v1:sha256:af364444dcb2025f921a6b514212f26d6a68cefd971ab75133cf9f4d209063ad:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjM2YWE0ZDhlMGMzMmYwZmI5YTQwMzYxYmYzYTE4MTQ0ZWUxMmJmYjVlYTE3YzVmN2Q3ODRlMmMxNDg3MGUzNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWRmNTc5ZTRlZmZlY2IxODQ3MGY5NGNmZTBhYTkzNWE2MmY2YzYzNGEyYTA0MDZhMTk4ZTg0YTE4NTlkZmJkOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ee8e88ba031f4405bc943496a458ae42",
+      "statement": "e2e/install sets --lockfile_mode=error.",
+      "evidence": [
+        {
+          "resource": "repo://e2e/install/.bazelrc",
+          "version": "repo-file-v1:sha256:ba773db6fb3cc8eb44d5aae891bf8aa222c2169e26258172055b59594113a6eb"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-03T03:35:17.537Z"
+    "at": "2026-10-04T12:22:38.266Z"
   }
 }

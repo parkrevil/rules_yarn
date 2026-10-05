@@ -2,7 +2,9 @@
 
 `rules_yarn` delivers an exact [Yarn](https://yarnpkg.com) version to a Bazel
 workspace and runs it with a Bazel-managed Node.js runtime, so nobody needs
-Node.js, Yarn, or Corepack installed to run Yarn.
+Node.js, Yarn, or Corepack installed to run Yarn. It also installs a Yarn
+project's locked dependencies as Bazel artifacts, every registry package
+fetched by Bazel with a pinned integrity.
 
 ## Installation
 
@@ -73,6 +75,73 @@ bazel run //:yarn -- --version
 bazel run //:yarn -- install
 ```
 
+## Installing a project's dependencies
+
+`yarn.install` turns a project's `yarn.lock` into Bazel artifacts that other
+targets can take as inputs.
+
+```starlark
+yarn = use_extension("@rules_yarn//yarn:extensions.bzl", "yarn")
+yarn.distribution(version = "4.18.0")
+yarn.install(
+    name = "npm",
+    package_json = "//:package.json",
+    lockfile = "//:yarn.lock",
+    pins = "//:yarn_pins.json",
+    yarnrc = "//:.yarnrc.yml",
+)
+use_repo(yarn, "npm", "yarn")
+```
+
+The pin file need not exist yet; the pin target writes it:
+
+```shell
+bazel run @npm//:pin
+```
+
+Commit it beside `yarn.lock`, and run the same command whenever the lockfile
+changes. `@npm//:node_modules` is then the installed tree.
+
+What it guarantees:
+
+- **Every registry package is fetched by Bazel** with the SHA-512 integrity the
+  pin file records — the registry's published digest, taken when you pinned,
+  or, for a registry that publishes none, the digest of the bytes it served
+  then; the pin target names those packages.
+  That puts the packages in Bazel's repository cache, and makes `--distdir`,
+  `--downloader_config` and `--credential_helper` apply. A
+  private registry's credentials reach Bazel through a credential helper.
+- **The installed versions are exactly the lockfile's.** A lockfile that would
+  have to change, a checksum it records that does not match, or a pin file
+  that does not match it, fails the fetch with what to do.
+- **Yarn lays the packages out, offline.** The selected Yarn runs on the
+  Bazel-managed Node.js against a loopback server that serves only the
+  verified tarballs, so peer dependencies, `packageExtensions` and patches —
+  your own and Yarn's built-in ones — work as Yarn does them. Yarn sees none of
+  the host's configuration, and nothing from your `.yarnrc.yml` but
+  `packageExtensions`, `enableTransparentWorkspaces`, `defaultProtocol` and
+  `compressionLevel`: no plugin, proxy or network setting reaches it.
+- **No dependency build script runs**, whatever `dependenciesMeta` says.
+- **Each package is its own artifact**, and each link between packages a
+  symlink artifact, in Yarn's isolated `pnpm` layout, so the tree is cached
+  package by package and needs no network to use.
+
+Workspaces need their `package.json` files listed in `workspaces`, and patch
+files their paths in `patches`. Platform-specific packages are installed for
+the host unless `supported_architectures` names others, with Yarn's meaning:
+`os`, `cpu` and `libc` each a set, so naming two systems and two CPUs admits
+all four combinations.
+
+Not supported yet, each refused with its reason: dependency resolution through
+`git:`, `exec:`, `file:`, `link:`, `portal:` or tarball URLs; registries whose
+tarballs are not at the conventional path; packages containing symbolic links;
+and Yarn 1 lockfiles. The project's `nodeLinker` is not carried: the packages
+are always laid out with Yarn's isolated `pnpm` linker, whatever the project
+uses locally, so a project that relies on Plug'n'Play's resolution gets a
+`node_modules` tree instead. Running project scripts and builds as Bazel
+actions, linking workspaces to each other, and running dependency build scripts
+are not part of this release.
+
 ## Public API
 
 ### `yarn.distribution` (module extension tag)
@@ -95,6 +164,23 @@ Repository naming and version selection follow Bazel's
   version, so the root module's choice wins over its dependencies'.
 - Declaring one repository name with two versions in that module is an error, as
   is requesting a version without a recorded digest.
+
+### `yarn.install` (module extension tag)
+
+| Attribute | Default | Description |
+| --- | --- | --- |
+| `name` | required | Name of the repository holding the installed packages. Only the root module may declare installs. |
+| `package_json` | required | The project's root `package.json`. |
+| `lockfile` | required | The project's `yarn.lock`. |
+| `pins` | required | The pin file `bazel run @<name>//:pin` writes. It need not exist, or may be empty, before the first pin. |
+| `yarnrc` | none | The project's `.yarnrc.yml`. Only the settings listed above are read from it. |
+| `workspaces` | `[]` | The `package.json` of every workspace other than the root. |
+| `patches` | `[]` | Every patch file a `patch:` entry applies, other than Yarn's built-in ones. |
+| `supported_architectures` | host | Yarn's `supportedArchitectures`: lists under `os`, `cpu` and `libc`. |
+| `distribution` | `yarn` | The `yarn.distribution` repository whose Yarn lays the packages out. |
+
+The repository provides `:node_modules`, carrying `YarnNodeModulesInfo` from
+`@rules_yarn//yarn:providers.bzl`, and `:pin`.
 
 ### `yarn_binary` (rule)
 
@@ -152,16 +238,20 @@ the shell toolchain points at Bash on every operating system it supports. So
 Windows needs work this ruleset does not do yet.
 
 [`e2e/smoke`](e2e/smoke) is a consumer module that uses only the public API,
-and [`tests/bcr`](tests/bcr) is the one the registry presubmit runs.
+[`e2e/install`](e2e/install) installs a real project with `yarn.install`, and
+[`tests/bcr`](tests/bcr) is the one the registry presubmit runs.
 
 ## Scope
 
-This ruleset delivers the Yarn CLI. It does not turn Yarn commands into Bazel
-build actions, so a command you run through `yarn_binary` gets no caching,
-sandboxing, or dependency-installation guarantees from Bazel: Yarn reads and
-writes your project, its caches, and the network exactly as it does outside
-Bazel. Installing dependencies, translating `yarn.lock` into Bazel targets, and
-Plug'n'Play or `node_modules` integration are not part of this ruleset.
+`yarn_binary` runs the Yarn CLI and nothing more: a command you run through it
+gets no caching, sandboxing, or dependency-installation guarantees from Bazel,
+and Yarn reads and writes your project, its caches, and the network exactly as
+it does outside Bazel.
+
+`yarn.install` is the part with guarantees: it installs the lockfile's
+dependencies as Bazel artifacts, as described above. It does not yet run your
+project's scripts or builds as Bazel actions; those take the installed tree as
+an input and come next.
 
 ## License
 

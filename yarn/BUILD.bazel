@@ -13,3 +13,9 @@ bzl_library(
     visibility = ["//visibility:public"],
     deps = ["//yarn/private:extensions"],
 )
+
+bzl_library(
+    name = "providers",
+    srcs = ["providers.bzl"],
+    visibility = ["//visibility:public"],
+)

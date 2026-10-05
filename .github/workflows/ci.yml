@@ -9,8 +9,8 @@ permissions:
   contents: read
 
 jobs:
-  # The gate AGENTS.md asks for before every commit, on both build roots.
-  # `.bazelignore` keeps e2e/ out of the root run, so it needs its own.
+  # The gate AGENTS.md asks for before every commit, on every build root.
+  # `.bazelignore` keeps the others out of the root run, so each needs its own.
   build-and-test:
     name: build and test (${{ matrix.os }})
     strategy:
@@ -56,6 +56,16 @@ jobs:
         working-directory: e2e/smoke
         run: bazel build //... && bazel test //... --test_output=errors
 
+      - name: Build and test the yarn.install consumer module
+        working-directory: e2e/install
+        run: bazel build //... && bazel test //... --test_output=errors
+
+      # What only a fresh consumer can show about yarn.install: fetching,
+      # pinning, refetching and isolation from the host, against a local
+      # registry so no public one is needed.
+      - name: Run the yarn.install scenarios
+        run: tools/ci/install_scenarios.sh
+
       # The module the registry presubmit runs. Its own .bazelrc keeps it
       # from writing a lockfile, as the other two roots' .bazelrc files pin
       # theirs.
@@ -75,6 +85,17 @@ jobs:
 
       - name: Build and run a Yarn target at the declared floor
         run: tools/ci/minimum_bazel.sh
+
+      # The same floor for yarn.install. The module's lock is written by the
+      # Bazel in .bazelversion, which an older Bazel refuses, so this run
+      # resolves without it, as a consumer starting from scratch would. The
+      # offline test needs the sandbox adjustment the build-and-test job makes,
+      # and is run there.
+      - name: Install a project with yarn.install at the declared floor
+        working-directory: e2e/install
+        run: |
+          floor=$(sed -n 's/.*bazel_compatibility.*">=\([0-9][0-9.]*\)".*/\1/p' ../../MODULE.bazel)
+          USE_BAZEL_VERSION="$floor" bazel test //:installed_test --lockfile_mode=off --test_output=errors
 
   checks:
     name: checks

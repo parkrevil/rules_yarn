@@ -3,9 +3,6 @@ type: architecture
 title: Yarn distribution pipeline
 description: How rules_yarn turns a version string in MODULE.bazel into a Bazel target, covering tag collection and version selection in the module extension, the integrity-checked download in the repository rule, and the filegroup it generates.
 tags: [module-extension, repository-rule, bzlmod, integrity, version-selection]
-verified:
-  - by: openwiki/0.5.1
-    at: 2026-10-03T03:35:17.537Z
 sources:
   - id: openwiki-source-42fff598a74b8a8cf6e6de47
     resource: repo://tests/extensions/extensions_tests.bzl
@@ -17,7 +14,10 @@ sources:
     resource: repo://yarn/private/repositories.bzl
   - id: openwiki-source-847ceba95f7fcfa239c5f25b
     resource: repo://yarn/private/versions.bzl
-generated: { by: "claude-code", at: "2026-10-03T03:12:21.393Z" }
+generated: { by: "claude-code", at: "2026-10-04T12:22:38.266Z" }
+verified:
+  - by: openwiki/0.5.1
+    at: 2026-10-04T18:04:16.838Z
 ---
 
 # Yarn distribution pipeline
@@ -33,7 +33,7 @@ selection, download, exposure.
 | --- | --- | --- |
 | Which version, under which repository name | `yarn/private/extensions.bzl` | a name → version map |
 | Fetching and verifying the bundle | `yarn/private/repositories.bzl` | `yarn.js` plus a generated `BUILD.bazel` |
-| Which versions may be requested at all | `yarn/private/versions.bzl` | URL template and digest table |
+| Which versions may be requested at all | `yarn/private/versions.bzl` | URL template, digest table, and each version's cache version |
 
 The three files are private: each declares `visibility(["//tests/...", "//yarn/..."])`,
 so only the ruleset's own packages and its tests can load them.
@@ -95,13 +95,27 @@ else knows how to run.
 
 Because the bundle is platform-independent JavaScript, the extension declares
 `os_dependent = False` and `arch_dependent = False`, and its metadata is marked
-reproducible. There is nothing about the host that could change what this
-extension produces.
+reproducible. Nothing about the host changes which repositories it defines;
+an install repository does depend on the host, which is why that repository,
+unlike this one, is not marked reproducible.
+
+## The same extension creates installs
+
+The `yarn` extension has a second tag class, `install`, for installing a
+project's locked dependencies; [Installing a project's
+dependencies](dependency-installation.md) covers it. Its part here is small.
+`select_installs` accepts install tags only from the root module, requires
+their names to be distinct and different from every distribution's, and
+requires the distribution each names to exist. Each selected install then
+names the Yarn it runs by repository, and takes from `versions.bzl` the cache
+version recorded beside that Yarn's digest — the number Yarn's lockfile cache
+key starts with — so a lockfile written for another Yarn is refused.
 
 ## What the extension tells Bazel about itself
 
 Alongside reproducibility, the extension reports which repositories the root
-module asked it to create. Bazel checks that report against the root module's
+module asked it to create — distributions and installs alike. Bazel checks
+that report against the root module's
 `use_repo` line, and `bazel mod tidy` writes the line from it — so a consumer
 who forgets `use_repo(yarn, "yarn")` can have it filled in rather than having
 to work out the name.
@@ -135,11 +149,13 @@ rather than producing a repository with unexpected contents.
 module and tag structs. For selection: default naming, duplicate identical
 declarations, root beating a dependency, closest-dependency-wins when the root
 is silent, ignored declarations escaping validation, root-only custom names,
-and the three failure messages verbatim. For the report: a regular
+and the three failure messages verbatim. For installs: a root install
+selected, and the four refusals — an install in a dependency, a repeated
+name, a name a distribution has, an unknown distribution. For the report: a regular
 declaration, a development-only one, the same repository declared both ways, a
 declaration by a dependency rather than the root, a declaration for a
 repository the extension did not create, and the same repository declared
-twice.
+twice, and an install reported like a distribution.
 
 `tests/repositories/repositories_tests.bzl` drives the repository
 implementation against a mock context, asserting the call order (`download` then

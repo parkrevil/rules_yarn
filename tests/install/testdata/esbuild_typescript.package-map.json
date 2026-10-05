@@ -1,0 +1,205 @@
+{
+  "packages": {
+    ".": {
+      "url": "..",
+      "dependencies": {
+        "esbuild": ".store/esbuild-npm-0.25.0-239cf019a2/package",
+        "is-number": ".store/is-number-npm-7.0.0-060086935c/package",
+        "typescript": ".store/typescript-patch-8964a48ba3/package"
+      }
+    },
+    ".store/@esbuild-aix-ppc64-npm-0.25.0-e3aca9fae0/package": {
+      "url": ".store/@esbuild-aix-ppc64-npm-0.25.0-e3aca9fae0/package",
+      "dependencies": {
+        "@esbuild/aix-ppc64": ".store/@esbuild-aix-ppc64-npm-0.25.0-e3aca9fae0/package"
+      }
+    },
+    ".store/@esbuild-android-arm-npm-0.25.0-5fe911139e/package": {
+      "url": ".store/@esbuild-android-arm-npm-0.25.0-5fe911139e/package",
+      "dependencies": {
+        "@esbuild/android-arm": ".store/@esbuild-android-arm-npm-0.25.0-5fe911139e/package"
+      }
+    },
+    ".store/@esbuild-android-arm64-npm-0.25.0-a540b3aa1f/package": {
+      "url": ".store/@esbuild-android-arm64-npm-0.25.0-a540b3aa1f/package",
+      "dependencies": {
+        "@esbuild/android-arm64": ".store/@esbuild-android-arm64-npm-0.25.0-a540b3aa1f/package"
+      }
+    },
+    ".store/@esbuild-android-x64-npm-0.25.0-7914a9e5a3/package": {
+      "url": ".store/@esbuild-android-x64-npm-0.25.0-7914a9e5a3/package",
+      "dependencies": {
+        "@esbuild/android-x64": ".store/@esbuild-android-x64-npm-0.25.0-7914a9e5a3/package"
+      }
+    },
+    ".store/@esbuild-darwin-arm64-npm-0.25.0-06bb50b265/package": {
+      "url": ".store/@esbuild-darwin-arm64-npm-0.25.0-06bb50b265/package",
+      "dependencies": {
+        "@esbuild/darwin-arm64": ".store/@esbuild-darwin-arm64-npm-0.25.0-06bb50b265/package"
+      }
+    },
+    ".store/@esbuild-darwin-x64-npm-0.25.0-615d56df7b/package": {
+      "url": ".store/@esbuild-darwin-x64-npm-0.25.0-615d56df7b/package",
+      "dependencies": {
+        "@esbuild/darwin-x64": ".store/@esbuild-darwin-x64-npm-0.25.0-615d56df7b/package"
+      }
+    },
+    ".store/@esbuild-freebsd-arm64-npm-0.25.0-20970541ea/package": {
+      "url": ".store/@esbuild-freebsd-arm64-npm-0.25.0-20970541ea/package",
+      "dependencies": {
+        "@esbuild/freebsd-arm64": ".store/@esbuild-freebsd-arm64-npm-0.25.0-20970541ea/package"
+      }
+    },
+    ".store/@esbuild-freebsd-x64-npm-0.25.0-f09069690a/package": {
+      "url": ".store/@esbuild-freebsd-x64-npm-0.25.0-f09069690a/package",
+      "dependencies": {
+        "@esbuild/freebsd-x64": ".store/@esbuild-freebsd-x64-npm-0.25.0-f09069690a/package"
+      }
+    },
+    ".store/@esbuild-linux-arm-npm-0.25.0-f326963bb0/package": {
+      "url": ".store/@esbuild-linux-arm-npm-0.25.0-f326963bb0/package",
+      "dependencies": {
+        "@esbuild/linux-arm": ".store/@esbuild-linux-arm-npm-0.25.0-f326963bb0/package"
+      }
+    },
+    ".store/@esbuild-linux-arm64-npm-0.25.0-5828713729/package": {
+      "url": ".store/@esbuild-linux-arm64-npm-0.25.0-5828713729/package",
+      "dependencies": {
+        "@esbuild/linux-arm64": ".store/@esbuild-linux-arm64-npm-0.25.0-5828713729/package"
+      }
+    },
+    ".store/@esbuild-linux-ia32-npm-0.25.0-915daf7a04/package": {
+      "url": ".store/@esbuild-linux-ia32-npm-0.25.0-915daf7a04/package",
+      "dependencies": {
+        "@esbuild/linux-ia32": ".store/@esbuild-linux-ia32-npm-0.25.0-915daf7a04/package"
+      }
+    },
+    ".store/@esbuild-linux-loong64-npm-0.25.0-1b64500d10/package": {
+      "url": ".store/@esbuild-linux-loong64-npm-0.25.0-1b64500d10/package",
+      "dependencies": {
+        "@esbuild/linux-loong64": ".store/@esbuild-linux-loong64-npm-0.25.0-1b64500d10/package"
+      }
+    },
+    ".store/@esbuild-linux-mips64el-npm-0.25.0-4b4408dbc1/package": {
+      "url": ".store/@esbuild-linux-mips64el-npm-0.25.0-4b4408dbc1/package",
+      "dependencies": {
+        "@esbuild/linux-mips64el": ".store/@esbuild-linux-mips64el-npm-0.25.0-4b4408dbc1/package"
+      }
+    },
+    ".store/@esbuild-linux-ppc64-npm-0.25.0-20764be6c2/package": {
+      "url": ".store/@esbuild-linux-ppc64-npm-0.25.0-20764be6c2/package",
+      "dependencies": {
+        "@esbuild/linux-ppc64": ".store/@esbuild-linux-ppc64-npm-0.25.0-20764be6c2/package"
+      }
+    },
+    ".store/@esbuild-linux-riscv64-npm-0.25.0-f1f4c97e75/package": {
+      "url": ".store/@esbuild-linux-riscv64-npm-0.25.0-f1f4c97e75/package",
+      "dependencies": {
+        "@esbuild/linux-riscv64": ".store/@esbuild-linux-riscv64-npm-0.25.0-f1f4c97e75/package"
+      }
+    },
+    ".store/@esbuild-linux-s390x-npm-0.25.0-fd7585160c/package": {
+      "url": ".store/@esbuild-linux-s390x-npm-0.25.0-fd7585160c/package",
+      "dependencies": {
+        "@esbuild/linux-s390x": ".store/@esbuild-linux-s390x-npm-0.25.0-fd7585160c/package"
+      }
+    },
+    ".store/@esbuild-linux-x64-npm-0.25.0-cd9596465b/package": {
+      "url": ".store/@esbuild-linux-x64-npm-0.25.0-cd9596465b/package",
+      "dependencies": {
+        "@esbuild/linux-x64": ".store/@esbuild-linux-x64-npm-0.25.0-cd9596465b/package"
+      }
+    },
+    ".store/@esbuild-netbsd-arm64-npm-0.25.0-0999a35d12/package": {
+      "url": ".store/@esbuild-netbsd-arm64-npm-0.25.0-0999a35d12/package",
+      "dependencies": {
+        "@esbuild/netbsd-arm64": ".store/@esbuild-netbsd-arm64-npm-0.25.0-0999a35d12/package"
+      }
+    },
+    ".store/@esbuild-netbsd-x64-npm-0.25.0-441712f290/package": {
+      "url": ".store/@esbuild-netbsd-x64-npm-0.25.0-441712f290/package",
+      "dependencies": {
+        "@esbuild/netbsd-x64": ".store/@esbuild-netbsd-x64-npm-0.25.0-441712f290/package"
+      }
+    },
+    ".store/@esbuild-openbsd-arm64-npm-0.25.0-a901bbe38e/package": {
+      "url": ".store/@esbuild-openbsd-arm64-npm-0.25.0-a901bbe38e/package",
+      "dependencies": {
+        "@esbuild/openbsd-arm64": ".store/@esbuild-openbsd-arm64-npm-0.25.0-a901bbe38e/package"
+      }
+    },
+    ".store/@esbuild-openbsd-x64-npm-0.25.0-acc6dbfbb1/package": {
+      "url": ".store/@esbuild-openbsd-x64-npm-0.25.0-acc6dbfbb1/package",
+      "dependencies": {
+        "@esbuild/openbsd-x64": ".store/@esbuild-openbsd-x64-npm-0.25.0-acc6dbfbb1/package"
+      }
+    },
+    ".store/@esbuild-sunos-x64-npm-0.25.0-0627cf593b/package": {
+      "url": ".store/@esbuild-sunos-x64-npm-0.25.0-0627cf593b/package",
+      "dependencies": {
+        "@esbuild/sunos-x64": ".store/@esbuild-sunos-x64-npm-0.25.0-0627cf593b/package"
+      }
+    },
+    ".store/@esbuild-win32-arm64-npm-0.25.0-6d80357735/package": {
+      "url": ".store/@esbuild-win32-arm64-npm-0.25.0-6d80357735/package",
+      "dependencies": {
+        "@esbuild/win32-arm64": ".store/@esbuild-win32-arm64-npm-0.25.0-6d80357735/package"
+      }
+    },
+    ".store/@esbuild-win32-ia32-npm-0.25.0-12e81b7db7/package": {
+      "url": ".store/@esbuild-win32-ia32-npm-0.25.0-12e81b7db7/package",
+      "dependencies": {
+        "@esbuild/win32-ia32": ".store/@esbuild-win32-ia32-npm-0.25.0-12e81b7db7/package"
+      }
+    },
+    ".store/@esbuild-win32-x64-npm-0.25.0-7e28bfebb7/package": {
+      "url": ".store/@esbuild-win32-x64-npm-0.25.0-7e28bfebb7/package",
+      "dependencies": {
+        "@esbuild/win32-x64": ".store/@esbuild-win32-x64-npm-0.25.0-7e28bfebb7/package"
+      }
+    },
+    ".store/esbuild-npm-0.25.0-239cf019a2/package": {
+      "url": ".store/esbuild-npm-0.25.0-239cf019a2/package",
+      "dependencies": {
+        "@esbuild/aix-ppc64": ".store/@esbuild-aix-ppc64-npm-0.25.0-e3aca9fae0/package",
+        "@esbuild/android-arm": ".store/@esbuild-android-arm-npm-0.25.0-5fe911139e/package",
+        "@esbuild/android-arm64": ".store/@esbuild-android-arm64-npm-0.25.0-a540b3aa1f/package",
+        "@esbuild/android-x64": ".store/@esbuild-android-x64-npm-0.25.0-7914a9e5a3/package",
+        "@esbuild/darwin-arm64": ".store/@esbuild-darwin-arm64-npm-0.25.0-06bb50b265/package",
+        "@esbuild/darwin-x64": ".store/@esbuild-darwin-x64-npm-0.25.0-615d56df7b/package",
+        "@esbuild/freebsd-arm64": ".store/@esbuild-freebsd-arm64-npm-0.25.0-20970541ea/package",
+        "@esbuild/freebsd-x64": ".store/@esbuild-freebsd-x64-npm-0.25.0-f09069690a/package",
+        "@esbuild/linux-arm": ".store/@esbuild-linux-arm-npm-0.25.0-f326963bb0/package",
+        "@esbuild/linux-arm64": ".store/@esbuild-linux-arm64-npm-0.25.0-5828713729/package",
+        "@esbuild/linux-ia32": ".store/@esbuild-linux-ia32-npm-0.25.0-915daf7a04/package",
+        "@esbuild/linux-loong64": ".store/@esbuild-linux-loong64-npm-0.25.0-1b64500d10/package",
+        "@esbuild/linux-mips64el": ".store/@esbuild-linux-mips64el-npm-0.25.0-4b4408dbc1/package",
+        "@esbuild/linux-ppc64": ".store/@esbuild-linux-ppc64-npm-0.25.0-20764be6c2/package",
+        "@esbuild/linux-riscv64": ".store/@esbuild-linux-riscv64-npm-0.25.0-f1f4c97e75/package",
+        "@esbuild/linux-s390x": ".store/@esbuild-linux-s390x-npm-0.25.0-fd7585160c/package",
+        "@esbuild/linux-x64": ".store/@esbuild-linux-x64-npm-0.25.0-cd9596465b/package",
+        "@esbuild/netbsd-arm64": ".store/@esbuild-netbsd-arm64-npm-0.25.0-0999a35d12/package",
+        "@esbuild/netbsd-x64": ".store/@esbuild-netbsd-x64-npm-0.25.0-441712f290/package",
+        "@esbuild/openbsd-arm64": ".store/@esbuild-openbsd-arm64-npm-0.25.0-a901bbe38e/package",
+        "@esbuild/openbsd-x64": ".store/@esbuild-openbsd-x64-npm-0.25.0-acc6dbfbb1/package",
+        "@esbuild/sunos-x64": ".store/@esbuild-sunos-x64-npm-0.25.0-0627cf593b/package",
+        "@esbuild/win32-arm64": ".store/@esbuild-win32-arm64-npm-0.25.0-6d80357735/package",
+        "@esbuild/win32-ia32": ".store/@esbuild-win32-ia32-npm-0.25.0-12e81b7db7/package",
+        "@esbuild/win32-x64": ".store/@esbuild-win32-x64-npm-0.25.0-7e28bfebb7/package",
+        "esbuild": ".store/esbuild-npm-0.25.0-239cf019a2/package"
+      }
+    },
+    ".store/is-number-npm-7.0.0-060086935c/package": {
+      "url": ".store/is-number-npm-7.0.0-060086935c/package",
+      "dependencies": {
+        "is-number": ".store/is-number-npm-7.0.0-060086935c/package"
+      }
+    },
+    ".store/typescript-patch-8964a48ba3/package": {
+      "url": ".store/typescript-patch-8964a48ba3/package",
+      "dependencies": {
+        "typescript": ".store/typescript-patch-8964a48ba3/package"
+      }
+    }
+  }
+}

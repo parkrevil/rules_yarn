@@ -20,29 +20,35 @@ sources:
     resource: repo://yarn/private/yarn_binary.bzl
   - id: openwiki-source-c20b05d8b903795173b9a3b2
     resource: repo://yarn/private/yarn_binary.sh.tpl
-generated: { by: "claude-code", at: "2026-10-03T03:12:21.393Z" }
+generated: { by: "claude-code", at: "2026-10-04T12:22:38.266Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-03T03:35:17.537Z
+    at: 2026-10-04T18:04:16.838Z
 ---
 
 # Quickstart
 
 `rules_yarn` delivers one exact Yarn version to a Bazel workspace and runs it
 with a Bazel-managed Node.js runtime, so nobody needs Node.js, Yarn or Corepack
-installed. Linux and macOS are supported; the launcher is a Bash script and the
+installed. It also installs a Yarn project's locked dependencies as Bazel
+artifacts, every registry package fetched by Bazel with a pinned integrity. Linux and macOS are supported; the launcher is a Bash script and the
 shell toolchain points at Bash on both, so Windows would need work the ruleset
 does not do.
 
-It delivers the Yarn CLI and nothing more. Yarn commands do not become Bazel
-actions, so they get no caching, sandboxing or dependency-installation
-guarantees from Bazel.
+The two halves make different promises. `yarn_binary` runs the Yarn CLI and
+nothing more: a command run through it gets no caching, sandboxing or
+dependency-installation guarantees from Bazel. `yarn.install` is the part with
+guarantees — integrity-checked fetching through Bazel's downloader, exactly the
+lockfile's versions, an offline layout isolated from the host, no dependency
+build scripts, one artifact per package. Running the project's own scripts and
+builds as Bazel actions is not provided yet.
 
 ## Task routing
 
 | I want to… | Open |
 | --- | --- |
 | depend on the ruleset and declare a Yarn target | [Public API surface](concepts/public-api-surface.md) |
+| install a project's dependencies, or understand how that works | [Installing a project's dependencies](architecture/dependency-installation.md) |
 | understand how a version string becomes `@yarn` | [Yarn distribution pipeline](architecture/distribution-pipeline.md) |
 | add or change a supported Yarn version | [Version pinning and lockfiles](operations/version-pinning.md) |
 | change how Yarn is launched, or debug a run | [Launcher and execution model](architecture/launcher-execution.md) |
@@ -70,11 +76,13 @@ takes effect in the root module, so a module depending on `rules_yarn` cannot
 pass it on and every root module downstream has to repeat it. That is what
 publishing removes, and the apparatus for it is already in place.
 
-`e2e/smoke` is a working consumer that uses only the public API.
+`e2e/smoke` is a working consumer that uses only the public API, and
+`e2e/install` one that installs a real project with `yarn.install`.
 
-## Three build roots
+## Four build roots
 
-The repository root, `e2e/smoke` and `tests/bcr` are separate Bazel modules,
-and the root excludes the other two from package discovery. Building or testing
-everything means three invocations, one in each directory — which is also what
-CI does, on Linux and macOS.
+The repository root, `e2e/smoke`, `e2e/install` and `tests/bcr` are separate
+Bazel modules, and the root excludes the other three from package discovery.
+Building or testing everything means four invocations, one in each directory,
+plus the install scenario script — which is also what CI does, on Linux and
+macOS.

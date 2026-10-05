@@ -1,6 +1,6 @@
 # rules_yarn
 
-Bazel rules that deliver the Yarn CLI. Linux and macOS. Public API lives in `yarn/` outside `yarn/private/`; tests in `tests/`; the consumer example in `e2e/smoke/`; the module the registry presubmit runs in `tests/bcr/`.
+Bazel rules that deliver the Yarn CLI and install Yarn projects' locked dependencies. Linux and macOS. Public API lives in `yarn/` outside `yarn/private/`; tests in `tests/`; the consumer examples in `e2e/smoke/` and `e2e/install/`; the module the registry presubmit runs in `tests/bcr/`.
 
 ## Always
 
@@ -18,14 +18,14 @@ Bazel rules that deliver the Yarn CLI. Linux and macOS. Public API lives in `yar
 
 ## Changing a pin
 
-Pins are `MODULE.bazel`, `MODULE.bazel.lock`, `.bazelversion`, `yarn/private/versions.bzl`, `e2e/smoke/`'s own `MODULE.bazel`, `MODULE.bazel.lock` and `.bazelversion`, and `tests/bcr/MODULE.bazel`. `tests/bcr/` keeps no lockfile on purpose — the registry presubmit runs it under several Bazel versions and a pinned lock would defeat that — and its own `.bazelrc` sets `--lockfile_mode=off` so Bazel does not write one.
+Pins are `MODULE.bazel`, `MODULE.bazel.lock`, `.bazelversion`, `yarn/private/versions.bzl` (a Yarn version's digest and its cache version), the `MODULE.bazel`, `MODULE.bazel.lock` and `.bazelversion` of `e2e/smoke/` and of `e2e/install/`, `e2e/install/`'s `yarn.lock` and `yarn_pins.json`, and `tests/bcr/MODULE.bazel`. `tests/bcr/` keeps no lockfile on purpose — the registry presubmit runs it under several Bazel versions and a pinned lock would defeat that — and its own `.bazelrc` sets `--lockfile_mode=off` so Bazel does not write one.
 
 - Confirm the version exists in every source the build resolves it from, and record the URLs in the change.
-- Run `bazel mod deps --lockfile_mode=update` in the root and in `e2e/smoke/`, then commit both locks. Each root sets `--lockfile_mode=error`, so a stale lock fails that root's build.
+- Run `bazel mod deps --lockfile_mode=update` in the root, in `e2e/smoke/` and in `e2e/install/`, then commit the locks. Each of those roots sets `--lockfile_mode=error`, so a stale lock fails that root's build. After changing `e2e/install/`'s dependencies, regenerate its `yarn.lock` with the pinned Yarn and its pins with `bazel run @npm//:pin`.
 
 ## Before commit
 
-- `bazel build //... && bazel test //...` passes in the root, in `e2e/smoke/` and in `tests/bcr/`; `.bazelignore` keeps both of the latter out of the root run.
+- `bazel build //... && bazel test //...` passes in the root, in `e2e/smoke/`, in `e2e/install/` and in `tests/bcr/`, and `tools/ci/install_scenarios.sh` passes; `.bazelignore` keeps the other roots out of the root run.
 - A reviewer without the implementation conversation reviews the change; check each finding against documentation or a failing test; commit only what passed. This holds for every commit, including one that changes this file.
 - Fix what the change is for, rather than recording it. A risk or a known limit states what the approach cannot do; it is not a place to put what you chose not to do. Say which one it is. A defect outside the change gets reported, and its own change.
 - When the change states a rule, apply it to everything that change touches, not only where a linter or a reviewer pointed, and record the verdict for each — including what you leave as it is.

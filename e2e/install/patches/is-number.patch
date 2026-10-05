@@ -1,0 +1,8 @@
+diff --git a/index.js b/index.js
+--- a/index.js
++++ b/index.js
+@@ -16,3 +16,4 @@ module.exports = function(num) {
+   }
+   return false;
+ };
++module.exports.patchedByRulesYarnTest = true;

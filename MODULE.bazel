@@ -21,8 +21,46 @@ bazel_dep(name = "rules_shell", version = "0.8.0")
 bazel_dep(name = "platforms", version = "1.1.0", dev_dependency = True)
 bazel_dep(name = "rules_testing", version = "0.9.0", dev_dependency = True)
 
+# yarn.install runs Yarn on Node.js in a repository rule, where toolchain
+# resolution is not available, so it takes the default toolchain's per-platform
+# repositories directly. rules_nodejs declares that toolchain itself.
+node_repositories = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
+use_repo(
+    node_repositories,
+    "nodejs_darwin_amd64",
+    "nodejs_darwin_arm64",
+    "nodejs_linux_amd64",
+    "nodejs_linux_arm64",
+)
+
+# yarn.install reads yarn.lock and .yarnrc.yml as Yarn 4.18.0 does: with the
+# js-yaml its own lockfile pins at that tag (4.3.0), by the integrity the npm
+# registry publishes for it. https://registry.npmjs.org/js-yaml/4.3.0
+# http_archive's urls, integrity, strip_prefix and build_file_content are
+# documented in Bazel 8.3.0's tools/build_defs/repo/http.bzl.
+http_archive = use_repo_rule("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
+
+http_archive(
+    name = "js_yaml",
+    build_file_content = """exports_files(["index.js"])
+
+filegroup(
+    name = "js_yaml",
+    srcs = ["index.js", "package.json"] + glob(["lib/**"]),
+    visibility = ["//visibility:public"],
+)
+""",
+    integrity = "sha512-1td788aAnnZ5qs7V2QIRl1owjtYpbKt749Y3xauqQgwIIGF/xXWz1wMTEBx5O3LK3lXLVuqXPdPxj2BoFHaW9Q==",
+    strip_prefix = "package",
+    urls = ["https://registry.npmjs.org/js-yaml/-/js-yaml-4.3.0.tgz"],
+)
+
 node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node", dev_dependency = True)
 node.toolchain(node_version = "24.21.0")
+
+# Bazel-managed Node.js for the host platform, for the tests of the ruleset's
+# own Node.js programs.
+use_repo(node, "nodejs")
 
 register_toolchains(
     "//tests/yarn_binary:host_path_node_runtime_toolchain",

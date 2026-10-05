@@ -1,0 +1,16 @@
+node_modules/.store/is-number-npm-7.0.0-060086935c/node_modules/is-number	../package
+node_modules/.store/js-tokens-npm-4.0.0-0ac852e9e2/node_modules/js-tokens	../package
+node_modules/.store/loose-envify-npm-1.4.0-6307b72ccf/node_modules/js-tokens	../../js-tokens-npm-4.0.0-0ac852e9e2/package
+node_modules/.store/loose-envify-npm-1.4.0-6307b72ccf/node_modules/loose-envify	../package
+node_modules/.store/react-dom-virtual-1137ace24f/node_modules/loose-envify	../../loose-envify-npm-1.4.0-6307b72ccf/package
+node_modules/.store/react-dom-virtual-1137ace24f/node_modules/react	../../react-npm-18.3.1-af38f3c1ae/package
+node_modules/.store/react-dom-virtual-1137ace24f/node_modules/react-dom	../package
+node_modules/.store/react-dom-virtual-1137ace24f/node_modules/scheduler	../../scheduler-npm-0.23.2-6d1dd9c2b7/package
+node_modules/.store/react-npm-18.3.1-af38f3c1ae/node_modules/loose-envify	../../loose-envify-npm-1.4.0-6307b72ccf/package
+node_modules/.store/react-npm-18.3.1-af38f3c1ae/node_modules/react	../package
+node_modules/.store/scheduler-npm-0.23.2-6d1dd9c2b7/node_modules/loose-envify	../../loose-envify-npm-1.4.0-6307b72ccf/package
+node_modules/.store/scheduler-npm-0.23.2-6d1dd9c2b7/node_modules/scheduler	../package
+packages/a/node_modules/b	../../b
+packages/a/node_modules/react	../../../node_modules/.store/react-npm-18.3.1-af38f3c1ae/package
+packages/a/node_modules/react-dom	../../../node_modules/.store/react-dom-virtual-1137ace24f/package
+packages/b/node_modules/is-number	../../../node_modules/.store/is-number-npm-7.0.0-060086935c/package

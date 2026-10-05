@@ -1,0 +1,64 @@
+{
+  "packages": {
+    ".": {
+      "url": "..",
+      "dependencies": {}
+    },
+    "../packages/a": {
+      "url": "../packages/a",
+      "dependencies": {
+        "b": "../packages/b",
+        "react": ".store/react-npm-18.3.1-af38f3c1ae/package",
+        "react-dom": ".store/react-dom-virtual-1137ace24f/package"
+      }
+    },
+    "../packages/b": {
+      "url": "../packages/b",
+      "dependencies": {
+        "is-number": ".store/is-number-npm-7.0.0-060086935c/package"
+      }
+    },
+    ".store/is-number-npm-7.0.0-060086935c/package": {
+      "url": ".store/is-number-npm-7.0.0-060086935c/package",
+      "dependencies": {
+        "is-number": ".store/is-number-npm-7.0.0-060086935c/package"
+      }
+    },
+    ".store/js-tokens-npm-4.0.0-0ac852e9e2/package": {
+      "url": ".store/js-tokens-npm-4.0.0-0ac852e9e2/package",
+      "dependencies": {
+        "js-tokens": ".store/js-tokens-npm-4.0.0-0ac852e9e2/package"
+      }
+    },
+    ".store/loose-envify-npm-1.4.0-6307b72ccf/package": {
+      "url": ".store/loose-envify-npm-1.4.0-6307b72ccf/package",
+      "dependencies": {
+        "js-tokens": ".store/js-tokens-npm-4.0.0-0ac852e9e2/package",
+        "loose-envify": ".store/loose-envify-npm-1.4.0-6307b72ccf/package"
+      }
+    },
+    ".store/react-dom-virtual-1137ace24f/package": {
+      "url": ".store/react-dom-virtual-1137ace24f/package",
+      "dependencies": {
+        "loose-envify": ".store/loose-envify-npm-1.4.0-6307b72ccf/package",
+        "react": ".store/react-npm-18.3.1-af38f3c1ae/package",
+        "react-dom": ".store/react-dom-virtual-1137ace24f/package",
+        "scheduler": ".store/scheduler-npm-0.23.2-6d1dd9c2b7/package"
+      }
+    },
+    ".store/react-npm-18.3.1-af38f3c1ae/package": {
+      "url": ".store/react-npm-18.3.1-af38f3c1ae/package",
+      "dependencies": {
+        "loose-envify": ".store/loose-envify-npm-1.4.0-6307b72ccf/package",
+        "react": ".store/react-npm-18.3.1-af38f3c1ae/package"
+      }
+    },
+    ".store/scheduler-npm-0.23.2-6d1dd9c2b7/package": {
+      "url": ".store/scheduler-npm-0.23.2-6d1dd9c2b7/package",
+      "dependencies": {
+        "loose-envify": ".store/loose-envify-npm-1.4.0-6307b72ccf/package",
+        "scheduler": ".store/scheduler-npm-0.23.2-6d1dd9c2b7/package"
+      }
+    }
+  }
+}

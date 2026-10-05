@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:bc6b545f72d0ba24f2907e1a03a2497a34dc14ace82903aec65617f562a07544",
+  "pageVersion": "sha256:4484db67dfb71e0f0333fcf2ab8e80aa97ee21849d8610be434ea15deb1eaa4a",
   "claims": [
     {
       "id": "claim_4937ff2c7dfc4c0bb7a1f0824afbd578",
       "statement": "Nothing is published to the Bazel Central Registry yet, so a consumer adds a non-registry override; because an override only takes effect in the root module, a module depending on rules_yarn cannot pass it on.",
       "evidence": [
         {
-          "resource": "repo://README.md#L30-L58",
-          "version": "repo-lines-v1:sha256:ac0598ebe903f910239d6eb91a7095f82d7179887e136b2b7988110fb1f44f24:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImE3MTkxOTMyOWI1ZjQwYTc0ZGNjZDMzNWI3YjdjNWNkNGE0MmU0NTdhYjAzZjk5NjlmZGZiODJiYzI3YmY4ZDQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjcxYWNiMWMwYzU0MmY1Yjg2ZmViMmE3MTgxY2I1ZDk5NzlkODlhYTVhNmU0MjJjMTRhY2YzZjAwYjVlZjNhOTUifQ"
+          "resource": "repo://README.md#L31-L55",
+          "version": "repo-lines-v1:sha256:46d3ca458fa2d5569d7b6b056c682ba5103cfb2cdaaf7bb1922ec714c8c4816b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3MzkwYTgzYWJhMWY2YzMyNjZiZGRkMjk5MzRjNTc0NDAwODgyMjEwYzk1OWY5YjAyZTk4NGFkZDVjZTZjNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2ZTFjMmU2MTcwNDdlMGU4ZDMxNmY2MTM1ODY4NThjOWZlN2I0Njg0YTk2ODE3MmI1MTBjOTg5YjVkMzI0MTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNjlhNTg4NDlhZTlkMjE0ZWNiNGQyOWFmNTAyNGEwOGM0ODI4OWM5NTI2MDE3MjVlMzNmNTNmOGYwMjAzOWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1MTkwYmIxNDY4YTMxNTM4YTE5YTg5MWQ4NDUyZTM3YWNiYmQzZjA1MTFlNDM4NWVhMTAwNjgxOGI1MWY1ZjkifQ"
         }
       ]
     },
@@ -58,7 +58,7 @@
     },
     {
       "id": "claim_3842121a2c6a4645a0a2bb33c245ca22",
-      "statement": "`.gitattributes` marks the agent tooling, the OpenSpec planning record and the generated wiki as export-ignore, so the release archive carries the ruleset, both test modules, the consumer example, the documentation and the licence.",
+      "statement": "`.gitattributes` marks the agent tooling, the OpenSpec planning record and the generated wiki as export-ignore, so the release archive carries the ruleset, its tests, the registry's test module, both consumer examples, the documentation and the licence.",
       "evidence": [
         {
           "resource": "repo://.gitattributes",
@@ -132,7 +132,7 @@
     },
     {
       "id": "claim_0f4ac1acecaf44fdb4f6bf1456d4c718",
-      "statement": "Publishing still requires a BCR_PUBLISH_TOKEN secret and a decision about the maintainer email that becomes public with the entry; the registry fork named in publish.yaml already exists.",
+      "statement": "Publishing still requires a BCR_PUBLISH_TOKEN secret; the registry fork named in publish.yaml already exists, and metadata.template.json records the maintainer's email address.",
       "evidence": [
         {
           "resource": "repo://.bcr/metadata.template.json",
@@ -153,10 +153,24 @@
           "version": "repo-file-v1:sha256:946bc2c7ded520aaf943f51b1c787d9de04c3db24978dcec3a77bf0f3f18afce"
         }
       ]
+    },
+    {
+      "id": "claim_0241be774e5c468285be068704a8e41d",
+      "statement": "Only the root module may declare yarn.install, which is where the ruleset's dependency-installation guarantees come from.",
+      "evidence": [
+        {
+          "resource": "repo://README.md",
+          "version": "repo-file-v1:sha256:2f6b78c4101c3f7892e7c397e61613eab4d3797fc9a457e96c065f2e678f8417"
+        },
+        {
+          "resource": "repo://yarn/private/extensions.bzl#L78-L130",
+          "version": "repo-lines-v1:sha256:f83c697cf33d488caaca1a6fb673dfc59ef39cc711af4d02d3058c6e72f9c029:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE5ZDUzOWVjMjgxZWU2OGFlYTk5M2I2ZTBiNDQ1ZmYxOGNjNjdmMzYzNzMwZWVjYTVmYTk2YmU1MWFhYWI4OGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJjYzI4NzkxYzMxOTA0MDUzMTY0MWNiMjZhZTFiYjY2ZmZmNzgwYjE3NzAzODhhMDBlZTAwYzhlZWU2MmM1ZjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwYzVhMjcyZDY5Y2JkOWY2YjI4NTI2YzVhZTg4OGUzMmY2ZGIyMTc3MzZhN2IwMTdiYjA5OGRjZjg0ODYxZGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBmYjhmYjlkYTQwNTE4YjNhZTg2ZDhiOTllMzQ4NWUyYmZmYjIwMTdmMzZhZmFkZmMzZDAzZmY5MzVhZjE1YjkifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-03T03:35:17.537Z"
+    "at": "2026-10-04T18:04:16.838Z"
   }
 }

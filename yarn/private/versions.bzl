@@ -13,3 +13,11 @@ YARN_URL_TEMPLATE = "https://repo.yarnpkg.com/{version}/packages/yarnpkg-cli/bin
 YARN_VERSIONS = {
     "4.18.0": "sha256-+4sdIL5yoLVEo1vOxMftD/Vamxc8AfGRsCuhZLIFHbU=",
 }
+
+# Maps each supported Yarn version to its cache version, `CACHE_VERSION` in
+# packages/yarnpkg-core/sources/Cache.ts at that version's tag. A lockfile's
+# cache key is this joined with the project's compression setting, so an
+# install checks it before running Yarn.
+YARN_CACHE_VERSIONS = {
+    "4.18.0": "10",
+}
