@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:cdd339f25a0c8d9a67a99b28b77fa675f618c9d0a3156f338a3e47e8cda18482",
+  "pageVersion": "sha256:be244ddf5ef2c4a2b66eb0f2bc632397b3b1af85c95bb9830ac348b0ca720d62",
   "claims": [
     {
       "id": "claim_80120293013247f8b2a4c96dba175e61",
@@ -192,15 +192,15 @@
     },
     {
       "id": "claim_17bb131fe8394737b85e88134f0b9618",
-      "statement": "Each install driver program has a Node test under tests/install run by node_test.sh on the Bazel-managed Node.js, which is given js-yaml and, for the Yarn comparison, the pinned Yarn.",
+      "statement": "Each install driver program has a Node test under tests/install run by node_test.sh on the Bazel-managed Node.js, given js-yaml, the pinned Yarn or the host's bsdtar as NAME=path arguments where it needs them.",
       "evidence": [
         {
           "resource": "repo://tests/install/BUILD.bazel",
-          "version": "repo-file-v1:sha256:b0c19b645f3396ea2540f92a1858b053b5385c5749836e0b1dad9435a4b122f3"
+          "version": "repo-file-v1:sha256:913955201179b0a2555c22f7aed48cbfc360af10dfe33e2eac47b1fa84f0d22a"
         },
         {
           "resource": "repo://tests/install/node_test.sh",
-          "version": "repo-file-v1:sha256:9f962156816e2673a37ac989cfa9a9e1a12ed8cb0f2964cc239ebb84ad37a29a"
+          "version": "repo-file-v1:sha256:ef67523abb2abc799e23ba6a06a2c4ad09f456dbf6d12eeeda3f7f618f35e555"
         }
       ]
     },
@@ -230,15 +230,15 @@
     },
     {
       "id": "claim_7035247e5f91438aabb64dc64d646cff",
-      "statement": "install_scenarios.sh builds a throwaway consumer against a local fixture registry, in a host whose home and output-root ancestors hold hostile configuration files, and runs thirty-three cases, including a .yarnrc.yml Yarn cannot read being refused and eleven that reproduce the measurements the design rests on.",
+      "statement": "install_scenarios.sh builds a throwaway consumer against a local fixture registry, in a host whose home and output-root ancestors hold hostile configuration files, and runs thirty-five cases, including two for building packages from their tarballs with crafted tarball shapes, a .yarnrc.yml Yarn cannot read being refused, and eleven that reproduce the measurements the design rests on.",
       "evidence": [
         {
           "resource": "repo://tools/ci/fixture_registry.js",
-          "version": "repo-file-v1:sha256:1cd9fcfb2e1b6f3f54d01779a0e5059b7b99ade4e8652392f97b97fe074369c9"
+          "version": "repo-file-v1:sha256:9e3a1dd6bf73fbaa5d547faa1c15e505ea1b1f2312e0df3f485a5945fc076651"
         },
         {
           "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:8071d75675b64b29736fe7da1a96500c2fabc09461e35e57a491581004cf5ca0"
+          "version": "repo-file-v1:sha256:5fdc8a76b77ac3f23d463a84b508a6367d726f81e9dd56ecbdae6aa8bc9200e4"
         }
       ]
     },
@@ -265,10 +265,24 @@
           "version": "repo-file-v1:sha256:e2a852ff102f4dbda2a6ad9c040af83fd3df36f587a4d1e6547ca79de5bd6f0f"
         }
       ]
+    },
+    {
+      "id": "claim_e98507baa91e4dc3a78f5d2cb23d9cac",
+      "statement": "sources_test checks computed store paths against those Yarn wrote for two captured projects, and extract_test checks extraction, normalisation, manifests, collisions and the build action's check with the host's bsdtar.",
+      "evidence": [
+        {
+          "resource": "repo://tests/install/extract_test.js",
+          "version": "repo-file-v1:sha256:772fe3b0fea5885aac039880a3bbf900dad27cd3f4ae736931116e3a12e93e2a"
+        },
+        {
+          "resource": "repo://tests/install/sources_test.js",
+          "version": "repo-file-v1:sha256:74f82bfc560c885dd1591c3aea39d3fe0f07c0dc6e2189937bc209d2eb76f0f7"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-05T05:22:56.641Z"
+    "at": "2026-10-05T14:22:28.209Z"
   }
 }

@@ -32,8 +32,12 @@ sources:
     resource: repo://tests/extensions/extensions_tests.bzl
   - id: openwiki-source-225340f64cde50bf1db88e14
     resource: repo://tests/install/BUILD.bazel
+  - id: openwiki-source-186e1eeea778492c4f3de07f
+    resource: repo://tests/install/extract_test.js
   - id: openwiki-source-515ecb9fb76cac4da668ba48
     resource: repo://tests/install/node_test.sh
+  - id: openwiki-source-bb76665a0173e3c463c3f320
+    resource: repo://tests/install/sources_test.js
   - id: openwiki-source-ca84f08526069556e5f272aa
     resource: repo://tests/install/yarnrc_yarn_test.js
   - id: openwiki-source-2786bbb2f5598011b27e9081
@@ -62,10 +66,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
-generated: { by: "claude-code", at: "2026-10-05T05:14:35.586Z" }
+generated: { by: "claude-code", at: "2026-10-05T14:22:28.209Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-05T05:22:56.641Z
+    at: 2026-10-05T14:22:28.209Z
 ---
 
 # Verification strategy
@@ -154,8 +158,9 @@ loses exactly the one check it cannot make.
 `yarn.install` does most of its work in Node.js programs that a repository rule
 runs, which no Starlark test can execute. Each has a test file under
 `tests/install/`, run by `node_test.sh` with Node's built-in runner on the
-Bazel-managed Node.js, and given js-yaml — fetched by integrity, as the driver
-gets it — when it reads YAML.
+Bazel-managed Node.js, and given what it needs as `NAME=<runfiles path>`
+arguments: js-yaml, fetched by integrity as the driver gets it, the pinned
+Yarn, or the host's bsdtar from `tar.bzl`.
 
 | Test | What it holds |
 | --- | --- |
@@ -167,6 +172,8 @@ gets it — when it reads YAML.
 | `yarnrc_test` | which settings are carried, and the YAML cases reviews found, each stating what Yarn reads |
 | `yarnrc_yarn_test` | the pinned Yarn's own effective configuration: the same carried values from the project's file and from the file the driver writes |
 | `driver_test` | the plan step reporting every unreadable input instead of throwing |
+| `sources_test` | the store path Yarn gives an `npm:` resolution, against the store paths Yarn wrote for two captured projects, and each store package's candidate tarball |
+| `extract_test` | extracting with the host's bsdtar, normalising, the manifest and its comparison, case and Unicode-normalisation collisions, and the build action's check failing on a manifest that is not the tarball's |
 | `watched_test` | the repository rule watching every module the driver loads |
 
 `yarnrc_yarn_test` is the one that asks Yarn rather than a port of it. Every
@@ -221,7 +228,7 @@ registry at a closed port, and a configuration under the install's former file
 name loading a marker plugin, in the Bazel client's home, above the output
 root and in it.
 
-Its thirty-three cases cover the first pin; the host's platform package and a
+Its thirty-five cases cover the first pin; the host's platform package and a
 scoped package; that nothing changed installs nothing; that a lockfile change
 and a pin-only change install again, and a new version is installed; named
 architectures; integrity, checksum, out-of-date lockfile and link refusals; a
@@ -230,7 +237,13 @@ global folder included, unchanged in content and metadata; a project plugin
 not loaded and a project proxy seeing nothing; a malformed and a missing pin
 file repaired through `:pin`; a cold fetch with the registry blocked; and
 credentials from a credential helper; and a `.yarnrc.yml` Yarn cannot read,
-refused because Yarn rejects the settings the install would carry.
+refused because Yarn rejects the settings the install would carry. Two cases
+cover building packages from their tarballs: plain packages are extracted at
+build time with no archive kept, and nine tarballs shaped the way some registry
+tarballs are — directories without an execute bit, a mode-0000 file, a hard
+link, a contiguous file, an absolute path, a `./package/` prefix, a `..`
+entry, a FIFO, names differing only by case — each install Yarn's tree, the
+first two from their tarballs and the rest from archives.
 
 The last eleven are the measurements the design rests on, kept as tests rather
 than as notes: a dependency cycle and a file named `col:on.js` used from a

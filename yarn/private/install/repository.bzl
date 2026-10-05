@@ -9,13 +9,26 @@ _NODE = {
     "linux_arm64": Label("@nodejs_linux_arm64//:bin/nodejs/bin/node"),
 }
 
+# The host's bsdtar from tar.bzl, which the driver runs to decide whether a
+# package can be built from its tarball; repository rules cannot resolve
+# toolchains, so rules_js reaches the same repositories by name
+# (npm/private/npm_import.bzl).
+_BSDTAR = {
+    "darwin_amd64": Label("@bsd_tar_toolchains_darwin_amd64//:tar"),
+    "darwin_arm64": Label("@bsd_tar_toolchains_darwin_arm64//:tar"),
+    "linux_amd64": Label("@bsd_tar_toolchains_linux_amd64//:tar"),
+    "linux_arm64": Label("@bsd_tar_toolchains_linux_arm64//:tar"),
+}
+
 _PROGRAMS = [
     Label("//yarn/private/install:archive.js"),
     Label("//yarn/private/install:check.js"),
     Label("//yarn/private/install:conditions.js"),
     Label("//yarn/private/install:driver.js"),
+    Label("//yarn/private/install:extract.js"),
     Label("//yarn/private/install:layout.js"),
     Label("//yarn/private/install:lockfile.js"),
+    Label("//yarn/private/install:sources.js"),
     Label("//yarn/private/install:syml.js"),
     Label("//yarn/private/install:yarnrc.js"),
 ]
@@ -91,7 +104,9 @@ yarn_binary(
 
 def _yarn_install_repository_impl(repository_ctx):
     attr = repository_ctx.attr
-    node = repository_ctx.path(_NODE[_host(repository_ctx)])
+    host = _host(repository_ctx)
+    node = repository_ctx.path(_NODE[host])
+    bsdtar = repository_ctx.path(_BSDTAR[host])
     driver = repository_ctx.path(Label("//yarn/private/install:driver.js"))
 
     # The driver and the modules it loads decide the installed tree as much as
@@ -147,6 +162,7 @@ def _yarn_install_repository_impl(repository_ctx):
     by_resolution = {resolution: label for label, resolution in attr.tarballs.items()}
     config = {
         "architectures": attr.supported_architectures,
+        "bsdtar": str(bsdtar),
         "cacheVersion": attr.cache_version,
         "installName": attr.install_name,
         "jsYaml": str(js_yaml),
@@ -187,23 +203,41 @@ yarn_install_error(
         return None
 
     layout = json.decode(repository_ctx.read("layout.json"))
+
+    # A package is built from its tarball, named by the tarball repository's
+    # label, with the manifest of Yarn's tree it must match, or from an archive.
+    tarballs = []
+    extracted = {}
+    archives = {}
+    for package in layout["packages"]:
+        if "tarball" in package:
+            label = str(by_resolution[package["tarball"]])
+            if label not in tarballs:
+                tarballs.append(label)
+            extracted[package["manifest"]] = "{}:{}".format(tarballs.index(label), package["path"])
+        else:
+            archives[package["archive"]] = package["path"]
     _build_file(repository_ctx, """\
 yarn_node_modules(
     name = "node_modules",
     architectures = {architectures},
+    archives = {archives},
     bins = {bins},
+    extracted = {extracted},
     links = {links},
     node_version = {node},
-    packages = {packages},
+    tarballs = {tarballs},
     workspace_links = {workspace_links},
     yarn_version = {yarn},
     visibility = ["//visibility:public"],
 )""".format(
         architectures = repr({k: v for k, v in layout["architectures"].items() if v != None}),
+        archives = repr(archives),
         bins = repr({b["path"]: b["target"] for b in layout["bins"]}),
+        extracted = repr(extracted),
         links = repr({link["path"]: link["target"] for link in layout["links"]}),
         node = repr(layout["node"]),
-        packages = repr({p["archive"]: p["path"] for p in layout["packages"]}),
+        tarballs = repr(tarballs),
         workspace_links = repr({link["path"]: link["workspace"] for link in layout["workspaceLinks"]}),
         yarn = repr(layout["yarn"]),
     ))

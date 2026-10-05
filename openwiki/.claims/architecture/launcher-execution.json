@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:77f90a7b362e5a4312df05459d5671f3b5c0af6ed08e8e23f2f43d62d6f42106",
+  "pageVersion": "sha256:8e3e84c97d03566c252ee13e9e4f46744b2ae68a25990e901bc0a427a3d8e90c",
   "claims": [
     {
       "id": "claim_dc8ca9a0db904b2abc728ee78830c9be",
@@ -137,11 +137,11 @@
       "statement": "Each install repository declares `pin`, a yarn_binary whose entry point is pin.cjs with pin_config.json and the selected yarn.js beside it.",
       "evidence": [
         {
-          "resource": "repo://yarn/private/install/repository.bzl#L111-L123",
+          "resource": "repo://yarn/private/install/repository.bzl#L126-L138",
           "version": "repo-lines-v1:sha256:fbd1cab7c1c6cdfaccaa0eb54c9308291f862981f4cab2a4f9433cb48d62dc8c:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdiYTcxNDkwNWI2ZjNmM2YyYjc1NDYxODQ0ZWEzZjc0ZjNhZWExOTJiY2VkNDFlZTRmZDAzYWYwOThjYjM1MjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFjY2NmMDdlODU4ODFlM2VjODBhOGFiNzc0ODQ4YzBmODc4NmViZmVhYzIxY2UxNDllMWI0NWUzODQxYzAxZmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk4NzFmZDIyYmI0MWMzMTA4MGZjODE4ZjZiZWFkMDNkNjgxNzhmMGZhNmFjOGRhMzgxODgwZWY1OGQ3ODQ3NzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc2MGVlMWVjZDU1ZTQ4MGVmYWFiNTM3YTUxYzY5MDJhNjU2MGMzNzZmNzMwYmU0Y2EwNzgzYmM5YTJhMThiNTcifQ"
         },
         {
-          "resource": "repo://yarn/private/install/repository.bzl#L68-L90",
+          "resource": "repo://yarn/private/install/repository.bzl#L81-L103",
           "version": "repo-lines-v1:sha256:57785ee451990d039dff275059ca8fd89343519f742027a53c13170925aa3dc2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwOGEzY2I5MmMxODAwMzRhZjg2MjU4YmMwYzliOTFjYTk3MGU4MWIzYTk1Y2ZiMTk4ZmM5M2M0MzRiMTFkMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiOWEyOGMwN2Y2YTE3YzExNDQ1YzMyMDU2NzUxMGJjYmVhOTc0ZDgyOWI0MTNkYmM0ODU4NTFjZjhhMDJlMTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzM2I1ODlhZDBiNmFhMDgwNWExZDg5YjJkZjBkOGY5NjU5NTIwYmFkMTAzMzUzZTBkZTUzOGZiYjZhOTIxMGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhhNTg5ZGI4ZjI0OWRhOTg2ZTdmMTIyNzg1MzRmZmZmMjg0MTg4NjM0MTdhNjRiZmI0YmZjYzA2MWI3MWMxZDIifQ"
         }
       ]
@@ -149,6 +149,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-04T12:22:38.266Z"
+    "at": "2026-10-05T14:22:28.209Z"
   }
 }

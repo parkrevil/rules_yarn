@@ -38,34 +38,48 @@ const PACKAGES = [
   // `yarn npm info` falls back to can be told apart.
   {name: "tagged", version: "1.0.0", files: {"index.js": "module.exports = 1;\n"}},
   {name: "tagged", version: "2.0.0", latest: false, files: {"index.js": "module.exports = 2;\n"}},
+  // Tarballs shaped the way some registry tarballs are, or could be, where
+  // bsdtar and Yarn's extraction part (see extract.js): `extra` entries are
+  // written after the package's files, as they are.
+  {name: "shape-dirmode", version: "1.0.0", files: {"index.js": "module.exports = 'dirmode';\n"}, extra: [{name: "package/lib/", type: "5", mode: 0o644}, {name: "package/lib/x.js", data: "module.exports = 'x';\n"}]},
+  {name: "shape-mode0", version: "1.0.0", files: {"index.js": "module.exports = 'mode0';\n"}, extra: [{name: "package/secret.js", data: "module.exports = 's';\n", mode: 0o000}]},
+  {name: "shape-hardlink", version: "1.0.0", files: {"index.js": "module.exports = 'hardlink';\n"}, extra: [{name: "package/again.js", type: "1", link: "package/index.js"}]},
+  {name: "shape-contiguous", version: "1.0.0", files: {"index.js": "module.exports = 'contiguous';\n"}, extra: [{name: "package/contiguous.js", type: "7", data: "c"}]},
+  {name: "shape-absolute", version: "1.0.0", files: {"index.js": "module.exports = 'absolute';\n"}, extra: [{name: "/package/absolute.js", data: "a"}]},
+  {name: "shape-dotslash", version: "1.0.0", files: {"index.js": "module.exports = 'dotslash';\n"}, prefix: "./package/"},
+  {name: "shape-dotdot", version: "1.0.0", files: {"index.js": "module.exports = 'dotdot';\n"}, extra: [{name: "package/../outside.js", data: "o"}]},
+  {name: "shape-fifo", version: "1.0.0", files: {"index.js": "module.exports = 'fifo';\n"}, extra: [{name: "package/pipe", type: "6"}]},
+  {name: "shape-case", version: "1.0.0", files: {"index.js": "module.exports = 'case';\n", "README": "upper\n", "readme": "lower\n"}},
 ];
 
-// A ustar archive with every entry under `package/`, as npm packs them.
-function tar(files, links) {
+// A ustar archive with every entry under `prefix` (`package/`, as npm packs
+// them), then the `extra` entries, written as given.
+function tar(files, links, extra = [], prefix = "package/") {
   const blocks = [];
-  const header = (name, size, type, linkname = "") => {
+  const entry = ({name, type = "0", data = "", mode, link = ""}) => {
+    const bytes = Buffer.from(data);
     const h = Buffer.alloc(512);
     h.write(name, 0, 100);
-    h.write(type === "0" ? "0000644\0" : "0000777\0", 100);
+    h.write((mode ?? (type === "5" ? 0o755 : type === "2" ? 0o777 : 0o644)).toString(8).padStart(7, "0") + "\0", 100);
     h.write("0000000\0", 108);
     h.write("0000000\0", 116);
-    h.write(size.toString(8).padStart(11, "0") + "\0", 124);
+    const sized = type === "0" || type === "7";
+    h.write((sized ? bytes.length : 0).toString(8).padStart(11, "0") + "\0", 124);
     h.write("00000000000\0", 136);
     h.write("        ", 148);
     h.write(type, 156);
-    h.write(linkname, 157, 100);
+    h.write(link, 157, 100);
     h.write("ustar\0", 257);
     h.write("00", 263);
     let sum = 0;
     for (const b of h) sum += b;
     h.write(sum.toString(8).padStart(6, "0") + "\0 ", 148);
-    return h;
+    blocks.push(h);
+    if (sized) blocks.push(bytes, Buffer.alloc((512 - (bytes.length % 512)) % 512));
   };
-  for (const [name, content] of Object.entries(files)) {
-    const data = Buffer.from(content);
-    blocks.push(header(`package/${name}`, data.length, "0"), data, Buffer.alloc((512 - (data.length % 512)) % 512));
-  }
-  for (const [name, target] of Object.entries(links || {})) blocks.push(header(`package/${name}`, 0, "2", target));
+  for (const [name, content] of Object.entries(files)) entry({name: `${prefix}${name}`, data: content});
+  for (const [name, target] of Object.entries(links || {})) entry({name: `${prefix}${name}`, type: "2", link: target});
+  for (const e of extra) entry(e);
   blocks.push(Buffer.alloc(1024));
   return zlib.gzipSync(Buffer.concat(blocks), {level: 9, mtime: 0});
 }
@@ -77,7 +91,7 @@ function build(port) {
   for (const p of PACKAGES) {
     const manifest = {name: p.name, version: p.version, main: "index.js"};
     for (const field of ["bin", "os", "cpu", "dependencies", "optionalDependencies"]) if (p[field]) manifest[field] = p[field];
-    const bytes = tar({"package.json": JSON.stringify(manifest, null, 2) + "\n", ...p.files}, p.links);
+    const bytes = tar({"package.json": JSON.stringify(manifest, null, 2) + "\n", ...p.files}, p.links, p.extra, p.prefix);
     const file = `${p.name.split("/").pop()}-${p.version}.tgz`;
     const tarballPath = `/${p.name}/-/${file}`;
     tarballs.set(tarballPath, bytes);

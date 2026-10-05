@@ -23,8 +23,10 @@ const cp = require("node:child_process");
 const archive = require("./archive.js");
 const {cacheKeyErrors, checkInstall, npmTarballPaths} = require("./check.js");
 const {architectureSet, selectTarballs} = require("./conditions.js");
+const extract = require("./extract.js");
 const {deriveLayout} = require("./layout.js");
 const {parseLockfile} = require("./lockfile.js");
+const {candidates} = require("./sources.js");
 const {CARRIED, carriedFiles} = require("./yarnrc.js");
 
 const crypto = require("node:crypto");
@@ -36,7 +38,7 @@ const crypto = require("node:crypto");
 function rcFilename() {
   return `.rules-yarn-${crypto.randomBytes(16).toString("hex")}.yml`;
 }
-const LAYOUT_VERSION = 1;
+const LAYOUT_VERSION = 2;
 
 // nodeUtils.getLibc in Yarn 4.18.0: Linux only; the ldd header first, then
 // the shared objects the process report lists.
@@ -312,26 +314,56 @@ async function install(config) {
   }
 
   const packageMap = readJson(path.join(project, "node_modules", ".package-map.json"), ".package-map.json");
-  const layout = deriveLayout(packageMap, (dir) => {
+  const readManifest = (dir) => {
     try {
       return JSON.parse(fs.readFileSync(path.join(project, dir, "package.json"), "utf8"));
     } catch {
       return {};
     }
-  });
-  const archives = path.join(config.out, "archives");
-  fs.rmSync(archives, {recursive: true, force: true});
-  fs.mkdirSync(archives);
+  };
+  const layout = deriveLayout(packageMap, readManifest);
+
+  // Each store package is built from its pinned tarball when extracting and
+  // normalising that tarball gives exactly the tree Yarn laid out (extract.js),
+  // and from an archive of Yarn's tree otherwise.
+  const tarballCandidates = candidates(layout.packages, new Set(Object.keys(config.tarballs)), readManifest);
+  const bsdtarEnv = extract.localeEnv(process.platform);
+  // A host bsdtar that cannot run would turn every package into an archive
+  // without a word; it is a pinned binary for the host's platform, so its
+  // failing to run is reported instead.
+  const probe = cp.spawnSync(config.bsdtar, ["--version"], {env: {...process.env, ...bsdtarEnv}, encoding: "utf8"});
+  if (probe.status !== 0) {
+    return {errors: [`tar.bzl's bsdtar for this host could not run (${config.bsdtar}):\n${probe.stdout ?? ""}${probe.stderr ?? ""}${probe.error ? probe.error.message : ""}`]};
+  }
+  for (const dir of ["archives", "manifests", "scratch"]) {
+    fs.rmSync(path.join(config.out, dir), {recursive: true, force: true});
+    fs.mkdirSync(path.join(config.out, dir));
+  }
   const packages = [];
   for (const [index, dir] of layout.packages.entries()) {
+    const yarnTree = path.join(project, dir);
+    const entries = extract.manifest(yarnTree);
+    const link = entries.find((e) => e[1] === "l");
+    if (link) {
+      fs.rmSync(path.join(config.out, "scratch"), {recursive: true, force: true});
+      return {errors: [`${dir}: ${link[0]} is a link, and a package containing links cannot be installed`]};
+    }
+    const resolution = tarballCandidates[dir];
+    if (resolution && extract.decide({bsdtar: config.bsdtar, env: bsdtarEnv, tarball: config.tarballs[resolution], expected: entries, scratch: path.join(config.out, "scratch", "package")})) {
+      const file = `manifests/${index}.json`;
+      fs.writeFileSync(path.join(config.out, file), JSON.stringify(entries));
+      packages.push({path: dir, tarball: resolution, manifest: file});
+      continue;
+    }
     const file = `archives/${index}.rya`;
     try {
-      fs.writeFileSync(path.join(config.out, file), archive.pack(path.join(project, dir)));
+      fs.writeFileSync(path.join(config.out, file), archive.pack(yarnTree));
     } catch (e) {
       return {errors: [`${dir}: ${e.message}`]};
     }
     packages.push({path: dir, archive: file});
   }
+  fs.rmSync(path.join(config.out, "scratch"), {recursive: true, force: true});
   fs.rmSync(work, {recursive: true, force: true});
   return {
     errors: [],

@@ -253,6 +253,63 @@ record $? "Named architectures: two systems and two CPUs install all four combin
 module "{}"
 
 echo
+echo "# building packages from their tarballs"
+
+# How the install recorded each package: "tarball", "archive", or nothing.
+source_of() { "$node" -e '
+const layout = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
+const p = layout.packages.find((x) => x.path.startsWith(`node_modules/.store/${process.argv[2]}-npm-`));
+console.log(p ? (p.tarball ? "tarball" : "archive") : "");' "$(b info output_base 2>/dev/null)/external/rules_yarn++yarn+npm/layout.json" "$1"; }
+installed_files() { (cd "$(store "$1-npm")" && find . | LC_ALL=C sort | tr '\n' ' '); }
+
+build
+plain=$?
+[ "$plain" = 0 ] && [ "$(source_of left)" = tarball ] && [ "$(source_of right)" = tarball ] && [ "$(source_of @fx-scoped)" = tarball ]
+record $? "Package built from its tarball: plain packages are extracted at build time, and the install keeps no archive of them"
+
+# A filesystem that folds case — macOS's APFS by default — lets Yarn write one
+# of README and readme; one that does not keeps both. Either way the package is
+# archived, which the sources above check.
+printf 'x' >"$work/case-probe"
+case_tree_ok() {
+  if [ -e "$work/CASE-PROBE" ]; then
+    [ -f "$(store shape-case-npm)/index.js" ]
+  else
+    [ "$(cat "$(store shape-case-npm)/README")" = "upper" ] && [ "$(cat "$(store shape-case-npm)/readme")" = "lower" ]
+  fi
+}
+shapes='"shape-dirmode": "1.0.0", "shape-mode0": "1.0.0", "shape-hardlink": "1.0.0", "shape-contiguous": "1.0.0", "shape-absolute": "1.0.0", "shape-dotslash": "1.0.0", "shape-dotdot": "1.0.0", "shape-fifo": "1.0.0", "shape-case": "1.0.0"'
+project "\"left\": \"1.0.0\", \"@fx/scoped\": \"1.0.0\", \"tool\": \"1.0.0\", \"right\": \"2.0.0\", $shapes"
+lock && pin || die "locking and pinning the tarball shapes failed: $(tail -20 "$work/pin.log")"
+build
+shaped=$?
+{
+  for shape in dirmode mode0; do echo "shape-$shape $(source_of "shape-$shape")"; done
+  for shape in hardlink contiguous absolute dotslash dotdot fifo case; do echo "shape-$shape $(source_of "shape-$shape")"; done
+  echo "dirmode files: $(installed_files shape-dirmode)"
+  echo "hardlink files: $(installed_files shape-hardlink)"
+  echo "case files: $(installed_files shape-case)"
+} >"$work/build.err"
+expected_sources="shape-dirmode tarball
+shape-mode0 tarball
+shape-hardlink archive
+shape-contiguous archive
+shape-absolute archive
+shape-dotslash archive
+shape-dotdot archive
+shape-fifo archive
+shape-case archive"
+[ "$shaped" = 0 ] && [ "$(head -9 "$work/build.err")" = "$expected_sources" ] \
+  && [ "$(cat "$(store shape-dirmode-npm)/lib/x.js")" = "module.exports = 'x';" ] \
+  && [ "$(cat "$(store shape-mode0-npm)/secret.js")" = "module.exports = 's';" ] \
+  && [ ! -e "$(store shape-hardlink-npm)/again.js" ] && [ ! -e "$(store shape-contiguous-npm)/contiguous.js" ] \
+  && [ ! -e "$(store shape-fifo-npm)/pipe" ] && [ -f "$(store shape-dotslash-npm)/index.js" ] \
+  && case_tree_ok
+record $? "Tarballs bsdtar and Yarn extract differently: each installs Yarn's tree, from its tarball when normalising makes them equal, from an archive otherwise"
+project '"left": "1.0.0", "@fx/scoped": "1.0.0", "tool": "1.0.0", "right": "2.0.0"'
+lock && pin || die "locking and pinning without the tarball shapes failed: $(tail -20 "$work/pin.log")"
+
+echo
 echo "# refusals"
 
 cp "$ws/pins.json" "$work/pins.good"

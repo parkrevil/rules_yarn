@@ -24,10 +24,10 @@ sources:
     resource: repo://tests/bcr/.bazelrc
   - id: openwiki-source-847ceba95f7fcfa239c5f25b
     resource: repo://yarn/private/versions.bzl
-generated: { by: "claude-code", at: "2026-10-04T12:22:38.266Z" }
+generated: { by: "claude-code", at: "2026-10-05T14:22:28.209Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-04T12:22:38.266Z
+    at: 2026-10-05T14:22:28.209Z
 ---
 
 # Version pinning and lockfiles
@@ -128,7 +128,10 @@ dependencies of the root module: they are needed to build and test the ruleset,
 not to consume it. A consumer supplies its own Node.js toolchain and declares its
 own Yarn version.
 
-Two declarations are not development-only, because `yarn.install` needs them in
-a consumer's build: the four per-platform Node.js repositories of
+Three declarations are not development-only, because `yarn.install` needs them
+in a consumer's build: the four per-platform Node.js repositories of
 `rules_nodejs`'s default toolchain, which the install repository runs Yarn on
-before any toolchain can be resolved, and the js-yaml archive.
+before any toolchain can be resolved; the js-yaml archive; and `tar.bzl`
+0.10.9, whose bsdtar extracts a package from its pinned tarball — through the
+registered toolchain in a build action, and through its four per-platform
+repositories in the install repository, where toolchains cannot be resolved.

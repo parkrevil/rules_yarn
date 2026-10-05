@@ -23,7 +23,7 @@ sh_test(
     args = [
         "$(rlocationpath @nodejs//:node_bin)",
         "$(rlocationpath lockfile_test.js)",
-        "$(rlocationpath @js_yaml//:index.js)",
+        "JS_YAML=$(rlocationpath @js_yaml//:index.js)",
     ],
     data = [
         "lockfile_test.js",
@@ -43,7 +43,7 @@ sh_test(
     args = [
         "$(rlocationpath @nodejs//:node_bin)",
         "$(rlocationpath check_test.js)",
-        "$(rlocationpath @js_yaml//:index.js)",
+        "JS_YAML=$(rlocationpath @js_yaml//:index.js)",
     ],
     data = [
         "check_test.js",
@@ -80,7 +80,7 @@ sh_test(
     args = [
         "$(rlocationpath @nodejs//:node_bin)",
         "$(rlocationpath conditions_test.js)",
-        "$(rlocationpath @js_yaml//:index.js)",
+        "JS_YAML=$(rlocationpath @js_yaml//:index.js)",
     ],
     data = [
         "conditions_test.js",
@@ -101,7 +101,7 @@ sh_test(
     args = [
         "$(rlocationpath @nodejs//:node_bin)",
         "$(rlocationpath yarnrc_test.js)",
-        "$(rlocationpath @js_yaml//:index.js)",
+        "JS_YAML=$(rlocationpath @js_yaml//:index.js)",
     ],
     data = [
         "yarnrc_test.js",
@@ -128,9 +128,11 @@ sh_test(
         "//yarn/private/install:check.js",
         "//yarn/private/install:conditions.js",
         "//yarn/private/install:driver.js",
+        "//yarn/private/install:extract.js",
         "//yarn/private/install:layout.js",
         "//yarn/private/install:lockfile.js",
         "//yarn/private/install:repository.bzl",
+        "//yarn/private/install:sources.js",
         "//yarn/private/install:syml.js",
         "//yarn/private/install:yarnrc.js",
         "@nodejs//:node_bin",
@@ -145,7 +147,7 @@ sh_test(
     args = [
         "$(rlocationpath @nodejs//:node_bin)",
         "$(rlocationpath driver_test.js)",
-        "$(rlocationpath @js_yaml//:index.js)",
+        "JS_YAML=$(rlocationpath @js_yaml//:index.js)",
     ],
     data = [
         "driver_test.js",
@@ -153,8 +155,10 @@ sh_test(
         "//yarn/private/install:check.js",
         "//yarn/private/install:conditions.js",
         "//yarn/private/install:driver.js",
+        "//yarn/private/install:extract.js",
         "//yarn/private/install:layout.js",
         "//yarn/private/install:lockfile.js",
+        "//yarn/private/install:sources.js",
         "//yarn/private/install:syml.js",
         "//yarn/private/install:yarnrc.js",
         "@js_yaml",
@@ -171,8 +175,8 @@ sh_test(
     args = [
         "$(rlocationpath @nodejs//:node_bin)",
         "$(rlocationpath yarnrc_yarn_test.js)",
-        "$(rlocationpath @js_yaml//:index.js)",
-        "$(rlocationpath @yarn)",
+        "JS_YAML=$(rlocationpath @js_yaml//:index.js)",
+        "YARN_JS=$(rlocationpath @yarn)",
     ],
     data = [
         "yarnrc_yarn_test.js",
@@ -180,8 +184,10 @@ sh_test(
         "//yarn/private/install:check.js",
         "//yarn/private/install:conditions.js",
         "//yarn/private/install:driver.js",
+        "//yarn/private/install:extract.js",
         "//yarn/private/install:layout.js",
         "//yarn/private/install:lockfile.js",
+        "//yarn/private/install:sources.js",
         "//yarn/private/install:syml.js",
         "//yarn/private/install:yarnrc.js",
         "@js_yaml",
@@ -189,5 +195,88 @@ sh_test(
         "@nodejs//:node_bin",
         "@yarn",
     ],
+    deps = ["@bazel_tools//tools/bash/runfiles"],
+)
+
+config_setting(
+    name = "linux_amd64",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:x86_64",
+    ],
+)
+
+config_setting(
+    name = "linux_arm64",
+    constraint_values = [
+        "@platforms//os:linux",
+        "@platforms//cpu:aarch64",
+    ],
+)
+
+config_setting(
+    name = "darwin_amd64",
+    constraint_values = [
+        "@platforms//os:macos",
+        "@platforms//cpu:x86_64",
+    ],
+)
+
+config_setting(
+    name = "darwin_arm64",
+    constraint_values = [
+        "@platforms//os:macos",
+        "@platforms//cpu:aarch64",
+    ],
+)
+
+# The host's bsdtar from tar.bzl, the binary the driver runs for the decision.
+alias(
+    name = "bsdtar",
+    actual = select({
+        ":darwin_amd64": "@bsd_tar_toolchains_darwin_amd64//:tar",
+        ":darwin_arm64": "@bsd_tar_toolchains_darwin_arm64//:tar",
+        ":linux_amd64": "@bsd_tar_toolchains_linux_amd64//:tar",
+        ":linux_arm64": "@bsd_tar_toolchains_linux_arm64//:tar",
+    }),
+)
+
+sh_test(
+    name = "extract_test",
+    size = "small",
+    srcs = ["node_test.sh"],
+    args = [
+        "$(rlocationpath @nodejs//:node_bin)",
+        "$(rlocationpath extract_test.js)",
+        "BSDTAR=$(rlocationpath :bsdtar)",
+    ],
+    data = [
+        "extract_test.js",
+        ":bsdtar",
+        "//yarn/private/install:extract.js",
+        "@nodejs//:node_bin",
+    ],
+    deps = ["@bazel_tools//tools/bash/runfiles"],
+)
+
+sh_test(
+    name = "sources_test",
+    size = "small",
+    srcs = ["node_test.sh"],
+    args = [
+        "$(rlocationpath @nodejs//:node_bin)",
+        "$(rlocationpath sources_test.js)",
+        "JS_YAML=$(rlocationpath @js_yaml//:index.js)",
+    ],
+    data = [
+        "sources_test.js",
+        "//yarn/private/install:check.js",
+        "//yarn/private/install:lockfile.js",
+        "//yarn/private/install:sources.js",
+        "//yarn/private/install:syml.js",
+        "@js_yaml",
+        "@js_yaml//:index.js",
+        "@nodejs//:node_bin",
+    ] + glob(["testdata/**"]),
     deps = ["@bazel_tools//tools/bash/runfiles"],
 )

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:f073aa1602c8c633186b03824ae01e1716393ce5634a3ebfd83f3536eca2fe58",
+  "pageVersion": "sha256:04ef26b3134d573a0935d197fa7672478c8f584c0d8b680b49f526937ccc46a2",
   "claims": [
     {
       "id": "claim_f94f369481c3466db1302dc475650602",
@@ -56,11 +56,11 @@
     },
     {
       "id": "claim_80b561828663453a8744bff1db2a6b94",
-      "statement": "The Node.js toolchain registration, the test Yarn distribution, the platforms module and the testing framework are declared as development dependencies of the root module, so consumers do not inherit them; the per-platform Node.js repositories and js-yaml are not development-only.",
+      "statement": "The Node.js toolchain registration, the test Yarn distribution, the platforms module and the testing framework are declared as development dependencies of the root module, so consumers do not inherit them; the per-platform Node.js repositories, js-yaml and tar.bzl are not development-only.",
       "evidence": [
         {
-          "resource": "repo://MODULE.bazel#L21-L72",
-          "version": "repo-lines-v1:sha256:3f15aefe1d155e1b34b7e81dfaa28d44b36fb0e456a6d23a4f3518b7240e9a14:eyJzZWxlY3RlZExpbmVDb3VudCI6NTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlYjAzOWI0NzM0YmM4OWVkYjliNzhhYWM3OTFlNTA3MmY4MzAyMjRhZDY4ZTlmOWQwYzcwNTg2YzYxN2EzMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiYjVmZTNjOTg4NTFkMWE4OGIzNjAyNDI4ODExZjc4OGVhNGQ5N2RlZTQzODE4YWRjYWEwYjg5ZGIyZDU1YzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRjNWQ3ZjY3ZWZlYzE4MWQ5MjA3ZTBjYjI4OWI1MzUwOTI4MTdhNDkwMTIyOWQyMmRkNWZmOGQwNWEwNmM4MWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://MODULE.bazel#L22-L86",
+          "version": "repo-lines-v1:sha256:f1a8034f14275be57b16ff3bd5344b17361a97500f8a65ea0d246a7eb9cea05c:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlYjAzOWI0NzM0YmM4OWVkYjliNzhhYWM3OTFlNTA3MmY4MzAyMjRhZDY4ZTlmOWQwYzcwNTg2YzYxN2EzMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiYjVmZTNjOTg4NTFkMWE4OGIzNjAyNDI4ODExZjc4OGVhNGQ5N2RlZTQzODE4YWRjYWEwYjg5ZGIyZDU1YzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiMDdhYzBiNTA5YmZhOTQzNWM3NTY4ZWM1MGQyNjUwZDRiZDgwZWIzY2YwZmNiZmMzZDk5MzdhYmE2MzI3MzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
     },
@@ -113,8 +113,8 @@
       "statement": "MODULE.bazel pins js-yaml 4.3.0 by URL and the npm registry's integrity through http_archive.",
       "evidence": [
         {
-          "resource": "repo://MODULE.bazel#L36-L56",
-          "version": "repo-lines-v1:sha256:7d8ec100c3f4098a3fe91658816f6782d3bb746b71f9785f88326198317bc43b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhZTYyMDViYTA0YzM5ZmFlOTE5Nzk1MDYzZTQ0NjFjOWE3ZmJiMjhhNzk5ODFiN2FkNzNkZDU4MTYzNTk0N2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjliMDBmY2I0NGY3ZTg3Y2M2NGRjMmQ0MDYyNzVkN2YzNmQ4ZTcxOTYzNWY4N2FkYTY5NzY3NTZmZDRmYWI2MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2NTViNDNhZGUyZDJiODk2ZTc1YTIyYzlmYWY5ZGE2NjQ5ODgyNDg0YzYwZDJlOGQ1NmQzMTk4NDA0Y2EyMDQifQ"
+          "resource": "repo://MODULE.bazel#L50-L70",
+          "version": "repo-lines-v1:sha256:7d8ec100c3f4098a3fe91658816f6782d3bb746b71f9785f88326198317bc43b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRhZTYyMDViYTA0YzM5ZmFlOTE5Nzk1MDYzZTQ0NjFjOWE3ZmJiMjhhNzk5ODFiN2FkNzNkZDU4MTYzNTk0N2UiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUxYzcxMGMxOGU5ZWY4NmJkNDgzZmYyMDBmZDYxNDY3OWVlODk4NjExZGMzM2MzNzhhYjY4MGZhOWIwMGM3ODAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2NTViNDNhZGUyZDJiODk2ZTc1YTIyYzlmYWY5ZGE2NjQ5ODgyNDg0YzYwZDJlOGQ1NmQzMTk4NDA0Y2EyMDQifQ"
         }
       ]
     },
@@ -137,10 +137,24 @@
           "version": "repo-file-v1:sha256:ba773db6fb3cc8eb44d5aae891bf8aa222c2169e26258172055b59594113a6eb"
         }
       ]
+    },
+    {
+      "id": "claim_9749949ebcd849c585496179dd3ceb19",
+      "statement": "MODULE.bazel depends on tar.bzl 0.10.9 and brings in its four per-platform bsdtar repositories for the install repository.",
+      "evidence": [
+        {
+          "resource": "repo://MODULE.bazel#L20-L20",
+          "version": "repo-lines-v1:sha256:fcf107a554f0e81f725f02f62881451c8c891ae67d9eea8dd22bffda20f4782f:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZmNmMTA3YTU1NGYwZTgxZjcyNWYwMmY2Mjg4MTQ1MWM4Yzg5MWFlNjdkOWVlYThkZDIyYmZmZGEyMGY0NzgyZiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmNmMTA3YTU1NGYwZTgxZjcyNWYwMmY2Mjg4MTQ1MWM4Yzg5MWFlNjdkOWVlYThkZDIyYmZmZGEyMGY0NzgyZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGI3NmQzYjg0YWJhZDBhY2FkMmI0N2M1NjVlZGIzZDYyNmU5MjZiYzA0ZDM1NTBlNGVlNmVlYTY0OTNkYTg2OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzIwNmM4NWQ3NmYwYmRhZjExNDgxMWYxMmVmMjU4NzE5NzgxN2FkYjhhMWFhYTI1OGZhMzNhYzU2ODE1ODEzMiJ9"
+        },
+        {
+          "resource": "repo://MODULE.bazel#L37-L48",
+          "version": "repo-lines-v1:sha256:9e0a944fd07f05bcde9e66ce0e302bfb61a868cc8aff5793f6bbc53b0e6fc179:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwMmIyY2MxNjM0NWRlNjFlOTk0NTZhMjY4N2Q4NmZhZDY4MDE4Mzk3NDk0MzU2ZTRmZDMwZDIwOWYyZDc4ZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjliMDBmY2I0NGY3ZTg3Y2M2NGRjMmQ0MDYyNzVkN2YzNmQ4ZTcxOTYzNWY4N2FkYTY5NzY3NTZmZDRmYWI2MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzMThhZGE2NmM2NDdmMWE0Yjg0MDg2YWQ1ZTFmYjFhZjUyNzVjNDhhZTVkZWY1ZTcxYWI4NjdiMjhlMjQzZTQifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-04T12:22:38.266Z"
+    "at": "2026-10-05T14:22:28.209Z"
   }
 }

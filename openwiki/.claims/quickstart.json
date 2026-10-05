@@ -1,13 +1,13 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:c6e446531ae2b96279baf1e020edf909c0057e80edbf3e8e2d9234a0901eeb42",
+  "pageVersion": "sha256:e7cb056752613a129df4a175a2d3070a9a9c58e172bf7d70b8399591370dfbbb",
   "claims": [
     {
       "id": "claim_8726f27a9d394749af7f84cf2e263861",
       "statement": "yarn_binary runs the Yarn CLI with no caching, sandboxing or dependency-installation guarantees from Bazel; yarn.install is the part with guarantees, and running the project's scripts as actions is not yet provided.",
       "evidence": [
         {
-          "resource": "repo://README.md#L244-L255",
+          "resource": "repo://README.md#L247-L258",
           "version": "repo-lines-v1:sha256:4e9612fb7442697d96e6c07541aeb4a1abc53970deaf9702ed7d4525a4b64663:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJmZWVjOGNiMzkzMTY1ZTk1MTgxMTk3ZWJlZmVjYTQ0YTQyNTZiZWY2ZjRjZmMxMGRlNjg4NDMxMzVkMWVjYjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc1YWQ5ZmEyNzExNjg0NGRlOTRhOWFhNGNjMGVmMTEzZDc1ZTk3MTRhODkxZGJmZjY0MzhjZmVhYzFmMWRlYjYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU5MTI4ZGUyZDZmYmMzNWI1YzY0OGJkNjc2MjJlODcxNmFmOTI1ODBjY2YxNGMyN2I3MGJmODkwNDlhOTg0ZjUifQ"
         },
         {
@@ -25,7 +25,7 @@
           "version": "repo-file-v1:sha256:38c2ece6eed674edaaf3563f91c555f8005ddd6632ce34cfcd231f9db95a9bc7"
         },
         {
-          "resource": "repo://README.md#L236-L238",
+          "resource": "repo://README.md#L239-L241",
           "version": "repo-lines-v1:sha256:410a77f15a4c1412bc56ba1f449d49882fd71640746912c7c73922d58c671518:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTI2MGRkZWE0YjgyNDJjZWRmZGExMzI0ODgyNzAwZjcxMDBiNDc5MmFjYWU5OWI3YjljZTFmNzdkZTYxNDBkOCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYWQ0ZjIxODhkODU5ZThkMDdlMmI5Nzk1YjVlZDQ1NWM2ODY4MTJiYTEyMjk4MjVhODU5NGNmMzUyYTNlMGEzYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDZhOWMwZWY5OTIyZTE3NzIxNmNiMjIwNDhhMzlkYjBlMTBjOTE2NGY0MGJhOWNhMmEwNWVjYTMxNGJmMGRhNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTIxMTJhYTExZDIwZDhkMWJiMThmOGEwZjMxYzNjMjI0M2Y1NGM4NTA2NTc5YjdkYWZjMWRiNTM5ZjJhZjFmMSJ9"
         }
       ]
@@ -77,7 +77,7 @@
       "statement": "A consumer needs Bazel 8.3.0 or newer, which the ruleset declares so that an older Bazel is turned away while the module graph resolves rather than failing inside the ruleset.",
       "evidence": [
         {
-          "resource": "repo://README.md#L231-L234",
+          "resource": "repo://README.md#L234-L237",
           "version": "repo-lines-v1:sha256:f352b2469e44e93fd81e596f04413d546dafea1c05a03dfa0c813d2a4e3d415f:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTM2ZDA1MDkyNzJiZjY0NGQ2MzUyNDhlYjM5OTczMTgyZDIxMDZkMTFhODZmZGQxZjc5MzEyOTNkZDZmZjBhNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiM2VjMjQ3ZGYwYzI3Njk3NTY2NjlkOGI4MDBlZTFhOWI4NmY1NGI5OWJlMjA5NzNiMjkwMjYzZTVmNzA4NGY1YSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNmFhODVhNmYyOWU1ZjU3MzQ5ODY3YTk0OWUzMDIyNWUwZDA5ZmM1OTMyZGIzMmYzODA1YzExOTllNmY3ZmZkZSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMTU4YTM0YjFmODE3NTIxOWEyZjkwYWI2ODI4MWI2Yzk3NjY2MjE0MTBjZWE0ODU1NTMxYjM0M2M4MmMzYmY5ZCJ9"
         },
         {
@@ -109,14 +109,14 @@
       "statement": "yarn.install fetches every registry package through Bazel with a pinned integrity, installs exactly the lockfile's versions offline, runs no dependency build scripts, and makes each package its own artifact.",
       "evidence": [
         {
-          "resource": "repo://README.md#L78-L144",
-          "version": "repo-lines-v1:sha256:6e4d3bdbbfe768f0efd1663c88ea39ad7be8d4c161abef4886d07a0562d395ce:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjMDMzZDA3NWRkYzkxZDQ0ZGY3NjQzM2E3ZGU4OWRkOGFkYzUwNWRhZDg0NDNkNDNiOWIzMjdiZjllMmRkYzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY2MjJmZWIzZDc1MmEwZGNlOWViYWZjOTQ2Mjg5MDY5ZjkzYzk4ZDQ1YjRiZGRkNzFjZWVlNmMwODE4YThiOTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiODU5YTJhMDE1MGYyMDhjYWU5NzViYjhlZWI2ZmI0MGNlYjAxNjk5ZTA5ZGE0YzdiYmI4MGM4ODIwMThkN2MifQ"
+          "resource": "repo://README.md#L78-L147",
+          "version": "repo-lines-v1:sha256:fc3dd2fe8c2fdb0ebdf8d5588b7c34ed1264e79a61e518998f445c5b127c3fe1:eyJzZWxlY3RlZExpbmVDb3VudCI6NzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjMDMzZDA3NWRkYzkxZDQ0ZGY3NjQzM2E3ZGU4OWRkOGFkYzUwNWRhZDg0NDNkNDNiOWIzMjdiZjllMmRkYzUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY2MjJmZWIzZDc1MmEwZGNlOWViYWZjOTQ2Mjg5MDY5ZjkzYzk4ZDQ1YjRiZGRkNzFjZWVlNmMwODE4YThiOTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImNiODU5YTJhMDE1MGYyMDhjYWU5NzViYjhlZWI2ZmI0MGNlYjAxNjk5ZTA5ZGE0YzdiYmI4MGM4ODIwMThkN2MifQ"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-04T18:04:16.838Z"
+    "at": "2026-10-05T14:22:28.209Z"
   }
 }

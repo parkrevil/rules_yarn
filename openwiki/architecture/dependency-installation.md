@@ -5,7 +5,7 @@ description: How yarn.install turns a project's yarn.lock into Bazel artifacts �
 tags: [yarn-install, repository-rule, module-extension, integrity, isolation, node-modules]
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-05T05:22:56.641Z
+    at: 2026-10-05T14:30:59.099Z
 sources:
   - id: openwiki-source-6baa3bd517a8e6434ec03836
     resource: repo://e2e/install/BUILD.bazel
@@ -17,10 +17,16 @@ sources:
     resource: repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/design.md
   - id: openwiki-source-8fb8a65196be59b25e803b94
     resource: repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/tasks.md
+  - id: openwiki-source-ac0611a35be203b30b8316c2
+    resource: repo://openspec/changes/extract-packages-from-tarballs/tasks.md
   - id: openwiki-source-3a9d47c216ac83ae687d3e65
     resource: repo://tests/install/driver_test.js
+  - id: openwiki-source-186e1eeea778492c4f3de07f
+    resource: repo://tests/install/extract_test.js
   - id: openwiki-source-e2f407b8e02db47e00a29b1f
     resource: repo://tests/install/layout_test.js
+  - id: openwiki-source-bb76665a0173e3c463c3f320
+    resource: repo://tests/install/sources_test.js
   - id: openwiki-source-de9ac9bca103f5df1400a559
     resource: repo://tests/install/watched_test.js
   - id: openwiki-source-3acfc65272985ab92f4e511f
@@ -37,6 +43,8 @@ sources:
     resource: repo://yarn/private/install/conditions.js
   - id: openwiki-source-fa80dfa9d053206fdf5a7f9e
     resource: repo://yarn/private/install/driver.js
+  - id: openwiki-source-5b97d2d7fb6db0ae06724904
+    resource: repo://yarn/private/install/extract.js
   - id: openwiki-source-7a214e1441b92687e338af66
     resource: repo://yarn/private/install/layout.js
   - id: openwiki-source-9e1e67b90ea3e259fedb1f39
@@ -45,6 +53,8 @@ sources:
     resource: repo://yarn/private/install/pin.cjs
   - id: openwiki-source-6da6376cacb3a4c5f3725a78
     resource: repo://yarn/private/install/repository.bzl
+  - id: openwiki-source-9496e4d2064ef23f84cb2a45
+    resource: repo://yarn/private/install/sources.js
   - id: openwiki-source-4ea75ec50617436e212f308e
     resource: repo://yarn/private/install/syml.js
   - id: openwiki-source-bf79b2e0e01f2ead3871382e
@@ -53,7 +63,7 @@ sources:
     resource: repo://yarn/private/install/yarnrc.js
   - id: openwiki-source-60f4d0e18953b7fc477fc496
     resource: repo://yarn/providers.bzl
-generated: { by: "claude-code", at: "2026-10-05T04:06:37.833Z" }
+generated: { by: "claude-code", at: "2026-10-05T14:22:28.209Z" }
 ---
 
 # Installing a project's dependencies
@@ -259,11 +269,34 @@ Yarn's `pnpm` linker writes a store of packages and a package map. The driver
 derives from the map every store package, every link between them, every
 `.bin` entry of the root's and workspaces' direct dependencies — each
 manifest's `bin` read as Yarn's `Manifest.load` reads it — and the
-workspace-to-workspace links it records but does not create. Each store package
-is packed into an archive in a format of the ruleset's own, sorted and with
-fixed modes; a package containing a symbolic link is refused, naming it.
-`layout.json`, version 1, records all of that plus the architecture set and the
-Yarn and Node.js versions.
+workspace-to-workspace links it records but does not create. A package
+containing a symbolic link is refused, naming it.
+
+### Built from its tarball, or kept as an archive
+
+Most store packages are byte for byte the registry tarball they came from, so
+keeping a second, uncompressed copy of them would double the install's disk.
+`rules_js` keeps the downloaded tarball and extracts it in a build action with
+`tar.bzl`'s bsdtar; it extracts in the repository only what it must change.
+The install does the same where it can show it is safe.
+
+For each store package the driver names a candidate tarball — the `npm:`
+resolution whose store path, computed as Yarn's `slugifyLocator` computes it,
+is this package's, or for a peer-dependency instance the resolution its
+`package.json` names — and then does what the build will do: it extracts the
+tarball with the host's bsdtar from `tar.bzl`, with the same flags and locale,
+makes every directory traversable and every file readable as Yarn's own
+extraction leaves them, and compares the result with Yarn's tree, path by path
+and file by SHA-256. A tarball holding two names that differ only by case or
+Unicode normalisation is refused first, since a host that folds them would see
+one file where an executor that does not sees two. If the trees are equal, the
+package is built from its tarball and the driver records Yarn's tree as a
+manifest; otherwise — a patched package, a stub for another platform, a
+tarball bsdtar and Yarn extract differently — it keeps an archive of Yarn's
+tree, as before. Extraction, normalisation, manifest and comparison live in one
+module, `extract.js`, which the build action runs too. `layout.json`, version
+2, records each package's source, the links, the `.bin` entries, the
+architecture set and the Yarn and Node.js versions.
 
 The repository is not marked reproducible. Its contents depend on the host —
 the platform packages chosen for it, the Node.js that ran — and it holds
@@ -273,10 +306,17 @@ workspaces; the tarballs it was made from are cached on their own.
 ## Step 4 — unpacking into artifacts
 
 The generated `BUILD.bazel` instantiates `yarn_node_modules`, which declares one
-directory artifact per package, filled by its own `YarnUnpack` action running
-the archive program on the exec Node.js toolchain, and one symlink artifact per
-link and per `.bin` entry. Each package is cached on its own, and using the tree
-needs no network.
+directory artifact per package and one symlink artifact per link and per
+`.bin` entry. A package built from its tarball is filled by a `YarnExtract`
+action, which runs `extract.js` to extract the pinned tarball, normalise it and
+compare it with the recorded manifest, failing and naming the package if they
+differ; it runs in a custom exec group holding both the Node.js and the
+`tar.bzl` toolchains, as Bazel requires of an action using two toolchains. The
+check is in the action rather than in a validation action because Bazel does
+not run validation actions for a target used as a tool. An archived package is
+filled by a `YarnUnpack` action running the archive program on the exec
+Node.js toolchain. Each package is cached on its own, and using the tree needs
+no network.
 
 The unpacker refuses an archive whose entries are not relative, repeat a path,
 or would collide on a case-folding filesystem, and writes into an empty
@@ -314,7 +354,11 @@ says, because `skip-build` returns before the build step.
 Not part of this change: running the project's scripts and builds as actions,
 creating the workspace-to-workspace links, and running dependency builds.
 
-Limits of the approach: an install takes roughly twice its size on disk, once
-as archives and once unpacked — 409 MB and 501 MB for a 717-entry project.
+Limits of the approach: for a 717-entry project, the install repository keeps
+53 MB of archives — the patched packages and the stubs — and 4.8 MB of
+manifests, beside the 501 MB tree; before packages were built from their
+tarballs it kept 409 MB of archives. Deciding and extracting cost time
+instead: fetching took 19.0 s rather than 11.7 s, and a cold build of the tree
+8.1 s rather than 2.0 s.
 Installation runs on Linux and macOS, x86-64 and ARM64, and remote execution
 is not established by any measurement.

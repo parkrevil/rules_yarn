@@ -124,7 +124,10 @@ What it guarantees:
 - **No dependency build script runs**, whatever `dependenciesMeta` says.
 - **Each package is its own artifact**, and each link between packages a
   symlink artifact, in Yarn's isolated `pnpm` layout, so the tree is cached
-  package by package and needs no network to use.
+  package by package and needs no network to use. A package whose pinned
+  tarball gives exactly the files Yarn laid out is extracted from that
+  tarball at build time, as `rules_js` does, and checked against Yarn's
+  layout; only the others are kept as an archive of Yarn's tree.
 
 Workspaces need their `package.json` files listed in `workspaces`, and patch
 files their paths in `patches`. Platform-specific packages are installed for

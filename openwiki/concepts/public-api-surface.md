@@ -28,10 +28,10 @@ sources:
     resource: repo://yarn/private/yarn_binary.bzl
   - id: openwiki-source-60f4d0e18953b7fc477fc496
     resource: repo://yarn/providers.bzl
-generated: { by: "claude-code", at: "2026-10-04T12:22:38.266Z" }
+generated: { by: "claude-code", at: "2026-10-05T14:30:59.099Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-04T18:04:16.838Z
+    at: 2026-10-05T14:30:59.099Z
 ---
 
 # Public API surface
@@ -125,7 +125,10 @@ A Node.js runtime toolchain, from `rules_nodejs`, has to be registered. The
 rule takes the runtime from `@rules_nodejs//nodejs:runtime_toolchain_type` and
 fails analysis if the resolved toolchain carries only a host path. An install
 unpacks its packages with actions on `@rules_nodejs//nodejs:toolchain_type`,
-the exec toolchain, and refuses a host-path toolchain the same way. The install
+the exec toolchain, and refuses a host-path toolchain the same way; a package
+built from its tarball is extracted with `tar.bzl`'s bsdtar toolchain, the
+`@tar.bzl//tar/toolchain:type` toolchain type, for which `rules_yarn`
+registers nothing of its own. The install
 repository itself runs before toolchain resolution exists, so it takes Node.js
 from the four per-platform repositories `rules_nodejs` creates for its default
 toolchain, which `rules_yarn` names itself.

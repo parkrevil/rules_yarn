@@ -17,6 +17,7 @@ module(
 bazel_dep(name = "bazel_skylib", version = "1.9.2")
 bazel_dep(name = "rules_nodejs", version = "6.7.5")
 bazel_dep(name = "rules_shell", version = "0.8.0")
+bazel_dep(name = "tar.bzl", version = "0.10.9")
 
 bazel_dep(name = "platforms", version = "1.1.0", dev_dependency = True)
 bazel_dep(name = "rules_testing", version = "0.9.0", dev_dependency = True)
@@ -31,6 +32,19 @@ use_repo(
     "nodejs_darwin_arm64",
     "nodejs_linux_amd64",
     "nodejs_linux_arm64",
+)
+
+# yarn.install builds a package from its pinned tarball with tar.bzl's bsdtar,
+# as rules_js does: its build actions take the registered toolchain, and its
+# repository rule, where toolchains cannot be resolved, the host's binary from
+# these repositories (tar/extensions.bzl at v0.10.9, create_repositories).
+tar_toolchains = use_extension("@tar.bzl//tar:extensions.bzl", "toolchains")
+use_repo(
+    tar_toolchains,
+    "bsd_tar_toolchains_darwin_amd64",
+    "bsd_tar_toolchains_darwin_arm64",
+    "bsd_tar_toolchains_linux_amd64",
+    "bsd_tar_toolchains_linux_arm64",
 )
 
 # yarn.install reads yarn.lock and .yarnrc.yml as Yarn 4.18.0 does: with the

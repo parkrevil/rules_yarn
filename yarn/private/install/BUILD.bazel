@@ -1,9 +1,13 @@
 load("@bazel_skylib//:bzl_library.bzl", "bzl_library")
 
-# The Node.js programs. archive.js is also the default of an attribute of the
-# rule each install repository instantiates, so it is visible to them.
+# The Node.js programs. archive.js and extract.js are also defaults of
+# attributes of the rule each install repository instantiates, so they are
+# visible to them.
 exports_files(
-    ["archive.js"],
+    [
+        "archive.js",
+        "extract.js",
+    ],
     visibility = ["//visibility:public"],
 )
 
@@ -14,10 +18,11 @@ exports_files(
         "driver.js",
         "layout.js",
         "lockfile.js",
-        "syml.js",
         "node_modules.bzl",
         "pin.cjs",
         "repository.bzl",
+        "sources.js",
+        "syml.js",
         "yarnrc.js",
     ],
     visibility = ["//tests:__subpackages__"],
