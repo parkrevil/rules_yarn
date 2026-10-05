@@ -62,10 +62,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
-generated: { by: "claude-code", at: "2026-10-05T04:06:37.833Z" }
+generated: { by: "claude-code", at: "2026-10-05T05:14:35.586Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-05T04:06:37.833Z
+    at: 2026-10-05T05:14:35.586Z
 ---
 
 # Verification strategy
@@ -225,7 +225,7 @@ Its thirty-three cases cover the first pin; the host's platform package and a
 scoped package; that nothing changed installs nothing; that a lockfile change
 and a pin-only change install again, and a new version is installed; named
 architectures; integrity, checksum, out-of-date lockfile and link refusals; a
-poisoned `node`, `yarn` and `corepack` on `PATH`; the host home, its Yarn
+poisoned `node`, `yarn` and `corepack` first on the `PATH` repository rules see; the host home, its Yarn
 global folder included, unchanged in content and metadata; a project plugin
 not loaded and a project proxy seeing nothing; a malformed and a missing pin
 file repaired through `:pin`; a cold fetch with the registry blocked; and

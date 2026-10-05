@@ -78,7 +78,7 @@ unset XDG_DATA_HOME
 for variable in $(compgen -e | grep '^YARN_'); do unset "$variable"; done
 
 b() {
-  (cd "$ws" && HOME="$work/home" PATH="${SCENARIO_PATH:-$PATH}" bazel --output_user_root="$work/obase" "$@")
+  (cd "$ws" && HOME="$work/home" bazel --output_user_root="$work/obase" "$@")
 }
 
 # --- the consumer -------------------------------------------------------------
@@ -294,7 +294,13 @@ echo "# the host"
 mkdir -p "$work/fakebin"
 for tool in node yarn corepack; do cp "$fixtures/poison.sh" "$work/fakebin/$tool" || die "copying the poison failed"; done
 touch_pins
-SCENARIO_PATH="$work/fakebin:$PATH" build
+# The poisoned PATH goes to the repository rules only: on some hosts the
+# Bazel client itself is a Node.js script, which a poisoned node would stop
+# before the install could show anything. The install's repository rule hands
+# its driver no environment at all, so what this guards is the rule itself
+# running a tool by name; a driver that ran `node` by name would get the
+# system's default PATH rather than this one, and this case would not see it.
+b build @npm//:node_modules --repo_env=PATH="$work/fakebin:$PATH" >"$work/build.log" 2>&1
 record $? "No host installation: node, yarn and corepack on PATH fail, and installation succeeds"
 
 # Bazelisk keeps the Bazel binaries it downloads under HOME/.cache/bazelisk;
@@ -513,8 +519,12 @@ yarnrc
 record $? "Yarn run on its own with enableNetwork false still sends requests through a project's per-host networkSettings proxy"
 
 # Why the architecture sets go in the install's own file.
-! YARN_SUPPORTED_ARCHITECTURES='{"os": ["linux"]}' b run //:yarn -- config get supportedArchitectures >"$work/build.log" 2>&1 \
-  && log_has 'Object configuration settings "supportedArchitectures" must be an object in <environment>'
+# Yarn colours its output where it sees a CI, so the codes are taken out
+# before the message is matched.
+! YARN_SUPPORTED_ARCHITECTURES='{"os": ["linux"]}' b run //:yarn -- config get supportedArchitectures >"$work/build.err" 2>&1
+refused=$?
+"$node" -e 'const fs = require("fs"); fs.writeFileSync(process.argv[2], fs.readFileSync(process.argv[1], "utf8").replace(/\x1b\[[0-9;]*m/g, ""));' "$work/build.err" "$work/build.log"
+[ "$refused" = 0 ] && log_has 'Object configuration settings "supportedArchitectures" must be an object in <environment>'
 record $? "YARN_SUPPORTED_ARCHITECTURES cannot carry Yarn's architecture sets"
 
 # Why the install gives Yarn private global and cache folders. Last, because

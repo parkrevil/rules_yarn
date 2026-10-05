@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:22fc2837a01dc2dcc3b25b6cff20e472050c62bc61bf8023384aa3dbd6f19b2e",
+  "pageVersion": "sha256:33e6900437d440058c161c446e594f482428d762fd3e0a780020530ee20c0a8f",
   "claims": [
     {
       "id": "claim_80120293013247f8b2a4c96dba175e61",
@@ -238,7 +238,7 @@
         },
         {
           "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:ae5ef86641dd0751aa3886bd0581e6f41342d357dd71e5cd32484322ab493404"
+          "version": "repo-file-v1:sha256:8071d75675b64b29736fe7da1a96500c2fabc09461e35e57a491581004cf5ca0"
         }
       ]
     },
@@ -269,6 +269,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-05T04:06:37.833Z"
+    "at": "2026-10-05T05:14:35.586Z"
   }
 }
