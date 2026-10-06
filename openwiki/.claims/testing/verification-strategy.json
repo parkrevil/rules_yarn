@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:a763fddcac089304bf7a34a9eca9de3ad269fea742d366d9affe355833af7732",
+  "pageVersion": "sha256:1d4a470192aaa2079c9bc7e36faf741846bf704d68c21bb83c666ea5b6313305",
   "claims": [
     {
       "id": "claim_80120293013247f8b2a4c96dba175e61",
@@ -52,15 +52,23 @@
     },
     {
       "id": "claim_161236d3019344bb92b05f7aba39201c",
-      "statement": "The no-host-tools guarantee is verified by execution: fake node, yarn and corepack executables are placed on PATH that record any invocation, and the test asserts the selected version is printed while the marker file never appears.",
+      "statement": "The no-host-tools guarantee is verified by execution: a checked-in stand-in that records any invocation is copied onto PATH as node, yarn and corepack, and the test asserts the selected version is printed while the marker file never appears.",
       "evidence": [
         {
-          "resource": "repo://e2e/smoke/yarn_version_test.sh#L27-L42",
-          "version": "repo-lines-v1:sha256:7f7706f0aa3399edf3d7222e23baefc3f89e106a4cb918fd6e511c7b96f3cb82:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3ODlkYmFhMTUxYjQyYTUyNzBiNmVlYTIzMTc0NGE5MjkzYTQyNzQyYWUwMWY0MDM5YzAxMmY3ZjFmNGE4ZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxMDk4ZDNkYmUwNzIyMjYwNjE2OGU2OGU2NmYwNDgyNTBiODg3MTRmMWUxMjc1N2U3YjYxNjIxZTAwY2M4MjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk3NGY2MjZmYzA5YTlmYmEzZTY4MmMyMWQ2NTM1ZGNmMmVjOWRjMzUwZTYxOTAyYTBmMWQyYjAwMTQ2OGE2OGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE5MGVjYmM2MjVmYTIzMDVmNGUzMjJmZmFjMjk2YjQzZTYyOTZiZGZkNTIxN2M2YTNiYTNkNTZmMDQ3OGViNTgifQ"
+          "resource": "repo://e2e/smoke/host_tool.sh",
+          "version": "repo-file-v1:sha256:382cca6ea45a0162f43cc58c710290d2940b4c1b433b5399165434ebd086b5bc"
         },
         {
-          "resource": "repo://tests/launcher/yarn_cli_test.sh#L31-L48",
-          "version": "repo-lines-v1:sha256:92ea5f82ba5ce7a0279c625313be14a593812ba1110c363989a46529c4b4192f:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxZTdmNzRhMzY0NDA3ZDY5OTEyZWM5MjRhNGMxNjYyNjRkNDkwMTIxODJiNzEwMDg4MWE5YTEwYWVkYzY2NDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhNjhlMTIyYjgwYTllYTQyMjRkYzdjMWVlMmQ0ZmMxMTVlYThhM2JhNTg3YmU0MDRiMzNkNzk3Y2JjOWE4OTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMwMTE5YTNlNmI4NzUzYmY0ZWQ5NDU2ODU1NjVhNmM0MDlhNjJiYThhYmQyYzZlMWJmYTQ4ZjM1N2RmN2Q3ODYifQ"
+          "resource": "repo://e2e/smoke/yarn_version_test.sh#L29-L39",
+          "version": "repo-lines-v1:sha256:9bc068373a0e7e25d1e8e4f10704a7f94a38e697c983f81b23847abb5bb93a21:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3ODlkYmFhMTUxYjQyYTUyNzBiNmVlYTIzMTc0NGE5MjkzYTQyNzQyYWUwMWY0MDM5YzAxMmY3ZjFmNGE4ZDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcxMDk4ZDNkYmUwNzIyMjYwNjE2OGU2OGU2NmYwNDgyNTBiODg3MTRmMWUxMjc1N2U3YjYxNjIxZTAwY2M4MjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjIyNTdkMjY3OWZmNDFhMDJjOGE5MTM5NzdlMTMxZTdiZDk2OTFiNDhmYjZiNjIwMzdkYjNlNTM2MDI0YzI5OGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoxLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE5MGVjYmM2MjVmYTIzMDVmNGUzMjJmZmFjMjk2YjQzZTYyOTZiZGZkNTIxN2M2YTNiYTNkNTZmMDQ3OGViNTgifQ"
+        },
+        {
+          "resource": "repo://tests/launcher/host_tool.sh",
+          "version": "repo-file-v1:sha256:bcc7324f8ca7b4bfe36bfd99399c3aa4e4d0c76b1e7652fce79b9750bc8c8d05"
+        },
+        {
+          "resource": "repo://tests/launcher/yarn_cli_test.sh#L37-L49",
+          "version": "repo-lines-v1:sha256:7a553b2d34984cf362346dd9ee69be8d93e9a2cbded9942b212fe385f9d430db:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxZTdmNzRhMzY0NDA3ZDY5OTEyZWM5MjRhNGMxNjYyNjRkNDkwMTIxODJiNzEwMDg4MWE5YTEwYWVkYzY2NDQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjhhNjhlMTIyYjgwYTllYTQyMjRkYzdjMWVlMmQ0ZmMxMTVlYThhM2JhNTg3YmU0MDRiMzNkNzk3Y2JjOWE4OTMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMwMTE5YTNlNmI4NzUzYmY0ZWQ5NDU2ODU1NjVhNmM0MDlhNjJiYThhYmQyYzZlMWJmYTQ4ZjM1N2RmN2Q3ODYifQ"
         }
       ]
     },
@@ -69,12 +77,12 @@
       "statement": "The assertion that the sandbox blocks the network lives in its own yarn_offline_test target in both consumer-facing roots; the other Yarn-executing tests no longer carry the block-network tag, because what they assert holds whether or not the network is reachable.",
       "evidence": [
         {
-          "resource": "repo://e2e/smoke/BUILD.bazel#L9-L31",
-          "version": "repo-lines-v1:sha256:5d3a8b1b1440b9db27cbd9aecf2f1d8abe90f695d1b72618098ec5df8d96114b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwNzc2YzE5Y2RiMDI4NGZmN2VhOTUwNDUzNmNhMzkzYTc5NmM4NzQ0M2MwMjNiZmRkMDllNzNmOTA5ZTFkMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMxZGE4Njk0OWRkNjg5NjQxYzlmYWE4OWY5OWFjN2M3Y2IyYjMxMjZkNDllYjAyZmI0MWVhNTBmZjFiZTc0OWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://e2e/smoke/BUILD.bazel#L9-L37",
+          "version": "repo-lines-v1:sha256:5d8ba2ab13b1cb34c595e1f4db54f093e48173663268f07e55653ef8186cf400:eyJzZWxlY3RlZExpbmVDb3VudCI6MjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwNzc2YzE5Y2RiMDI4NGZmN2VhOTUwNDUzNmNhMzkzYTc5NmM4NzQ0M2MwMjNiZmRkMDllNzNmOTA5ZTFkMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMxZGE4Njk0OWRkNjg5NjQxYzlmYWE4OWY5OWFjN2M3Y2IyYjMxMjZkNDllYjAyZmI0MWVhNTBmZjFiZTc0OWUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
-          "resource": "repo://tests/launcher/BUILD.bazel#L46-L68",
-          "version": "repo-lines-v1:sha256:806d391b55f8884aa3cd698a2b330590e5bf28cf445ac52f9b94e81e0f86d2af:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwNzc2YzE5Y2RiMDI4NGZmN2VhOTUwNDUzNmNhMzkzYTc5NmM4NzQ0M2MwMjNiZmRkMDllNzNmOTA5ZTFkMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmNjI2MTFkMGRkODE4OWQzYWEzMDhiNDUxOTM2YWU0YmE1NDk1MmM4MmRhMDYwNTQ5ZGViM2JjNTA0MzQ1YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://tests/launcher/BUILD.bazel#L46-L78",
+          "version": "repo-lines-v1:sha256:03aeca09debf3e34fad87e59da710c6dd75b69765ef374b02f5e447310bae40d:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQwNzc2YzE5Y2RiMDI4NGZmN2VhOTUwNDUzNmNhMzkzYTc5NmM4NzQ0M2MwMjNiZmRkMDllNzNmOTA5ZTFkMWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZmNjI2MTFkMGRkODE4OWQzYWEzMDhiNDUxOTM2YWU0YmE1NDk1MmM4MmRhMDYwNTQ5ZGViM2JjNTA0MzQ1YTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://tests/launcher/yarn_offline_test.sh#L30-L35",
@@ -91,8 +99,8 @@
           "version": "repo-file-v1:sha256:e9a93a6a6541e1ffd5ff2379d04d03d61a5c505cc9f19cecb050f0a97b8189c0"
         },
         {
-          "resource": "repo://e2e/smoke/BUILD.bazel#L1-L31",
-          "version": "repo-lines-v1:sha256:abaf6e5772585477f39bb82a40aa3ed36fe4dceae22bed3d7fc45d0b38fc5d9b:eyJzZWxlY3RlZExpbmVDb3VudCI6MzEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5M2I2MjM0MWU3YzcxYmEyZmVlMDA5Y2ZiZDUwZjc2NGNlMzgyYmRiNjVhNzU2NmI5NjVmOTQ2NjBkYWUwOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://e2e/smoke/BUILD.bazel#L1-L37",
+          "version": "repo-lines-v1:sha256:f538f81490b8846092b9295ab27119eac28f586e025e5472aa38b978d01b1dc9:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5M2I2MjM0MWU3YzcxYmEyZmVlMDA5Y2ZiZDUwZjc2NGNlMzgyYmRiNjVhNzU2NmI5NjVmOTQ2NjBkYWUwOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://tests/bcr/BUILD.bazel",
@@ -160,19 +168,23 @@
     },
     {
       "id": "claim_bf245540c1364794a6f152376765c414",
-      "statement": "Neither harness hook is built by Bazel, so each carries a plain test script naming the decisions it is supposed to make — forty cases for the generated-file guard and fifty-six rows for the wiki staleness gate, mostly refusals, the latter including injected failures of the commands the gate depends on — and CI runs both.",
+      "statement": "Neither harness hook is built by Bazel, so each carries a plain test script naming the decisions it is supposed to make — forty cases for the generated-file guard and fifty-six rows for the wiki staleness gate, mostly refusals, the latter including injected failures of the commands the gate depends on through a checked-in wrapper — and CI runs both.",
       "evidence": [
         {
           "resource": "repo://.github/workflows/ci.yml#L129-L135",
           "version": "repo-lines-v1:sha256:80b928a3aef7616b25d39c5c4aab94a42ac1d8c3cd526602327162de2f0bbff3:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGRkNTg0YjM3NjAwYjg2MTE3NTFlZTg1NTZjOTA4ZmRiYWIyYTM0NjljZWU0YmFiMmNkMjM2YTRmYTZmMDRkOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjIwNTRmMjcwMjNjZDUzZGY3MWFjZTkyMzRiYWM3NDhiMzNmM2E4MGFmMjU0ZDIyNTVlNTY5ZGExNzgwZTZlNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGRjOWEyZDk2ZjY4ZjAzMTY3MGQwNGI5MDUzMjgzMWYxOTgzOTRlM2U3NGYyNjI1MjAxOGVmMWJiY2NkNDM2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzg4NWMxYmM1ZDY5MWZiM2EyNWE5NzRiMDQyOGQwZDE2N2Q1MTE3ZDNlN2NkNTY1NzA2ODk2YjgyN2RiNGNkYiJ9"
         },
         {
+          "resource": "repo://tools/hooks/fixtures/failing_tool.sh",
+          "version": "repo-file-v1:sha256:3fd254ff8bfaf039d69747c3cf858d23783bb78cbea5109c8f564df075e6b561"
+        },
+        {
           "resource": "repo://tools/hooks/openwiki_staleness_test.sh#L1-L12",
           "version": "repo-lines-v1:sha256:a79a29bd69c8f4839ea966b3e0bc9fbb9488e3e99862791c25fb41dbcb42f205:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3NTFlYzU2Mjc1YzEzMWEyNjQ4ZjU5MDdmZjliOTRhMjdjMWNhMThiYWUwYWY3YzVhNjVjNGRhNzU0YjBlYzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc5ZjY0Yjc3YjUyM2VhMjY0M2E3M2JmZTZiNjE3MGNkMThjMGI2MzdmMTI2NTZjNWIwYzgzZDNiN2IzNjMyMjQifQ"
         },
         {
-          "resource": "repo://tools/hooks/openwiki_staleness_test.sh#L125-L142",
-          "version": "repo-lines-v1:sha256:fd57999a93628059de98bfdcf59d976478696deefc84a093b23cc824535c67bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2NmEwMmQ5NzY1ODkxMDJmYTc3ZmVmYWNhNDcyMzEzMWVjMDVjZWM0ZDk3NDc3MWU2NGUwZWQ2ZDI2YWJmMjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiNDlmMjlkZjg5ZDAzNmY1MjQ5YjU5Y2Q0Njk4NDgwMTQ3ZTMxM2ZkMTRmNGIzODY2M2E4YTExZDM1M2JiYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5ODExMTQ5NzEyNDY3ZWI0ZDYxM2NlNGEzNTlkNDJlNmU1N2IzYmY0ZDE5ZDc2ZThlYTFmY2VjOThlZGY1NWIifQ"
+          "resource": "repo://tools/hooks/openwiki_staleness_test.sh#L128-L143",
+          "version": "repo-lines-v1:sha256:dea3ddf84246c84ad234dbfd7686d4b6c7d448ca99b9d30efc12647d13e2733b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2NmEwMmQ5NzY1ODkxMDJmYTc3ZmVmYWNhNDcyMzEzMWVjMDVjZWM0ZDk3NDc3MWU2NGUwZWQ2ZDI2YWJmMjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiNDlmMjlkZjg5ZDAzNmY1MjQ5YjU5Y2Q0Njk4NDgwMTQ3ZTMxM2ZkMTRmNGIzODY2M2E4YTExZDM1M2JiYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5ODExMTQ5NzEyNDY3ZWI0ZDYxM2NlNGEzNTlkNDJlNmU1N2IzYmY0ZDE5ZDc2ZThlYTFmY2VjOThlZGY1NWIifQ"
         },
         {
           "resource": "repo://tools/hooks/protect_generated_test.sh#L1-L12",
@@ -242,7 +254,7 @@
         },
         {
           "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:393dd5f0f2a2bd02a7dee380468d050964f7b9104394f09e8268e05986f9aad0"
+          "version": "repo-file-v1:sha256:d539ff413807ab6b6e84b79ba2e8a8bca8a74106c5e89721e4e6b02dacc31e50"
         }
       ]
     },
@@ -294,7 +306,7 @@
         },
         {
           "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:393dd5f0f2a2bd02a7dee380468d050964f7b9104394f09e8268e05986f9aad0"
+          "version": "repo-file-v1:sha256:d539ff413807ab6b6e84b79ba2e8a8bca8a74106c5e89721e4e6b02dacc31e50"
         }
       ]
     },
@@ -321,10 +333,24 @@
           "version": "repo-file-v1:sha256:074d815ddcfda5d7c7835cefd10093643fe4e40679e5a92436bfb6e1d93e840d"
         }
       ]
+    },
+    {
+      "id": "claim_8de7251afa014e4b83659b1c942679dc",
+      "statement": "The scenario measuring a dependency cycle from a sandboxed action runs a checked-in program, tools/ci/fixtures/cycle_probe.js, named by the genrule the scenario declares.",
+      "evidence": [
+        {
+          "resource": "repo://tools/ci/fixtures/cycle_probe.js",
+          "version": "repo-file-v1:sha256:3f5b58ee1e0b90b391b61c172fa477fc6faca0c1697836ce08a5bdb632c823bb"
+        },
+        {
+          "resource": "repo://tools/ci/install_scenarios.sh",
+          "version": "repo-file-v1:sha256:d539ff413807ab6b6e84b79ba2e8a8bca8a74106c5e89721e4e6b02dacc31e50"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-06T17:04:45.060Z"
+    "at": "2026-10-06T17:32:29.974Z"
   }
 }

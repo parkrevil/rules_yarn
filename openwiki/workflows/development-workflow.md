@@ -16,6 +16,8 @@ sources:
     resource: repo://CLAUDE.md
   - id: openwiki-source-38af7bdd34d817fbd3c29077
     resource: repo://openspec/config.yaml
+  - id: openwiki-source-b556aad9e4bffdbb4dc7c367
+    resource: repo://tools/hooks/fixtures/failing_tool.sh
   - id: openwiki-source-f62aa9ed7021af1727946d31
     resource: repo://tools/hooks/openwiki_staleness_test.sh
   - id: openwiki-source-c1d011fc51fb7948e3fbbd2e
@@ -24,10 +26,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-1182253f19cc7fc5a1a4410d
     resource: repo://tools/hooks/protect_generated.sh
-generated: { by: "claude-code", at: "2026-10-04T12:22:38.266Z" }
+generated: { by: "claude-code", at: "2026-10-06T17:26:00.906Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-04T18:04:16.838Z
+    at: 2026-10-06T17:26:00.906Z
 ---
 
 # Development workflow
@@ -168,7 +170,8 @@ fifty-six rows, each built in a throwaway repository laid out like this one.
 A row counts only when the gate exits with exactly 0 or exactly 1, and a
 refusal only when its message names what the row is about; seven rows inject a
 failure into a command the gate depends on, after the command has done its
-work. Three independent reviews shaped it. Each found records the gate of the
+work, through a checked-in wrapper that runs the real command and fails at a
+named moment. Three independent reviews shaped it. Each found records the gate of the
 time cleared without checking — a `sha512` label beside a SHA-256 digest, a
 line range past the end of the file, an empty sidecar beside a readable one,
 then line numbers too long to compare and a sidecar holding two JSON documents,

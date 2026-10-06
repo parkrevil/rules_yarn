@@ -18,6 +18,8 @@ sources:
     resource: repo://e2e/install/part_test.sh
   - id: openwiki-source-9166404a3cbd4408b80101ce
     resource: repo://e2e/smoke/BUILD.bazel
+  - id: openwiki-source-bf3f205da02e00511cb718fc
+    resource: repo://e2e/smoke/host_tool.sh
   - id: openwiki-source-30a0b6b2b81e4795cac4f928
     resource: repo://e2e/smoke/yarn_version_test.sh
   - id: openwiki-source-73fd324955f975c877a99db0
@@ -52,6 +54,8 @@ sources:
     resource: repo://tests/install/yarnrc_yarn_test.js
   - id: openwiki-source-2786bbb2f5598011b27e9081
     resource: repo://tests/launcher/BUILD.bazel
+  - id: openwiki-source-8de250de58da6ab4a8a00c9f
+    resource: repo://tests/launcher/host_tool.sh
   - id: openwiki-source-8a52f3cc97aa21919ea82129
     resource: repo://tests/launcher/launcher_test.sh
   - id: openwiki-source-d066155d67929b81ea0f151f
@@ -66,20 +70,24 @@ sources:
     resource: repo://tests/yarn_binary/yarn_binary_tests.bzl
   - id: openwiki-source-06ff1bab713011478aa79fbf
     resource: repo://tools/ci/fixture_registry.js
+  - id: openwiki-source-73abdb8671b2a4726fca20ff
+    resource: repo://tools/ci/fixtures/cycle_probe.js
   - id: openwiki-source-4030dc4bcad5a09c915b98fb
     resource: repo://tools/ci/install_scenarios.sh
   - id: openwiki-source-d0cac2a9da6e4ff2f6a238cf
     resource: repo://tools/ci/minimum_bazel.sh
+  - id: openwiki-source-b556aad9e4bffdbb4dc7c367
+    resource: repo://tools/hooks/fixtures/failing_tool.sh
   - id: openwiki-source-f62aa9ed7021af1727946d31
     resource: repo://tools/hooks/openwiki_staleness_test.sh
   - id: openwiki-source-c344118095552b0e155044aa
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
-generated: { by: "claude-code", at: "2026-10-06T17:04:45.060Z" }
+generated: { by: "claude-code", at: "2026-10-06T17:32:29.974Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-06T17:04:45.060Z
+    at: 2026-10-06T17:32:29.974Z
 ---
 
 # Verification strategy
@@ -142,12 +150,15 @@ that relative runfiles paths survive the directory change; and a manifest-only
 runfiles lookup performed with the runfiles directory removed from the
 environment.
 
-A second test drives the real Yarn distribution. It plants fake `node`, `yarn`
-and `corepack` executables on `PATH` that record any invocation and exit
-non-zero, then asserts the selected version is printed and the marker file never
-appears — the direct evidence that no host tool participates. It also creates a
-project whose configuration redirects Yarn elsewhere and asserts both that the
-redirect is ignored and that the project files are unchanged afterwards.
+A second test drives the real Yarn distribution. It copies a checked-in
+stand-in, `host_tool.sh`, onto `PATH` as `node`, `yarn` and `corepack`; the
+stand-in records any invocation and exits non-zero, and the test asserts the
+selected version is printed and the marker file never appears — the direct
+evidence that no host tool participates. It also copies a checked-in project
+whose configuration redirects Yarn to a script of its own and asserts both
+that the redirect is ignored and that the project files are unchanged
+afterwards. Neither test writes a script: AGENTS.md keeps the launcher
+template the only generated one.
 
 ## Layer 3a — the one thing only a blocked network can show
 
@@ -277,7 +288,8 @@ packages; and an install that failed declares no dependency's target.
 
 The last eleven are the measurements the design rests on, kept as tests rather
 than as notes: a dependency cycle and a file named `col:on.js` used from a
-sandboxed action; what `packageExtensions` records in the lockfile; the cache
+sandboxed action, whose program is the checked-in
+`tools/ci/fixtures/cycle_probe.js`; what `packageExtensions` records in the lockfile; the cache
 key Yarn writes; what `yarn npm info` answers for a missing version; a changed
 checksum on a patched entry; Yarn run on its own loading a project's plugin,
 and a plugin named in a file above the project under the rc name it is given;
@@ -325,7 +337,9 @@ forty cases for the guard, fifty-six rows for the staleness gate, in both
 cases mostly refusals, because for a guard the dangerous mistake is clearing
 something it never checked. The staleness gate's table also injects failures
 into the commands the gate depends on, so a command that does its work and
-then fails is shown to be a refusal rather than a pass.
+then fails is shown to be a refusal rather than a pass; the failing command
+is a checked-in wrapper, `tools/hooks/fixtures/failing_tool.sh`, told the
+real tool and one of four named moments to fail at.
 
 The first run of this workflow found two defects no local run could have:
 a GNU-only `find` flag the macOS runner rejected, and a Linux runner where

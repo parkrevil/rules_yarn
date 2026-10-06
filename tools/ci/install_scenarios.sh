@@ -458,21 +458,17 @@ echo "# the measurements design.md relies on"
 # colon in its name survives.
 project '"left": "1.0.0", "@fx/scoped": "1.0.0", "tool": "1.0.0", "right": "2.0.0", "cyc-a": "1.0.0"'
 lock && pin || die "locking and pinning the project with cyc-a failed: $(tail -20 "$work/pin.log")"
+cp "$fixtures/cycle_probe.js" "$ws/" || die "copying the cycle probe failed"
 cat >>"$ws/BUILD.bazel" <<'EOF'
 
 genrule(
     name = "cycle",
-    srcs = ["@npm//:node_modules"],
+    srcs = [
+        "cycle_probe.js",
+        "@npm//:node_modules",
+    ],
     outs = ["cycle.txt"],
-    cmd = "$(execpath @nodejs//:node_bin) -e '" +
-          "const p = require(\"path\"), fs = require(\"fs\");" +
-          "const root = p.dirname(process.argv.slice(1).find((f) => f.endsWith(\"/node_modules/cyc-a\")));" +
-          "const a = require(p.resolve(root, \"cyc-a\"));" +
-          "const b = require(require.resolve(\"cyc-b\", {paths: [require.resolve(p.resolve(root, \"cyc-a\"))]}));" +
-          "const link = (from, to) => fs.readlinkSync(process.argv.slice(1).find((f) => f.includes(\"/.store/\" + from + \"-npm-\") && f.endsWith(\"/node_modules/\" + to)));" +
-          "const back = link(\"cyc-a\", \"cyc-b\").includes(\"/cyc-b-npm-\") && link(\"cyc-b\", \"cyc-a\").includes(\"/cyc-a-npm-\");" +
-          "fs.writeFileSync(process.argv[process.argv.length - 1], [a.other(), b.other(), require(p.resolve(root, \"cyc-a/col:on.js\")), back].join(\" \"));" +
-          "' $(execpaths @npm//:node_modules) $@",
+    cmd = "$(execpath @nodejs//:node_bin) $(execpath cycle_probe.js) $(execpaths @npm//:node_modules) $@",
     tools = ["@nodejs//:node_bin"],
 )
 EOF

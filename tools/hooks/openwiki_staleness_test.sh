@@ -25,6 +25,9 @@ hook_argument=${1:-"$(dirname "$0")/openwiki_staleness.sh"}
 hook=$(cd "$(dirname "$hook_argument")" && pwd -P)/$(basename "$hook_argument") ||
   die "cannot resolve $hook_argument"
 [ -f "$hook" ] || die "no hook at $hook"
+# The checked-in stand-in for a tool that does its work and then fails.
+failing_tool=$(cd "$(dirname "$0")" && pwd -P)/fixtures/failing_tool.sh
+[ -x "$failing_tool" ] || die "no executable fixture at $failing_tool"
 failures=0
 rows=0
 
@@ -126,7 +129,7 @@ case_is() {
 # wrapper that does the real work, prints the real output, and then fails —
 # the case where a failure would most easily pass for success.
 case_with_failing() {
-  local tool=$1 what=$2 words=$3 condition=${4:-true} stub real t
+  local tool=$1 what=$2 words=$3 when=${4:-always} stub real t
   stub=$(mktemp -d) || die "mktemp failed"
   for t in bash sh dirname jq awk sed find mktemp sha256sum shasum sort rm cat cut head grep tr; do
     real=$(command -v "$t" 2>/dev/null) || continue
@@ -134,10 +137,8 @@ case_with_failing() {
   done
   real=$(command -v "$tool") || die "no $tool to wrap"
   rm -f "$stub/$tool"
-  printf '#!%s\n"%s" "$@"\nstatus=$?\nif %s; then exit 7; fi\nexit $status\n' \
-    "$(command -v sh)" "$real" "$condition" >"$stub/$tool" || die "writing the $tool wrapper failed"
-  chmod +x "$stub/$tool" || die "chmod failed"
-  record refuse "$(verdict "$words" env PATH="$stub" "$stub/bash" "$fake/tools/hooks/openwiki_staleness.sh")" "$what"
+  cp "$failing_tool" "$stub/$tool" || die "copying the $tool wrapper failed"
+  record refuse "$(verdict "$words" env PATH="$stub" REAL_TOOL="$real" FAIL_WHEN="$when" "$stub/bash" "$fake/tools/hooks/openwiki_staleness.sh")" "$what"
   rm -rf "$stub" "$fake"
 }
 
@@ -390,15 +391,15 @@ case_with_failing jq "reading a sidecar" "cannot be read as a claims sidecar"
 new_repository
 sidecar aaa "$(valid)"
 sidecar zzz "$(evidence "repo://subject.txt#L1-L2" "$(lines_version subject.txt 1 2)")"
-case_with_failing jq "reading the second sidecar, after the first was read cleanly" "cannot be read as a claims sidecar" 'n=$(cat "$0.count" 2>/dev/null || echo 0); n=$((n + 1)); echo "$n" >"$0.count"; [ "$n" -eq 2 ]'
+case_with_failing jq "reading the second sidecar, after the first was read cleanly" "cannot be read as a claims sidecar" second-run
 
 new_repository
 sidecar page "$(valid)"
-case_with_failing awk "counting the rows collected" "could not count the rows" '[ "${1:-}" = "END {print NR}" ] && case "${2:-}" in */rows) true ;; *) false ;; esac'
+case_with_failing awk "counting the rows collected" "could not count the rows" counting-rows
 
 new_repository
 sidecar page "$(evidence "repo://subject.txt#L2-L4" "$(lines_version subject.txt 2 4)")"
-case_with_failing awk "counting a cited file's lines" "could not count the lines of subject.txt" 'case "${2:-}" in */rows) false ;; *) true ;; esac'
+case_with_failing awk "counting a cited file's lines" "could not count the lines of subject.txt" counting-lines
 
 echo
 echo "# a tool the gate depends on is missing"

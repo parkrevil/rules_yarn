@@ -23,18 +23,15 @@ fail() {
 
 yarn="$(rlocation "$1")"
 [[ -x "$yarn" ]] || fail "cannot find the Yarn launcher $1"
+host_tool="$(rlocation "$2")"
+[[ -x "$host_tool" ]] || fail "cannot find the host tool stand-in $2"
 
 host_tools="$TEST_TMPDIR/host tools"
 marker="$TEST_TMPDIR/host-tool-used"
 mkdir -p "$host_tools"
-cat >"$host_tools/node" <<'TOOL'
-#!/bin/sh
-echo "$0" >>"$HOST_TOOL_MARKER"
-exit 97
-TOOL
-chmod +x "$host_tools/node"
-cp "$host_tools/node" "$host_tools/yarn"
-cp "$host_tools/node" "$host_tools/corepack"
+for tool in node yarn corepack; do
+  cp "$host_tool" "$host_tools/$tool"
+done
 
 version="$(HOST_TOOL_MARKER="$marker" PATH="$host_tools:/usr/bin:/bin" "$yarn" --version)"
 

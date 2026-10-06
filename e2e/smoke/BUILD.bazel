@@ -10,8 +10,14 @@ sh_test(
     name = "yarn_version_test",
     size = "small",
     srcs = ["yarn_version_test.sh"],
-    args = ["$(rlocationpath :yarn)"],
-    data = [":yarn"],
+    args = [
+        "$(rlocationpath :yarn)",
+        "$(rlocationpath host_tool.sh)",
+    ],
+    data = [
+        "host_tool.sh",
+        ":yarn",
+    ],
     deps = ["@rules_shell//shell/runfiles"],
 )
 

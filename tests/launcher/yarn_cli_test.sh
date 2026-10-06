@@ -24,6 +24,12 @@ fail() {
 
 yarn="$(rlocation "$1")"
 [[ -x "$yarn" ]] || fail "cannot find the Yarn launcher $1"
+host_tool="$(rlocation "$2")"
+[[ -x "$host_tool" ]] || fail "cannot find the host tool stand-in $2"
+# A project whose .yarnrc.yml points yarnPath at a script that would print
+# "redirected" and fail, found through its package.json.
+yarn_path_project="$(dirname "$(rlocation "$3")")"
+[[ -f "$yarn_path_project/redirect.cjs" && -f "$yarn_path_project/.yarnrc.yml" ]] || fail "cannot find the yarnPath project $3"
 
 out="$TEST_TMPDIR/stdout"
 err="$TEST_TMPDIR/stderr"
@@ -32,14 +38,9 @@ test_version_without_usable_host_tools() {
   local host_tools="$TEST_TMPDIR/host tools"
   local marker="$TEST_TMPDIR/host-tool-used"
   mkdir -p "$host_tools"
-  cat >"$host_tools/node" <<'TOOL'
-#!/bin/sh
-echo "$0" >>"$HOST_TOOL_MARKER"
-exit 97
-TOOL
-  chmod +x "$host_tools/node"
-  cp "$host_tools/node" "$host_tools/yarn"
-  cp "$host_tools/node" "$host_tools/corepack"
+  for tool in node yarn corepack; do
+    cp "$host_tool" "$host_tools/$tool"
+  done
 
   HOST_TOOL_MARKER="$marker" PATH="$host_tools:/usr/bin:/bin" "$yarn" --version >"$out" 2>"$err"
 
@@ -49,21 +50,8 @@ TOOL
 
 test_project_yarn_path_is_ignored_and_files_are_unchanged() {
   local project="$TEST_TMPDIR/project"
-  mkdir -p "$project"
-  cat >"$project/package.json" <<'JSON'
-{
-  "name": "project",
-  "packageManager": "yarn@4.18.0"
-}
-JSON
-  cat >"$project/.yarnrc.yml" <<'YAML'
-yarnPath: ./redirect.cjs
-YAML
-  cat >"$project/redirect.cjs" <<'JS'
-console.log("redirected");
-process.exit(3);
-JS
-  : >"$project/yarn.lock"
+  # Copied with links followed, so the project is plain files Yarn could write.
+  cp -RL "$yarn_path_project" "$project"
   cp -R "$project" "$TEST_TMPDIR/project-before"
 
   (cd "$project" && "$yarn" --version) >"$out" 2>"$err"

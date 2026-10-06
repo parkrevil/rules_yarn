@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:48731ed87733eb8f6eb65c08b0d14db9968b1f0a50105c325fd7523659597826",
+  "pageVersion": "sha256:ed5c16634198d04492d4ad5305ac1446bf3fb4b714766c9c224befbce9162197",
   "claims": [
     {
       "id": "claim_0d817a7a3b964d06937894529d820b10",
@@ -240,23 +240,27 @@
     },
     {
       "id": "claim_52494467d70b434baa1ca4028660de05",
-      "statement": "tools/hooks/openwiki_staleness_test.sh states the staleness gate's contract as fifty-six rows, each built in a throwaway repository laid out like this one; a row counts only when the gate exits with exactly 0 or exactly 1 and a refusal only when its message names what the row is about, and seven rows inject a failure into a command the gate depends on after that command has done its work; CI runs it.",
+      "statement": "tools/hooks/openwiki_staleness_test.sh states the staleness gate's contract as fifty-six rows, each built in a throwaway repository laid out like this one; a row counts only when the gate exits with exactly 0 or exactly 1 and a refusal only when its message names what the row is about, and seven rows inject a failure into a command the gate depends on after that command has done its work, through a checked-in wrapper; CI runs it.",
       "evidence": [
         {
           "resource": "repo://.github/workflows/ci.yml#L134-L135",
           "version": "repo-lines-v1:sha256:5323fd5ca7b79b2c31c74c315af88e8a2f9b28d09d5c4890a2c844ed2106d07a:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZDUxZGU4MWU5ZmU3YzU1ZTZlYzRkYjhiMDllZmYxOGIxNjA1OWJhYzRiM2E3OTcyMjlmZWNjMjc3ZmQzN2U1YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjIwNTRmMjcwMjNjZDUzZGY3MWFjZTkyMzRiYWM3NDhiMzNmM2E4MGFmMjU0ZDIyNTVlNTY5ZGExNzgwZTZlNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTZhNzU3MjI1MTkzMmU1MmYwODBhZjc3NGQ4ODE0YTViNDQxZDUyNzA2NGQ5OTRjNjkzN2I2MDllZWNhYWZmYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzg4NWMxYmM1ZDY5MWZiM2EyNWE5NzRiMDQyOGQwZDE2N2Q1MTE3ZDNlN2NkNTY1NzA2ODk2YjgyN2RiNGNkYiJ9"
         },
         {
+          "resource": "repo://tools/hooks/fixtures/failing_tool.sh",
+          "version": "repo-file-v1:sha256:3fd254ff8bfaf039d69747c3cf858d23783bb78cbea5109c8f564df075e6b561"
+        },
+        {
           "resource": "repo://tools/hooks/openwiki_staleness_test.sh#L1-L12",
           "version": "repo-lines-v1:sha256:a79a29bd69c8f4839ea966b3e0bc9fbb9488e3e99862791c25fb41dbcb42f205:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3NTFlYzU2Mjc1YzEzMWEyNjQ4ZjU5MDdmZjliOTRhMjdjMWNhMThiYWUwYWY3YzVhNjVjNGRhNzU0YjBlYzQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijc5ZjY0Yjc3YjUyM2VhMjY0M2E3M2JmZTZiNjE3MGNkMThjMGI2MzdmMTI2NTZjNWIwYzgzZDNiN2IzNjMyMjQifQ"
         },
         {
-          "resource": "repo://tools/hooks/openwiki_staleness_test.sh#L125-L142",
-          "version": "repo-lines-v1:sha256:fd57999a93628059de98bfdcf59d976478696deefc84a093b23cc824535c67bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2NmEwMmQ5NzY1ODkxMDJmYTc3ZmVmYWNhNDcyMzEzMWVjMDVjZWM0ZDk3NDc3MWU2NGUwZWQ2ZDI2YWJmMjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiNDlmMjlkZjg5ZDAzNmY1MjQ5YjU5Y2Q0Njk4NDgwMTQ3ZTMxM2ZkMTRmNGIzODY2M2E4YTExZDM1M2JiYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5ODExMTQ5NzEyNDY3ZWI0ZDYxM2NlNGEzNTlkNDJlNmU1N2IzYmY0ZDE5ZDc2ZThlYTFmY2VjOThlZGY1NWIifQ"
+          "resource": "repo://tools/hooks/openwiki_staleness_test.sh#L101-L120",
+          "version": "repo-lines-v1:sha256:b87e327a6f1911ee870933ef8a49f2a27b1da33f2b2c0a5a3ef059fa30d97bde:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkYzcxMDI4OTc2MGVmNDViZjlkZmU0MWI3NWJmOTAzNjJiMTRkNDY3ZDAyNjhiYWVmNzdkZjAxOTI4MTk0MGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZjIyZGFjNTU4N2QxODIzOWM2MDY4MzU3MzI1NDdhMDYwOTkyZGI2MzdhNDBmMTUzZmM1ZGYyYTY2NmI1MTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEwZmRkNzc1OGZkMjQwNzU3N2E5NGVhMjRkY2ViMzkxMThhZWJlNjM2ZGNhYzdhMmYxNzZiZGJjNWRhZDY1ZjYifQ"
         },
         {
-          "resource": "repo://tools/hooks/openwiki_staleness_test.sh#L98-L117",
-          "version": "repo-lines-v1:sha256:b87e327a6f1911ee870933ef8a49f2a27b1da33f2b2c0a5a3ef059fa30d97bde:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRkYzcxMDI4OTc2MGVmNDViZjlkZmU0MWI3NWJmOTAzNjJiMTRkNDY3ZDAyNjhiYWVmNzdkZjAxOTI4MTk0MGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjA5ZjIyZGFjNTU4N2QxODIzOWM2MDY4MzU3MzI1NDdhMDYwOTkyZGI2MzdhNDBmMTUzZmM1ZGYyYTY2NmI1MTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjEwZmRkNzc1OGZkMjQwNzU3N2E5NGVhMjRkY2ViMzkxMThhZWJlNjM2ZGNhYzdhMmYxNzZiZGJjNWRhZDY1ZjYifQ"
+          "resource": "repo://tools/hooks/openwiki_staleness_test.sh#L128-L143",
+          "version": "repo-lines-v1:sha256:dea3ddf84246c84ad234dbfd7686d4b6c7d448ca99b9d30efc12647d13e2733b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2NmEwMmQ5NzY1ODkxMDJmYTc3ZmVmYWNhNDcyMzEzMWVjMDVjZWM0ZDk3NDc3MWU2NGUwZWQ2ZDI2YWJmMjEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJiNDlmMjlkZjg5ZDAzNmY1MjQ5YjU5Y2Q0Njk4NDgwMTQ3ZTMxM2ZkMTRmNGIzODY2M2E4YTExZDM1M2JiYWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA5ODExMTQ5NzEyNDY3ZWI0ZDYxM2NlNGEzNTlkNDJlNmU1N2IzYmY0ZDE5ZDc2ZThlYTFmY2VjOThlZGY1NWIifQ"
         }
       ]
     },
@@ -273,6 +277,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-04T18:04:16.838Z"
+    "at": "2026-10-06T17:26:00.906Z"
   }
 }

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:9ae2c9cda1912b29d397b9a904783b6e492b1dcc0b4c0dee0da03cad328b1d84",
+  "pageVersion": "sha256:05ac724df6ecc3f2cbf76b26eaa7dd86083524cd2421f158602a93c6665aaf2b",
   "claims": [
     {
       "id": "claim_dc8ca9a0db904b2abc728ee78830c9be",
@@ -71,8 +71,12 @@
           "version": "repo-lines-v1:sha256:24170c843b951159ddd638c261895bcc822033f5aa3b45a096fd6d24b717fb35:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTMyOTg3NTgxZWI0YzI1M2VjYWNiYzFkYThkNzQwMDEwZmZhOTRmYmEwOWViYWRiMmRhMGU4M2NmYTExOGQ2YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGE3ODRmYTM5MDM2ZGFhZGFmYWNlM2U2M2YxMGIxMmNiYTIxMzg3MDVhZDg2ZDU5MjY4N2Y2OWRkNjVmNzA0OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZGU3NmM1MDQ2NGQzYjQ3Nzc4ZmUyOWI3MTllNDg5OTNlNjliY2RjM2Y0ZGEzYmEwNjdhNjljNjA1NmM1OTVkYyJ9"
         },
         {
-          "resource": "repo://tests/launcher/yarn_cli_test.sh#L50-L73",
-          "version": "repo-lines-v1:sha256:beb5a86827ea69641add7a0c5fca62c520b00d5ec08c5f65a949a5fe3a13c8e2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0YTA1OGQ5YjZlNTJlNzcyZWMzYzdiMDE0NjRlYTBiMjRiZjk5YzA4OWJmMzlhZjNmYWU4ZjBiYWY2NjZhNTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiM2IwMjdlYjYxYmEzYTEzMDhlYjljNWMwOTY1OWE0YzhlNTQ5MGEwZjQ4MzFkODhjMGQ5ODYzOTM4ZjhmYTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiNGJjYjEzY2JlZTg0ZTA5MWUzMGM1MzkyYjM0MmFhZmIwZGZmMWRlNWQ2OWUwN2E1Y2NjMzMyOGM5NDJmZDIifQ"
+          "resource": "repo://tests/launcher/testdata/yarn_path_project/.yarnrc.yml",
+          "version": "repo-file-v1:sha256:5889d81e2b1e229d2e5898e3d7b9108ef16f90a28fef76b981f05298e9ff3f6a"
+        },
+        {
+          "resource": "repo://tests/launcher/yarn_cli_test.sh#L51-L61",
+          "version": "repo-lines-v1:sha256:249279045eaab81b7671a61e9b37756013617086f5a9e41ac8fc8fcee6b5c6bf:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ0YTA1OGQ5YjZlNTJlNzcyZWMzYzdiMDE0NjRlYTBiMjRiZjk5YzA4OWJmMzlhZjNmYWU4ZjBiYWY2NjZhNTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiM2IwMjdlYjYxYmEzYTEzMDhlYjljNWMwOTY1OWE0YzhlNTQ5MGEwZjQ4MzFkODhjMGQ5ODYzOTM4ZjhmYTQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiNGJjYjEzY2JlZTg0ZTA5MWUzMGM1MzkyYjM0MmFhZmIwZGZmMWRlNWQ2OWUwN2E1Y2NjMzMyOGM5NDJmZDIifQ"
         },
         {
           "resource": "repo://yarn/private/yarn_binary.sh.tpl#L34-L37",
@@ -149,6 +153,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-06T12:18:29.604Z"
+    "at": "2026-10-06T17:26:00.906Z"
   }
 }

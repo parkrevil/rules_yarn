@@ -6,6 +6,8 @@ tags: [rule, toolchain, runfiles, launcher, bazel-run]
 sources:
   - id: openwiki-source-8a52f3cc97aa21919ea82129
     resource: repo://tests/launcher/launcher_test.sh
+  - id: openwiki-source-fcdc68f3e44110f07c155369
+    resource: repo://tests/launcher/testdata/yarn_path_project/.yarnrc.yml
   - id: openwiki-source-d066155d67929b81ea0f151f
     resource: repo://tests/launcher/yarn_cli_test.sh
   - id: openwiki-source-eb3dcfac0b874f311a6353ac
@@ -19,7 +21,7 @@ sources:
 generated: { by: "claude-code", at: "2026-10-04T12:22:38.266Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-06T12:18:29.604Z
+    at: 2026-10-06T17:26:00.906Z
 ---
 
 # Launcher and execution model
