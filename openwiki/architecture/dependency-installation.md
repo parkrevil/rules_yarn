@@ -5,7 +5,7 @@ description: How yarn.install turns a project's yarn.lock into Bazel artifacts �
 tags: [yarn-install, repository-rule, module-extension, integrity, isolation, node-modules]
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-05T14:54:48.275Z
+    at: 2026-10-06T12:28:08.929Z
 sources:
   - id: openwiki-source-6baa3bd517a8e6434ec03836
     resource: repo://e2e/install/BUILD.bazel
@@ -21,6 +21,10 @@ sources:
     resource: repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/design.md
   - id: openwiki-source-8fb8a65196be59b25e803b94
     resource: repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/tasks.md
+  - id: openwiki-source-c23074b1ef135ae03bb87264
+    resource: repo://openspec/changes/per-package-targets/design.md
+  - id: openwiki-source-576d200b82f104a1111379ae
+    resource: repo://openspec/changes/per-package-targets/tasks.md
   - id: openwiki-source-3a9d47c216ac83ae687d3e65
     resource: repo://tests/install/driver_test.js
   - id: openwiki-source-186e1eeea778492c4f3de07f
@@ -35,6 +39,8 @@ sources:
     resource: repo://tests/install/yarnrc_test.js
   - id: openwiki-source-ca84f08526069556e5f272aa
     resource: repo://tests/install/yarnrc_yarn_test.js
+  - id: openwiki-source-4030dc4bcad5a09c915b98fb
+    resource: repo://tools/ci/install_scenarios.sh
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
   - id: openwiki-source-0a3b1034f06d7d11f2f65afd
@@ -65,7 +71,7 @@ sources:
     resource: repo://yarn/private/install/yarnrc.js
   - id: openwiki-source-60f4d0e18953b7fc477fc496
     resource: repo://yarn/providers.bzl
-generated: { by: "claude-code", at: "2026-10-05T14:22:28.209Z" }
+generated: { by: "claude-code", at: "2026-10-06T12:28:08.929Z" }
 ---
 
 # Installing a project's dependencies
@@ -274,6 +280,16 @@ manifest's `bin` read as Yarn's `Manifest.load` reads it — and the
 workspace-to-workspace links it records but does not create. A package
 containing a symbolic link is refused, naming it.
 
+It also walks Yarn's links from each direct dependency of the root and of each
+workspace that is a store package: its link, the store package it points at,
+the links in that package's own `node_modules`, and so on, each store package
+once, so a cycle — every store package even links to itself — ends where it
+closes. Each such dependency is recorded with the store packages it reaches
+and the `.bin` entries it was given, and each scope among them with its
+dependencies. A link holding a character a Bazel target name cannot is
+refused, naming it, because the dependency's target is named after its link;
+so is a dependency name that is neither `name` nor `@scope/name`.
+
 ### Built from its tarball, or kept as an archive
 
 Most store packages are byte for byte the registry tarball they came from, so
@@ -297,8 +313,9 @@ manifest; otherwise — a patched package, a stub for another platform, a
 tarball bsdtar and Yarn extract differently — it keeps an archive of Yarn's
 tree, as before. Extraction, normalisation, manifest and comparison live in one
 module, `extract.js`, which the build action runs too. `layout.json`, version
-2, records each package's source, the links, the `.bin` entries, the
-architecture set and the Yarn and Node.js versions.
+3, records each package's source, the links, the `.bin` entries, each direct
+dependency's reach and each scope, the architecture set and the Yarn and
+Node.js versions.
 
 The repository is not marked reproducible. Its contents depend on the host —
 the platform packages chosen for it, the Node.js that ran — and it holds
@@ -334,6 +351,26 @@ load it. Each install repository holds a symlink to it at its root and loads
 it from its own root package, which Bazel's load visibility allows and a
 consumer's package does not.
 
+### A target per direct dependency
+
+`yarn_node_modules` is also given each direct dependency's store packages and
+`.bin` entries and each scope's dependencies, and returns, in a provider
+private to `node_modules.bzl`, one part per dependency: a depset of its link,
+its `.bin` entries and, for each store package it reaches, that package's
+directory and the links in its own `node_modules` — one depset per store
+package, shared by every part that reaches it — and one per scope, the union
+of its dependencies' parts. The generated `BUILD` file declares a
+`yarn_node_modules_part` target for each, named after the dependency's link or
+the scope's directory, as `rules_js` names its `node_modules/<package>` and
+`node_modules/@<scope>` targets: `:node_modules/react`, `:node_modules/@babel`,
+`:packages/app/node_modules/react`. Since one rule declares every artifact,
+packages that depend on each other are artifacts of one target, not targets
+depending on each other, so a cycle needs none of the extra targets `rules_js`
+uses to break one. Bazel runs only the actions of the files requested, so
+building a dependency's target extracts or unpacks only the packages it
+reaches. A dependency on another workspace gets no target, since those links
+are not created.
+
 ## What a consumer reads
 
 `@<name>//:node_modules` carries `YarnNodeModulesInfo`, defined in the public
@@ -343,6 +380,13 @@ holds the layout version, every artifact, the execution path of the tree's
 artifacts live under the output directory — the workspace links, the
 architecture set, and the Yarn and Node.js versions. A test in `e2e/install`
 runs an action that finds a package through that path.
+
+A dependency's or scope's target carries the same provider for its part:
+`files` holds only that part, and `root` is the `node_modules` directory its
+link or scope is in — a workspace's for a workspace's dependency — so the same
+consumer, taking `files` as inputs and resolving from `root`, works on every
+target; the layout version stays 1. Another `e2e/install` test resolves
+`packages/lib`'s `is-number` that way.
 
 ## What is refused, and what is not claimed
 
@@ -364,5 +408,13 @@ instead: fetching took 19.0 s rather than 11.7 s, and a cold build of the tree
 8.1 s rather than 2.0 s. A package holding two names that differ only by
 case cannot be installed on a filesystem that folds case: Yarn itself cannot
 lay it out there, and the install reports Yarn's error.
+A dependency's target cuts what is extracted, staged and hashed, not what is
+fetched: analysing it analyses `:node_modules`, which names every pinned
+tarball, so every tarball is downloaded. When the install fails, only
+`:node_modules`, which reports why, and `:pin` exist, so a consumer depending
+on a dependency's target sees Bazel's "no such target", as a scenario shows. On the 717-entry
+project, building `:node_modules/react` wrote 3 store packages (339 KB) in
+0.36 s, against 732 (425 MB) in 2.54 s for `:node_modules`; the generated
+`BUILD` file grew from 403 KB to 476 KB, and analysis time did not change.
 Installation runs on Linux and macOS, x86-64 and ARM64, and remote execution
 is not established by any measurement.

@@ -8,6 +8,8 @@ sources:
     resource: repo://e2e/smoke/BUILD.bazel
   - id: openwiki-source-d92bdd4d3d554717b6869e2d
     resource: repo://MODULE.bazel
+  - id: openwiki-source-23775c3de52f3ab95a13cb8b
+    resource: repo://README.md
   - id: openwiki-source-b24cb6f741eb257166e5a139
     resource: repo://yarn/BUILD.bazel
   - id: openwiki-source-044df30840b4f85a8f7d705c
@@ -28,10 +30,10 @@ sources:
     resource: repo://yarn/private/yarn_binary.bzl
   - id: openwiki-source-60f4d0e18953b7fc477fc496
     resource: repo://yarn/providers.bzl
-generated: { by: "claude-code", at: "2026-10-05T14:30:59.099Z" }
+generated: { by: "claude-code", at: "2026-10-06T12:18:29.604Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-05T14:30:59.099Z
+    at: 2026-10-06T12:21:37.329Z
 ---
 
 # Public API surface
@@ -49,6 +51,14 @@ the build rather than by convention.
 | `@rules_yarn//yarn:providers.bzl` | `YarnNodeModulesInfo` | reads an installed tree from a rule of its own |
 | a distribution repository | `@yarn` | the label passed to `yarn_binary`'s `yarn` attribute |
 | an install repository | `@<name>//:node_modules`, `@<name>//:pin` | the installed tree as artifacts, carrying `YarnNodeModulesInfo`; the command that writes the pin file |
+| an install repository | `@<name>//:node_modules/<package>`, `@<name>//:node_modules/@<scope>`, `@<name>//:<workspace>/node_modules/<package>` | one direct dependency's or scope's part of the tree — what it reaches through Yarn's links — carrying `YarnNodeModulesInfo` for that part |
+
+A dependency's or scope's target is named after the link Yarn writes for it,
+as `rules_js` names its `node_modules/<package>` targets. Its
+`YarnNodeModulesInfo` keeps layout version 1: `files` holds the part, and
+`root` is the `node_modules` directory the link is in, a workspace's for a
+workspace's dependency, so a rule that takes `files` as inputs and resolves a
+package from `root` works on every target.
 
 `defs.bzl` and `extensions.bzl` are thin: each loads the private
 implementation and rebinds it under a public name. That indirection is the seam — the implementation can

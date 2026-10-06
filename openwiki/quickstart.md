@@ -20,10 +20,10 @@ sources:
     resource: repo://yarn/private/yarn_binary.bzl
   - id: openwiki-source-c20b05d8b903795173b9a3b2
     resource: repo://yarn/private/yarn_binary.sh.tpl
-generated: { by: "claude-code", at: "2026-10-04T12:22:38.266Z" }
+generated: { by: "claude-code", at: "2026-10-06T12:18:29.604Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-05T14:22:28.209Z
+    at: 2026-10-06T12:18:29.604Z
 ---
 
 # Quickstart
@@ -40,8 +40,10 @@ nothing more: a command run through it gets no caching, sandboxing or
 dependency-installation guarantees from Bazel. `yarn.install` is the part with
 guarantees — integrity-checked fetching through Bazel's downloader, exactly the
 lockfile's versions, an offline layout isolated from the host, no dependency
-build scripts, one artifact per package. Running the project's own scripts and
-builds as Bazel actions is not provided yet.
+build scripts, one artifact per package, and a target per direct dependency,
+such as `@npm//:node_modules/react`, holding only what that dependency needs.
+Running the project's own scripts and builds as Bazel actions is not provided
+yet.
 
 ## Task routing
 

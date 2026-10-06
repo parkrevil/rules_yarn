@@ -100,7 +100,11 @@ bazel run @npm//:pin
 ```
 
 Commit it beside `yarn.lock`, and run the same command whenever the lockfile
-changes. `@npm//:node_modules` is then the installed tree.
+changes. `@npm//:node_modules` is then the installed tree, and each direct
+dependency has a target of its own holding only what it needs, as in
+`rules_js`: `@npm//:node_modules/react`, a scope's `@npm//:node_modules/@babel`,
+and a workspace's `@npm//:packages/app/node_modules/react`. Depend on the
+narrowest one: Bazel then extracts, stages and hashes only those packages.
 
 What it guarantees:
 
@@ -183,7 +187,16 @@ Repository naming and version selection follow Bazel's
 | `distribution` | `yarn` | The `yarn.distribution` repository whose Yarn lays the packages out. |
 
 The repository provides `:node_modules`, carrying `YarnNodeModulesInfo` from
-`@rules_yarn//yarn:providers.bzl`, and `:pin`.
+`@rules_yarn//yarn:providers.bzl`, and `:pin`. It also provides a target per
+direct dependency of the root and of each workspace, named after the link Yarn
+writes for it — `:node_modules/<name>`, `:<workspace>/node_modules/<name>` —
+and per scope among them, `:node_modules/@<scope>`. Each holds the dependency's
+link, every installed package it reaches through Yarn's links, and its `.bin`
+entries, and carries `YarnNodeModulesInfo` for that part, its `root` the
+`node_modules` directory the link is in. A dependency on another workspace has
+no target, since those links are not created yet. These targets cut what is
+built, not what is fetched: every pinned tarball is still downloaded. When the
+install fails, only `:node_modules`, which reports why, and `:pin` exist.
 
 ### `yarn_binary` (rule)
 

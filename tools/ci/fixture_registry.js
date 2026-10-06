@@ -24,6 +24,7 @@ const PACKAGES = [
   {name: "right", version: "1.0.0", files: {"index.js": "module.exports = 'right 1';\n"}},
   {name: "right", version: "2.0.0", files: {"index.js": "module.exports = 'right 2';\n"}},
   {name: "@fx/scoped", version: "1.0.0", files: {"index.js": "module.exports = 'scoped';\n"}},
+  {name: "@fx/other", version: "1.0.0", files: {"index.js": "module.exports = 'other';\n"}},
   {name: "tool", version: "1.0.0", files: {"index.js": "module.exports = 'tool';\n", "cli.js": fs.readFileSync(path.join(__dirname, "fixtures/tool_cli.js"), "utf8")},
     bin: {"fx-tool": "cli.js"},
     optionalDependencies: {"tool-linux-x64": "1.0.0", "tool-linux-arm64": "1.0.0", "tool-darwin-x64": "1.0.0", "tool-darwin-arm64": "1.0.0"}},

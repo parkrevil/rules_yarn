@@ -308,6 +308,28 @@ project '"left": "1.0.0", "@fx/scoped": "1.0.0", "tool": "1.0.0", "right": "2.0.
 lock && pin || die "locking and pinning without the tarball shapes failed: $(tail -20 "$work/pin.log")"
 
 echo
+echo "# a target per direct dependency"
+
+# The store packages bazel-bin holds, by name, after the outputs were removed
+# and one target was built.
+built_alone() {
+  b clean >"$work/clean.log" 2>&1 || return 1
+  b build "$1" >"$work/build.log" 2>&1 || return 1
+  ls "$(built)/.store" | sed 's/-npm-.*//' | LC_ALL=C sort | paste -sd, -
+}
+project '"left": "1.0.0", "@fx/scoped": "1.0.0", "@fx/other": "1.0.0", "tool": "1.0.0", "right": "2.0.0", "cyc-a": "1.0.0"'
+lock && pin || die "locking and pinning with the cycle and the second scoped package failed: $(tail -20 "$work/pin.log")"
+[ "$(built_alone @npm//:node_modules/left)" = "left" ]
+record $? "Only the dependency's packages are built: building one direct dependency's target builds its package's directory and no other's"
+[ "$(built_alone @npm//:node_modules/cyc-a)" = "cyc-a,cyc-b" ] \
+  && [ "$(NODE_PATH="$(built)" "$node" -p 'const fs = require("fs"); const a = require("cyc-a"); a.other() + require(require.resolve("cyc-b", {paths: [fs.realpathSync(require.resolve("cyc-a"))]})).other()' 2>/dev/null)" = "ba" ]
+record $? "Dependency cycle: the target of a package in a cycle holds both packages, and requiring it succeeds"
+[ "$(built_alone @npm//:node_modules/@fx)" = "@fx-other,@fx-scoped" ]
+record $? "Scope: the scope's target holds both of its packages"
+project '"left": "1.0.0", "@fx/scoped": "1.0.0", "tool": "1.0.0", "right": "2.0.0"'
+lock && pin || die "locking and pinning without the cycle failed: $(tail -20 "$work/pin.log")"
+
+echo
 echo "# refusals"
 
 cp "$ws/pins.json" "$work/pins.good"
@@ -330,6 +352,9 @@ printf 'onConflict: reset\nvalue:\n' >"$ws/.yarnrc.yml"
 touch_pins
 ! build && log_has "Yarn does not accept the settings this install carries from .yarnrc.yml"
 record $? "Configuration Yarn cannot read: fetching fails, saying Yarn does not accept it"
+# A failed install has no layout to name its dependencies' targets after.
+! b build @npm//:node_modules/left >"$work/build.log" 2>&1 && log_has "no such target '@@rules_yarn++yarn+npm//:node_modules/left'"
+record $? "a failed install declares no dependency's target: Bazel reports no such target, and :node_modules says why"
 yarnrc
 touch_pins
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:ca843fe465e43a103b7a6adc49bdc9106dce90115a1842cc4878655a15f3246a",
+  "pageVersion": "sha256:7ba35e05ab45dc91ccb803170a29cd1fc3fbe192fbcac1a91ce5c3174cdd9d8e",
   "claims": [
     {
       "id": "claim_80120293013247f8b2a4c96dba175e61",
@@ -140,11 +140,11 @@
     },
     {
       "id": "claim_a4680c64fab84820a5937baae2224a81",
-      "statement": "CI runs on every push and pull request over Linux and macOS with three jobs: build and test across all four roots plus the install scenarios, the declared Bazel floor for a Yarn target and for e2e/install, and checks covering pre-commit, both harness hooks' contract tables and the wiki staleness gate itself.",
+      "statement": "CI runs on every push and pull request over Linux and macOS with three jobs: build and test across all four roots plus the install scenarios, the declared Bazel floor for a Yarn target and for every e2e/install test but the network-blocking one, and checks covering pre-commit, both harness hooks' contract tables and the wiki staleness gate itself.",
       "evidence": [
         {
           "resource": "repo://.github/workflows/ci.yml",
-          "version": "repo-file-v1:sha256:d507cd6f701f1ced6367d85be36206c9f29bbc48f9c06d073c3a8070c23913a9"
+          "version": "repo-file-v1:sha256:a91e563928ebeb0490566a3ab3f882cc63f1005939a87ee7d49f18148cc90762"
         }
       ]
     },
@@ -216,29 +216,33 @@
     },
     {
       "id": "claim_146a6c5d46d64969b33febd88d573cfc",
-      "statement": "e2e/install checks its installed tree from runfiles, again in a network-blocking sandbox, and through an action reading the provider's root.",
+      "statement": "e2e/install checks its installed tree from runfiles, again in a network-blocking sandbox, and through an action reading the provider's root, and checks three direct dependencies' own targets and a workspace dependency's root.",
       "evidence": [
         {
           "resource": "repo://e2e/install/BUILD.bazel",
-          "version": "repo-file-v1:sha256:d8bded16af9d238cd1c468311d381382e6b9d152e7cc8da5aca937f5b0ec7549"
+          "version": "repo-file-v1:sha256:6745f6d1daa294fc0890534e0e25d5a7d3a883d28e9fc8c4ce7b86af25c6eab8"
         },
         {
           "resource": "repo://e2e/install/installed_test.sh",
           "version": "repo-file-v1:sha256:bbc5592c6ca2f8e84a958e242ab37770f37f3fadb93a4187755c321e4fd2c469"
+        },
+        {
+          "resource": "repo://e2e/install/part_test.sh",
+          "version": "repo-file-v1:sha256:90f5ffb628cdf85bedb54ac6dcf67658459ae131cf0ac31f5491f1363c0878ba"
         }
       ]
     },
     {
       "id": "claim_7035247e5f91438aabb64dc64d646cff",
-      "statement": "install_scenarios.sh builds a throwaway consumer against a local fixture registry, in a host whose home and output-root ancestors hold hostile configuration files, and runs thirty-five cases, including two for building packages from their tarballs with crafted tarball shapes, a .yarnrc.yml Yarn cannot read being refused, and eleven that reproduce the measurements the design rests on.",
+      "statement": "install_scenarios.sh builds a throwaway consumer against a local fixture registry, in a host whose home and output-root ancestors hold hostile configuration files, and runs thirty-nine cases, including two for building packages from their tarballs with crafted tarball shapes, four for the targets per direct dependency, a .yarnrc.yml Yarn cannot read being refused, and eleven that reproduce the measurements the design rests on.",
       "evidence": [
         {
           "resource": "repo://tools/ci/fixture_registry.js",
-          "version": "repo-file-v1:sha256:9e3a1dd6bf73fbaa5d547faa1c15e505ea1b1f2312e0df3f485a5945fc076651"
+          "version": "repo-file-v1:sha256:4e63924f0611f9210c2ceb45621fd28a802503de616a613c51d91c90cd731284"
         },
         {
           "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:9eb2b4694c6f029cde6c866038e8717740c838e094a1d31f2315481fef758a93"
+          "version": "repo-file-v1:sha256:393dd5f0f2a2bd02a7dee380468d050964f7b9104394f09e8268e05986f9aad0"
         }
       ]
     },
@@ -290,13 +294,23 @@
         },
         {
           "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:9eb2b4694c6f029cde6c866038e8717740c838e094a1d31f2315481fef758a93"
+          "version": "repo-file-v1:sha256:393dd5f0f2a2bd02a7dee380468d050964f7b9104394f09e8268e05986f9aad0"
+        }
+      ]
+    },
+    {
+      "id": "claim_c74462047b604e5ea5008407914ac7e8",
+      "statement": "layout_test checks each direct dependency's store packages and .bin entries through cycles, scopes and workspaces, and the refusal of a link a target name cannot hold.",
+      "evidence": [
+        {
+          "resource": "repo://tests/install/layout_test.js",
+          "version": "repo-file-v1:sha256:23f84fc86dd188b085062a866f3a737ec56b4a651a26248999f03cf78e109806"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-05T14:54:48.275Z"
+    "at": "2026-10-06T12:28:52.942Z"
   }
 }

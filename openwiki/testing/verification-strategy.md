@@ -14,6 +14,8 @@ sources:
     resource: repo://e2e/install/BUILD.bazel
   - id: openwiki-source-8f322198adc8ed03086b9d4d
     resource: repo://e2e/install/installed_test.sh
+  - id: openwiki-source-d159ea9440fc4640c297be62
+    resource: repo://e2e/install/part_test.sh
   - id: openwiki-source-9166404a3cbd4408b80101ce
     resource: repo://e2e/smoke/BUILD.bazel
   - id: openwiki-source-30a0b6b2b81e4795cac4f928
@@ -36,6 +38,8 @@ sources:
     resource: repo://tests/install/BUILD.bazel
   - id: openwiki-source-186e1eeea778492c4f3de07f
     resource: repo://tests/install/extract_test.js
+  - id: openwiki-source-e2f407b8e02db47e00a29b1f
+    resource: repo://tests/install/layout_test.js
   - id: openwiki-source-515ecb9fb76cac4da668ba48
     resource: repo://tests/install/node_test.sh
   - id: openwiki-source-bb76665a0173e3c463c3f320
@@ -68,10 +72,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
-generated: { by: "claude-code", at: "2026-10-05T14:22:28.209Z" }
+generated: { by: "claude-code", at: "2026-10-06T12:28:52.942Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-05T14:54:48.275Z
+    at: 2026-10-06T12:28:52.942Z
 ---
 
 # Verification strategy
@@ -170,7 +174,7 @@ Yarn, or the host's bsdtar from `tar.bzl`.
 | `lockfile_test` | the lockfile read as Yarn reads it, and its shape checks |
 | `check_test` | the project and pin checks, one refusal at a time, and the tarball paths Yarn requests |
 | `conditions_test` | condition evaluation and which tarballs a host fetches, including the patch-source case a large project found |
-| `layout_test` | links and `.bin` entries derived from Yarn's package map, compared with the links Yarn itself wrote for two captured projects |
+| `layout_test` | links and `.bin` entries derived from Yarn's package map, compared with the links Yarn itself wrote for two captured projects; each direct dependency's store packages and `.bin` entries, through cycles, scopes and workspaces; a link a target name cannot hold refused |
 | `yarnrc_test` | which settings are carried, and the YAML cases reviews found, each stating what Yarn reads |
 | `yarnrc_yarn_test` | the pinned Yarn's own effective configuration: the same carried values from the project's file and from the file the driver writes |
 | `driver_test` | the plan step reporting every unreadable input instead of throwing |
@@ -206,7 +210,13 @@ tree from runfiles — versions, the patch applied, peers, the host's platform
 package only, no build script run, workspaces kept apart — then again in a
 sandbox that blocks the network, and run an action that finds a package
 through `YarnNodeModulesInfo`'s root. Each assertion was shown failing on a
-deliberately broken copy of the tree.
+deliberately broken copy of the tree. Three more tests take only one direct
+dependency's target — the patched `is-number`, a workspace's peer-dependency
+instance of `react-dom`, and `typescript` with its `.bin/tsc` — and check that
+their runfiles hold exactly the store packages it reaches, and a provider test
+resolves a workspace's `is-number` through its target's root; they failed
+with the whole tree in place of the part, and with the install's root in
+place of the workspace's.
 
 `tests/bcr` is what the Bazel Central Registry's presubmit runs. It keeps no
 lockfile, because that presubmit resolves it under several Bazel versions. It
@@ -230,7 +240,7 @@ registry at a closed port, and a configuration under the install's former file
 name loading a marker plugin, in the Bazel client's home, above the output
 root and in it.
 
-Its thirty-five cases cover the first pin; the host's platform package and a
+Its thirty-nine cases cover the first pin; the host's platform package and a
 scoped package; that nothing changed installs nothing; that a lockfile change
 and a pin-only change install again, and a new version is installed; named
 architectures; integrity, checksum, out-of-date lockfile and link refusals; a
@@ -247,7 +257,11 @@ link, a contiguous file, an absolute path, a `./package/` prefix, a `..`
 entry, a FIFO, and, where the filesystem keeps case apart, names differing
 only by case — each install Yarn's tree, the first two from their tarballs and
 the rest from archives. On a filesystem that folds case Yarn itself cannot lay
-out that last package, so it is left out there.
+out that last package, so it is left out there. Four cases cover the targets
+per direct dependency: with the outputs removed, building one dependency's
+target builds only its package's directory; a cycle between two packages is
+held whole by the target of one of them; a scope's target holds both of its
+packages; and an install that failed declares no dependency's target.
 
 The last eleven are the measurements the design rests on, kept as tests rather
 than as notes: a dependency cycle and a file named `col:on.js` used from a
@@ -282,7 +296,9 @@ macOS:
   cannot answer this: their lockfiles are written by a newer Bazel and both
   set `--lockfile_mode=error`, so an older Bazel fails on the lockfile before
   reaching the ruleset. The same job installs `e2e/install` at the floor with
-  the lock off, as a consumer resolving from scratch would.
+  the lock off, as a consumer resolving from scratch would, and runs every
+  test there but the network-blocking one, which needs the sandbox
+  adjustment the build-and-test job makes.
 - **checks** — the pre-commit hooks, which cover Buildifier, the file-hygiene
   hooks and `openspec validate --all --strict`; the contract tables of both
   harness hooks, the generated-file guard's and the wiki staleness gate's; and

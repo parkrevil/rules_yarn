@@ -120,3 +120,88 @@ test("a command named __proto__ is a command like any other, from a string bin o
     assert.deepEqual(layout.bins.map((b) => [b.path, b.target]), [["node_modules/.bin/__proto__", `../${dependency}/cli.js`]], what);
   }
 });
+
+// Each direct dependency of the root and of each workspace is a target holding
+// what it reaches through Yarn's links; the layout records which store
+// packages and `.bin` entries that is.
+const store = (slug) => `node_modules/.store/${slug}/package`;
+
+test("each direct dependency reaches the store packages Yarn links it to, each once; a workspace link is no dependency's", () => {
+  const layout = deriveLayout(packageMap("workspaces_peers"), noManifest);
+  assert.deepEqual(layout.dependencies, [
+    {path: "packages/a/node_modules/react", packages: [
+      store("js-tokens-npm-4.0.0-0ac852e9e2"), store("loose-envify-npm-1.4.0-6307b72ccf"), store("react-npm-18.3.1-af38f3c1ae"),
+    ], bins: []},
+    {path: "packages/a/node_modules/react-dom", packages: [
+      store("js-tokens-npm-4.0.0-0ac852e9e2"), store("loose-envify-npm-1.4.0-6307b72ccf"), store("react-dom-virtual-1137ace24f"),
+      store("react-npm-18.3.1-af38f3c1ae"), store("scheduler-npm-0.23.2-6d1dd9c2b7"),
+    ], bins: []},
+    {path: "packages/b/node_modules/is-number", packages: [store("is-number-npm-7.0.0-060086935c")], bins: []},
+  ]);
+  assert.deepEqual(layout.scopes, []);
+});
+
+test("a dependency cycle reaches both packages and ends", () => {
+  const map = {packages: {
+    ".": {dependencies: {a: ".store/a-npm-1.0.0-0000000000/package"}},
+    ".store/a-npm-1.0.0-0000000000/package": {dependencies: {a: ".store/a-npm-1.0.0-0000000000/package", b: ".store/b-npm-1.0.0-1111111111/package"}},
+    ".store/b-npm-1.0.0-1111111111/package": {dependencies: {a: ".store/a-npm-1.0.0-0000000000/package", b: ".store/b-npm-1.0.0-1111111111/package"}},
+  }};
+  assert.deepEqual(deriveLayout(map, noManifest).dependencies, [
+    {path: "node_modules/a", packages: [store("a-npm-1.0.0-0000000000"), store("b-npm-1.0.0-1111111111")], bins: []},
+  ]);
+});
+
+test("scoped dependencies are grouped by scope, and a dependency keeps the .bin entries the install gives it", () => {
+  const map = {packages: {
+    ".": {dependencies: {
+      "@s/x": ".store/@s-x-npm-1.0.0-0000000000/package",
+      "@s/y": ".store/@s-y-npm-1.0.0-1111111111/package",
+      "tool": ".store/tool-npm-1.0.0-2222222222/package",
+    }},
+    ".store/@s-x-npm-1.0.0-0000000000/package": {dependencies: {}},
+    ".store/@s-y-npm-1.0.0-1111111111/package": {dependencies: {}},
+    ".store/tool-npm-1.0.0-2222222222/package": {dependencies: {}},
+  }};
+  const manifests = {[store("tool-npm-1.0.0-2222222222")]: {name: "tool", bin: {tool: "cli.js", "tool-extra": "extra.js"}}};
+  const layout = deriveLayout(map, (dir) => manifests[dir] ?? {});
+  assert.deepEqual(layout.dependencies, [
+    {path: "node_modules/@s/x", packages: [store("@s-x-npm-1.0.0-0000000000")], bins: []},
+    {path: "node_modules/@s/y", packages: [store("@s-y-npm-1.0.0-1111111111")], bins: []},
+    {path: "node_modules/tool", packages: [store("tool-npm-1.0.0-2222222222")], bins: ["node_modules/.bin/tool", "node_modules/.bin/tool-extra"]},
+  ]);
+  assert.deepEqual(layout.scopes, [{path: "node_modules/@s", dependencies: ["node_modules/@s/x", "node_modules/@s/y"]}]);
+});
+
+test("a command two dependencies provide belongs to the one whose entry the install keeps", () => {
+  const map = {packages: {
+    ".": {dependencies: {a: ".store/a-npm-1.0.0-0000000000/package", b: ".store/b-npm-1.0.0-1111111111/package"}},
+    ".store/a-npm-1.0.0-0000000000/package": {dependencies: {}},
+    ".store/b-npm-1.0.0-1111111111/package": {dependencies: {}},
+  }};
+  const layout = deriveLayout(map, (dir) => ({name: dir.includes("/a-npm") ? "a" : "b", bin: {run: "x.js"}}));
+  assert.deepEqual(layout.dependencies.map((d) => [d.path, d.bins]), [["node_modules/a", ["node_modules/.bin/run"]], ["node_modules/b", []]]);
+});
+
+test("a link a Bazel target name cannot hold is refused, naming it", () => {
+  const map = {packages: {
+    ".": {dependencies: {}},
+    "../my app": {dependencies: {a: ".store/a-npm-1.0.0-0000000000/package"}},
+    ".store/a-npm-1.0.0-0000000000/package": {dependencies: {}},
+  }};
+  assert.throws(() => deriveLayout(map, noManifest), /the link "my app\/node_modules\/a" holds a character a Bazel target name cannot/);
+});
+
+test("every store package's link to itself ends the walk where it starts", () => {
+  const layout = deriveLayout(packageMap("esbuild_typescript"), noManifest);
+  for (const dependency of layout.dependencies) assert.equal(new Set(dependency.packages).size, dependency.packages.length);
+  const typescript = layout.dependencies.find((d) => d.path === "node_modules/typescript");
+  assert.equal(typescript.packages.length, 1);
+});
+
+test("a dependency name that is not `name` or `@scope/name` is refused", () => {
+  for (const name of ["@foo", "a/b"]) {
+    const map = {packages: {".": {dependencies: {[name]: ".store/a-npm-1.0.0-0000000000/package"}}, ".store/a-npm-1.0.0-0000000000/package": {dependencies: {}}}};
+    assert.throws(() => deriveLayout(map, noManifest), /is not a package name/, name);
+  }
+});

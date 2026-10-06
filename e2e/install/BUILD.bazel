@@ -57,3 +57,56 @@ sh_test(
     data = [":provider_root"],
     deps = ["@rules_shell//shell/runfiles"],
 )
+
+# A direct dependency's own target: its runfiles hold only what it reaches.
+[
+    sh_test(
+        name = "part_test_" + check["name"],
+        size = "small",
+        srcs = ["part_test.sh"],
+        args = [
+            "$(rlocationpath @nodejs//:node_bin)",
+            check["link"],
+            check["stores"],
+            "$(rlocationpaths @npm//:" + check["link"] + ")",
+        ],
+        data = [
+            "@nodejs//:node_bin",
+            "@npm//:" + check["link"],
+        ],
+        deps = ["@rules_shell//shell/runfiles"],
+    )
+    for check in [
+        {
+            "link": "node_modules/is-number",
+            "name": "is_number",
+            "stores": "is-number-patch,js-tokens-npm-4.0.0",
+        },
+        {
+            "link": "packages/app/node_modules/react-dom",
+            "name": "react_dom",
+            "stores": "js-tokens-npm-4.0.0,loose-envify-npm-1.4.0,react-dom-virtual,react-npm-18.3.1,scheduler-npm-0.23.2",
+        },
+        {
+            "link": "node_modules/typescript",
+            "name": "typescript",
+            "stores": "typescript-patch",
+        },
+    ]
+]
+
+# A workspace dependency's target, whose YarnNodeModulesInfo.root is that
+# workspace's node_modules.
+provider_root(
+    name = "provider_root_workspace_part",
+    node_modules = "@npm//:packages/lib/node_modules/is-number",
+)
+
+sh_test(
+    name = "provider_root_workspace_part_test",
+    size = "small",
+    srcs = ["provider_root_test.sh"],
+    args = ["$(rlocationpath :provider_root_workspace_part)"],
+    data = [":provider_root_workspace_part"],
+    deps = ["@rules_shell//shell/runfiles"],
+)

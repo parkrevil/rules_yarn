@@ -95,7 +95,7 @@ jobs:
         working-directory: e2e/install
         run: |
           floor=$(sed -n 's/.*bazel_compatibility.*">=\([0-9][0-9.]*\)".*/\1/p' ../../MODULE.bazel)
-          USE_BAZEL_VERSION="$floor" bazel test //:installed_test --lockfile_mode=off --test_output=errors
+          USE_BAZEL_VERSION="$floor" bazel test --lockfile_mode=off --test_output=errors -- //... -//:offline_test
 
   checks:
     name: checks

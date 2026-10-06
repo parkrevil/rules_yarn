@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:28f279c629435635aa9d9f6d9a8133e7bb6a9c763a460e1cab54084b72b07dbb",
+  "pageVersion": "sha256:3a0e0a2f0623a94dbf043854ac826536f5133350897d7218605b48b03671ade7",
   "claims": [
     {
       "id": "claim_54350d03825b4543a2e34ff911ba1463",
@@ -75,7 +75,7 @@
           "version": "repo-file-v1:sha256:95ead94217af9e25a183a2c27a318834b4d27124cc6726f509f5b815b0c2d19c"
         },
         {
-          "resource": "repo://yarn/private/install/driver.js#L383-L419",
+          "resource": "repo://yarn/private/install/driver.js#L385-L421",
           "version": "repo-lines-v1:sha256:60404227d7a6e1f3d94b6c40b3e7b68206d0655764b9785f3dcb06e85aaa9730:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNlODIwMGViZDE3MDliNmE2NzViZWNiM2JlOWYzOWU1M2JiYWMwMmNjOTI3MjM0NjJjMDU0NjhlYjBkYTZhMTYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjBhY2IzNDhmM2Y1NDhhM2Y4YmQ4NmYwZjhkMWNjNWY3YTIxYjY4NTE4YzdmZTgxYzQyMTE1ZjkzMTZlOGMwNDkiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkyMDQwZTA5NWE5NGUyYWRhNzRlNDIxZjM3MTg3NTFhOTFhODEwYmZkNjZmNDhmNGU5MzljN2I3NDgwZWI2NzAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
@@ -209,8 +209,8 @@
       "statement": "The install repository is not marked reproducible, because its contents depend on the host and hold absolute paths into the output base.",
       "evidence": [
         {
-          "resource": "repo://yarn/private/install/repository.bzl#L205-L251",
-          "version": "repo-lines-v1:sha256:0bd0f83a77a9f8bd74499ac8eb8e9689b29f7ee2b5443377e7ffe09f7b5ce800:eyJzZWxlY3RlZExpbmVDb3VudCI6NDcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzOWRlNDAwMDQzZDQzNmY0NjYyM2JmYzUxOThiYTY2ZDc5ZWNiZTkwNTIxMjYyYTdhNWQyZmEzYjJlYzU3YWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ4OTYwMGE3M2QyZTAyZjM1MmI5MGZlZjFkOGQ2MzgxMWJhNGE4ZWUwYzFiZWFhN2FlNDY1OGYzNmFhMmUxOTgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2NjMzNWIzMmEyYjZhM2U4ZWQ3MGJjZWFjOWJkZTEzYjQzMzIyMTM2MDA0OTA3Yjc3YzNmYzkzYWQxY2EyNDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUxMmQ0YWJmNjZmYTY3ZTBlOTVkNzZlMDVhNTFlMmI5MjQ0YzAxYjBhMTE3MjgxYmFkOGExM2NhM2NhOWJjNGIifQ"
+          "resource": "repo://yarn/private/install/repository.bzl#L205-L271",
+          "version": "repo-lines-v1:sha256:bfbf9a7aaa2f9be7ed1bde5c80d83c8584fd413548223f172d4916dd7b228b1e:eyJzZWxlY3RlZExpbmVDb3VudCI6NjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzOWRlNDAwMDQzZDQzNmY0NjYyM2JmYzUxOThiYTY2ZDc5ZWNiZTkwNTIxMjYyYTdhNWQyZmEzYjJlYzU3YWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJlMTU1OGJhOTNkOGFjYTMwNjE1OWYyYWQ3OGIzYmY5MTkxOGRkOTU2Mjc1M2MyNDUzZTE0Nzk0NzUyODNjY2YiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2NjMzNWIzMmEyYjZhM2U4ZWQ3MGJjZWFjOWJkZTEzYjQzMzIyMTM2MDA0OTA3Yjc3YzNmYzkzYWQxY2EyNDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg1YmU1MWQyMDNlY2VlNTYxOTEzNmYzMjI2ODZkNGMxMDBlZTgwZmNmMzhkN2FiNTU4MDU5NmZmNjQ5YWJkN2MifQ"
         }
       ]
     },
@@ -219,8 +219,8 @@
       "statement": "yarn_node_modules declares one directory artifact per package — filled by a YarnExtract action for a package built from its tarball and by a YarnUnpack action on the exec Node.js toolchain for an archived one — and one symlink artifact per link and .bin entry.",
       "evidence": [
         {
-          "resource": "repo://yarn/private/install/node_modules.bzl#L13-L89",
-          "version": "repo-lines-v1:sha256:05359609204402a11d4085057686773e5e3b7016a30f1fbf975c2c2e58483a01:eyJzZWxlY3RlZExpbmVDb3VudCI6NzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljOTVlNDdlYmE2NDVhZmI1MzA3OWMxNjFjNzUzZmIxNjU1YThiYTJkNDNjYzQ4ZWFlNDVjMmY5MDMwNDVlYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRmMTk0NjhkOWQ5OTBlOWY3NWVmN2ZiYmE3NWVhYjQ1NzU1NTUwYTRhOGM4OGJhZmRiNmNiNGViNGJkNjI2YmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM2NjdmZDFhNTU3Yzk2MjY5MTA2ZmRjNDQ2NGE5NzYxNmVmYWY3MmE0NDk5ZTdhNTVhODUzMGJkODY3YzQ5OWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImVlMGVjMTYzNDM1ZDUxNGMyYjRiN2E0NGFlNGM5ZWFkOWM0NTNmMzhlMjJjOGNjMjU3MmU4ODIyMzYwMGVmOTEifQ"
+          "resource": "repo://yarn/private/install/node_modules.bzl#L13-L104",
+          "version": "repo-lines-v1:sha256:121fa6b909c67eef9903aae2763acfac4cf4d6be536a44805d1c2947b3311f63:eyJzZWxlY3RlZExpbmVDb3VudCI6OTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjljOTVlNDdlYmE2NDVhZmI1MzA3OWMxNjFjNzUzZmIxNjU1YThiYTJkNDNjYzQ4ZWFlNDVjMmY5MDMwNDVlYWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjRmMTk0NjhkOWQ5OTBlOWY3NWVmN2ZiYmE3NWVhYjQ1NzU1NTUwYTRhOGM4OGJhZmRiNmNiNGViNGJkNjI2YmEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjM2NjdmZDFhNTU3Yzk2MjY5MTA2ZmRjNDQ2NGE5NzYxNmVmYWY3MmE0NDk5ZTdhNTVhODUzMGJkODY3YzQ5OWEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMxMDU5YjRlZDM5ZjE2NTZiOGYyYWU5ZDhiNWRiYjFiMDAxNjU4MTUyODYwZjVlMDA2N2E0ZWNhNjMzNDU5YjEifQ"
         }
       ]
     },
@@ -233,8 +233,8 @@
           "version": "repo-lines-v1:sha256:2508124eab2cc40936fef4d80e95b993bba9be2f20845110b8c1704a81ab8b21:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmU2OTRiNmUwNDAyMTExNjE0ZDViNTIxOWQwOWZjMGJkODBkMDQ3YjRkNWMyNzQxMTA2ODA4MjMxZWQ1YTY5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWU3Yzk1N2JjYjQ0ZmI2NzNjOThiMDA1MGE3NWQzODA4MmRiODFkOTE4ZGUzMTNhM2YwN2MxMjM1MzA2ZDdlYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGVjZTg5ZmQ1MzU1ZmE2Y2VmM2Q3YjcxNjUxOTRmZWZkM2VmNTBmMzQ5ZjEyMjE2ZjFkZWMyMWU4NjYyZTIxOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjY5ODBmMmNlMDE2NDM0OGQ2YTAwOWQxM2YxMTk2ZjE1YmJhNTcwNjdmMTRkMjZiYjA4ZDM5ZDQzNTQyNGQ4YiJ9"
         },
         {
-          "resource": "repo://yarn/private/install/repository.bzl#L81-L103",
-          "version": "repo-lines-v1:sha256:57785ee451990d039dff275059ca8fd89343519f742027a53c13170925aa3dc2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwOGEzY2I5MmMxODAwMzRhZjg2MjU4YmMwYzliOTFjYTk3MGU4MWIzYTk1Y2ZiMTk4ZmM5M2M0MzRiMTFkMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFiOWEyOGMwN2Y2YTE3YzExNDQ1YzMyMDU2NzUxMGJjYmVhOTc0ZDgyOWI0MTNkYmM0ODU4NTFjZjhhMDJlMTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzM2I1ODlhZDBiNmFhMDgwNWExZDg5YjJkZjBkOGY5NjU5NTIwYmFkMTAzMzUzZTBkZTUzOGZiYjZhOTIxMGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhhNTg5ZGI4ZjI0OWRhOTg2ZTdmMTIyNzg1MzRmZmZmMjg0MTg4NjM0MTdhNjRiZmI0YmZjYzA2MWI3MWMxZDIifQ"
+          "resource": "repo://yarn/private/install/repository.bzl#L81-L102",
+          "version": "repo-lines-v1:sha256:27bb0082405861d5da77ea08de4f5047e7d6abeb1b1ba28b898387165dab0459:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwOGEzY2I5MmMxODAwMzRhZjg2MjU4YmMwYzliOTFjYTk3MGU4MWIzYTk1Y2ZiMTk4ZmM5M2M0MzRiMTFkMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzM2I1ODlhZDBiNmFhMDgwNWExZDg5YjJkZjBkOGY5NjU5NTIwYmFkMTAzMzUzZTBkZTUzOGZiYjZhOTIxMGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYyYjU5ZjIwNzIwZmMwZGJmYWQ1ZGQ5MTllNTJjNjBkYmIzNmJiNmZmOTU3ZmYxYjhlNDg3MjkzOWRhNDE3YjgifQ"
         }
       ]
     },
@@ -254,15 +254,15 @@
     },
     {
       "id": "claim_77c4a369bcd340e08663d3ebf9d31af7",
-      "statement": "YarnNodeModulesInfo is defined in the public //yarn:providers.bzl, and its root is the execution path of node_modules derived from a declared artifact, or None when nothing is installed.",
+      "statement": "YarnNodeModulesInfo is defined in the public //yarn:providers.bzl, and the root of :node_modules is the execution path of node_modules derived from a declared artifact, or None when nothing is installed.",
       "evidence": [
         {
-          "resource": "repo://yarn/private/install/node_modules.bzl#L91-L103",
-          "version": "repo-lines-v1:sha256:8c2f0e614b7dd8d87559623220f6d59e51acb8833424d91e8bb4339d4b699de8:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwNTM0MTMzYjI2NDg4OTljY2IwMDVmMTA0YzNiMWNkNjIyNzA1YTk5OTc2ZTVjNGYyNTQ1YTMwY2E0MDc0YmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkZDI0NDU4MmI2ZmIwM2QyM2I4NDE1YWJlY2QzNDZiMGM5ZjQ2NmI2Zjc1MmIwNjgxODljZTdlOWEyZGMzNTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjMTcxM2QwNTZmOGE2ZmEyNzdlOTdlZTRmYzM0YjQ4ZjFjOWQ0OTVmNGQ4YWNjMmQ2ZDMyNzY4M2NlMzNlZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM0MTE4ODMwOGIxZTcxZmMzNDhjYzczNjY5ODc4MmEwNzcxMWVjM2EwMWYyNTg1YTRjZDdhYjQ4NmEzODBhMTQifQ"
+          "resource": "repo://yarn/private/install/node_modules.bzl#L134-L147",
+          "version": "repo-lines-v1:sha256:c1a89ac0e982de8f314d59b927ccf072757cba496d21a6663fa39372e01f50fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImYwNTM0MTMzYjI2NDg4OTljY2IwMDVmMTA0YzNiMWNkNjIyNzA1YTk5OTc2ZTVjNGYyNTQ1YTMwY2E0MDc0YmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFkZDI0NDU4MmI2ZmIwM2QyM2I4NDE1YWJlY2QzNDZiMGM5ZjQ2NmI2Zjc1MmIwNjgxODljZTdlOWEyZGMzNTAiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ2YjIwZjIyYTc1NmQwZDU5MjVkNjE5YjU2ODM0Y2E4MGFkZDBjMjMzMGVmNTk2ZWIyMjRhMmE4YzU3ODU1MzYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjM0MTE4ODMwOGIxZTcxZmMzNDhjYzczNjY5ODc4MmEwNzcxMWVjM2EwMWYyNTg1YTRjZDdhYjQ4NmEzODBhMTQifQ"
         },
         {
           "resource": "repo://yarn/providers.bzl",
-          "version": "repo-file-v1:sha256:95a4c37cf96e28ef9d260ca3fbefca52ae0a6b4f3797475a5615045fb893dbf4"
+          "version": "repo-file-v1:sha256:0be321b136d3933766db8a8c588eb7323ac6902ce307f0ae90ab90005ff07519"
         }
       ]
     },
@@ -296,11 +296,11 @@
       "evidence": [
         {
           "resource": "repo://tests/install/layout_test.js",
-          "version": "repo-file-v1:sha256:11667d41d904c9adce88183ae2ccf04a76dba553f64c3cdfaa514e8d43ae17ad"
+          "version": "repo-file-v1:sha256:23f84fc86dd188b085062a866f3a737ec56b4a651a26248999f03cf78e109806"
         },
         {
-          "resource": "repo://yarn/private/install/layout.js#L37-L62",
-          "version": "repo-lines-v1:sha256:bd181beb7a4afb6152334ef491a50e642775b8787c26d13ffda6f4377f4e1446:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjOTcxOTY3NzBkZTIwMjhkYzA0ZDQ4M2UzODU1YThkNDdjMGU5NDlhZGE3ZDQ2MTgyNGQwOWJlZjAyODZkNzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdhZmVjYWE0NGMzMmIyYjUyNzViMWVkODUyNzRlZWE1MDQzN2I4ZjY2NjkwYTJmM2RjZDllMGM4MWU0Y2I3MmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFlNTA1NzM1Njg5ZDY3NGM5NzQzNDllNjUyNTYzZDUyODZkOTI1MzM2ZDIxNzg0MGVmYmMyY2FjMmU3N2M3OGYifQ"
+          "resource": "repo://yarn/private/install/layout.js#L42-L67",
+          "version": "repo-lines-v1:sha256:bd181beb7a4afb6152334ef491a50e642775b8787c26d13ffda6f4377f4e1446:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdjOTcxOTY3NzBkZTIwMjhkYzA0ZDQ4M2UzODU1YThkNDdjMGU5NDlhZGE3ZDQ2MTgyNGQwOWJlZjAyODZkNzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdhZmVjYWE0NGMzMmIyYjUyNzViMWVkODUyNzRlZWE1MDQzN2I4ZjY2NjkwYTJmM2RjZDllMGM4MWU0Y2I3MmYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM2NjRjMmI4ZWJkYzFiMjIyMzc1NzI3MWIxNDhhMmM1YjRkNTk0ZWE1NTI0YmQxZTVlZjllMmRhYjdlMTIwZWYifQ"
         }
       ]
     },
@@ -355,12 +355,12 @@
       "statement": "The YarnExtract action runs extract.js to extract, normalise and compare the tarball with the recorded manifest, in a custom exec group holding the Node.js and tar.bzl toolchains.",
       "evidence": [
         {
-          "resource": "repo://yarn/private/install/node_modules.bzl#L131-L140",
-          "version": "repo-lines-v1:sha256:35a19df4da992063c3998b7f02cf84642d79b2666d9b7d278713a6b1ce391389:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3MzAyODhiMGZlNTA1ZWY2ZDYyZjI3MmM2OWEyY2RhZTFhNDc4OGRjYzJhM2ZmM2Y5MTRkMmQyYjFkMmI3MmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxYWI5OWYwZDJlZGE1OTE1M2Y1YjZhNDdiNzU5NDExYzBmYzQyZDFhOTVmMzRlYzMxNTUyZTRlZjE1NGU5OTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjFjZmMxNWM4M2Y4ZTVjNjc3ZjliNGJlYzg1YTJkY2FjYTZhOTg4ZWIwNWYwYmQ5MzY3MTAwOTg1OTFmNDU5NmQifQ"
+          "resource": "repo://yarn/private/install/node_modules.bzl#L182-L191",
+          "version": "repo-lines-v1:sha256:35a19df4da992063c3998b7f02cf84642d79b2666d9b7d278713a6b1ce391389:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3MzAyODhiMGZlNTA1ZWY2ZDYyZjI3MmM2OWEyY2RhZTFhNDc4OGRjYzJhM2ZmM2Y5MTRkMmQyYjFkMmI3MmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxYWI5OWYwZDJlZGE1OTE1M2Y1YjZhNDdiNzU5NDExYzBmYzQyZDFhOTVmMzRlYzMxNTUyZTRlZjE1NGU5OTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU4MGI1OGYwZjI5ZmE0MGIzZWI3NzcyMDI3NjNkODQzYWE4ZGNiZmYzODhiYmYyMmEyMDRjNDk1MDRjNzcxYmMifQ"
         },
         {
-          "resource": "repo://yarn/private/install/node_modules.bzl#L36-L67",
-          "version": "repo-lines-v1:sha256:7f06d1eaf81dedc8d4a374f547d80706ffc7b5444467b50cfdba217df9d12c96:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4YTQ0NzRhNzkwZjk2MTc5MTU1NDRkZjQ1NjdlMDRlODk5YjMzNmNhY2JmOTYxYTRlM2EzNzAwYWNkNWQ2ZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3MWNkYWY2OTdiMDFhMTZmMDljODRhNWU4Mjc4YmE4ODdjYjUwYjQxZTQ0OWRlNDE5ODQ3YTU1MmI5NmY1OTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNjMDIwOWY0YTg2ODdiODgzMzZjMzUxNmNhZDUzMDY2OTI5NTY2NTU3NDBkNmFmM2UzYjA4YzhkNTdmOWJjNTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIyNjA0ZjJlZGNiMzZkMjk3NTM1NGRjNmRlYzU4NTJjMTFjY2JiNzFkODVjNTMyY2Q0ZDZjMDc3OWExNzM3NzUifQ"
+          "resource": "repo://yarn/private/install/node_modules.bzl#L48-L80",
+          "version": "repo-lines-v1:sha256:29b45c5bbc0cba387cf90ab06522c27d992ebaa26e9201562cb7995115c8a6df:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk4YTQ0NzRhNzkwZjk2MTc5MTU1NDRkZjQ1NjdlMDRlODk5YjMzNmNhY2JmOTYxYTRlM2EzNzAwYWNkNWQ2ZTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc3MWNkYWY2OTdiMDFhMTZmMDljODRhNWU4Mjc4YmE4ODdjYjUwYjQxZTQ0OWRlNDE5ODQ3YTU1MmI5NmY1OTYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImNjMDIwOWY0YTg2ODdiODgzMzZjMzUxNmNhZDUzMDY2OTI5NTY2NTU3NDBkNmFmM2UzYjA4YzhkNTdmOWJjNTkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjIyNjA0ZjJlZGNiMzZkMjk3NTM1NGRjNmRlYzU4NTJjMTFjY2JiNzFkODVjNTMyY2Q0ZDZjMDc3OWExNzM3NzUifQ"
         }
       ]
     },
@@ -387,10 +387,90 @@
           "version": "repo-file-v1:sha256:0f506e3b03f46f01a6eb61e08acff81271b6ea82ba21ea2e113f1e3c4311a13a"
         }
       ]
+    },
+    {
+      "id": "claim_25be37256756490c8410f3f4aeee5e96",
+      "statement": "The layout records, for each direct dependency of the root and of each workspace that is a store package, every store package reached by walking Yarn's links, each once so that cycles end, with its .bin entries, and each scope among them with its dependencies; a link a Bazel target name cannot hold, and a dependency name that is neither name nor @scope/name, is refused.",
+      "evidence": [
+        {
+          "resource": "repo://tests/install/layout_test.js",
+          "version": "repo-file-v1:sha256:23f84fc86dd188b085062a866f3a737ec56b4a651a26248999f03cf78e109806"
+        },
+        {
+          "resource": "repo://yarn/private/install/layout.js",
+          "version": "repo-file-v1:sha256:b326d7a1873d429c44fe408f688deea8fb00be0c0dbc68844586dd28234d718d"
+        }
+      ]
+    },
+    {
+      "id": "claim_c7d0173ad2c54ae1802c0f23f9dbcbc9",
+      "statement": "yarn_node_modules returns, in a provider private to node_modules.bzl, one part per direct dependency and scope, and the generated BUILD declares a yarn_node_modules_part target for each, named after the dependency's link or the scope's directory.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/node_modules.bzl#L106-L137",
+          "version": "repo-lines-v1:sha256:a9c4258ead8e60d0e199ada3745f36ac018a473685720d1bc2a3c3fb477ff4fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE5NWRhNzQ5OTQ1MTgxMmQzOGUxMTI4NTM1ZjI1YjUwODg0MTEwZWUzMzdiMWEyOTAyNzY2NGM0MzU0MzJkYzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4NTFlODcyYjFiYmNkMzIxNjU2YzMzNmZmMmM4MDk1NDZhZGQyZTM3NzQyMTczYzhhNWM3OWY5MWU2Yzk4N2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjMTcxM2QwNTZmOGE2ZmEyNzdlOTdlZTRmYzM0YjQ4ZjFjOWQ0OTVmNGQ4YWNjMmQ2ZDMyNzY4M2NlMzNlZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFlYzA0YjE5NjBlMzYyMGE0Zjc5MTVmNjRjNDBlNGQ1ZGU5ZDczZTQ5NTg1YTkxODFkMTAxMWYxOWI2YTNjZDIifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L205-L264",
+          "version": "repo-lines-v1:sha256:ed27f2ff6e0280679763e5ba61dbf15d8bbefe8cbf5f27f9c18a6689f6b149c6:eyJzZWxlY3RlZExpbmVDb3VudCI6NjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImIzOWRlNDAwMDQzZDQzNmY0NjYyM2JmYzUxOThiYTY2ZDc5ZWNiZTkwNTIxMjYyYTdhNWQyZmEzYjJlYzU3YWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijg4MzEyMzNkMjhkOTUzNWQ3YjM3NjFkMjFhM2U5YWU0M2Q4MTYwZmQ1MTAzNWExNTM3ZDAxODJlODY4OGY4OWEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg2NjMzNWIzMmEyYjZhM2U4ZWQ3MGJjZWFjOWJkZTEzYjQzMzIyMTM2MDA0OTA3Yjc3YzNmYzkzYWQxY2EyNDgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE4MGExNzA3MDM1MDc5NTkzYzgxNTdhZTJmMTk0MWIxMmZkZDVkNTBlZmYyNDJiOTQxNmE2NzMyMGVkOWU3YjEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_3b501954f134445280a667c3cd46a948",
+      "statement": "A dependency's or scope's target carries YarnNodeModulesInfo whose files are its part and whose root is the node_modules directory its link or scope is in, and an e2e test resolves a workspace dependency through that root.",
+      "evidence": [
+        {
+          "resource": "repo://e2e/install/BUILD.bazel",
+          "version": "repo-file-v1:sha256:6745f6d1daa294fc0890534e0e25d5a7d3a883d28e9fc8c4ce7b86af25c6eab8"
+        },
+        {
+          "resource": "repo://yarn/private/install/node_modules.bzl#L106-L137",
+          "version": "repo-lines-v1:sha256:a9c4258ead8e60d0e199ada3745f36ac018a473685720d1bc2a3c3fb477ff4fa:eyJzZWxlY3RlZExpbmVDb3VudCI6MzIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE5NWRhNzQ5OTQ1MTgxMmQzOGUxMTI4NTM1ZjI1YjUwODg0MTEwZWUzMzdiMWEyOTAyNzY2NGM0MzU0MzJkYzMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4NTFlODcyYjFiYmNkMzIxNjU2YzMzNmZmMmM4MDk1NDZhZGQyZTM3NzQyMTczYzhhNWM3OWY5MWU2Yzk4N2UiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjNjMTcxM2QwNTZmOGE2ZmEyNzdlOTdlZTRmYzM0YjQ4ZjFjOWQ0OTVmNGQ4YWNjMmQ2ZDMyNzY4M2NlMzNlZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImFlYzA0YjE5NjBlMzYyMGE0Zjc5MTVmNjRjNDBlNGQ1ZGU5ZDczZTQ5NTg1YTkxODFkMTAxMWYxOWI2YTNjZDIifQ"
+        },
+        {
+          "resource": "repo://yarn/providers.bzl",
+          "version": "repo-file-v1:sha256:0be321b136d3933766db8a8c588eb7323ac6902ce307f0ae90ab90005ff07519"
+        }
+      ]
+    },
+    {
+      "id": "claim_fde46edde4c04701a8cc13f4c06f6da5",
+      "statement": "A dependency's target does not reduce fetching, every pinned tarball is still downloaded, and when the install fails no dependency target exists.",
+      "evidence": [
+        {
+          "resource": "repo://openspec/changes/per-package-targets/design.md",
+          "version": "repo-file-v1:sha256:6bb90c6243bf39b7fe3d1916179ab968b3dbcd70ed9cd8b8ded17ad34b798680"
+        }
+      ]
+    },
+    {
+      "id": "claim_70f1c1621b3c43809530a89a3e71fc59",
+      "statement": "On the 717-entry project, building :node_modules/react wrote 3 store packages (339 KB) in 0.36 s against 732 (425 MB) in 2.54 s for :node_modules, the generated BUILD grew from 403 KB to 476 KB, and analysis time did not change.",
+      "evidence": [
+        {
+          "resource": "repo://openspec/changes/per-package-targets/tasks.md",
+          "version": "repo-file-v1:sha256:45dca0a7eee22d007e0b54baa0bf028bff91893298cbf6b3326684a4bbb460f1"
+        }
+      ]
+    },
+    {
+      "id": "claim_0083f86e6945479e9792c946c1d37a1b",
+      "statement": "When the install fails, building a dependency's target gives Bazel's no such target, as an install scenario shows.",
+      "evidence": [
+        {
+          "resource": "repo://tools/ci/install_scenarios.sh",
+          "version": "repo-file-v1:sha256:393dd5f0f2a2bd02a7dee380468d050964f7b9104394f09e8268e05986f9aad0"
+        },
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L196-L203",
+          "version": "repo-lines-v1:sha256:2508124eab2cc40936fef4d80e95b993bba9be2f20845110b8c1704a81ab8b21:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmU2OTRiNmUwNDAyMTExNjE0ZDViNTIxOWQwOWZjMGJkODBkMDQ3YjRkNWMyNzQxMTA2ODA4MjMxZWQ1YTY5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWU3Yzk1N2JjYjQ0ZmI2NzNjOThiMDA1MGE3NWQzODA4MmRiODFkOTE4ZGUzMTNhM2YwN2MxMjM1MzA2ZDdlYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGVjZTg5ZmQ1MzU1ZmE2Y2VmM2Q3YjcxNjUxOTRmZWZkM2VmNTBmMzQ5ZjEyMjE2ZjFkZWMyMWU4NjYyZTIxOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjY5ODBmMmNlMDE2NDM0OGQ2YTAwOWQxM2YxMTk2ZjE1YmJhNTcwNjdmMTRkMjZiYjA4ZDM5ZDQzNTQyNGQ4YiJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-05T14:54:48.275Z"
+    "at": "2026-10-06T12:28:08.929Z"
   }
 }

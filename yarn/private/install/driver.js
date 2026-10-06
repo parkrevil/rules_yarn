@@ -38,7 +38,7 @@ const crypto = require("node:crypto");
 function rcFilename() {
   return `.rules-yarn-${crypto.randomBytes(16).toString("hex")}.yml`;
 }
-const LAYOUT_VERSION = 2;
+const LAYOUT_VERSION = 3;
 
 // nodeUtils.getLibc in Yarn 4.18.0: Linux only; the ldd header first, then
 // the shared objects the process report lists.
@@ -373,6 +373,8 @@ async function install(config) {
       links: layout.links,
       bins: layout.bins,
       workspaceLinks: layout.workspaceLinks,
+      dependencies: layout.dependencies,
+      scopes: layout.scopes,
       architectures: loaded.architectures,
       yarn: config.yarnVersion,
       node: process.version,
