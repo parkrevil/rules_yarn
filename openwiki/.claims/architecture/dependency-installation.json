@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:3a0e0a2f0623a94dbf043854ac826536f5133350897d7218605b48b03671ade7",
+  "pageVersion": "sha256:a872e2dd2e9e908096e3222e42471a14a2a18837315c6498bf19fb1fbfa338c7",
   "claims": [
     {
       "id": "claim_54350d03825b4543a2e34ff911ba1463",
@@ -439,7 +439,7 @@
       "statement": "A dependency's target does not reduce fetching, every pinned tarball is still downloaded, and when the install fails no dependency target exists.",
       "evidence": [
         {
-          "resource": "repo://openspec/changes/per-package-targets/design.md",
+          "resource": "repo://openspec/changes/archive/2026-10-07-per-package-targets/design.md",
           "version": "repo-file-v1:sha256:6bb90c6243bf39b7fe3d1916179ab968b3dbcd70ed9cd8b8ded17ad34b798680"
         }
       ]
@@ -449,7 +449,7 @@
       "statement": "On the 717-entry project, building :node_modules/react wrote 3 store packages (339 KB) in 0.36 s against 732 (425 MB) in 2.54 s for :node_modules, the generated BUILD grew from 403 KB to 476 KB, and analysis time did not change.",
       "evidence": [
         {
-          "resource": "repo://openspec/changes/per-package-targets/tasks.md",
+          "resource": "repo://openspec/changes/archive/2026-10-07-per-package-targets/tasks.md",
           "version": "repo-file-v1:sha256:45dca0a7eee22d007e0b54baa0bf028bff91893298cbf6b3326684a4bbb460f1"
         }
       ]
@@ -471,6 +471,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-06T12:28:08.929Z"
+    "at": "2026-10-06T16:51:59.728Z"
   }
 }

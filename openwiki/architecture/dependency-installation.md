@@ -5,7 +5,7 @@ description: How yarn.install turns a project's yarn.lock into Bazel artifacts â
 tags: [yarn-install, repository-rule, module-extension, integrity, isolation, node-modules]
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-06T12:28:08.929Z
+    at: 2026-10-06T16:51:59.728Z
 sources:
   - id: openwiki-source-6baa3bd517a8e6434ec03836
     resource: repo://e2e/install/BUILD.bazel
@@ -21,10 +21,10 @@ sources:
     resource: repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/design.md
   - id: openwiki-source-8fb8a65196be59b25e803b94
     resource: repo://openspec/changes/archive/2026-10-05-install-yarn-dependencies/tasks.md
-  - id: openwiki-source-c23074b1ef135ae03bb87264
-    resource: repo://openspec/changes/per-package-targets/design.md
-  - id: openwiki-source-576d200b82f104a1111379ae
-    resource: repo://openspec/changes/per-package-targets/tasks.md
+  - id: openwiki-source-a0e9e37d6ba8d0611e0d9fb0
+    resource: repo://openspec/changes/archive/2026-10-07-per-package-targets/design.md
+  - id: openwiki-source-9e003ae0d9981e801dc26d77
+    resource: repo://openspec/changes/archive/2026-10-07-per-package-targets/tasks.md
   - id: openwiki-source-3a9d47c216ac83ae687d3e65
     resource: repo://tests/install/driver_test.js
   - id: openwiki-source-186e1eeea778492c4f3de07f
