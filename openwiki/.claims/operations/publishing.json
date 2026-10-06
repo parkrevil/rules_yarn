@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:11cfae5a2618d21711470d3265b2658d772958b47fa78f2c8747b0b18819b55e",
+  "pageVersion": "sha256:eabdd9a7a5e623da1cada7372ebe8249bef6eb98277f2239ed71d5be3eebf5c1",
   "claims": [
     {
       "id": "claim_4937ff2c7dfc4c0bb7a1f0824afbd578",
@@ -37,8 +37,8 @@
       "statement": "release_prep.sh builds the archive with git archive under the prefix rules_yarn-<version>, matching what a GitHub-generated archive would use, and prints release notes carrying the integrity value.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/release_prep.sh#L1-L20",
-          "version": "repo-lines-v1:sha256:f1b6812ff794dc267961b121cc3969b02be9c0777e1f2c1ee7cf5a43091a1d05:eyJzZWxlY3RlZExpbmVDb3VudCI6MjAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4OTY0NDFiMTRjNjU1ZGIyNjI2ZWU0N2RmYmU3Y2RlNGM2NzIyYjJjMzA2ZThlODE3MWVkOTM0OGEyNDM1YjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3YjkwYTMyNTAxM2ZhOTNhYWE2ZDgyNjVhNDA2YTVlODVlODA4MmRhNjcwYTc3YTEyN2RjYjZmYTQyN2FjMmQifQ"
+          "resource": "repo://.github/workflows/release_prep.sh#L1-L24",
+          "version": "repo-lines-v1:sha256:1364ca2614b2ba14c598907a265fd28b8767872bd6dffbd1628ef31844cc1e73:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4OTY0NDFiMTRjNjU1ZGIyNjI2ZWU0N2RmYmU3Y2RlNGM2NzIyYjJjMzA2ZThlODE3MWVkOTM0OGEyNDM1YjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3YjkwYTMyNTAxM2ZhOTNhYWE2ZDgyNjVhNDA2YTVlODVlODA4MmRhNjcwYTc3YTEyN2RjYjZmYTQyN2FjMmQifQ"
         }
       ]
     },
@@ -48,7 +48,7 @@
       "evidence": [
         {
           "resource": "repo://.bcr/source.template.json",
-          "version": "repo-file-v1:sha256:6bc9a3ee634445022ab1f54673a8d018f3897a7f697689dca09cda56d2a514d6"
+          "version": "repo-file-v1:sha256:d26da2dddf6aa1a9f7ae300da138408cba3747e7ee4be8ff790be318091c32ba"
         },
         {
           "resource": "repo://openspec/changes/archive/2026-10-02-publish-to-the-registry/design.md#L30-L45",
@@ -84,7 +84,7 @@
         },
         {
           "resource": "repo://.bcr/source.template.json",
-          "version": "repo-file-v1:sha256:6bc9a3ee634445022ab1f54673a8d018f3897a7f697689dca09cda56d2a514d6"
+          "version": "repo-file-v1:sha256:d26da2dddf6aa1a9f7ae300da138408cba3747e7ee4be8ff790be318091c32ba"
         }
       ]
     },
@@ -160,17 +160,45 @@
       "evidence": [
         {
           "resource": "repo://README.md",
-          "version": "repo-file-v1:sha256:2059fa50a246906d869c15dc482694db9ad6c7db3459bde5da02884e99923855"
+          "version": "repo-file-v1:sha256:a1c5218ff9364d38b31001265e50833a66b2cb9e77a5a2bc813f779003a8bc60"
         },
         {
           "resource": "repo://yarn/private/extensions.bzl#L78-L130",
           "version": "repo-lines-v1:sha256:f83c697cf33d488caaca1a6fb673dfc59ef39cc711af4d02d3058c6e72f9c029:eyJzZWxlY3RlZExpbmVDb3VudCI6NTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjE5ZDUzOWVjMjgxZWU2OGFlYTk5M2I2ZTBiNDQ1ZmYxOGNjNjdmMzYzNzMwZWVjYTVmYTk2YmU1MWFhYWI4OGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJjYzI4NzkxYzMxOTA0MDUzMTY0MWNiMjZhZTFiYjY2ZmZmNzgwYjE3NzAzODhhMDBlZTAwYzhlZWU2MmM1ZjgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQwYzVhMjcyZDY5Y2JkOWY2YjI4NTI2YzVhZTg4OGUzMmY2ZGIyMTc3MzZhN2IwMTdiYjA5OGRjZjg0ODYxZGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBmYjhmYjlkYTQwNTE4YjNhZTg2ZDhiOTllMzQ4NWUyYmZmYjIwMTdmMzZhZmFkZmMzZDAzZmY5MzVhZjE1YjkifQ"
         }
       ]
+    },
+    {
+      "id": "claim_9f03165a20aa42ebb4832e095dc623ae",
+      "statement": "release_prep.sh has release_docs.sh build rules_yarn-<tag>.docs.tar.gz, the starlark_doc_extract outputs built in an output base of its own by the registry's recipe, writing nothing to standard output, and source.template.json links it as docs_url.",
+      "evidence": [
+        {
+          "resource": "repo://.bcr/source.template.json",
+          "version": "repo-file-v1:sha256:d26da2dddf6aa1a9f7ae300da138408cba3747e7ee4be8ff790be318091c32ba"
+        },
+        {
+          "resource": "repo://.github/workflows/release_docs.sh",
+          "version": "repo-file-v1:sha256:1d3f80965dd7f43aed0a107c467afdb7af0550900a393457fc0fb7da915f8afd"
+        },
+        {
+          "resource": "repo://.github/workflows/release_prep.sh#L1-L24",
+          "version": "repo-lines-v1:sha256:1364ca2614b2ba14c598907a265fd28b8767872bd6dffbd1628ef31844cc1e73:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4OTY0NDFiMTRjNjU1ZGIyNjI2ZWU0N2RmYmU3Y2RlNGM2NzIyYjJjMzA2ZThlODE3MWVkOTM0OGEyNDM1YjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3YjkwYTMyNTAxM2ZhOTNhYWE2ZDgyNjVhNDA2YTVlODVlODA4MmRhNjcwYTc3YTEyN2RjYjZmYTQyN2FjMmQifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_0ee1c6b483004ecda3e7059ca8919eb9",
+      "statement": "The CI checks job runs release_prep.sh under a tag of its own and requires the release notes, the source archive, a documentation archive holding each public file's binary proto, and a docs_url naming that archive.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml",
+          "version": "repo-file-v1:sha256:100225ebbbc7433898396e011f2eefbf34e2fb9c5f1cc952172e4c1fa98167e7"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-06T12:18:29.604Z"
+    "at": "2026-10-06T17:01:23.075Z"
   }
 }

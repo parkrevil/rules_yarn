@@ -151,6 +151,12 @@ are not part of this release.
 
 ## Public API
 
+Each release attaches the API reference Bazel's `starlark_doc_extract`
+extracts from `yarn/defs.bzl`, `yarn/extensions.bzl` and `yarn/providers.bzl`,
+as `rules_yarn-<tag>.docs.tar.gz`, which the module's registry entry links as
+`docs_url` for registry.bazel.build to render. A test requires every rule,
+extension, tag, provider, attribute and field there to be documented.
+
 ### `yarn.distribution` (module extension tag)
 
 | Attribute | Default | Description |

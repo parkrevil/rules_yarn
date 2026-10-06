@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:9eced6c766e4daba5020b6bc3e9e621775ae08eaf2a24f62a8f72d142a9fe11f",
+  "pageVersion": "sha256:2531304dc27effa67eea35d7395ca06f4b828d3c49ba77637499e4c0e401dede",
   "claims": [
     {
       "id": "claim_982785d0fd074cf9afca2ef0e4673dd2",
@@ -54,7 +54,7 @@
       "evidence": [
         {
           "resource": "repo://yarn/BUILD.bazel",
-          "version": "repo-file-v1:sha256:43fbf76bf76b648cdef0a334695daca26f2c3d3d158fada5f96df0afeb475a5c"
+          "version": "repo-file-v1:sha256:7add3d0bae6a77382bf712217e0d2a64875589dccd2ed1136e15f5a141eee8b7"
         }
       ]
     },
@@ -205,7 +205,7 @@
       "statement": "An install repository also provides a target per direct dependency of the root and of each workspace and per scope among them, named after the dependency's link or the scope's directory, each carrying YarnNodeModulesInfo for its part of the tree with root the node_modules directory its link is in.",
       "evidence": [
         {
-          "resource": "repo://README.md#L189-L199",
+          "resource": "repo://README.md#L195-L205",
           "version": "repo-lines-v1:sha256:0c24b0c0f9ad643f227c7c5cb12db4000e56b87cedc6d3eefcfddcf50f24ca3d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjA4ZTgwMTRiZmFlZWM1N2Y2MjZjNDJkMzAwZTg5NDQxNGU4OTdiZTI3YTM2ZjczNmI4MjNjYjQxM2RmMTg0Y2YiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjY5NjIxY2JjOWQ4M2Y3Zjk4YzhiZjI1MWFjMjU4M2IyM2ExODA4NGY0MjE0ZmJiY2RkMTM0YTFiZjgxYzAwMGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImJlMDg3N2M3YmY2ODhiOWI2NTMwN2M5ZjkzZmU4OWZkOTIzNWRkZTZjZWI1MTkyZmYyZWUzOGU0Y2ZkZTE1YjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjMwZDAxMWI1ODEwM2FmOWM4MzU2NDNjOGY4YWU2Mzc0NDIzMjFlYWFmMzZjZjk5ODkzZThhZTEwYWNhMTk5ZGYifQ"
         },
         {
@@ -221,10 +221,28 @@
           "version": "repo-file-v1:sha256:0be321b136d3933766db8a8c588eb7323ac6902ce307f0ae90ab90005ff07519"
         }
       ]
+    },
+    {
+      "id": "claim_52a230878bdf47e79c387a09c7be3144",
+      "statement": "Each public .bzl file has a starlark_doc_extract target on its bzl_library with render_main_repo_name set, and tests/docs:docs_test requires a non-empty doc string on every rule, extension, tag class, provider, attribute and field it extracts, failing on an entry of a kind it does not know.",
+      "evidence": [
+        {
+          "resource": "repo://tests/docs/BUILD.bazel",
+          "version": "repo-file-v1:sha256:834b771dcfb48cf9b763b8a86049d6015817087549642081d502c634e6043e70"
+        },
+        {
+          "resource": "repo://tests/docs/docs_test.js",
+          "version": "repo-file-v1:sha256:074d815ddcfda5d7c7835cefd10093643fe4e40679e5a92436bfb6e1d93e840d"
+        },
+        {
+          "resource": "repo://yarn/BUILD.bazel",
+          "version": "repo-file-v1:sha256:7add3d0bae6a77382bf712217e0d2a64875589dccd2ed1136e15f5a141eee8b7"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-06T12:21:37.329Z"
+    "at": "2026-10-06T17:04:45.060Z"
   }
 }

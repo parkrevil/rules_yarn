@@ -10,6 +10,10 @@ sources:
     resource: repo://MODULE.bazel
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
+  - id: openwiki-source-82caa9f3eab4a43e183311bb
+    resource: repo://tests/docs/BUILD.bazel
+  - id: openwiki-source-a8aba4c9b8a07e5ed3cadfbc
+    resource: repo://tests/docs/docs_test.js
   - id: openwiki-source-b24cb6f741eb257166e5a139
     resource: repo://yarn/BUILD.bazel
   - id: openwiki-source-044df30840b4f85a8f7d705c
@@ -30,10 +34,10 @@ sources:
     resource: repo://yarn/private/yarn_binary.bzl
   - id: openwiki-source-60f4d0e18953b7fc477fc496
     resource: repo://yarn/providers.bzl
-generated: { by: "claude-code", at: "2026-10-06T12:18:29.604Z" }
+generated: { by: "claude-code", at: "2026-10-06T17:04:45.060Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-06T12:21:37.329Z
+    at: 2026-10-06T17:04:45.060Z
 ---
 
 # Public API surface
@@ -110,6 +114,18 @@ on the private extension library, which in turn depends on the repository and
 version libraries and the two install repository rules; `providers` has no
 dependencies. These targets are publicly visible and exist so downstream
 tooling can describe the Starlark dependency graph.
+
+Each also has a `starlark_doc_extract` target — `defs.doc_extract`,
+`extensions.doc_extract`, `providers.doc_extract` — on that library, with
+`render_main_repo_name` set so labels read `@rules_yarn//...`, as Bazel's
+documentation of the rule asks for files used from other repositories.
+Extraction loads every file the public file loads, so a library missing a
+dependency fails the build. `tests/docs:docs_test` reads the extracted text
+protos and requires a non-empty doc string on every rule, extension, tag
+class, provider, attribute and field, and the public names to be present; an
+entry of a kind it does not know fails it rather than going unchecked.
+Each release archives the binary protos for the registry, which links them
+as `docs_url`.
 
 ## What is deliberately not public
 

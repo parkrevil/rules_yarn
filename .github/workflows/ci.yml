@@ -138,3 +138,20 @@ jobs:
       # needs no model, only the sources its own claims name.
       - name: Check the wiki still describes the repository
         run: tools/hooks/openwiki_staleness.sh
+
+      # What a release builds, under a tag of this run's own: the source
+      # archive, and beside it the archive of the public API's documentation
+      # holding each public .bzl file's, at the name .bcr/source.template.json
+      # links as docs_url; the release notes, release_prep.sh's standard
+      # output, hold nothing else.
+      - name: Build the release archives
+        run: |
+          tag=v0.0.0-ci
+          git tag "$tag"
+          GITHUB_REF_NAME="$tag" .github/workflows/release_prep.sh >"$RUNNER_TEMP/notes.md"
+          test "$(head -1 "$RUNNER_TEMP/notes.md")" = "## Using this release"
+          test -s "rules_yarn-$tag.tar.gz"
+          docs="$(node -p 'JSON.parse(require("fs").readFileSync(".bcr/source.template.json", "utf8")).docs_url' | sed "s|.*/||; s|{REPO}|rules_yarn|g; s|{TAG}|$tag|g")"
+          test "$docs" = "rules_yarn-$tag.docs.tar.gz"
+          test "$(tar -tzf "$docs" | grep '\.binaryproto$' | LC_ALL=C sort | paste -sd' ' -)" = \
+            "./yarn/defs.doc_extract.binaryproto ./yarn/extensions.doc_extract.binaryproto ./yarn/providers.doc_extract.binaryproto"

@@ -32,6 +32,10 @@ sources:
     resource: repo://tests/bcr/BUILD.bazel
   - id: openwiki-source-9396675ac7636781156cad60
     resource: repo://tests/bcr/MODULE.bazel
+  - id: openwiki-source-82caa9f3eab4a43e183311bb
+    resource: repo://tests/docs/BUILD.bazel
+  - id: openwiki-source-a8aba4c9b8a07e5ed3cadfbc
+    resource: repo://tests/docs/docs_test.js
   - id: openwiki-source-42fff598a74b8a8cf6e6de47
     resource: repo://tests/extensions/extensions_tests.bzl
   - id: openwiki-source-225340f64cde50bf1db88e14
@@ -72,10 +76,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
-generated: { by: "claude-code", at: "2026-10-06T12:28:52.942Z" }
+generated: { by: "claude-code", at: "2026-10-06T17:04:45.060Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-06T12:28:52.942Z
+    at: 2026-10-06T17:04:45.060Z
 ---
 
 # Verification strategy
@@ -192,6 +196,14 @@ counts as agreement, and each case states what Yarn should make of it. For
 the documents Yarn fails on, it requires Yarn to fail on the carried part read
 alone, which is the check the driver makes at every install.
 
+`tests/docs:docs_test`, on the same runner, reads the text protos Bazel's
+`starlark_doc_extract` extracts from the three public `.bzl` files and requires
+a non-empty doc string on every rule, extension, tag class, provider,
+attribute and field, and the public names to be present, and fails on an
+entry of a kind it does not know; it compares nothing else, since the rule's
+output is not stable across Bazel versions. It failed with one field's doc
+string emptied.
+
 ## Layer 4 — the consumer modules
 
 Consumption through a module boundary cannot be observed from inside the module
@@ -301,8 +313,10 @@ macOS:
   adjustment the build-and-test job makes.
 - **checks** — the pre-commit hooks, which cover Buildifier, the file-hygiene
   hooks and `openspec validate --all --strict`; the contract tables of both
-  harness hooks, the generated-file guard's and the wiki staleness gate's; and
-  the staleness gate itself.
+  harness hooks, the generated-file guard's and the wiki staleness gate's; the
+  staleness gate itself; and `release_prep.sh` run under a tag of its own,
+  requiring the release notes, the source archive, the documentation archive
+  with each public file's binary proto, and a `docs_url` naming it.
 
 The two contract tables are the layer for code that has no Bazel target. Both
 hooks are shell scripts the harness runs, not things the build produces, so

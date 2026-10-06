@@ -14,8 +14,12 @@ sources:
     resource: repo://.bcr/source.template.json
   - id: openwiki-source-3c099d9af7cba6b30d6eaf07
     resource: repo://.gitattributes
+  - id: openwiki-source-164e2da859b5277df81c7d94
+    resource: repo://.github/workflows/ci.yml
   - id: openwiki-source-70ab0363e4be6caa7ada8f8a
     resource: repo://.github/workflows/publish.yaml
+  - id: openwiki-source-38d051cbfe080f7c7cfd32b8
+    resource: repo://.github/workflows/release_docs.sh
   - id: openwiki-source-dbe15c01c777baeb41e77f3c
     resource: repo://.github/workflows/release_prep.sh
   - id: openwiki-source-4d1d392666be6dfdd7a91a2e
@@ -34,10 +38,10 @@ sources:
     resource: repo://tests/bcr/MODULE.bazel
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
-generated: { by: "claude-code", at: "2026-10-04T12:22:38.266Z" }
+generated: { by: "claude-code", at: "2026-10-06T17:01:23.075Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-06T12:18:29.604Z
+    at: 2026-10-06T17:01:23.075Z
 ---
 
 # Releasing and publishing
@@ -60,8 +64,17 @@ That workflow runs the repository's tests, then calls
 `.github/workflows/release_prep.sh` — a path it hard-codes, deliberately, so
 the script that prepares a release is attestable from the repository rather
 than supplied when the workflow is dispatched. The script builds the archive
-with `git archive`, computes its digest, and prints the release notes, which
-the workflow puts on the GitHub release along with the archive.
+with `git archive`, computes its digest, has `release_docs.sh` build the
+archive of the public API's documentation beside it, and prints the release
+notes, which the workflow puts on the GitHub release along with both
+archives.
+
+`release_docs.sh` follows the registry's recipe (`docs/stardoc.md` of the
+Bazel Central Registry): it builds every `starlark_doc_extract` target — one
+per public `.bzl` file — in an output base of its own and archives that
+`bazel-bin` as `rules_yarn-<tag>.docs.tar.gz`, writing nothing to standard
+output, which is the release notes. The workflow's `rules_yarn-*.tar.gz`
+uploads it, and its attestation step attests every uploaded file.
 
 The second job calls the registry's own publishing workflow from
 `bazel-contrib/publish-to-bcr`, which reads the templates under `.bcr/`, forms
@@ -93,14 +106,19 @@ Four files, the set the publishing automation reads.
 | File | What it carries |
 | --- | --- |
 | `metadata.template.json` | Homepage, maintainers with their numeric GitHub ids, the repository. The version list is filled by the automation. |
-| `source.template.json` | Where the archive is and what prefix to strip, written with the `{OWNER}`, `{REPO}`, `{VERSION}` and `{TAG}` placeholders the automation substitutes. |
+| `source.template.json` | Where the archive is, what prefix to strip, and, as `docs_url`, where the documentation archive is, written with the `{OWNER}`, `{REPO}`, `{VERSION}` and `{TAG}` placeholders the automation substitutes. |
 | `presubmit.yml` | What the registry runs to check the entry. |
 | `config.yml` | That this repository publishes one module, at its root. |
 
 `{VERSION}` is the tag without its leading `v` and `{TAG}` is the whole tag, so
 `source.template.json` resolves to the prefix and filename `release_prep.sh`
 produces. That correspondence was checked by running the script against a tag
-and comparing, not by reading both and assuming.
+and comparing, not by reading both and assuming. For the documentation archive
+CI checks it on every push: the `checks` job runs `release_prep.sh` under a
+tag of its own and requires the release notes, the source archive, a
+documentation archive holding each public file's binary proto, and a
+`docs_url` naming that archive. That the release uploads it and the registry
+renders it is shown only by a published release.
 
 ## The version placeholder
 

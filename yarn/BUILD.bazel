@@ -19,3 +19,27 @@ bzl_library(
     srcs = ["providers.bzl"],
     visibility = ["//visibility:public"],
 )
+
+starlark_doc_extract(
+    name = "defs.doc_extract",
+    src = "defs.bzl",
+    render_main_repo_name = True,
+    visibility = ["//tests/docs:__pkg__"],
+    deps = [":defs"],
+)
+
+starlark_doc_extract(
+    name = "extensions.doc_extract",
+    src = "extensions.bzl",
+    render_main_repo_name = True,
+    visibility = ["//tests/docs:__pkg__"],
+    deps = [":extensions"],
+)
+
+starlark_doc_extract(
+    name = "providers.doc_extract",
+    src = "providers.bzl",
+    render_main_repo_name = True,
+    visibility = ["//tests/docs:__pkg__"],
+    deps = [":providers"],
+)

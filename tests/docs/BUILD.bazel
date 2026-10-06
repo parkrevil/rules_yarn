@@ -1,0 +1,23 @@
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
+
+# The public API's extracted documentation is complete.
+sh_test(
+    name = "docs_test",
+    size = "small",
+    srcs = ["//tests/install:node_test.sh"],
+    args = [
+        "$(rlocationpath @nodejs//:node_bin)",
+        "$(rlocationpath docs_test.js)",
+        "DEFS=$(rlocationpath //yarn:defs.doc_extract.textproto)",
+        "EXTENSIONS=$(rlocationpath //yarn:extensions.doc_extract.textproto)",
+        "PROVIDERS=$(rlocationpath //yarn:providers.doc_extract.textproto)",
+    ],
+    data = [
+        "docs_test.js",
+        "//yarn:defs.doc_extract.textproto",
+        "//yarn:extensions.doc_extract.textproto",
+        "//yarn:providers.doc_extract.textproto",
+        "@nodejs//:node_bin",
+    ],
+    deps = ["@bazel_tools//tools/bash/runfiles"],
+)

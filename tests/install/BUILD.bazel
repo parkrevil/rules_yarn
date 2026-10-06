@@ -1,5 +1,11 @@
 load("@rules_shell//shell:sh_test.bzl", "sh_test")
 
+# The Node test runner, which tests/docs uses too.
+exports_files(
+    ["node_test.sh"],
+    visibility = ["//tests:__subpackages__"],
+)
+
 sh_test(
     name = "archive_test",
     size = "small",

@@ -12,6 +12,10 @@ ARCHIVE="rules_yarn-$TAG.tar.gz"
 git archive --format=tar --prefix="${PREFIX}/" "${TAG}" | gzip > "$ARCHIVE"
 SHA=$(shasum -a 256 "$ARCHIVE" | awk '{print $1}')
 
+# The public API's documentation, which .bcr/source.template.json links as
+# docs_url and the registry renders.
+.github/workflows/release_docs.sh "${ARCHIVE%.tar.gz}.docs.tar.gz"
+
 cat <<EOF
 ## Using this release
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:7ba35e05ab45dc91ccb803170a29cd1fc3fbe192fbcac1a91ce5c3174cdd9d8e",
+  "pageVersion": "sha256:a763fddcac089304bf7a34a9eca9de3ad269fea742d366d9affe355833af7732",
   "claims": [
     {
       "id": "claim_80120293013247f8b2a4c96dba175e61",
@@ -140,11 +140,11 @@
     },
     {
       "id": "claim_a4680c64fab84820a5937baae2224a81",
-      "statement": "CI runs on every push and pull request over Linux and macOS with three jobs: build and test across all four roots plus the install scenarios, the declared Bazel floor for a Yarn target and for every e2e/install test but the network-blocking one, and checks covering pre-commit, both harness hooks' contract tables and the wiki staleness gate itself.",
+      "statement": "CI runs on every push and pull request over Linux and macOS with three jobs: build and test across all four roots plus the install scenarios, the declared Bazel floor for a Yarn target and for every e2e/install test but the network-blocking one, and checks covering pre-commit, both harness hooks' contract tables, the wiki staleness gate itself and a run of release_prep.sh.",
       "evidence": [
         {
           "resource": "repo://.github/workflows/ci.yml",
-          "version": "repo-file-v1:sha256:a91e563928ebeb0490566a3ab3f882cc63f1005939a87ee7d49f18148cc90762"
+          "version": "repo-file-v1:sha256:100225ebbbc7433898396e011f2eefbf34e2fb9c5f1cc952172e4c1fa98167e7"
         }
       ]
     },
@@ -196,7 +196,7 @@
       "evidence": [
         {
           "resource": "repo://tests/install/BUILD.bazel",
-          "version": "repo-file-v1:sha256:913955201179b0a2555c22f7aed48cbfc360af10dfe33e2eac47b1fa84f0d22a"
+          "version": "repo-file-v1:sha256:ba0204a253a55adced8ad96ae88b74f58e0550457b35ff6dba22bb170734c568"
         },
         {
           "resource": "repo://tests/install/node_test.sh",
@@ -307,10 +307,24 @@
           "version": "repo-file-v1:sha256:23f84fc86dd188b085062a866f3a737ec56b4a651a26248999f03cf78e109806"
         }
       ]
+    },
+    {
+      "id": "claim_aec8542b4eba4f2689739dc319b97336",
+      "statement": "tests/docs:docs_test requires a non-empty doc string on every rule, extension, tag class, provider, attribute and field extracted from the public .bzl files, and the public names, fails on an entry of a kind it does not know, and compares nothing else.",
+      "evidence": [
+        {
+          "resource": "repo://tests/docs/BUILD.bazel",
+          "version": "repo-file-v1:sha256:834b771dcfb48cf9b763b8a86049d6015817087549642081d502c634e6043e70"
+        },
+        {
+          "resource": "repo://tests/docs/docs_test.js",
+          "version": "repo-file-v1:sha256:074d815ddcfda5d7c7835cefd10093643fe4e40679e5a92436bfb6e1d93e840d"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-06T12:28:52.942Z"
+    "at": "2026-10-06T17:04:45.060Z"
   }
 }
