@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:c34adf41e4b9b2542ed4419c51ca7ed18416246f3b4bf83fb14b8b9b5ef73437",
+  "pageVersion": "sha256:28f279c629435635aa9d9f6d9a8133e7bb6a9c763a460e1cab54084b72b07dbb",
   "claims": [
     {
       "id": "claim_54350d03825b4543a2e34ff911ba1463",
@@ -369,7 +369,7 @@
       "statement": "For a 717-entry project the install repository keeps 53 MB of archives and 4.8 MB of manifests instead of 409 MB of archives, and fetching and a cold build take 19.0 s and 8.1 s instead of 11.7 s and 2.0 s.",
       "evidence": [
         {
-          "resource": "repo://openspec/changes/extract-packages-from-tarballs/tasks.md",
+          "resource": "repo://openspec/changes/archive/2026-10-05-extract-packages-from-tarballs/tasks.md",
           "version": "repo-file-v1:sha256:0f506e3b03f46f01a6eb61e08acff81271b6ea82ba21ea2e113f1e3c4311a13a"
         }
       ]
@@ -379,11 +379,11 @@
       "statement": "A package holding two names that differ only by case cannot be installed on a filesystem that folds case, because Yarn itself cannot lay it out there, and the install reports Yarn's error.",
       "evidence": [
         {
-          "resource": "repo://openspec/changes/extract-packages-from-tarballs/design.md",
+          "resource": "repo://openspec/changes/archive/2026-10-05-extract-packages-from-tarballs/design.md",
           "version": "repo-file-v1:sha256:2fed178c7163d6c76d33635344eb59e7cf0dac7e480f06061da3de5bef5fcbe7"
         },
         {
-          "resource": "repo://openspec/changes/extract-packages-from-tarballs/tasks.md",
+          "resource": "repo://openspec/changes/archive/2026-10-05-extract-packages-from-tarballs/tasks.md",
           "version": "repo-file-v1:sha256:0f506e3b03f46f01a6eb61e08acff81271b6ea82ba21ea2e113f1e3c4311a13a"
         }
       ]
@@ -391,6 +391,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-05T14:46:32.438Z"
+    "at": "2026-10-05T14:54:48.275Z"
   }
 }

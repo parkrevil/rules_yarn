@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:144326aaa636a387052f64b90ff18a910ead558ddbf70f4f0d27e62e1a5bed46",
+  "pageVersion": "sha256:ca843fe465e43a103b7a6adc49bdc9106dce90115a1842cc4878655a15f3246a",
   "claims": [
     {
       "id": "claim_80120293013247f8b2a4c96dba175e61",
@@ -285,7 +285,7 @@
       "statement": "The scenario with crafted tarball shapes adds the tarball holding names that differ only by case only where the work filesystem keeps case apart, because on a case-folding filesystem Yarn itself cannot lay that package out.",
       "evidence": [
         {
-          "resource": "repo://openspec/changes/extract-packages-from-tarballs/tasks.md",
+          "resource": "repo://openspec/changes/archive/2026-10-05-extract-packages-from-tarballs/tasks.md",
           "version": "repo-file-v1:sha256:0f506e3b03f46f01a6eb61e08acff81271b6ea82ba21ea2e113f1e3c4311a13a"
         },
         {
@@ -297,6 +297,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-05T14:46:32.438Z"
+    "at": "2026-10-05T14:54:48.275Z"
   }
 }
