@@ -52,7 +52,7 @@
     90-day artifact limit on a retry is stated. Left: a dispatch from
     another branch shows a run that did nothing, which is what its `if`
     says.
-- [ ] 3.4 After the merge, `tag.yaml` dispatched once: the tag, the release
+- [x] 3.4 After the merge, `tag.yaml` dispatched once: the tag, the release
   with both archives published by `finalize`, and the registry pull request
   recorded.
   - 2026-10-08, run 37758860778: `tag` pushed `v0.1.0` at `d8a73a89`; the
@@ -61,3 +61,10 @@
     leaving out `block-network` tests — locally that command ran 40 of 40
     tests — and `release.yml` now takes a dispatch to release an existing
     tag.
+  - 2026-10-08, run 37760533408 (`release.yml` dispatched for `v0.1.0`): build,
+    attest, release, publish and `finalize` succeeded. The release is
+    published, not a draft, with `rules_yarn-v0.1.0.tar.gz`,
+    `rules_yarn-v0.1.0.docs.tar.gz` and their attestations; the registry pull
+    request is bazelbuild/bazel-central-registry#10979, a draft titled
+    `rules_yarn@0.1.0`, whose `source.json` carries the `docs_url` of that
+    documentation archive.

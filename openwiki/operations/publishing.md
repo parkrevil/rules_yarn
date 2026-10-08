@@ -32,8 +32,10 @@ sources:
     resource: repo://MODULE.bazel
   - id: openwiki-source-63ce3ef0151d26335584ed2e
     resource: repo://openspec/changes/archive/2026-10-02-publish-to-the-registry/design.md
-  - id: openwiki-source-b270a5545803bfbe1ddaeeb8
-    resource: repo://openspec/changes/automate-releases/design.md
+  - id: openwiki-source-1c605292596af7be83f68f1e
+    resource: repo://openspec/changes/archive/2026-10-08-automate-releases/design.md
+  - id: openwiki-source-2b963a7716c7f3360a6f8229
+    resource: repo://openspec/changes/archive/2026-10-08-automate-releases/tasks.md
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
   - id: openwiki-source-01bd775b2b199eca72dcc70e
@@ -42,22 +44,24 @@ sources:
     resource: repo://tests/bcr/MODULE.bazel
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
-generated: { by: "claude-code", at: "2026-10-08T09:37:10.868Z" }
+generated: { by: "claude-code", at: "2026-10-08T10:04:22.632Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-08T09:53:12.361Z
+    at: 2026-10-08T10:05:39.676Z
 ---
 
 # Releasing and publishing
 
-Nothing is published yet. A consumer today adds a non-registry override, and
-because an override only takes effect in the root module, a module that
-depends on `rules_yarn` cannot pass it on — every root module downstream has
-to repeat it. Removing that is what this apparatus exists for.
+`v0.1.0` is released on GitHub, and its registry pull request
+(bazelbuild/bazel-central-registry#10979) is open as a draft for the author to
+mark ready; until the registry merges it, a consumer adds a non-registry
+override, and because an override only takes effect in the root module, a
+module that depends on `rules_yarn` cannot pass it on — every root module
+downstream has to repeat it. Removing that is what this apparatus exists for.
 
-Everything below is in place; the token publishing needs is set. What has
-been exercised and what only a first release will show is said where it
-matters.
+Everything below is in place, the token publishing needs is set, and the
+whole chain — tag, release, attestations, registry pull request — ran for
+`v0.1.0`.
 
 ## What tags a release
 

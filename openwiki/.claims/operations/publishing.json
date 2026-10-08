@@ -1,14 +1,18 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:27912a55dde063f3c89281d2c3efb4a58e290a81f7fda4755c3317346fd66797",
+  "pageVersion": "sha256:feb73fe8a0dfe5de58f2b172baff148ccee1be93ca8b6fd23d35fa29c1e38274",
   "claims": [
     {
       "id": "claim_4937ff2c7dfc4c0bb7a1f0824afbd578",
-      "statement": "Nothing is published to the Bazel Central Registry yet, so a consumer adds a non-registry override; because an override only takes effect in the root module, a module depending on rules_yarn cannot pass it on.",
+      "statement": "v0.1.0 is released on GitHub and its registry pull request is open as a draft; until the registry merges it, a consumer adds a non-registry override, and because an override only takes effect in the root module, a module depending on rules_yarn cannot pass it on.",
       "evidence": [
         {
           "resource": "repo://README.md#L31-L55",
           "version": "repo-lines-v1:sha256:46d3ca458fa2d5569d7b6b056c682ba5103cfb2cdaaf7bb1922ec714c8c4816b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3MzkwYTgzYWJhMWY2YzMyNjZiZGRkMjk5MzRjNTc0NDAwODgyMjEwYzk1OWY5YjAyZTk4NGFkZDVjZTZjNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2ZTFjMmU2MTcwNDdlMGU4ZDMxNmY2MTM1ODY4NThjOWZlN2I0Njg0YTk2ODE3MmI1MTBjOTg5YjVkMzI0MTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNjlhNTg4NDlhZTlkMjE0ZWNiNGQyOWFmNTAyNGEwOGM0ODI4OWM5NTI2MDE3MjVlMzNmNTNmOGYwMjAzOWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1MTkwYmIxNDY4YTMxNTM4YTE5YTg5MWQ4NDUyZTM3YWNiYmQzZjA1MTFlNDM4NWVhMTAwNjgxOGI1MWY1ZjkifQ"
+        },
+        {
+          "resource": "repo://openspec/changes/archive/2026-10-08-automate-releases/tasks.md",
+          "version": "repo-file-v1:sha256:2434b64257e580151a256595691707de940095551d5caa9b37b5c8539e1321d4"
         }
       ]
     },
@@ -143,7 +147,7 @@
           "version": "repo-file-v1:sha256:43cc59319901d4a37d89f204c664c9ffc92eadacacfdd3f61892b3fd84f09ead"
         },
         {
-          "resource": "repo://openspec/changes/automate-releases/design.md",
+          "resource": "repo://openspec/changes/archive/2026-10-08-automate-releases/design.md",
           "version": "repo-file-v1:sha256:3bdf15ef52374985e8dbab1606e44dae67ddda5d991c914ff704e72b50132368"
         }
       ]
@@ -209,7 +213,7 @@
           "version": "repo-file-v1:sha256:af2335a0241f9cd0bd8be392fbad1c10f5993edff2030ab51cd610ee3cf67bd0"
         },
         {
-          "resource": "repo://openspec/changes/automate-releases/design.md",
+          "resource": "repo://openspec/changes/archive/2026-10-08-automate-releases/design.md",
           "version": "repo-file-v1:sha256:3bdf15ef52374985e8dbab1606e44dae67ddda5d991c914ff704e72b50132368"
         }
       ]
@@ -241,14 +245,24 @@
           "version": "repo-file-v1:sha256:c21d3bbd74ea7acad0a231ced893c2014baee315f24c03dea95fa6e5d5b5dfaf"
         },
         {
-          "resource": "repo://openspec/changes/automate-releases/design.md",
+          "resource": "repo://openspec/changes/archive/2026-10-08-automate-releases/design.md",
           "version": "repo-file-v1:sha256:3bdf15ef52374985e8dbab1606e44dae67ddda5d991c914ff704e72b50132368"
+        }
+      ]
+    },
+    {
+      "id": "claim_d33bf31c9de3423889462a0b55ca3609",
+      "statement": "The whole release chain — tag, release with its attestations, registry pull request — ran for v0.1.0.",
+      "evidence": [
+        {
+          "resource": "repo://openspec/changes/archive/2026-10-08-automate-releases/tasks.md",
+          "version": "repo-file-v1:sha256:2434b64257e580151a256595691707de940095551d5caa9b37b5c8539e1321d4"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-08T09:53:12.361Z"
+    "at": "2026-10-08T10:05:39.676Z"
   }
 }
