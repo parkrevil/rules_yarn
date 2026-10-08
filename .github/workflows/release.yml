@@ -16,6 +16,13 @@ on:
   push:
     tags:
       - "v*.*.*"
+  # So a release that failed can be run again for its existing tag.
+  workflow_dispatch:
+    inputs:
+      tag_name:
+        description: the existing tag to release
+        required: true
+        type: string
 
 permissions:
   attestations: write
@@ -27,6 +34,14 @@ jobs:
     uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.7.0
     with:
       release_files: rules_yarn-*.tar.gz
+      # The tests run again on the tagged commit, but not the ones tagged
+      # block-network: they assert that the sandbox blocks the network, and
+      # the release runner's Bazel fell back to processwrapper-sandbox, which
+      # does not (run 37758860778). ci.yml found the same on its runners —
+      # AppArmor refusing unprivileged user namespaces (run 37758005119) —
+      # lifts that restriction and runs them on every push. The workflow
+      # appends its cache flags to this command.
+      bazel_test_command: bazel test --test_tag_filters=-block-network //...
       prerelease: false
       # A draft until the registry entry has been offered: publish.yaml
       # uploads the attestations to it, and `finalize` publishes it, so a

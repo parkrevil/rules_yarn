@@ -34,8 +34,10 @@
 
 ## 3. Gate
 
-- [ ] 3.1 Every root builds and tests; pre-commit; `openspec validate --all
+- [x] 3.1 Every root builds and tests; pre-commit; `openspec validate --all
   --strict`; CI on the branch, the read-only `ccv` check included.
+  - 2026-10-08: CI run 37758005119 passed all five jobs; its next-release
+    job worked out `v0.1.0` (minor).
 - [x] 3.2 The wiki is regenerated and the staleness gate passes.
 - [x] 3.3 A reviewer without this conversation reviews the change; each
   finding checked and recorded.
@@ -53,3 +55,9 @@
 - [ ] 3.4 After the merge, `tag.yaml` dispatched once: the tag, the release
   with both archives published by `finalize`, and the registry pull request
   recorded.
+  - 2026-10-08, run 37758860778: `tag` pushed `v0.1.0` at `d8a73a89`; the
+    release build failed on `//tests/launcher:yarn_offline_test`, the runner's
+    sandbox not blocking the network. Fixed by the release's test command
+    leaving out `block-network` tests — locally that command ran 40 of 40
+    tests — and `release.yml` now takes a dispatch to release an existing
+    tag.

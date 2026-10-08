@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:5cc0051c943806c0903c6082b87bbdc12a71e90f967618163af97fff093beba3",
+  "pageVersion": "sha256:27912a55dde063f3c89281d2c3efb4a58e290a81f7fda4755c3317346fd66797",
   "claims": [
     {
       "id": "claim_4937ff2c7dfc4c0bb7a1f0824afbd578",
@@ -14,11 +14,11 @@
     },
     {
       "id": "claim_7edaa2148ce149d29bbecf0321e9e16f",
-      "statement": "release.yml runs on a pushed v*.*.* tag or when tag.yaml calls it, and runs the reusable release workflow from bazel-contrib/.github with the release as a draft, then the publish workflow, then a finalize job that publishes the draft.",
+      "statement": "release.yml runs on a pushed v*.*.* tag, when tag.yaml calls it, or when dispatched with an existing tag, and runs the reusable release workflow from bazel-contrib/.github with the release as a draft, then the publish workflow, then a finalize job that publishes the draft.",
       "evidence": [
         {
           "resource": "repo://.github/workflows/release.yml",
-          "version": "repo-file-v1:sha256:3f52f30af96e04c7324722a0879c41bf54b909f8fa5a588f88b90ab08d04802f"
+          "version": "repo-file-v1:sha256:c21d3bbd74ea7acad0a231ced893c2014baee315f24c03dea95fa6e5d5b5dfaf"
         }
       ]
     },
@@ -144,7 +144,7 @@
         },
         {
           "resource": "repo://openspec/changes/automate-releases/design.md",
-          "version": "repo-file-v1:sha256:a1eb3d8b80441c4b7d177d715ca6f647645b595aaae385926138222dfed1867c"
+          "version": "repo-file-v1:sha256:3bdf15ef52374985e8dbab1606e44dae67ddda5d991c914ff704e72b50132368"
         }
       ]
     },
@@ -210,7 +210,7 @@
         },
         {
           "resource": "repo://openspec/changes/automate-releases/design.md",
-          "version": "repo-file-v1:sha256:a1eb3d8b80441c4b7d177d715ca6f647645b595aaae385926138222dfed1867c"
+          "version": "repo-file-v1:sha256:3bdf15ef52374985e8dbab1606e44dae67ddda5d991c914ff704e72b50132368"
         }
       ]
     },
@@ -224,17 +224,31 @@
         },
         {
           "resource": "repo://.github/workflows/release.yml",
-          "version": "repo-file-v1:sha256:3f52f30af96e04c7324722a0879c41bf54b909f8fa5a588f88b90ab08d04802f"
+          "version": "repo-file-v1:sha256:c21d3bbd74ea7acad0a231ced893c2014baee315f24c03dea95fa6e5d5b5dfaf"
         },
         {
           "resource": "repo://.github/workflows/tag.yaml",
           "version": "repo-file-v1:sha256:af2335a0241f9cd0bd8be392fbad1c10f5993edff2030ab51cd610ee3cf67bd0"
         }
       ]
+    },
+    {
+      "id": "claim_3bd9dbae1d9248328b46dde11cabdb7c",
+      "statement": "The release's tests on the tagged commit leave out the block-network tests, since the release runner's Bazel used processwrapper-sandbox, which does not honour that tag; CI runs them on every push, and the first dispatched release failed on one of them.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/release.yml",
+          "version": "repo-file-v1:sha256:c21d3bbd74ea7acad0a231ced893c2014baee315f24c03dea95fa6e5d5b5dfaf"
+        },
+        {
+          "resource": "repo://openspec/changes/automate-releases/design.md",
+          "version": "repo-file-v1:sha256:3bdf15ef52374985e8dbab1606e44dae67ddda5d991c914ff704e72b50132368"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-08T09:37:10.868Z"
+    "at": "2026-10-08T09:53:12.361Z"
   }
 }

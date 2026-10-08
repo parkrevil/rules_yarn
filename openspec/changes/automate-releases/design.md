@@ -94,6 +94,22 @@ the same commits.
 way `release_ruleset.yaml` calls it; the CI step that builds the release
 archives passes it the same way.
 
+**The release's tests skip the network-blocking ones.** `release_ruleset.yaml`
+re-runs `bazel test //...` on the tagged commit. In the first dispatched run
+(37758860778) Bazel there used `processwrapper-sandbox`, which does not honour
+the `block-network` tag, and `//tests/launcher:yarn_offline_test`, which
+asserts that the network is blocked, was the one test of 41 to fail; on the
+same runner image CI measured AppArmor refusing unprivileged user namespaces,
+which the Linux sandbox needs, until it lowers that setting (run
+37758005119). `ci.yml` lifts that restriction and runs
+those tests on every push, so `release.yml` passes `bazel_test_command: bazel
+test --test_tag_filters=-block-network //...`, the input the workflow offers
+for it.
+
+**A failed release can be run again** for its tag: `release.yml` also takes
+`workflow_dispatch` with the tag, since the tag already exists and a tag pushed
+by the workflow starts nothing.
+
 **A read-only check on every push.** A CI job of its own — `ccv` is a Docker
 action, so Linux only, and needs the full history and tags — runs it with
 `write-tag: false` and writes the version the next release would get to the

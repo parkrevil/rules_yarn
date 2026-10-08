@@ -45,7 +45,7 @@ sources:
 generated: { by: "claude-code", at: "2026-10-08T09:37:10.868Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-08T09:37:10.868Z
+    at: 2026-10-08T09:53:12.361Z
 ---
 
 # Releasing and publishing
@@ -78,11 +78,14 @@ version on every push without writing a tag.
 
 ## What a tag sets off
 
-`.github/workflows/release.yml`, started by a pushed `v*.*.*` tag or called by
-`tag.yaml`, runs three jobs in sequence.
+`.github/workflows/release.yml`, started by a pushed `v*.*.*` tag, called by
+`tag.yaml`, or dispatched with an existing tag to run a failed release again,
+runs three jobs in sequence.
 
 The first calls the reusable release workflow from `bazel-contrib/.github`.
-That workflow runs the repository's tests, then calls
+That workflow runs the repository's tests on the tagged commit — all but the
+ones tagged `block-network`, which the release runner's sandbox cannot honour
+and CI runs on every push — then calls
 `.github/workflows/release_prep.sh` — a path it hard-codes, deliberately, so
 the script that prepares a release is attestable from the repository rather
 than supplied when the workflow is dispatched. The script builds the archive
