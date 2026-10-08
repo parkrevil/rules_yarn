@@ -84,10 +84,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
-generated: { by: "claude-code", at: "2026-10-06T17:32:29.974Z" }
+generated: { by: "claude-code", at: "2026-10-08T09:32:20.561Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-06T17:32:29.974Z
+    at: 2026-10-08T09:37:10.868Z
 ---
 
 # Verification strategy
@@ -323,8 +323,12 @@ macOS:
   the lock off, as a consumer resolving from scratch would, and runs every
   test there but the network-blocking one, which needs the sandbox
   adjustment the build-and-test job makes.
-- **checks** — the pre-commit hooks, which cover Buildifier, the file-hygiene
-  hooks and `openspec validate --all --strict`; the contract tables of both
+- **next release** — `smlx/ccv` with `write-tag: false`, which writes to the
+  job summary the version `tag.yaml` would give the next release, so a change
+  in how commits are written shows before the schedule acts on it.
+- **checks** — the pre-commit hooks, which cover Buildifier, `actionlint` over
+  every workflow, the file-hygiene hooks and `openspec validate --all
+  --strict`; the contract tables of both
   harness hooks, the generated-file guard's and the wiki staleness gate's; the
   staleness gate itself; and `release_prep.sh` run under a tag of its own,
   requiring the release notes, the source archive, the documentation archive

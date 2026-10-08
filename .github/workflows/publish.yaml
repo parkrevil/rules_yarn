@@ -4,19 +4,24 @@
 name: Publish to BCR
 
 on:
+  # release.yml passes its secrets with `secrets: inherit`, so
+  # BCR_PUBLISH_TOKEN is there under its own name, as on a dispatch.
   workflow_call:
     inputs:
       tag_name:
         required: true
         type: string
-    secrets:
-      publish_token:
-        required: true
-  # So a failed publish can be retried without cutting another release.
+  # So a failed publish can be retried without cutting another release. The
+  # release is still a draft then, whose files cannot be downloaded by URL, so
+  # the retry takes them from the run that built them.
   workflow_dispatch:
     inputs:
       tag_name:
         description: the git tag being published
+        required: true
+        type: string
+      release_artifacts_run_id:
+        description: the id of the run that built the tag's files — the Tag a release run, or the Release run for a pushed tag
         required: true
         type: string
 
@@ -25,6 +30,10 @@ jobs:
     uses: bazel-contrib/publish-to-bcr/.github/workflows/publish.yaml@v1.5.0
     with:
       tag_name: ${{ inputs.tag_name }}
+      # The run whose release files and attestations to use: this one when
+      # release.yml calls this workflow, the release's run when a person
+      # retries it.
+      release_artifacts_run_id: ${{ inputs.release_artifacts_run_id || github.run_id }}
       # A fork of bazelbuild/bazel-central-registry that the token can push to.
       registry_fork: parkrevil/bazel-central-registry
       # `draft` is left at its default of true on purpose. The reusable
@@ -37,4 +46,4 @@ jobs:
       contents: write
       id-token: write
     secrets:
-      publish_token: ${{ secrets.publish_token || secrets.BCR_PUBLISH_TOKEN }}
+      publish_token: ${{ secrets.BCR_PUBLISH_TOKEN }}

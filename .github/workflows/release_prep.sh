@@ -3,7 +3,11 @@
 # workflow at bazel-contrib/.github, which calls this path by name.
 set -o errexit -o nounset -o pipefail
 
-TAG=${GITHUB_REF_NAME}
+# The tag being released, as the reusable release workflow passes it
+# (release_ruleset.yaml at v7.7.0: `release_prep.sh ${{ inputs.tag_name ||
+# github.ref_name }}`). GITHUB_REF_NAME is the tag only when a pushed tag
+# started the run; called from tag.yaml it is the branch.
+TAG=$1
 # The prefix matches what GitHub generates for a source archive, so a consumer
 # can move between the two without changing strip_prefix.
 PREFIX="rules_yarn-${TAG:1}"

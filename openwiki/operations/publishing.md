@@ -24,12 +24,16 @@ sources:
     resource: repo://.github/workflows/release_prep.sh
   - id: openwiki-source-4d1d392666be6dfdd7a91a2e
     resource: repo://.github/workflows/release.yml
+  - id: openwiki-source-685d1e99022c20c7bfd21b06
+    resource: repo://.github/workflows/tag.yaml
   - id: openwiki-source-bc52b7fdf1f189e434bbea21
     resource: repo://e2e/smoke/.bazelrc
   - id: openwiki-source-d92bdd4d3d554717b6869e2d
     resource: repo://MODULE.bazel
   - id: openwiki-source-63ce3ef0151d26335584ed2e
     resource: repo://openspec/changes/archive/2026-10-02-publish-to-the-registry/design.md
+  - id: openwiki-source-b270a5545803bfbe1ddaeeb8
+    resource: repo://openspec/changes/automate-releases/design.md
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
   - id: openwiki-source-01bd775b2b199eca72dcc70e
@@ -38,10 +42,10 @@ sources:
     resource: repo://tests/bcr/MODULE.bazel
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
-generated: { by: "claude-code", at: "2026-10-06T17:01:23.075Z" }
+generated: { by: "claude-code", at: "2026-10-08T09:37:10.868Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-06T17:01:23.075Z
+    at: 2026-10-08T09:37:10.868Z
 ---
 
 # Releasing and publishing
@@ -51,13 +55,31 @@ because an override only takes effect in the root module, a module that
 depends on `rules_yarn` cannot pass it on — every root module downstream has
 to repeat it. Removing that is what this apparatus exists for.
 
-Everything below is in place and was exercised; the one step that needs a
-credential nobody has yet is named at the end.
+Everything below is in place; the token publishing needs is set. What has
+been exercised and what only a first release will show is said where it
+matters.
+
+## What tags a release
+
+`.github/workflows/tag.yaml`, as in `bazel-contrib/rules-template`, runs daily
+at 15:00 UTC and whenever it is dispatched, on `main` only and one run at a
+time. `smlx/ccv` works out the next version from the Conventional Commits
+since the last tag — a `feat` a minor version, a `fix` a patch, a breaking
+change a major one, anything else none, and `v0.1.0` while there is no tag.
+For a minor or patch version the workflow pushes the tag and calls
+`release.yml` with it, because a tag pushed with the workflow token starts no
+run of its own. A major version it reports and leaves to a person, whose
+pushed tag starts `release.yml` directly; the template's way, where `ccv`
+pushes every tag, would leave an unreleased major tag behind. Until that tag
+is pushed no minor or patch release is cut either, since `ccv` ranks the
+breaking commit first. The daily run
+does nothing within two weeks of the last tag. A CI job works out the same
+version on every push without writing a tag.
 
 ## What a tag sets off
 
-Pushing a tag matching `v*.*.*` starts `.github/workflows/release.yml`, which
-runs two jobs in sequence.
+`.github/workflows/release.yml`, started by a pushed `v*.*.*` tag or called by
+`tag.yaml`, runs three jobs in sequence.
 
 The first calls the reusable release workflow from `bazel-contrib/.github`.
 That workflow runs the repository's tests, then calls
@@ -76,10 +98,15 @@ per public `.bzl` file — in an output base of its own and archives that
 output, which is the release notes. The workflow's `rules_yarn-*.tar.gz`
 uploads it, and its attestation step attests every uploaded file.
 
-The second job calls the registry's own publishing workflow from
-`bazel-contrib/publish-to-bcr`, which reads the templates under `.bcr/`, forms
-a registry entry for the tag, and opens a pull request against the Bazel
-Central Registry from a fork.
+The release is created as a draft. The second job calls the registry's own
+publishing workflow from `bazel-contrib/publish-to-bcr`, which reads the
+templates under `.bcr/`, forms a registry entry for the tag, uploads the
+attestations to the draft, and opens a pull request against the Bazel Central
+Registry from a fork. The third, `finalize`, publishes the draft. A publish
+that fails leaves the release a draft; `publish.yaml` can be dispatched again
+with the release run's id, since a draft's files cannot be fetched by URL.
+The secret reaches every job as `BCR_PUBLISH_TOKEN`, passed on with `secrets:
+inherit`.
 
 ## Why the archive is built here
 
@@ -153,9 +180,9 @@ fail for reasons that say nothing about the module.
 
 ## Before a first publication
 
-One thing, which cannot be done from a checkout: a `BCR_PUBLISH_TOKEN` secret
-that can push to the registry fork and open pull requests. The fork it pushes
-to, named in `publish.yaml`, already exists.
+The `BCR_PUBLISH_TOKEN` secret, a token that can push to the registry fork
+and open pull requests, is set, and the fork it pushes to, named in
+`publish.yaml`, exists.
 
 The maintainer email in `metadata.template.json` was the other open item. The
 registry emails maintainers when a release fails, so it has to be an address

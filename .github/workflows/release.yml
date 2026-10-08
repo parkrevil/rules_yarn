@@ -1,7 +1,18 @@
-# Cuts a release when a version tag is pushed, then offers it to the registry.
+# Cuts a release for a version tag — one a person pushed, or one tag.yaml
+# created and passes here, since a tag pushed with the workflow token starts
+# no run of its own — then offers it to the registry, and publishes the
+# release once it has been offered. This is bazel-contrib/rules-template's
+# release.yaml (commit cb8787e7).
 name: Release
 
 on:
+  # Its caller passes its secrets with `secrets: inherit`, so
+  # BCR_PUBLISH_TOKEN is there under its own name either way.
+  workflow_call:
+    inputs:
+      tag_name:
+        required: true
+        type: string
   push:
     tags:
       - "v*.*.*"
@@ -17,12 +28,25 @@ jobs:
     with:
       release_files: rules_yarn-*.tar.gz
       prerelease: false
-      tag_name: ${{ github.ref_name }}
+      # A draft until the registry entry has been offered: publish.yaml
+      # uploads the attestations to it, and `finalize` publishes it, so a
+      # release never appears before its registry entry is under way.
+      draft: true
+      tag_name: ${{ inputs.tag_name || github.ref_name }}
 
   publish:
     needs: release
     uses: ./.github/workflows/publish.yaml
     with:
-      tag_name: ${{ github.ref_name }}
-    secrets:
-      publish_token: ${{ secrets.BCR_PUBLISH_TOKEN }}
+      tag_name: ${{ inputs.tag_name || github.ref_name }}
+    secrets: inherit
+
+  finalize:
+    needs: publish
+    runs-on: ubuntu-latest
+    steps:
+      # action-gh-release reuses the draft for the tag and, with `draft`
+      # omitted, publishes it (README and src/github.ts at v3.0.1).
+      - uses: softprops/action-gh-release@718ea10b132b3b2eba29c1007bb80653f286566b # v3.0.1
+        with:
+          tag_name: ${{ inputs.tag_name || github.ref_name }}

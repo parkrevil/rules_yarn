@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:7d1bdfbc34314f4ff558fcd3786281f14fcd1eb0dee765e60369cca598d625b5",
+  "pageVersion": "sha256:dec4d622fc330db81e9874bd7e18389dc7ba5687eb991a11644b0988cd490cf4",
   "claims": [
     {
       "id": "claim_8726f27a9d394749af7f84cf2e263861",
@@ -96,7 +96,7 @@
         },
         {
           "resource": "repo://.github/workflows/ci.yml",
-          "version": "repo-file-v1:sha256:100225ebbbc7433898396e011f2eefbf34e2fb9c5f1cc952172e4c1fa98167e7"
+          "version": "repo-file-v1:sha256:f8c99b61588dc37ff3e569388804c459cbdbcc7094b4e729f1b9b9e7da69ab8e"
         },
         {
           "resource": "repo://AGENTS.md",
@@ -117,6 +117,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-06T17:01:23.075Z"
+    "at": "2026-10-08T09:37:10.868Z"
   }
 }

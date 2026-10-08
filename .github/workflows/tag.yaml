@@ -1,0 +1,94 @@
+# Tags a release when the commits since the last one call for it, by the
+# Conventional Commits rules smlx/ccv applies — a `feat` a minor version, a
+# `fix` a patch, a breaking change a major one, anything else none, and the
+# first tag v0.1.0 — and releases it through release.yml. This is
+# bazel-contrib/rules-template's tag.yaml (commit cb8787e7), with one
+# difference: ccv only works out the version, and the tag is written here,
+# for a minor or patch version only, so a major version — a person's
+# decision — leaves no tag behind. Pushing that tag by hand releases it.
+name: Tag a release
+
+on:
+  # A person can release now, for example after landing a fix someone needs.
+  workflow_dispatch:
+  # So commits are not left unreleased indefinitely.
+  schedule:
+    - cron: "0 15 * * *" # Daily at 15:00 UTC
+
+# One run at a time, so two runs cannot tag and release the same commits.
+concurrency:
+  group: tag-a-release
+  cancel-in-progress: false
+
+permissions: {}
+
+jobs:
+  tag:
+    # Releases are cut from main only.
+    if: github.ref == 'refs/heads/main'
+    permissions:
+      contents: write # push the tag
+    runs-on: ubuntu-latest
+    outputs:
+      new-tag: ${{ steps.write.outputs.new-tag }}
+      new-tag-version: ${{ steps.ccv.outputs.new-tag-version }}
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # ccv walks back to the latest tag.
+          fetch-depth: 0
+
+      - name: Check if there is a recent tag
+        id: recent-tag
+        # Only the schedule waits; a person's run does not.
+        if: github.event_name == 'schedule'
+        run: |
+          # The template's trade-off between releasing so often that it
+          # overwhelms the registry's maintainers and so rarely that fixes wait.
+          MAX_AGE=1209600 # two weeks
+          TAG=$(git describe --tags --match 'v[0-9]*.[0-9]*.[0-9]*' --abbrev=0 2>/dev/null) || {
+            echo "No release tag yet."
+            exit 0
+          }
+          AGE=$(($(date +%s) - $(git log -1 --format=%ct "$TAG")))
+          echo "Latest tag: $TAG ($AGE seconds ago)"
+          if [ "$AGE" -lt "$MAX_AGE" ]; then
+            echo "recently-tagged=true" >>"$GITHUB_OUTPUT"
+          fi
+
+      - name: Work out the next version
+        id: ccv
+        if: github.event_name != 'schedule' || steps.recent-tag.outputs.recently-tagged != 'true'
+        uses: smlx/ccv@7318e2f25a52dcd550e75384b84983973251a1f8 # v0.10.0
+        with:
+          write-tag: false
+
+      - name: Tag a minor or patch version
+        id: write
+        if: steps.ccv.outputs.new-tag == 'true' && steps.ccv.outputs.new-tag-version-type != 'major'
+        env:
+          TAG: ${{ steps.ccv.outputs.new-tag-version }}
+        run: |
+          git tag "$TAG"
+          git push origin "refs/tags/$TAG"
+          echo "new-tag=true" >>"$GITHUB_OUTPUT"
+
+      - name: Leave a major version to a person
+        if: steps.ccv.outputs.new-tag-version-type == 'major'
+        env:
+          TAG: ${{ steps.ccv.outputs.new-tag-version }}
+        run: |
+          echo "::notice::The commits since the last release call for $TAG, a major version. Push that tag to release it."
+          echo "The commits since the last release call for \`$TAG\`, a major version; pushing that tag releases it." >>"$GITHUB_STEP_SUMMARY"
+
+  release:
+    needs: tag
+    if: needs.tag.outputs.new-tag == 'true'
+    uses: ./.github/workflows/release.yml
+    with:
+      tag_name: ${{ needs.tag.outputs.new-tag-version }}
+    secrets: inherit
+    permissions:
+      attestations: write
+      contents: write
+      id-token: write

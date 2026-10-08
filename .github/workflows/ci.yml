@@ -97,6 +97,44 @@ jobs:
           floor=$(sed -n 's/.*bazel_compatibility.*">=\([0-9][0-9.]*\)".*/\1/p' ../../MODULE.bazel)
           USE_BAZEL_VERSION="$floor" bazel test --lockfile_mode=off --test_output=errors -- //... -//:offline_test
 
+  # The version tag.yaml would give the next release, worked out the same way
+  # but without writing a tag, so a change in how commits are written shows
+  # before the schedule acts on it. ccv is a Docker action, so Linux only.
+  next-release:
+    name: next release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          # ccv walks back to the latest tag.
+          fetch-depth: 0
+
+      # Informational: a branch that forked before the first tag has no tag
+      # among its ancestors, which ccv reports as an error, so its failure is
+      # reported here rather than failing the run.
+      - name: Work out the next version
+        id: ccv
+        continue-on-error: true
+        uses: smlx/ccv@7318e2f25a52dcd550e75384b84983973251a1f8 # v0.10.0
+        with:
+          write-tag: false
+
+      - name: Report it
+        env:
+          OUTCOME: ${{ steps.ccv.outcome }}
+          NEW_TAG: ${{ steps.ccv.outputs.new-tag }}
+          VERSION: ${{ steps.ccv.outputs.new-tag-version }}
+          TYPE: ${{ steps.ccv.outputs.new-tag-version-type }}
+        run: |
+          if [ "$OUTCOME" != success ]; then
+            echo "ccv could not work out the next version from this history." >>"$GITHUB_STEP_SUMMARY"
+          elif [ "$NEW_TAG" = true ]; then
+            echo "The next release would be \`$VERSION\` ($TYPE)." >>"$GITHUB_STEP_SUMMARY"
+          else
+            echo "No commit since the last release calls for a new one." >>"$GITHUB_STEP_SUMMARY"
+          fi
+
   checks:
     name: checks
     runs-on: ubuntu-latest
@@ -148,7 +186,7 @@ jobs:
         run: |
           tag=v0.0.0-ci
           git tag "$tag"
-          GITHUB_REF_NAME="$tag" .github/workflows/release_prep.sh >"$RUNNER_TEMP/notes.md"
+          .github/workflows/release_prep.sh "$tag" >"$RUNNER_TEMP/notes.md"
           test "$(head -1 "$RUNNER_TEMP/notes.md")" = "## Using this release"
           test -s "rules_yarn-$tag.tar.gz"
           docs="$(node -p 'JSON.parse(require("fs").readFileSync(".bcr/source.template.json", "utf8")).docs_url' | sed "s|.*/||; s|{REPO}|rules_yarn|g; s|{TAG}|$tag|g")"

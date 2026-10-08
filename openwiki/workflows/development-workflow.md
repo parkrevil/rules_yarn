@@ -26,10 +26,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-1182253f19cc7fc5a1a4410d
     resource: repo://tools/hooks/protect_generated.sh
-generated: { by: "claude-code", at: "2026-10-06T17:26:00.906Z" }
+generated: { by: "claude-code", at: "2026-10-08T09:32:20.561Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-06T17:26:00.906Z
+    at: 2026-10-08T09:37:10.868Z
 ---
 
 # Development workflow
@@ -83,7 +83,7 @@ plain `pre-commit install` wires all of them:
 
 | Stage | What runs |
 | --- | --- |
-| `pre-commit` | file hygiene, buildifier and its linter, `openspec validate --all --strict` when `openspec/` changed |
+| `pre-commit` | file hygiene, buildifier and its linter, `actionlint` over the workflows, `openspec validate --all --strict` when `openspec/` changed |
 | `commit-msg` | `commitizen`, enforcing Conventional Commits |
 | `pre-push` | the wiki staleness gate |
 

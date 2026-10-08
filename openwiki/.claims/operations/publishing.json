@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:eabdd9a7a5e623da1cada7372ebe8249bef6eb98277f2239ed71d5be3eebf5c1",
+  "pageVersion": "sha256:5cc0051c943806c0903c6082b87bbdc12a71e90f967618163af97fff093beba3",
   "claims": [
     {
       "id": "claim_4937ff2c7dfc4c0bb7a1f0824afbd578",
@@ -14,21 +14,21 @@
     },
     {
       "id": "claim_7edaa2148ce149d29bbecf0321e9e16f",
-      "statement": "Pushing a tag matching v*.*.* runs release.yml, which calls the reusable release workflow from bazel-contrib/.github and then the publish workflow.",
+      "statement": "release.yml runs on a pushed v*.*.* tag or when tag.yaml calls it, and runs the reusable release workflow from bazel-contrib/.github with the release as a draft, then the publish workflow, then a finalize job that publishes the draft.",
       "evidence": [
         {
           "resource": "repo://.github/workflows/release.yml",
-          "version": "repo-file-v1:sha256:d7812eb0de1c441b6df3badccb022cc7f90fcb7a421387523adf376cdde5cfd8"
+          "version": "repo-file-v1:sha256:3f52f30af96e04c7324722a0879c41bf54b909f8fa5a588f88b90ab08d04802f"
         }
       ]
     },
     {
       "id": "claim_5b0881ca5c204e83b856cc604fcabb3a",
-      "statement": "The reusable release workflow calls .github/workflows/release_prep.sh at a hard-coded path, so the script preparing a release is attestable from the repository rather than supplied at dispatch.",
+      "statement": "The reusable release workflow calls .github/workflows/release_prep.sh at a hard-coded path, passing the tag as its argument, so the script preparing a release is attestable from the repository rather than supplied at dispatch.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/release_prep.sh#L1-L14",
-          "version": "repo-lines-v1:sha256:47f04391fb9a66c07652e7a0ba75984ff280db3f864c90c7d9c6c5902c9643d7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQwN2Y3NzlhNjkyNGM1NmFmZmU2OGE1YzU5YmY4MmQwODM0MDQzZjEwZTY0NmY2Njc5YjBhZTE2NGM5YTg5NzcifQ"
+          "resource": "repo://.github/workflows/release_prep.sh#L1-L18",
+          "version": "repo-lines-v1:sha256:0b69a023bbfb6581821d3c3845b07be3b72c48984c4641a9b4cd16e4d8113fd6:eyJzZWxlY3RlZExpbmVDb3VudCI6MTgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA1NDE4Zjc2MDRlMmE0YWUyOWEwOTIxODVmM2I2NzUxYjA2MDBjNmVmZWQ4NWY1OGE5OGI4Y2I4YWFjOWI1NTIifQ"
         }
       ]
     },
@@ -37,8 +37,8 @@
       "statement": "release_prep.sh builds the archive with git archive under the prefix rules_yarn-<version>, matching what a GitHub-generated archive would use, and prints release notes carrying the integrity value.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/release_prep.sh#L1-L24",
-          "version": "repo-lines-v1:sha256:1364ca2614b2ba14c598907a265fd28b8767872bd6dffbd1628ef31844cc1e73:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4OTY0NDFiMTRjNjU1ZGIyNjI2ZWU0N2RmYmU3Y2RlNGM2NzIyYjJjMzA2ZThlODE3MWVkOTM0OGEyNDM1YjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3YjkwYTMyNTAxM2ZhOTNhYWE2ZDgyNjVhNDA2YTVlODVlODA4MmRhNjcwYTc3YTEyN2RjYjZmYTQyN2FjMmQifQ"
+          "resource": "repo://.github/workflows/release_prep.sh#L1-L28",
+          "version": "repo-lines-v1:sha256:efdbc568363be28d15aa3774735212b2b931cce2142867243f8dd42576cd7131:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4OTY0NDFiMTRjNjU1ZGIyNjI2ZWU0N2RmYmU3Y2RlNGM2NzIyYjJjMzA2ZThlODE3MWVkOTM0OGEyNDM1YjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3YjkwYTMyNTAxM2ZhOTNhYWE2ZDgyNjVhNDA2YTVlODVlODA4MmRhNjcwYTc3YTEyN2RjYjZmYTQyN2FjMmQifQ"
         }
       ]
     },
@@ -132,7 +132,7 @@
     },
     {
       "id": "claim_0f4ac1acecaf44fdb4f6bf1456d4c718",
-      "statement": "Publishing still requires a BCR_PUBLISH_TOKEN secret; the registry fork named in publish.yaml already exists, and metadata.template.json records the maintainer's email address.",
+      "statement": "Publishing reads the BCR_PUBLISH_TOKEN repository secret, which is set; the registry fork named in publish.yaml exists, and metadata.template.json records the maintainer's email address.",
       "evidence": [
         {
           "resource": "repo://.bcr/metadata.template.json",
@@ -140,7 +140,11 @@
         },
         {
           "resource": "repo://.github/workflows/publish.yaml",
-          "version": "repo-file-v1:sha256:946bc2c7ded520aaf943f51b1c787d9de04c3db24978dcec3a77bf0f3f18afce"
+          "version": "repo-file-v1:sha256:43cc59319901d4a37d89f204c664c9ffc92eadacacfdd3f61892b3fd84f09ead"
+        },
+        {
+          "resource": "repo://openspec/changes/automate-releases/design.md",
+          "version": "repo-file-v1:sha256:a1eb3d8b80441c4b7d177d715ca6f647645b595aaae385926138222dfed1867c"
         }
       ]
     },
@@ -150,7 +154,7 @@
       "evidence": [
         {
           "resource": "repo://.github/workflows/publish.yaml",
-          "version": "repo-file-v1:sha256:946bc2c7ded520aaf943f51b1c787d9de04c3db24978dcec3a77bf0f3f18afce"
+          "version": "repo-file-v1:sha256:43cc59319901d4a37d89f204c664c9ffc92eadacacfdd3f61892b3fd84f09ead"
         }
       ]
     },
@@ -160,7 +164,7 @@
       "evidence": [
         {
           "resource": "repo://README.md",
-          "version": "repo-file-v1:sha256:a1c5218ff9364d38b31001265e50833a66b2cb9e77a5a2bc813f779003a8bc60"
+          "version": "repo-file-v1:sha256:08d008e32dac7f27d80ae47498eca5756d69aabf6a880b746f31e8f6ccf6392d"
         },
         {
           "resource": "repo://yarn/private/extensions.bzl#L78-L130",
@@ -181,8 +185,8 @@
           "version": "repo-file-v1:sha256:1d3f80965dd7f43aed0a107c467afdb7af0550900a393457fc0fb7da915f8afd"
         },
         {
-          "resource": "repo://.github/workflows/release_prep.sh#L1-L24",
-          "version": "repo-lines-v1:sha256:1364ca2614b2ba14c598907a265fd28b8767872bd6dffbd1628ef31844cc1e73:eyJzZWxlY3RlZExpbmVDb3VudCI6MjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4OTY0NDFiMTRjNjU1ZGIyNjI2ZWU0N2RmYmU3Y2RlNGM2NzIyYjJjMzA2ZThlODE3MWVkOTM0OGEyNDM1YjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3YjkwYTMyNTAxM2ZhOTNhYWE2ZDgyNjVhNDA2YTVlODVlODA4MmRhNjcwYTc3YTEyN2RjYjZmYTQyN2FjMmQifQ"
+          "resource": "repo://.github/workflows/release_prep.sh#L1-L28",
+          "version": "repo-lines-v1:sha256:efdbc568363be28d15aa3774735212b2b931cce2142867243f8dd42576cd7131:eyJzZWxlY3RlZExpbmVDb3VudCI6MjgsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFkOTVmYzA0YTgwYzk1MmY0OWNlNDE4ODYyN2M1M2IwZmJlOGM0NDA0MWI5NTJkNTkyYWNkMWRlOTk4NjE0NjYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijc4OTY0NDFiMTRjNjU1ZGIyNjI2ZWU0N2RmYmU3Y2RlNGM2NzIyYjJjMzA2ZThlODE3MWVkOTM0OGEyNDM1YjEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY3YjkwYTMyNTAxM2ZhOTNhYWE2ZDgyNjVhNDA2YTVlODVlODA4MmRhNjcwYTc3YTEyN2RjYjZmYTQyN2FjMmQifQ"
         }
       ]
     },
@@ -192,13 +196,45 @@
       "evidence": [
         {
           "resource": "repo://.github/workflows/ci.yml",
-          "version": "repo-file-v1:sha256:100225ebbbc7433898396e011f2eefbf34e2fb9c5f1cc952172e4c1fa98167e7"
+          "version": "repo-file-v1:sha256:f8c99b61588dc37ff3e569388804c459cbdbcc7094b4e729f1b9b9e7da69ab8e"
+        }
+      ]
+    },
+    {
+      "id": "claim_fe6e998653404b3b8abc1329addc3f57",
+      "statement": "tag.yaml runs daily and on dispatch, on main only and one run at a time; smlx/ccv works out the next version from Conventional Commits, and the workflow pushes the tag and calls release.yml for a minor or patch version, leaving a major one to a person, which holds every later release until its tag is pushed.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/tag.yaml",
+          "version": "repo-file-v1:sha256:af2335a0241f9cd0bd8be392fbad1c10f5993edff2030ab51cd610ee3cf67bd0"
+        },
+        {
+          "resource": "repo://openspec/changes/automate-releases/design.md",
+          "version": "repo-file-v1:sha256:a1eb3d8b80441c4b7d177d715ca6f647645b595aaae385926138222dfed1867c"
+        }
+      ]
+    },
+    {
+      "id": "claim_2f64a37a342a4231ba1d2ecaf1cd8874",
+      "statement": "Secrets reach the release and publish workflows by secrets: inherit, so every job reads BCR_PUBLISH_TOKEN under its own name, and a dispatched publish retry names the run whose files to use.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/publish.yaml",
+          "version": "repo-file-v1:sha256:43cc59319901d4a37d89f204c664c9ffc92eadacacfdd3f61892b3fd84f09ead"
+        },
+        {
+          "resource": "repo://.github/workflows/release.yml",
+          "version": "repo-file-v1:sha256:3f52f30af96e04c7324722a0879c41bf54b909f8fa5a588f88b90ab08d04802f"
+        },
+        {
+          "resource": "repo://.github/workflows/tag.yaml",
+          "version": "repo-file-v1:sha256:af2335a0241f9cd0bd8be392fbad1c10f5993edff2030ab51cd610ee3cf67bd0"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-06T17:01:23.075Z"
+    "at": "2026-10-08T09:37:10.868Z"
   }
 }

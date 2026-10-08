@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:1d4a470192aaa2079c9bc7e36faf741846bf704d68c21bb83c666ea5b6313305",
+  "pageVersion": "sha256:2eb79e5c7d1332c06e2f2c962c69a79bfa79146adedf86d1c044cfbd9f4faf67",
   "claims": [
     {
       "id": "claim_80120293013247f8b2a4c96dba175e61",
@@ -148,11 +148,11 @@
     },
     {
       "id": "claim_a4680c64fab84820a5937baae2224a81",
-      "statement": "CI runs on every push and pull request over Linux and macOS with three jobs: build and test across all four roots plus the install scenarios, the declared Bazel floor for a Yarn target and for every e2e/install test but the network-blocking one, and checks covering pre-commit, both harness hooks' contract tables, the wiki staleness gate itself and a run of release_prep.sh.",
+      "statement": "CI runs on every push and pull request over Linux and macOS with four jobs: build and test across all four roots plus the install scenarios, the declared Bazel floor for a Yarn target and for every e2e/install test but the network-blocking one, the version the next release would get, and checks covering pre-commit with actionlint, both harness hooks' contract tables, the wiki staleness gate itself and a run of release_prep.sh.",
       "evidence": [
         {
           "resource": "repo://.github/workflows/ci.yml",
-          "version": "repo-file-v1:sha256:100225ebbbc7433898396e011f2eefbf34e2fb9c5f1cc952172e4c1fa98167e7"
+          "version": "repo-file-v1:sha256:f8c99b61588dc37ff3e569388804c459cbdbcc7094b4e729f1b9b9e7da69ab8e"
         }
       ]
     },
@@ -171,7 +171,7 @@
       "statement": "Neither harness hook is built by Bazel, so each carries a plain test script naming the decisions it is supposed to make — forty cases for the generated-file guard and fifty-six rows for the wiki staleness gate, mostly refusals, the latter including injected failures of the commands the gate depends on through a checked-in wrapper — and CI runs both.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/ci.yml#L129-L135",
+          "resource": "repo://.github/workflows/ci.yml#L167-L173",
           "version": "repo-lines-v1:sha256:80b928a3aef7616b25d39c5c4aab94a42ac1d8c3cd526602327162de2f0bbff3:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGRkNTg0YjM3NjAwYjg2MTE3NTFlZTg1NTZjOTA4ZmRiYWIyYTM0NjljZWU0YmFiMmNkMjM2YTRmYTZmMDRkOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjIwNTRmMjcwMjNjZDUzZGY3MWFjZTkyMzRiYWM3NDhiMzNmM2E4MGFmMjU0ZDIyNTVlNTY5ZGExNzgwZTZlNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGRjOWEyZDk2ZjY4ZjAzMTY3MGQwNGI5MDUzMjgzMWYxOTgzOTRlM2U3NGYyNjI1MjAxOGVmMWJiY2NkNDM2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzg4NWMxYmM1ZDY5MWZiM2EyNWE5NzRiMDQyOGQwZDE2N2Q1MTE3ZDNlN2NkNTY1NzA2ODk2YjgyN2RiNGNkYiJ9"
         },
         {
@@ -351,6 +351,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-06T17:32:29.974Z"
+    "at": "2026-10-08T09:37:10.868Z"
   }
 }

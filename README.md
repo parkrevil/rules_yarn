@@ -275,6 +275,19 @@ dependencies as Bazel artifacts, as described above. It does not yet run your
 project's scripts or builds as Bazel actions; those take the installed tree as
 an input and come next.
 
+## Releases
+
+Releases are cut by `.github/workflows/tag.yaml`, as in
+`bazel-contrib/rules-template`: daily, and whenever it is run by hand from the
+Actions tab, it works out the next version from the Conventional Commits since
+the last release — a `feat` a minor version, a `fix` a patch, anything else
+none — tags it, builds the release with its documentation archive, and opens
+the Bazel Central Registry pull request as a draft for the author to mark
+ready. The daily run waits two weeks after a release. A breaking change calls
+for a major version, which it reports and leaves to a person: pushing that tag
+releases it, and until then no minor or patch release is cut, since the
+commits since the last release include the breaking one.
+
 ## License
 
 [Apache License 2.0](LICENSE), the license of the rulesets this one builds on.

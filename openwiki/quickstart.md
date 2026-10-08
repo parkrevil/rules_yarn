@@ -23,7 +23,7 @@ sources:
 generated: { by: "claude-code", at: "2026-10-06T12:18:29.604Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-06T17:01:23.075Z
+    at: 2026-10-08T09:37:10.868Z
 ---
 
 # Quickstart
