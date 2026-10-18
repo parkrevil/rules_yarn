@@ -9,7 +9,15 @@
 
 - [x] 2.1 Write the delta that replaces `Repository naming` with `Repository naming authority` and `Version arbitration across modules`, and `Command forwarding` with `Argument forwarding`, `Output stream passthrough` and `Exit status propagation`; verify `openspec validate --strict` accepts the change.
   - 2026-09-29: `Change 'apply-one-obligation-per-requirement' is valid`. The shape is a removal plus two additions, for the reasons measured while splitting the previous requirement.
-- [ ] 2.2 Verify the regrouping loses nothing: compare the requirement sentences and the scenario set in the main spec before and after archiving, and confirm the only difference is which requirement each one sits under, apart from the one clause design.md records as deliberately moved.
+- [x] 2.2 Verify the regrouping loses nothing: compare the requirement sentences and the scenario set in the main spec before and after archiving, and confirm the only difference is which requirement each one sits under, apart from the one clause design.md records as deliberately moved.
+  - 2026-10-19, done late, in `require-completed-tasks`: the main spec before
+    and after the archive commit `3b59a99` compared. 22 scenarios before and
+    after, the same titles; the requirement sentence on arguments, output and
+    exit status split into three sentences with the same obligations; one
+    scenario body changed, `Failed command`, which lost "and the caller
+    receives Yarn's diagnostic output" — the clause design.md records as
+    moved, which `Output stream passthrough`'s scenario asserts. Nothing else
+    differs.
 
 ## 3. Gate
 

@@ -40,3 +40,11 @@ repos:
         language: system
         pass_filenames: false
         files: ^openspec/
+      # Fails while an archived change has an unchecked task, which `openspec
+      # archive` allows after a confirmation (docs/cli.md, OpenSpec v1.13.0).
+      - id: openspec-validate-archived
+        name: openspec validate --archived
+        entry: openspec validate --archived --no-interactive
+        language: system
+        pass_filenames: false
+        files: ^openspec/

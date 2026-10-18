@@ -18,7 +18,12 @@
 
 - [x] 3.1 Check what can be checked locally before asking a runner: that the ruleset analyses for macOS and emits a sensible launcher.
   - 2026-09-29: from a throwaway module defining `@platforms//os:osx` platforms for both CPUs, `bazel build --platforms=//:macos_arm64 //:yarn` and the x86_64 equivalent both succeed. The launcher carries `#!/bin/bash` and resolves `rules_nodejs++node+nodejs_darwin_arm64/bin/nodejs/bin/node`, so the darwin Node.js toolchain and the macOS shell toolchain both resolve. Execution cannot be checked from Linux.
-- [ ] 3.2 Record what the macOS job reports on the first run, and act on it there rather than guessing now.
+- [x] 3.2 Record what the macOS job reports on the first run, and act on it there rather than guessing now.
+  - Recorded 2026-10-19, in `require-completed-tasks`: the first CI run
+    (36726763532) failed on macOS with `find: -printf: unknown primary or
+    operator` in `//tests/launcher:launcher_test`, `-printf` being a GNU
+    extension BSD find lacks; commit `c0bba48` replaced it with
+    `find -print | sed`, and the next run (36852664790) passed.
 
 ## 4. Gate
 

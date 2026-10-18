@@ -51,6 +51,8 @@
 
 ## 7. Left to whoever publishes
 
-- [ ] 7.1 Create a `BCR_PUBLISH_TOKEN` secret that can push to the registry fork and open pull requests, and decide whether the maintainer email in `.bcr/metadata.template.json` is the address to publish.
+- [x] 7.1 Create a `BCR_PUBLISH_TOKEN` secret that can push to the registry fork and open pull requests, and decide whether the maintainer email in `.bcr/metadata.template.json` is the address to publish.
   - 2026-10-02: the fork this task also asked for already exists — `parkrevil/bazel-central-registry`, a fork of `bazelbuild/bazel-central-registry` — so only the secret remains. `gh secret list` for this repository is empty.
-- [ ] 7.2 Tag a version. The release workflow builds the archive and calls the publish workflow, which opens the registry pull request.
+  - 2026-10-08: the maintainer set `BCR_PUBLISH_TOKEN` (`gh secret list`), and kept the email in `metadata.template.json`; recorded 2026-10-19 in `require-completed-tasks`.
+- [x] 7.2 Tag a version. The release workflow builds the archive and calls the publish workflow, which opens the registry pull request.
+  - 2026-10-08: `tag.yaml` tagged `v0.1.0`; `release.yml` run 37760533408 released it and opened bazelbuild/bazel-central-registry#10979, as `automate-releases` records; recorded 2026-10-19 in `require-completed-tasks`.

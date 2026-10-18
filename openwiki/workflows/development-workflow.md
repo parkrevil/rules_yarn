@@ -14,6 +14,8 @@ sources:
     resource: repo://AGENTS.md
   - id: openwiki-source-a2371d6362e5db4bc834ad03
     resource: repo://CLAUDE.md
+  - id: openwiki-source-9641916e3fd58db7b24d83a7
+    resource: repo://openspec/changes/require-completed-tasks/design.md
   - id: openwiki-source-38af7bdd34d817fbd3c29077
     resource: repo://openspec/config.yaml
   - id: openwiki-source-b556aad9e4bffdbb4dc7c367
@@ -26,10 +28,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-1182253f19cc7fc5a1a4410d
     resource: repo://tools/hooks/protect_generated.sh
-generated: { by: "claude-code", at: "2026-10-08T09:32:20.561Z" }
+generated: { by: "claude-code", at: "2026-10-18T15:05:45.605Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-08T09:37:10.868Z
+    at: 2026-10-18T15:05:45.605Z
 ---
 
 # Development workflow
@@ -83,7 +85,7 @@ plain `pre-commit install` wires all of them:
 
 | Stage | What runs |
 | --- | --- |
-| `pre-commit` | file hygiene, buildifier and its linter, `actionlint` over the workflows, `openspec validate --all --strict` when `openspec/` changed |
+| `pre-commit` | file hygiene, buildifier and its linter, `actionlint` over the workflows, `openspec validate --all --strict` and `openspec validate --archived` when `openspec/` changed — the second failing while an archived change has an unchecked task |
 | `commit-msg` | `commitizen`, enforcing Conventional Commits |
 | `pre-push` | the wiki staleness gate |
 

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:cf828c439134431e952506cbd3703c7c10597659253a62f813a74b42369f1644",
+  "pageVersion": "sha256:f031f40be5f3c98b4da42fb622254585edcbe130407eb4f21bf5a90418cfb8b4",
   "claims": [
     {
       "id": "claim_0d817a7a3b964d06937894529d820b10",
@@ -273,10 +273,24 @@
           "version": "repo-file-v1:sha256:38c2ece6eed674edaaf3563f91c555f8005ddd6632ce34cfcd231f9db95a9bc7"
         }
       ]
+    },
+    {
+      "id": "claim_ac4f90a7d1864ade96eed5c2510dc289",
+      "statement": "A pre-commit hook runs openspec validate --archived when openspec/ changes, failing while an archived change has an unchecked task, as OpenSpec documents that check for pre-commit use.",
+      "evidence": [
+        {
+          "resource": "repo://.pre-commit-config.yaml#L43-L50",
+          "version": "repo-lines-v1:sha256:3df7df3a5b30aa42dd69c2ed082ed12f7506dd7af5df19d8607262c48923d40b:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTNlODFlYjZmMmU3MjNiZjUxODBhNTBjYmU0MmI1NWFlYmE0MjJlZmM0ZjBjNWE1OGI0Y2ExOTVmMGVjZjQ2ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTk3YjdjMjE4MzdkZjdmM2EyZTA3NTY0ZTc5NTU4NjBmMjUxOGI0MDExNjMzNzIxNGVmMGVlNDc0MTliMDYwZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWUwNDc4YTE3OTc3M2QwMmY2ZDZmYTlhNGRlNmY4MDYyZWJhNjhiMDUxNDkyZTg1MGI4Zjg1ZTdiNmEyMDYwNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        },
+        {
+          "resource": "repo://openspec/changes/require-completed-tasks/design.md",
+          "version": "repo-file-v1:sha256:68b713432255f2dbc37933564868f845389712b756c34b01f4a126037a5cfba8"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-08T09:37:10.868Z"
+    "at": "2026-10-18T15:05:45.605Z"
   }
 }
