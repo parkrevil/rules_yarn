@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:f031f40be5f3c98b4da42fb622254585edcbe130407eb4f21bf5a90418cfb8b4",
+  "pageVersion": "sha256:8b76a549b7068c9510e4396a154649b0140da6b9db3b52564ad4a765c210a627",
   "claims": [
     {
       "id": "claim_0d817a7a3b964d06937894529d820b10",
@@ -283,7 +283,7 @@
           "version": "repo-lines-v1:sha256:3df7df3a5b30aa42dd69c2ed082ed12f7506dd7af5df19d8607262c48923d40b:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTNlODFlYjZmMmU3MjNiZjUxODBhNTBjYmU0MmI1NWFlYmE0MjJlZmM0ZjBjNWE1OGI0Y2ExOTVmMGVjZjQ2ZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMTk3YjdjMjE4MzdkZjdmM2EyZTA3NTY0ZTc5NTU4NjBmMjUxOGI0MDExNjMzNzIxNGVmMGVlNDc0MTliMDYwZCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWUwNDc4YTE3OTc3M2QwMmY2ZDZmYTlhNGRlNmY4MDYyZWJhNjhiMDUxNDkyZTg1MGI4Zjg1ZTdiNmEyMDYwNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
         },
         {
-          "resource": "repo://openspec/changes/require-completed-tasks/design.md",
+          "resource": "repo://openspec/changes/archive/2026-10-19-require-completed-tasks/design.md",
           "version": "repo-file-v1:sha256:68b713432255f2dbc37933564868f845389712b756c34b01f4a126037a5cfba8"
         }
       ]
@@ -291,6 +291,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-18T15:05:45.605Z"
+    "at": "2026-10-18T15:13:36.649Z"
   }
 }

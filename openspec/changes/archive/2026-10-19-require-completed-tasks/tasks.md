@@ -12,8 +12,10 @@
 
 ## 2. Gate
 
-- [ ] 2.1 Every root builds and tests; pre-commit; `openspec validate --all
+- [x] 2.1 Every root builds and tests; pre-commit; `openspec validate --all
   --strict`; CI on the branch.
+  - 2026-10-19: CI run 39139044245 passed all five jobs, its `checks` job
+    running the new hook over all files.
 - [x] 2.2 The wiki is regenerated and the staleness gate passes.
 - [x] 2.3 A reviewer without this conversation reviews the change; each
   finding checked and recorded.

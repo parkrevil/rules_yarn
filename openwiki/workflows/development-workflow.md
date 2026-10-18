@@ -14,8 +14,8 @@ sources:
     resource: repo://AGENTS.md
   - id: openwiki-source-a2371d6362e5db4bc834ad03
     resource: repo://CLAUDE.md
-  - id: openwiki-source-9641916e3fd58db7b24d83a7
-    resource: repo://openspec/changes/require-completed-tasks/design.md
+  - id: openwiki-source-805b0f293ac32600ebf6dbf0
+    resource: repo://openspec/changes/archive/2026-10-19-require-completed-tasks/design.md
   - id: openwiki-source-38af7bdd34d817fbd3c29077
     resource: repo://openspec/config.yaml
   - id: openwiki-source-b556aad9e4bffdbb4dc7c367
@@ -31,7 +31,7 @@ sources:
 generated: { by: "claude-code", at: "2026-10-18T15:05:45.605Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-18T15:05:45.605Z
+    at: 2026-10-18T15:13:36.649Z
 ---
 
 # Development workflow
