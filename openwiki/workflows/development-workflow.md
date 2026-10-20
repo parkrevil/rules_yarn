@@ -16,8 +16,8 @@ sources:
     resource: repo://CLAUDE.md
   - id: openwiki-source-805b0f293ac32600ebf6dbf0
     resource: repo://openspec/changes/archive/2026-10-19-require-completed-tasks/design.md
-  - id: openwiki-source-b23112aeab2e72b2fbc592f6
-    resource: repo://openspec/changes/correct-the-completion-gate-records/design.md
+  - id: openwiki-source-8451e67edb1540b343fed3ed
+    resource: repo://openspec/changes/archive/2026-10-20-correct-the-completion-gate-records/design.md
   - id: openwiki-source-38af7bdd34d817fbd3c29077
     resource: repo://openspec/config.yaml
   - id: openwiki-source-b556aad9e4bffdbb4dc7c367
@@ -33,7 +33,7 @@ sources:
 generated: { by: "claude-code", at: "2026-10-20T10:48:25.667Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-20T14:36:50.876Z
+    at: 2026-10-20T14:50:23.669Z
 ---
 
 # Development workflow

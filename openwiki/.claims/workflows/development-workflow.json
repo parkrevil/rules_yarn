@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:3ab90b6ca9984c3d9e41309ec080f398af60b16b50f5a3badd964023e3263c6e",
+  "pageVersion": "sha256:00382fa8fd90a3295fb94136b34063b78853f6b8c64b6f0c746f9370554f4b51",
   "claims": [
     {
       "id": "claim_0d817a7a3b964d06937894529d820b10",
@@ -297,7 +297,7 @@
           "version": "repo-file-v1:sha256:6719c3ec9e72930ee0618b7d49b778fd416cec89bd89182c9068299a1a0f137b"
         },
         {
-          "resource": "repo://openspec/changes/correct-the-completion-gate-records/design.md",
+          "resource": "repo://openspec/changes/archive/2026-10-20-correct-the-completion-gate-records/design.md",
           "version": "repo-file-v1:sha256:778ef42d3a9b1f510491c8f68437675615874245aad206253f011aa77b31d138"
         }
       ]
@@ -305,6 +305,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-20T14:36:50.876Z"
+    "at": "2026-10-20T14:50:23.669Z"
   }
 }
