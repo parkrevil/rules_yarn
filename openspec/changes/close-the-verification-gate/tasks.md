@@ -25,8 +25,10 @@
 
 - [x] 4.1 Supersede the unchecked task in `automate-verification-gate`, which is the one that would have caught this CI failure.
   - 2026-09-30: its task 3.2, "Record what the macOS job reports on the first run, and act on it there rather than guessing now", was never done and the change was archived with it unchecked. The run it asked about is 36726763532; what it reports is recorded in this change's proposal, and acting on it is tasks 1.1 and 2.1 here. The archived change is left as it stands, because an archive is a record of what happened, including that this was skipped.
+  - 2026-10-20, from `correct-the-completion-gate-records`: the archived change is no longer left as it stood. `require-completed-tasks` ticked its 3.2 on 2026-10-19 so that `openspec validate --archived` passes; the line appended under that task records that it was skipped there and done here.
 - [x] 4.2 Supersede the unchecked task in `apply-one-obligation-per-requirement`.
   - 2026-09-30: its task 2.2 asked for a before-and-after comparison of the spec across archiving. That comparison was run and reported — sorted, the scenario sets were identical apart from the one clause design.md records as deliberately moved — but the box was never ticked. The work happened; the record did not.
+  - 2026-10-20, from `correct-the-completion-gate-records`: the box is now ticked; `require-completed-tasks` ticked it on 2026-10-19, and the line appended under it records that the work was done at archive time.
 - [x] 4.3 Record what `fa33984` did without saying so.
   - 2026-09-30: besides committing the archive and the main spec, it restored `openspec/config.yaml`, 14 insertions and 28 deletions, undoing a revert made by the earlier snapshot commit `a34df4d`. The restored content is correct, and the commit message does not mention it. The commit is pushed, so it is recorded here rather than amended.
 

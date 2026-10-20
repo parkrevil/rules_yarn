@@ -18,6 +18,15 @@
     receives Yarn's diagnostic output" — the clause design.md records as
     moved, which `Output stream passthrough`'s scenario asserts. Nothing else
     differs.
+  - Correction, 2026-10-20, in `correct-the-completion-gate-records`: "done
+    late" above is wrong. The comparison was run and reported in this change's
+    archive commit, `3b59a99`, whose message records that a full comparison of
+    the scenarios, WHEN and THEN lines found one difference, the `Failed
+    command` output clause design.md moved to `Output stream passthrough`; and
+    `close-the-verification-gate` 4.2 (2026-09-30) records "The work happened;
+    the record did not". Only the box was left unticked. The 2026-10-19 run
+    agrees with that commit message: one moved clause, one sentence split into
+    three with the same obligations.
 
 ## 3. Gate
 

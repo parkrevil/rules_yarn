@@ -26,3 +26,18 @@
     citation is re-anchored at archive time, as every earlier archive did.
     Nits left: the 3.2 line names the macOS failure only, the Linux one being
     recorded in `close-the-verification-gate`'s own history.
+
+## Correction, 2026-10-20
+
+- 1.2 named no way to verify it, against `openspec/config.yaml`'s rule that
+  every task does: CI run 39139044245's log shows
+  `openspec validate --archived ... Passed`.
+- 2.1 was ticked after the commit it gates (`6ff562a`). CI run 39139044245,
+  on that commit, did run every root and `install_scenarios.sh`; the fault is
+  the order — AGENTS.md's "Before commit" asks for those to pass before the
+  commit, and the task's own wording, "CI on the branch", could only be met
+  after it.
+- The review recorded in 2.3 missed the contradiction with
+  `close-the-verification-gate` 4.1 and the wrong "done late" and email
+  lines; an adversarial review on 2026-10-20 found them, and
+  `correct-the-completion-gate-records` corrects them.

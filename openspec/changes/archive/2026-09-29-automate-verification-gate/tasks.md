@@ -24,6 +24,15 @@
     operator` in `//tests/launcher:launcher_test`, `-printf` being a GNU
     extension BSD find lacks; commit `c0bba48` replaced it with
     `find -print | sed`, and the next run (36852664790) passed.
+  - Correction, 2026-10-20, in `correct-the-completion-gate-records`: this
+    task was not done in this change. `close-the-verification-gate` 4.1
+    (2026-09-30) recorded the first run's result and acted on it there, and
+    left this box unticked on purpose, "because an archive is a record of what
+    happened, including that this was skipped". The tick above reverses that
+    decision without saying so. `openspec validate --archived`, the hook
+    `require-completed-tasks` added, fails on any unchecked task and has no
+    exemption, so keeping the hook keeps the tick. This line, not the box, is
+    the record: skipped here, done in `close-the-verification-gate`.
 
 ## 4. Gate
 

@@ -159,8 +159,8 @@ jobs:
       - name: Install pre-commit
         run: pip install pre-commit==4.6.2
 
-      # Covers buildifier, its linter, the file hygiene hooks, and
-      # `openspec validate --all --strict`.
+      # Covers buildifier, its linter, actionlint, the file hygiene hooks,
+      # `openspec validate --all --strict` and `openspec validate --archived`.
       - name: Run the pre-commit hooks
         run: pre-commit run --all-files --show-diff-on-failure
 

@@ -34,3 +34,25 @@ only with what shows it was done, dated, in its own task list:
 - A ticked box is still a claim: the hook proves only that no task was left
   open, not that each was done well; the evidence lines under each task, and
   the review of every change, are what show that.
+
+## Correction, 2026-10-20
+
+- The 3.2 decision above reverses `close-the-verification-gate` 4.1, which
+  left that box unticked as a record that the task was skipped; the
+  correction under that task records it so. Keeping the hook means an
+  archived change can no longer keep a task open as a record of a skip: such
+  a task is ticked, and the line under it says what happened.
+- "`BCR_PUBLISH_TOKEN` set on 2026-10-08 and `v0.1.0` released ..., both
+  recorded in `automate-releases`": the release is recorded there, but the
+  token's date comes from `gh secret list`, which `automate-releases` does
+  not record. The 7.1 evidence line this change wrote also dated the email
+  decision to 2026-10-08; the publishing wiki page has recorded it since
+  2026-10-05 (commit `aa36173`).
+- This correction lets a ticked box in an archived change record a skip, with
+  the line under it saying so, where the decision above checked a box "only
+  with what shows it was done". Whether that becomes a repository rule is for
+  the principles still to be agreed; until then it holds for these four
+  tasks only.
+- Limit: the hook does not see active changes, unarchived finished changes,
+  deleted changes, archived changes with no `tasks.md`, non-checkbox tasks or
+  a box ticked without the work, as listed in the proposal's correction.

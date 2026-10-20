@@ -16,6 +16,8 @@ sources:
     resource: repo://CLAUDE.md
   - id: openwiki-source-805b0f293ac32600ebf6dbf0
     resource: repo://openspec/changes/archive/2026-10-19-require-completed-tasks/design.md
+  - id: openwiki-source-b23112aeab2e72b2fbc592f6
+    resource: repo://openspec/changes/correct-the-completion-gate-records/design.md
   - id: openwiki-source-38af7bdd34d817fbd3c29077
     resource: repo://openspec/config.yaml
   - id: openwiki-source-b556aad9e4bffdbb4dc7c367
@@ -28,10 +30,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-1182253f19cc7fc5a1a4410d
     resource: repo://tools/hooks/protect_generated.sh
-generated: { by: "claude-code", at: "2026-10-18T15:05:45.605Z" }
+generated: { by: "claude-code", at: "2026-10-20T10:48:25.667Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-18T15:13:36.649Z
+    at: 2026-10-20T14:36:50.876Z
 ---
 
 # Development workflow
@@ -253,3 +255,10 @@ before the implementation and watched to fail, and that an independent reviewer
 saw the change. A machine can see the citation but not that it was read, the
 test but not when it was written, the commit but not who reviewed it. These
 depend on the author.
+
+Two more gaps sit around the checks that do exist. `main` has no branch
+protection, so a failing CI run reports a problem without blocking the push
+that caused it. And the archived-tasks hook sees only archived changes: an
+active change with open tasks, a finished change left unarchived, a change
+deleted instead of archived, an archived change with no task list, a task
+without checkbox syntax and a box ticked without the work all pass it.

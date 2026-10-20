@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:8b76a549b7068c9510e4396a154649b0140da6b9db3b52564ad4a765c210a627",
+  "pageVersion": "sha256:3ab90b6ca9984c3d9e41309ec080f398af60b16b50f5a3badd964023e3263c6e",
   "claims": [
     {
       "id": "claim_0d817a7a3b964d06937894529d820b10",
@@ -92,7 +92,7 @@
         },
         {
           "resource": "repo://.github/workflows/ci.yml#L138-L178",
-          "version": "repo-lines-v1:sha256:d6bb4f08b56c7789d2c4878a793472c149b2c3ba98bdf7ea663b37e0d4f49402:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyMTJjMDM0ZDQzNjQ4ZDFiMGUzZWNkYjE3ZmQ1ZDJjMjNhYjNkYjRmOTZmNDE0NDBmMjJkY2FiY2FiYmJkOTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhZmUyZTBjNjRmN2ViOTVjN2Q5YTdmNDVhNDVlNmZjNWI0NWZkZDBiNDQ5ODk1M2Y4MmNhNzdlNGExYmQ5ODUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJiYTMwY2U5NDgyMjBkOGU4OWY5ZTAwY2ZiNzE4OTU1ZjhjOTVjM2VkZWNlZGY3NzAwMzU2OWQyZDE3Njk5NzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA0NzQzOGVkMTBmZmU0NWIzYTQyMzM1Zjk4MTMwNjg5OWU0YzRiZWY0OWEzNTFmZmY2OWI2MjgyNTM2MGQ1NjAifQ"
+          "version": "repo-lines-v1:sha256:c405bdbd8cd897df1db49c92f0f516d5b64dcc61b39ebf9ec2c0acfa45822a71:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjMyMTJjMDM0ZDQzNjQ4ZDFiMGUzZWNkYjE3ZmQ1ZDJjMjNhYjNkYjRmOTZmNDE0NDBmMjJkY2FiY2FiYmJkOTEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhZmUyZTBjNjRmN2ViOTVjN2Q5YTdmNDVhNDVlNmZjNWI0NWZkZDBiNDQ5ODk1M2Y4MmNhNzdlNGExYmQ5ODUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjJiYTMwY2U5NDgyMjBkOGU4OWY5ZTAwY2ZiNzE4OTU1ZjhjOTVjM2VkZWNlZGY3NzAwMzU2OWQyZDE3Njk5NzciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjA0NzQzOGVkMTBmZmU0NWIzYTQyMzM1Zjk4MTMwNjg5OWU0YzRiZWY0OWEzNTFmZmY2OWI2MjgyNTM2MGQ1NjAifQ"
         },
         {
           "resource": "repo://AGENTS.md",
@@ -284,13 +284,27 @@
         },
         {
           "resource": "repo://openspec/changes/archive/2026-10-19-require-completed-tasks/design.md",
-          "version": "repo-file-v1:sha256:68b713432255f2dbc37933564868f845389712b756c34b01f4a126037a5cfba8"
+          "version": "repo-file-v1:sha256:6719c3ec9e72930ee0618b7d49b778fd416cec89bd89182c9068299a1a0f137b"
+        }
+      ]
+    },
+    {
+      "id": "claim_4e5a007f9bfe4fcea0c33e8411915457",
+      "statement": "main has no branch protection or rulesets, so a failing CI run does not block the push that caused it, and the archived-tasks hook does not see active, unarchived, deleted or task-less changes, non-checkbox tasks, or a box ticked without the work.",
+      "evidence": [
+        {
+          "resource": "repo://openspec/changes/archive/2026-10-19-require-completed-tasks/design.md",
+          "version": "repo-file-v1:sha256:6719c3ec9e72930ee0618b7d49b778fd416cec89bd89182c9068299a1a0f137b"
+        },
+        {
+          "resource": "repo://openspec/changes/correct-the-completion-gate-records/design.md",
+          "version": "repo-file-v1:sha256:778ef42d3a9b1f510491c8f68437675615874245aad206253f011aa77b31d138"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-18T15:13:36.649Z"
+    "at": "2026-10-20T14:36:50.876Z"
   }
 }
