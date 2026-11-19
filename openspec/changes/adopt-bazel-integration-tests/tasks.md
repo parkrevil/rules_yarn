@@ -425,6 +425,15 @@ Each target is written red first:
 
 ## 6. Release order
 
-- [ ] 6.1 With the user's go-ahead, merge `rename-the-module`, then this
+- [x] 6.1 With the user's go-ahead, merge `rename-the-module`, then this
   change, then tag v0.2.0 as `rename-the-module`'s tasks 5.x describe.
   Verified: the tagged commit holds both changes.
+  - 2026-11-20:
+    - main was fast-forwarded to `7f97d0f` (rename-the-module), then to
+      `8aa3421`. That is this change's three commits and a record commit on
+      top of it.
+    - main's CI, run 44603752136, passed every job on both platforms.
+    - v0.2.0 is a lightweight tag on `8aa3421`, and `7f97d0f` and `9e71ac3`
+      are both its ancestors.
+    - Release run 44605072225 passed, the CI-runner `bazel test //...` with
+      `yarn_behavior_test` in it included.

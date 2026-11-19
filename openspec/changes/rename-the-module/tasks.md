@@ -263,11 +263,20 @@
 
 ## 5. Release
 
-- [ ] 5.1 With the user's go-ahead, merge to main as a `feat!:` commit with
+- [x] 5.1 With the user's go-ahead, merge to main as a `feat!:` commit with
   a `BREAKING CHANGE:` footer, push, and dispatch `tag.yaml` once. Verified
   from the recorded runs: CI's next-release job and `tag.yaml` both compute
   v1.0.0 (major), and `tag.yaml` writes no tag.
-- [ ] 5.2 With the user's go-ahead, create the lightweight tag
+  - 2026-11-20:
+    - main was fast-forwarded to `7f97d0f`, the `feat!:` commit with its
+      `BREAKING CHANGE:` footer.
+    - CI run 44603575185's next-release job computed `VERSION: v1.0.0`,
+      `TYPE: major`.
+    - `tag.yaml`, dispatched once on main (run 44603596162), computed v1.0.0.
+      "Leave a major version to a person" ran, "Tag a minor or patch
+      version" and the release were skipped, and `git ls-remote --tags`
+      shows no v1.0.0.
+- [x] 5.2 With the user's go-ahead, create the lightweight tag
   `git tag --no-sign v0.2.0 <merge sha>` (no `-a`, `-s`, `-u`, `-m` or `-F`)
   and push it. This is also the first run on GitHub of `release.yml`'s
   `lightweight-tag` job (design Decision 7). Verified:
@@ -278,6 +287,26 @@
   "Registry entry" scenario has no test that can fail first: only a release
   run creates the entry. Its evidence is this recorded run, as for the
   existing "Registry link" scenario.
-- [ ] 5.3 With the user's go-ahead, mark the new registry PR ready for
+  - 2026-11-20:
+    - **Where the tag went.** v0.2.0 is on `8aa3421`, not on this change's
+      commit. adopt-bazel-integration-tests was merged after this change
+      and before the tag, as its design planned, so the release carries both.
+      `git for-each-ref refs/tags/v0.2.0` reports `commit`.
+    - **Release run 44605072225 passed every job.** `lightweight-tag` passed
+      on its first run on GitHub. The release's build, attestation and
+      release jobs passed, then publish, then finalize.
+    - **The release** is published, not a draft. It holds the source and
+      documentation archives with their attestations, and those of
+      `MODULE.bazel` and `source.json`.
+    - **The registry PR** is https://github.com/bazelbuild/bazel-central-registry/pull/11941,
+      `parkrevil_rules_yarn@0.2.0`, by parkrevil. It adds
+      `modules/parkrevil_rules_yarn/0.2.0/` (`MODULE.bazel`,
+      `attestations.json`, the version patch, `presubmit.yml`, `source.json`)
+      and `modules/parkrevil_rules_yarn/metadata.json`.
+- [x] 5.3 With the user's go-ahead, mark the new registry PR ready for
   review, and close bazelbuild/bazel-central-registry#10979 with a link to
   it. Verified: `gh pr view` shows each PR's state.
+  - 2026-11-20: `gh pr view` shows #11941 open and not a draft. #10979 is
+    closed, with the comment "Superseded by #11941, which publishes the
+    module under the user-prefixed name `parkrevil_rules_yarn` as
+    requested."
