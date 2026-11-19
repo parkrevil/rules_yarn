@@ -123,7 +123,7 @@
     plant. The fixtures only the integration tests use went to
     `tests/integration/fixtures/`. Every moved file's header now names its
     new user.
-- [ ] 2.4 `install_targets_test`, first because it holds the case that needs
+- [x] 2.4 `install_targets_test`, first because it holds the case that needs
   the nested Bazel's own sandbox. Red and green as section 3 describes. Then,
   with the user's go-ahead, push and run CI on Linux and macOS.
   Verified: one of these happens, and the run id and which one are recorded.
@@ -157,6 +157,9 @@
       `linux-sandbox` underneath. Its `/tmp` scratch directory was removed
       afterwards. The macOS result of the fix is 5.4's, and this task stays
       open until that run shows it.
+    - CI run 44600394905, with the fix: `install_targets_test` passed on macOS
+      in 25.1 s, its cycle case under the named `darwin-sandbox`, and on Linux
+      in 23.1 s.
     - The fix's review found no blocker. Taken: this task left open; "would
       have run" for "would have passed"; the Bazel lines that keep
       `no-sandbox` under `exclusive` cited in the design; and the `/tmp`
@@ -405,9 +408,20 @@ Each target is written red first:
   - After the fixes, the 7 targets, `bazel_binary_test` and
     `yarn_behavior_test` passed, 9 of 9 in 235 s. The cycle case ran under
     the named `linux-sandbox`.
-- [ ] 5.4 One commit. With the user's go-ahead, push. Verified: every CI job
+- [x] 5.4 One commit. With the user's go-ahead, push. Verified: every CI job
   passes on both platforms. Record the run id, and the suite's time in CI
   against the script's 2 m 30 s and 4 m 11 s.
+  - 2026-11-20, two runs:
+    - **Run 44596357423, commit `9e71ac3`.** macOS failed in
+      `install_targets_test` (2.4). Every other job and test passed.
+    - **Run 44600394905, commit `98a14c1`.** Every job passed on both
+      platforms.
+  - The suite's step took 3 m 28 s on Linux and 3 m 53 s on macOS. The
+    script's step took 2 m 30 s and 4 m 11 s.
+  - Two commits, not one. Folding the fix into `9e71ac3` would have needed a
+    force push, which the session's permissions refused. So the fix went up
+    as its own commit on top, both `test:`, which no version calculation
+    counts. This record is a third, `docs(openspec):`.
 
 ## 6. Release order
 
