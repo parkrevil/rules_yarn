@@ -26,20 +26,20 @@ cat <<EOF
 Add to your \`MODULE.bazel\`:
 
 \`\`\`starlark
-bazel_dep(name = "rules_yarn", version = "${TAG:1}")
+bazel_dep(name = "parkrevil_rules_yarn", version = "${TAG:1}")
 \`\`\`
 
-Bazel 8.3.0 or newer is required; \`rules_yarn\` declares that and older
+Bazel 8.3.0 or newer is required; \`parkrevil_rules_yarn\` declares that and older
 versions are refused while the module graph resolves.
 
 Until the module is in the Bazel Central Registry, depend on the archive
 directly:
 
 \`\`\`starlark
-bazel_dep(name = "rules_yarn", version = "${TAG:1}")
+bazel_dep(name = "parkrevil_rules_yarn", version = "${TAG:1}")
 
 archive_override(
-    module_name = "rules_yarn",
+    module_name = "parkrevil_rules_yarn",
     integrity = "sha256-$(openssl dgst -binary -sha256 "$ARCHIVE" | openssl base64 -A)",
     strip_prefix = "${PREFIX}",
     urls = ["https://github.com/parkrevil/rules_yarn/releases/download/${TAG}/${ARCHIVE}"],

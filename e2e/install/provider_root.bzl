@@ -1,6 +1,6 @@
 """A consumer of YarnNodeModulesInfo: an action that requires a package through the provider's `root`."""
 
-load("@rules_yarn//yarn:providers.bzl", "YarnNodeModulesInfo")
+load("@parkrevil_rules_yarn//yarn:providers.bzl", "YarnNodeModulesInfo")
 
 def _provider_root_impl(ctx):
     info = ctx.attr.node_modules[YarnNodeModulesInfo]

@@ -5,7 +5,7 @@ description: How yarn.install turns a project's yarn.lock into Bazel artifacts �
 tags: [yarn-install, repository-rule, module-extension, integrity, isolation, node-modules]
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-06T17:32:29.974Z
+    at: 2026-11-19T10:17:13.013Z
 sources:
   - id: openwiki-source-6baa3bd517a8e6434ec03836
     resource: repo://e2e/install/BUILD.bazel
@@ -71,7 +71,7 @@ sources:
     resource: repo://yarn/private/install/yarnrc.js
   - id: openwiki-source-60f4d0e18953b7fc477fc496
     resource: repo://yarn/providers.bzl
-generated: { by: "claude-code", at: "2026-10-06T12:28:08.929Z" }
+generated: { by: "claude-code", at: "2026-11-19T09:34:34.611Z" }
 ---
 
 # Installing a project's dependencies
@@ -346,10 +346,14 @@ which fails analysis with every error found. So fetching does not fail —
 `:pin` stays buildable — but anything depending on the install does, saying
 why.
 
-`node_modules.bzl` is private to rules_yarn, yet a generated repository has to
-load it. Each install repository holds a symlink to it at its root and loads
-it from its own root package, which Bazel's load visibility allows and a
-consumer's package does not.
+`node_modules.bzl` is private to `parkrevil_rules_yarn`'s own repository, yet a
+generated repository has to load it. Each install repository holds a symlink
+to it at its root and loads it from its own root package, which Bazel's load
+visibility allows and a consumer's package does not. Because the file is
+loaded from there, a relative label in it would name the install repository,
+so it and the `BUILD.bazel` the repository rule writes reach the ruleset's own
+files by the module's name, `@parkrevil_rules_yarn` — the name the module sees
+itself by, which repositories its extension generates also see.
 
 ### A target per direct dependency
 

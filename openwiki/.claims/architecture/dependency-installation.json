@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:fee5dbce728180892d63859ad909ab968a1b8fb3c736e1a87cce6f5adeb71cd0",
+  "pageVersion": "sha256:f0cde2cb258d35a57519cbc05f31a50e22e3421c653df5ed9e6817b6af8bcffb",
   "claims": [
     {
       "id": "claim_54350d03825b4543a2e34ff911ba1463",
@@ -234,7 +234,7 @@
         },
         {
           "resource": "repo://yarn/private/install/repository.bzl#L81-L102",
-          "version": "repo-lines-v1:sha256:27bb0082405861d5da77ea08de4f5047e7d6abeb1b1ba28b898387165dab0459:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwOGEzY2I5MmMxODAwMzRhZjg2MjU4YmMwYzliOTFjYTk3MGU4MWIzYTk1Y2ZiMTk4ZmM5M2M0MzRiMTFkMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzM2I1ODlhZDBiNmFhMDgwNWExZDg5YjJkZjBkOGY5NjU5NTIwYmFkMTAzMzUzZTBkZTUzOGZiYjZhOTIxMGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYyYjU5ZjIwNzIwZmMwZGJmYWQ1ZGQ5MTllNTJjNjBkYmIzNmJiNmZmOTU3ZmYxYjhlNDg3MjkzOWRhNDE3YjgifQ"
+          "version": "repo-lines-v1:sha256:c2c1681bf612a657f98df5602302c27480c7ec686503c10598d1a46b0505aff0:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgwOGEzY2I5MmMxODAwMzRhZjg2MjU4YmMwYzliOTFjYTk3MGU4MWIzYTk1Y2ZiMTk4ZmM5M2M0MzRiMTFkMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkzM2I1ODlhZDBiNmFhMDgwNWExZDg5YjJkZjBkOGY5NjU5NTIwYmFkMTAzMzUzZTBkZTUzOGZiYjZhOTIxMGEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjYyYjU5ZjIwNzIwZmMwZGJmYWQ1ZGQ5MTllNTJjNjBkYmIzNmJiNmZmOTU3ZmYxYjhlNDg3MjkzOWRhNDE3YjgifQ"
         }
       ]
     },
@@ -244,7 +244,7 @@
       "evidence": [
         {
           "resource": "repo://yarn/private/install/node_modules.bzl#L1-L11",
-          "version": "repo-lines-v1:sha256:713b705f2e3ef9cfd4065786900dc0c86227c598a24d4057c15e235f5d46ccd3:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzNDVkNTNlOGQ0ZDdlY2ExMGIwYTY2ZGIzZjA2MTE5M2NkMzE2NjNkNmM4NGI2ZTNjZjdiOWY1MDEzZTNjMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZWYxOGNmMDhmOGFiMTU4NTAxZDY1OTRjZjE4OTM1YTc2Yjk4ODhkZGFhZjRmYzJhNzFkYTFiMDYzYTkwNDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI4MTU3MmYxZTMwYTU1NjcwYzgzNzcwMDhmZDZlMTJlZmVhZDQyYWEwZWFmODljNGI1MGQ3OGEwNzA1NDRjMGIifQ"
+          "version": "repo-lines-v1:sha256:6808627db8823090d9cfcd9759f1c0cc969001270793319980fa7146eeca6388:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzNDVkNTNlOGQ0ZDdlY2ExMGIwYTY2ZGIzZjA2MTE5M2NkMzE2NjNkNmM4NGI2ZTNjZjdiOWY1MDEzZTNjMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZWYxOGNmMDhmOGFiMTU4NTAxZDY1OTRjZjE4OTM1YTc2Yjk4ODhkZGFhZjRmYzJhNzFkYTFiMDYzYTkwNDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI4MTU3MmYxZTMwYTU1NjcwYzgzNzcwMDhmZDZlMTJlZmVhZDQyYWEwZWFmODljNGI1MGQ3OGEwNzA1NDRjMGIifQ"
         },
         {
           "resource": "repo://yarn/private/install/repository.bzl#L126-L128",
@@ -276,7 +276,7 @@
         },
         {
           "resource": "repo://e2e/install/provider_root.bzl",
-          "version": "repo-file-v1:sha256:049b60303e281e9d5db4d011e764460b8ee46be5fc4a105fc5600dc048a6fe66"
+          "version": "repo-file-v1:sha256:dbb681cffb107c4ebc73c59f7be64255f0db9537bef6d98d792b976b8308324d"
         }
       ]
     },
@@ -355,8 +355,8 @@
       "statement": "The YarnExtract action runs extract.js to extract, normalise and compare the tarball with the recorded manifest, in a custom exec group holding the Node.js and tar.bzl toolchains.",
       "evidence": [
         {
-          "resource": "repo://yarn/private/install/node_modules.bzl#L182-L191",
-          "version": "repo-lines-v1:sha256:35a19df4da992063c3998b7f02cf84642d79b2666d9b7d278713a6b1ce391389:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU3MzAyODhiMGZlNTA1ZWY2ZDYyZjI3MmM2OWEyY2RhZTFhNDc4OGRjYzJhM2ZmM2Y5MTRkMmQyYjFkMmI3MmEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjAxYWI5OWYwZDJlZGE1OTE1M2Y1YjZhNDdiNzU5NDExYzBmYzQyZDFhOTVmMzRlYzMxNTUyZTRlZjE1NGU5OTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjU4MGI1OGYwZjI5ZmE0MGIzZWI3NzcyMDI3NjNkODQzYWE4ZGNiZmYzODhiYmYyMmEyMDRjNDk1MDRjNzcxYmMifQ"
+          "resource": "repo://yarn/private/install/node_modules.bzl#L182-L190",
+          "version": "repo-lines-v1:sha256:181a95ee7dbda16f84e918de82655287eebef19a7e3ac720eef032c607513061:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTczMDI4OGIwZmU1MDVlZjZkNjJmMjcyYzY5YTJjZGFlMWE0Nzg4ZGNjMmEzZmYzZjkxNGQyZDJiMWQyYjcyYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMWYwY2RiOTcyYTdiZmI3ZWQyNDZmOWZmNjcyMzg1ZTU1ZjQ5NjhmYzExMDQzZGM1YjY4NGQ1MWRmYTMxZGJjYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiODE1MTc4OGEyMDkxNzA4Y2YyNzliYWU3YjliYzY0OGU0MzdiZTFkYmRiZmFlNDQzMDNmMWUzM2Y3NDQ3N2ZlYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiOTFkYTFhZGQ2NmJhZTAyNGNjZGZiNjQxNmVkMzJiMmViYmNlZDU3MWVjMzZlYjZkYmE4YzUwMjQxNjRjODlmMiJ9"
         },
         {
           "resource": "repo://yarn/private/install/node_modules.bzl#L48-L80",
@@ -460,17 +460,35 @@
       "evidence": [
         {
           "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:d539ff413807ab6b6e84b79ba2e8a8bca8a74106c5e89721e4e6b02dacc31e50"
+          "version": "repo-file-v1:sha256:c86eb99b6eebaa43c822d0824cc82c5af92ef10ce56ca22e787372b6508486ec"
         },
         {
           "resource": "repo://yarn/private/install/repository.bzl#L196-L203",
           "version": "repo-lines-v1:sha256:2508124eab2cc40936fef4d80e95b993bba9be2f20845110b8c1704a81ab8b21:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmU2OTRiNmUwNDAyMTExNjE0ZDViNTIxOWQwOWZjMGJkODBkMDQ3YjRkNWMyNzQxMTA2ODA4MjMxZWQ1YTY5OSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWU3Yzk1N2JjYjQ0ZmI2NzNjOThiMDA1MGE3NWQzODA4MmRiODFkOTE4ZGUzMTNhM2YwN2MxMjM1MzA2ZDdlYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGVjZTg5ZmQ1MzU1ZmE2Y2VmM2Q3YjcxNjUxOTRmZWZkM2VmNTBmMzQ5ZjEyMjE2ZjFkZWMyMWU4NjYyZTIxOSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYjY5ODBmMmNlMDE2NDM0OGQ2YTAwOWQxM2YxMTk2ZjE1YmJhNTcwNjdmMTRkMjZiYjA4ZDM5ZDQzNTQyNGQ4YiJ9"
         }
       ]
+    },
+    {
+      "id": "claim_b0103e786a0c4e6f89807ce6b6366916",
+      "statement": "node_modules.bzl, loaded from the install repository's root, and the BUILD.bazel the repository rule writes there name the ruleset's own files as @parkrevil_rules_yarn, because a relative label there would name the install repository.",
+      "evidence": [
+        {
+          "resource": "repo://yarn/private/install/node_modules.bzl#L1-L11",
+          "version": "repo-lines-v1:sha256:6808627db8823090d9cfcd9759f1c0cc969001270793319980fa7146eeca6388:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjgzNDVkNTNlOGQ0ZDdlY2ExMGIwYTY2ZGIzZjA2MTE5M2NkMzE2NjNkNmM4NGI2ZTNjZjdiOWY1MDEzZTNjMDYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ1ZWYxOGNmMDhmOGFiMTU4NTAxZDY1OTRjZjE4OTM1YTc2Yjk4ODhkZGFhZjRmYzJhNzFkYTFiMDYzYTkwNDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjI4MTU3MmYxZTMwYTU1NjcwYzgzNzcwMDhmZDZlMTJlZmVhZDQyYWEwZWFmODljNGI1MGQ3OGEwNzA1NDRjMGIifQ"
+        },
+        {
+          "resource": "repo://yarn/private/install/node_modules.bzl#L178-L185",
+          "version": "repo-lines-v1:sha256:637bf02f3a425edf90511b154ffc38e7262a71554287690d615062ece34f649c:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTNlZTBmMjE5ZTBmMzVhZDRkNTBiZmMwMWI0Nzg1Mjg5ZjhkOTUyZDIwYzY2NzliZmNkZTFjZTNmNmU3YzMxYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiOTQzM2QwZWE5ZWNmMmYzOWM5YTUwNDA3Mzk1ZWU0MTE3MmZlNjgyYzljODg1YTM1MDhmNzViZGVlMTUxZWZmZiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTU4NWZlY2EyMDBlYzM0MmIwMmFjYWI5MWUwYTFmNzFmYTQ1NGE5NzhiOWZiNDM5YmViNjU1NjNiNWY4NTNiNiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjQxMDlhNDViMzE4ZDQzYWNkNzMxZWI2NDFjNzFhZDZjYzA5ZGMyOTAwMWNhMWQ4NWY0Y2U5MDhiNWU1MGUxNSJ9"
+        },
+        {
+          "resource": "repo://yarn/private/install/repository.bzl#L81-L87",
+          "version": "repo-lines-v1:sha256:ff5a84937e159b7dd98ef6bcfb356c5b0540dd87bae3f08a258bcae742fc3853:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiODA4YTNjYjkyYzE4MDAzNGFmODYyNThiYzBjOWI5MWNhOTcwZTgxYjNhOTVjZmIxOThmYzkzYzQzNGIxMWQzMSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOTMzYjU4OWFkMGI2YWEwODA1YTFkODliMmRmMGQ4Zjk2NTk1MjBiYWQxMDMzNTNlMGRlNTM4ZmJiNmE5MjEwYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZDMwMGMwOWUxMjgwZjY5YjFlZmRiNGY3OWQxMThmOTI2MzE2ZGIyZWRhZjRhZmU2MjBmN2UwZGQ5YWI1NTZiYiJ9"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-06T17:32:29.974Z"
+    "at": "2026-11-19T10:17:13.013Z"
   }
 }

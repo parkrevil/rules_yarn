@@ -1,14 +1,14 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:cd78962ba882793d2573176943be4d648ae680c03c0870f1fc666fdca5119718",
+  "pageVersion": "sha256:326ff7c943480adaad9c4ce48843a31d2ddbd5fcea4e7f60b2b17b488c70663c",
   "claims": [
     {
       "id": "claim_4937ff2c7dfc4c0bb7a1f0824afbd578",
-      "statement": "v0.1.0 is released on GitHub and its registry pull request is open as a draft; until the registry merges it, a consumer adds a non-registry override, and because an override only takes effect in the root module, a module depending on rules_yarn cannot pass it on.",
+      "statement": "v0.1.0 was released on GitHub as the module rules_yarn; from 0.2.0 the module is parkrevil_rules_yarn, a user-prefixed name as the registry asked, while the repository and its release archives keep rules_yarn. Until the registry merges an entry, a consumer adds a non-registry override, and because an override only takes effect in the root module, a module depending on parkrevil_rules_yarn cannot pass it on.",
       "evidence": [
         {
-          "resource": "repo://README.md#L31-L55",
-          "version": "repo-lines-v1:sha256:46d3ca458fa2d5569d7b6b056c682ba5103cfb2cdaaf7bb1922ec714c8c4816b:eyJzZWxlY3RlZExpbmVDb3VudCI6MjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3MzkwYTgzYWJhMWY2YzMyNjZiZGRkMjk5MzRjNTc0NDAwODgyMjEwYzk1OWY5YjAyZTk4NGFkZDVjZTZjNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI2ZTFjMmU2MTcwNDdlMGU4ZDMxNmY2MTM1ODY4NThjOWZlN2I0Njg0YTk2ODE3MmI1MTBjOTg5YjVkMzI0MTciLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNjlhNTg4NDlhZTlkMjE0ZWNiNGQyOWFmNTAyNGEwOGM0ODI4OWM5NTI2MDE3MjVlMzNmNTNmOGYwMjAzOWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1MTkwYmIxNDY4YTMxNTM4YTE5YTg5MWQ4NDUyZTM3YWNiYmQzZjA1MTFlNDM4NWVhMTAwNjgxOGI1MWY1ZjkifQ"
+          "resource": "repo://README.md#L32-L72",
+          "version": "repo-lines-v1:sha256:746026bfd153013a19746421803d8bbdfc172b334de5afcc8ef8fdbb98d28fdf:eyJzZWxlY3RlZExpbmVDb3VudCI6NDEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImM3MzkwYTgzYWJhMWY2YzMyNjZiZGRkMjk5MzRjNTc0NDAwODgyMjEwYzk1OWY5YjAyZTk4NGFkZDVjZTZjNTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImJlMzNkYmI5Y2NhODMwYzUwMDY5ODQ0NTYyMzVjMzE2YThhYzU4M2MxMDQxYmU2MjQyMzMwMWQ3ZTBkNzhiYzgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjdmNjlhNTg4NDlhZTlkMjE0ZWNiNGQyOWFmNTAyNGEwOGM0ODI4OWM5NTI2MDE3MjVlMzNmNTNmOGYwMjAzOWMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY1MTkwYmIxNDY4YTMxNTM4YTE5YTg5MWQ4NDUyZTM3YWNiYmQzZjA1MTFlNDM4NWVhMTAwNjgxOGI1MWY1ZjkifQ"
         },
         {
           "resource": "repo://openspec/changes/archive/2026-10-08-automate-releases/tasks.md",
@@ -18,11 +18,11 @@
     },
     {
       "id": "claim_7edaa2148ce149d29bbecf0321e9e16f",
-      "statement": "release.yml runs on a pushed v*.*.* tag, when tag.yaml calls it, or when dispatched with an existing tag, and runs the reusable release workflow from bazel-contrib/.github with the release as a draft, then the publish workflow, then a finalize job that publishes the draft.",
+      "statement": "release.yml runs on a pushed v*.*.* tag, when tag.yaml calls it, or when dispatched with an existing tag, and runs a job that refuses an annotated tag, then the reusable release workflow from bazel-contrib/.github with the release as a draft, then the publish workflow, then a finalize job that publishes the draft.",
       "evidence": [
         {
           "resource": "repo://.github/workflows/release.yml",
-          "version": "repo-file-v1:sha256:c21d3bbd74ea7acad0a231ced893c2014baee315f24c03dea95fa6e5d5b5dfaf"
+          "version": "repo-file-v1:sha256:158937ccf6aebd7daf802c233744f11a5ab749a8d38d9485cce03cd67f9192fd"
         }
       ]
     },
@@ -98,7 +98,7 @@
       "evidence": [
         {
           "resource": "repo://MODULE.bazel#L3-L12",
-          "version": "repo-lines-v1:sha256:9d16fb0e606a533257eef1c5808e49d9ed7ca3381975f9c8879bb5f3c4d91349:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3N2NlZjQ4ZWY2MTI1MDBkOGMwODhhYTM1MTMyMTEzNGVhNGFmNTU1ZDc5MmY4ZWYzOTE1ZjE3MTdiMjY1ZjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4OWJmNTRiN2NiZjNlNDVjMzlkNjU1NjJhNTg2YzRjYzA2YWViZGE4ZjExMGU3Y2JkYzllZThjZDk2Y2QzOGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY3OTJmODYwYWFkZWY3Mzk3MWIwODAyNjUxMmFlZTlhZGFkMzZjNGVhYjhlOGRiMjc0ZmY1NmM3OTQ1NTMyYTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg3NTYxNzZjZjFkZGQ1Yzg2ZjVmNjI4ZjQ3ZDFmMmVlY2I5YjRjZjliYTY2ODYwMDMyZDlkNDAzNTFlODBjNzYifQ"
+          "version": "repo-lines-v1:sha256:9fb88b9c591de3f36e1ce2e4de75f695eb9352c2334dabe3a83d0b1241efacd9:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3N2NlZjQ4ZWY2MTI1MDBkOGMwODhhYTM1MTMyMTEzNGVhNGFmNTU1ZDc5MmY4ZWYzOTE1ZjE3MTdiMjY1ZjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNmNmNiMGNhODIxNjgyODFjYjBiNGY3ZDAxOWU1YjljN2NjNTk4ZmM1MDA1N2Q5ZmM3MTA3YWY4YTYwNzA5OWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY3OTJmODYwYWFkZWY3Mzk3MWIwODAyNjUxMmFlZTlhZGFkMzZjNGVhYjhlOGRiMjc0ZmY1NmM3OTQ1NTMyYTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg3NTYxNzZjZjFkZGQ1Yzg2ZjVmNjI4ZjQ3ZDFmMmVlY2I5YjRjZjliYTY2ODYwMDMyZDlkNDAzNTFlODBjNzYifQ"
         },
         {
           "resource": "repo://openspec/changes/archive/2026-10-02-publish-to-the-registry/design.md#L20-L29",
@@ -116,7 +116,7 @@
         },
         {
           "resource": "repo://tests/bcr/MODULE.bazel",
-          "version": "repo-file-v1:sha256:b49f1b9bc6c24079777036d2e1968364929d4b3dd9f833fc1a7f229639a3ca60"
+          "version": "repo-file-v1:sha256:a2ef7465f46905553449f6671552555f43c5d322f083ea4c6a89f9e80fea5003"
         }
       ]
     },
@@ -168,7 +168,7 @@
       "evidence": [
         {
           "resource": "repo://README.md",
-          "version": "repo-file-v1:sha256:08d008e32dac7f27d80ae47498eca5756d69aabf6a880b746f31e8f6ccf6392d"
+          "version": "repo-file-v1:sha256:3fec3783a8a88498d9c16ff54f378cd16f292a5c3eec5c70d063aa9a7cd7372d"
         },
         {
           "resource": "repo://yarn/private/extensions.bzl#L78-L130",
@@ -196,21 +196,25 @@
     },
     {
       "id": "claim_0ee1c6b483004ecda3e7059ca8919eb9",
-      "statement": "The CI checks job runs release_prep.sh under a tag of its own and requires the release notes, the source archive, a documentation archive holding each public file's binary proto, and a docs_url naming that archive.",
+      "statement": "The CI checks job runs release_prep.sh under a tag of its own and requires the release notes, the source archive, a documentation archive holding each public file's binary proto, and a docs_url naming that archive; it also requires the notes to name the module parkrevil_rules_yarn in the bazel_dep and the override's module_name, and to use rules_yarn only in the archive's name, prefix and URL.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/ci.yml",
-          "version": "repo-file-v1:sha256:6de8d457ac72e8f7e9672f9ff9587ce4d24a0c3e51601a62cf5daacf2ab4b269"
+          "resource": "repo://.github/workflows/ci.yml#L180-L200",
+          "version": "repo-lines-v1:sha256:91268eb2e7f90f6bd921f340ae845b91852c417789f9b5d6fdeba64cbeecb02d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0YjFiZTY2NDk0NDE3ZjhmNTI3MDBlNWViZTNjZGVhYzMxYTBmZThmMmM4NDU4MzM3YjFiYmU4NWU5NDdkMzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYxNDQwOTFmYzZmMDUyYjljYzJkMGFmM2U3YjY4NGY3ZjM0NGUxMjc2NGU0MzE1OWU0NjU2NWQxOGY0MjhlM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5YzU4OWViMDZlYjcyMDdkNTY5YWVkNDI0NjVlNGExMzE4OGJlYTJlZGRjOWI5N2E3NDViNDJiNjAyMmZmNjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://.github/workflows/release_prep.sh",
+          "version": "repo-file-v1:sha256:87810ec62c4b0337536889bdbfb21ff35955eb3364292e48d9b0ceda3a289a16"
         }
       ]
     },
     {
       "id": "claim_fe6e998653404b3b8abc1329addc3f57",
-      "statement": "tag.yaml runs daily and on dispatch, on main only and one run at a time; smlx/ccv works out the next version from Conventional Commits, and the workflow pushes the tag and calls release.yml for a minor or patch version, leaving a major one to a person, which holds every later release until its tag is pushed.",
+      "statement": "tag.yaml runs daily and on dispatch, on main only and one run at a time; smlx/ccv works out the next version from Conventional Commits, and the workflow pushes the tag and calls release.yml for a minor or patch version, leaving a major one to a person, which holds every later release until its tag is pushed; its notice tells the person to push a lightweight tag with git tag --no-sign.",
       "evidence": [
         {
           "resource": "repo://.github/workflows/tag.yaml",
-          "version": "repo-file-v1:sha256:af2335a0241f9cd0bd8be392fbad1c10f5993edff2030ab51cd610ee3cf67bd0"
+          "version": "repo-file-v1:sha256:86edd97c7670c3452693c83c5e38eee4b35ed410338f3e91f101d60a1453a9ff"
         },
         {
           "resource": "repo://openspec/changes/archive/2026-10-08-automate-releases/design.md",
@@ -228,11 +232,11 @@
         },
         {
           "resource": "repo://.github/workflows/release.yml",
-          "version": "repo-file-v1:sha256:c21d3bbd74ea7acad0a231ced893c2014baee315f24c03dea95fa6e5d5b5dfaf"
+          "version": "repo-file-v1:sha256:158937ccf6aebd7daf802c233744f11a5ab749a8d38d9485cce03cd67f9192fd"
         },
         {
           "resource": "repo://.github/workflows/tag.yaml",
-          "version": "repo-file-v1:sha256:af2335a0241f9cd0bd8be392fbad1c10f5993edff2030ab51cd610ee3cf67bd0"
+          "version": "repo-file-v1:sha256:86edd97c7670c3452693c83c5e38eee4b35ed410338f3e91f101d60a1453a9ff"
         }
       ]
     },
@@ -242,7 +246,7 @@
       "evidence": [
         {
           "resource": "repo://.github/workflows/release.yml",
-          "version": "repo-file-v1:sha256:c21d3bbd74ea7acad0a231ced893c2014baee315f24c03dea95fa6e5d5b5dfaf"
+          "version": "repo-file-v1:sha256:158937ccf6aebd7daf802c233744f11a5ab749a8d38d9485cce03cd67f9192fd"
         },
         {
           "resource": "repo://openspec/changes/archive/2026-10-08-automate-releases/design.md",
@@ -259,10 +263,38 @@
           "version": "repo-file-v1:sha256:2434b64257e580151a256595691707de940095551d5caa9b37b5c8539e1321d4"
         }
       ]
+    },
+    {
+      "id": "claim_8cd50adf16db46c2975c8e4f59ccc7f6",
+      "statement": "The release archive's name, its prefix, its URL and the {REPO} substitutions in the .bcr templates come from the repository name rules_yarn, while the bazel_dep and override in the release notes name the module parkrevil_rules_yarn.",
+      "evidence": [
+        {
+          "resource": "repo://.bcr/source.template.json",
+          "version": "repo-file-v1:sha256:d26da2dddf6aa1a9f7ae300da138408cba3747e7ee4be8ff790be318091c32ba"
+        },
+        {
+          "resource": "repo://.github/workflows/release_prep.sh",
+          "version": "repo-file-v1:sha256:87810ec62c4b0337536889bdbfb21ff35955eb3364292e48d9b0ceda3a289a16"
+        },
+        {
+          "resource": "repo://MODULE.bazel#L11-L15",
+          "version": "repo-lines-v1:sha256:efad10e6cd3055722b8c8073b34f629a373bca95c10c89931ef23e9540a10205:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNmQ5YWE4ZjBjN2VjMTI4MmY1OGYzYmY0OGQyNTcyMDAzNjM0NzE1MWJjODIzZjgxNjA4NDRlZmM2Y2UzY2M5MyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNDY2ZGMyYTEwOGM3MDlkYWM1Y2ZlYTM4YjA0YTI2MDU3MDlkYzk5MDE1ZDFlMWZjYzU5ZmJjMGZmNDY5YTgyOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMGI2NDhjNWVkYWMyNjE3NDRlY2UxZjhkMzk2YWIzY2I0Y2Y1NjcwNTUwMjIzNDFlYTM4Y2I3ZGNmNzliYmM4MyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_2663219f6ec8455ba444c908d3746dc4",
+      "statement": "release.yml's lightweight-tag job, which the release waits for, asks GitHub's get-a-reference API for the tag ref's object type and fails unless it is commit, giving the commands to replace an annotated tag with a lightweight one, because ccv keys tags by the ref's own hash and so cannot see an annotated tag.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/release.yml#L33-L59",
+          "version": "repo-lines-v1:sha256:d5fc7fb7ea067bdd1e0a318b6a0c26210db132667fa4134cc14045f3a2abe3a3:eyJzZWxlY3RlZExpbmVDb3VudCI6MjcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU5ZDgwMTU0ZWQ0MmZjNWM3NzliMTMzMTU3OGI1OGI4OWM4MDFlYWNlNzRmMjRjZDQ4ZWI0YTIzNTc5NDBhOTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImEwYmEyMGQzYzY3NjQ4MDUxZGI1YzRhMmNjMjM3NDgwODNiMDUzYjhhZjZiMmYwYjQ1OTVkMDJmZTc2OGE0NTQiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImI3ZDE5MmVhYmZhNGU1MTQzOTMzNGJjMWEwMDNmNWY2YWNkOTBkZDEzMDQ1ZDFmNzQwYWFkYWUyNzMyYjUyZmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImQ0YjQ5OWZlMWM5NDM1MzliNGE3YmYxNTFhMTVhYzUwZjViMjliYmQ3YTAxNzM2MzJjM2U2ZTc1OTRjZWE2YmYifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-20T10:48:25.667Z"
+    "at": "2026-11-19T10:17:13.013Z"
   }
 }

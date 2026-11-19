@@ -14,16 +14,18 @@ sources:
     resource: repo://e2e/smoke/BUILD.bazel
   - id: openwiki-source-e27756e3a61ff66626b48e05
     resource: repo://e2e/smoke/MODULE.bazel
+  - id: openwiki-source-d92bdd4d3d554717b6869e2d
+    resource: repo://MODULE.bazel
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
     resource: repo://README.md
   - id: openwiki-source-d9081795909674dafc7044aa
     resource: repo://yarn/private/yarn_binary.bzl
   - id: openwiki-source-c20b05d8b903795173b9a3b2
     resource: repo://yarn/private/yarn_binary.sh.tpl
-generated: { by: "claude-code", at: "2026-10-06T12:18:29.604Z" }
+generated: { by: "claude-code", at: "2026-11-19T09:16:08.640Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-20T10:48:25.667Z
+    at: 2026-11-19T09:34:34.611Z
 ---
 
 # Quickstart
@@ -62,7 +64,12 @@ yet.
 
 Two declarations in `MODULE.bazel` — a dependency on the ruleset plus a Node.js
 toolchain, and a Yarn version through the `yarn` module extension — and one
-`yarn_binary` target naming the resulting repository. Then `bazel run` the
+`yarn_binary` target naming the resulting repository. The ruleset's Bazel
+module is `parkrevil_rules_yarn`, so that is the name in `bazel_dep` and in
+labels such as `@parkrevil_rules_yarn//yarn:defs.bzl`; the GitHub repository
+and its release archives keep the name `rules_yarn`. Release 0.1.0 was the
+module `rules_yarn`, and the README lists what to change when upgrading from
+it. Then `bazel run` the
 target; arguments after `--` reach Yarn unchanged, and Yarn runs in the
 directory Bazel was invoked from.
 
@@ -74,8 +81,9 @@ The ruleset is not in the Bazel Central Registry yet, so until it is, a
 consumer adds a non-registry override next to the `bazel_dep` — an
 `archive_override` on a release archive, whose integrity value is in that
 release's notes, or `git_override`, or `local_path_override`. An override only
-takes effect in the root module, so a module depending on `rules_yarn` cannot
-pass it on and every root module downstream has to repeat it. That is what
+takes effect in the root module, so a module depending on
+`parkrevil_rules_yarn` cannot pass it on and every root module downstream has
+to repeat it. That is what
 publishing removes, and the apparatus for it is already in place.
 
 `e2e/smoke` is a working consumer that uses only the public API, and

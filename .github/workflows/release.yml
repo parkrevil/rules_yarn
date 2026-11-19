@@ -2,7 +2,8 @@
 # created and passes here, since a tag pushed with the workflow token starts
 # no run of its own — then offers it to the registry, and publishes the
 # release once it has been offered. This is bazel-contrib/rules-template's
-# release.yaml (commit cb8787e7).
+# release.yaml (commit cb8787e7), with one addition: a first job that refuses
+# an annotated tag, which ccv cannot see.
 name: Release
 
 on:
@@ -30,7 +31,32 @@ permissions:
   id-token: write
 
 jobs:
+  # ccv keys each tag by its ref's own hash and matches commits against it
+  # (ccv.go:91-94 at 7318e2f). An annotated tag's ref points at a tag object,
+  # not a commit, so ccv would never find the release: it would walk back to
+  # the tag before, count the commits behind this one again, and hold every
+  # later release at the version they call for. A person pushing a tag by hand
+  # can make that mistake; tag.yaml's own tags are lightweight. GitHub's "get a
+  # reference" API reports the ref's object type: "commit" for a lightweight
+  # tag, "tag" for an annotated one.
+  lightweight-tag:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+    steps:
+      - name: Require a lightweight tag
+        env:
+          GH_TOKEN: ${{ github.token }}
+          TAG: ${{ inputs.tag_name || github.ref_name }}
+        run: |
+          kind=$(gh api "repos/$GITHUB_REPOSITORY/git/ref/tags/$TAG" --jq .object.type)
+          if [ "$kind" != commit ]; then
+            echo "::error::$TAG is an annotated tag ($kind), which ccv cannot see. Replace it with a lightweight one: git tag -d $TAG && git push origin :refs/tags/$TAG && git tag --no-sign $TAG <commit> && git push origin $TAG"
+            exit 1
+          fi
+
   release:
+    needs: lightweight-tag
     uses: bazel-contrib/.github/.github/workflows/release_ruleset.yaml@v7.7.0
     with:
       release_files: rules_yarn-*.tar.gz

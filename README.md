@@ -11,35 +11,37 @@ fetched by Bazel with a pinned integrity.
 In `MODULE.bazel`:
 
 ```starlark
-bazel_dep(name = "rules_yarn", version = "0.1.0")
+bazel_dep(name = "parkrevil_rules_yarn", version = "0.2.0")
 bazel_dep(name = "rules_nodejs", version = "6.7.5")
 
 node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
 node.toolchain(node_version = "24.21.0")
 
-yarn = use_extension("@rules_yarn//yarn:extensions.bzl", "yarn")
+yarn = use_extension("@parkrevil_rules_yarn//yarn:extensions.bzl", "yarn")
 yarn.distribution(version = "4.18.0")
 use_repo(yarn, "yarn")
 ```
 
-Bazel 8.3.0 or newer. `rules_yarn` declares that, so an older Bazel is turned
-away while the module graph resolves rather than failing inside the ruleset.
+Bazel 8.3.0 or newer. `parkrevil_rules_yarn` declares that, so an older Bazel
+is turned away while the module graph resolves rather than failing inside the
+ruleset.
 
 `rules_nodejs` supplies the Node.js runtime toolchain. Pick the Node.js version
 your project needs; the one above is what this ruleset is tested with.
 
 ### Before the module reaches the registry
 
-`rules_yarn` is not in the [Bazel Central Registry](https://registry.bazel.build)
-yet, so `bazel_dep` alone will not resolve it. Until it is, add an override
-next to the `bazel_dep` above. A release archive, which every release carries:
+`parkrevil_rules_yarn` is not in the
+[Bazel Central Registry](https://registry.bazel.build) yet, so `bazel_dep`
+alone will not resolve it. Until it is, add an override next to the
+`bazel_dep` above. A release archive, which every release carries:
 
 ```starlark
 archive_override(
-    module_name = "rules_yarn",
+    module_name = "parkrevil_rules_yarn",
     integrity = "sha256-...",
-    strip_prefix = "rules_yarn-0.1.0",
-    urls = ["https://github.com/parkrevil/rules_yarn/releases/download/v0.1.0/rules_yarn-v0.1.0.tar.gz"],
+    strip_prefix = "rules_yarn-0.2.0",
+    urls = ["https://github.com/parkrevil/rules_yarn/releases/download/v0.2.0/rules_yarn-v0.2.0.tar.gz"],
 )
 ```
 
@@ -50,16 +52,31 @@ work too; `local_path_override` is what [`e2e/smoke`](e2e/smoke) uses, with
 `path = "../.."`, because it sits two directories below this repository's root.
 
 An override only takes effect in the root module, so a module that depends on
-`rules_yarn` cannot pass it on — every root module that ends up depending on
-`rules_yarn` has to repeat it. That is the reason to publish, and the reason
-this section exists.
+`parkrevil_rules_yarn` cannot pass it on — every root module that ends up
+depending on `parkrevil_rules_yarn` has to repeat it. That is the reason to
+publish, and the reason this section exists.
+
+### Upgrading from 0.1.0
+
+0.1.0 was released as the module `rules_yarn`. From 0.2.0 the module is
+`parkrevil_rules_yarn`, a user-prefixed name as the registry asked; the
+repository and its release archives keep the name `rules_yarn`. To upgrade,
+change:
+
+- the `bazel_dep` name;
+- the `module_name` of any override, an `--override_module` flag included;
+- each label `@rules_yarn//…` to `@parkrevil_rules_yarn//…`.
+
+The canonical names of the module's repositories change with it — for
+example `rules_yarn++yarn+npm` becomes `parkrevil_rules_yarn++yarn+npm` — and
+so do the runfiles and output paths built from them.
 
 ## Usage
 
 In a `BUILD.bazel` file:
 
 ```starlark
-load("@rules_yarn//yarn:defs.bzl", "yarn_binary")
+load("@parkrevil_rules_yarn//yarn:defs.bzl", "yarn_binary")
 
 yarn_binary(
     name = "yarn",
@@ -81,7 +98,7 @@ bazel run //:yarn -- install
 targets can take as inputs.
 
 ```starlark
-yarn = use_extension("@rules_yarn//yarn:extensions.bzl", "yarn")
+yarn = use_extension("@parkrevil_rules_yarn//yarn:extensions.bzl", "yarn")
 yarn.distribution(version = "4.18.0")
 yarn.install(
     name = "npm",
@@ -193,16 +210,17 @@ Repository naming and version selection follow Bazel's
 | `distribution` | `yarn` | The `yarn.distribution` repository whose Yarn lays the packages out. |
 
 The repository provides `:node_modules`, carrying `YarnNodeModulesInfo` from
-`@rules_yarn//yarn:providers.bzl`, and `:pin`. It also provides a target per
-direct dependency of the root and of each workspace, named after the link Yarn
-writes for it — `:node_modules/<name>`, `:<workspace>/node_modules/<name>` —
-and per scope among them, `:node_modules/@<scope>`. Each holds the dependency's
-link, every installed package it reaches through Yarn's links, and its `.bin`
-entries, and carries `YarnNodeModulesInfo` for that part, its `root` the
-`node_modules` directory the link is in. A dependency on another workspace has
-no target, since those links are not created yet. These targets cut what is
-built, not what is fetched: every pinned tarball is still downloaded. When the
-install fails, only `:node_modules`, which reports why, and `:pin` exist.
+`@parkrevil_rules_yarn//yarn:providers.bzl`, and `:pin`. It also provides a
+target per direct dependency of the root and of each workspace, named after
+the link Yarn writes for it — `:node_modules/<name>`,
+`:<workspace>/node_modules/<name>` — and per scope among them,
+`:node_modules/@<scope>`. Each holds the dependency's link, every installed
+package it reaches through Yarn's links, and its `.bin` entries, and carries
+`YarnNodeModulesInfo` for that part, its `root` the `node_modules` directory
+the link is in. A dependency on another workspace has no target, since those
+links are not created yet. These targets cut what is built, not what is
+fetched: every pinned tarball is still downloaded. When the install fails,
+only `:node_modules`, which reports why, and `:pin` exist.
 
 ### `yarn_binary` (rule)
 
@@ -250,10 +268,10 @@ Checked on 2026-09-20 on Linux x86_64:
 | `rules_shell` | 0.8.0 |
 | `bazel_skylib` | 1.9.2 |
 
-`rules_yarn` declares `bazel_compatibility = [">=8.3.0"]`, the release where
-the repository API it uses arrives. Bazel refuses an older version while it
-resolves the module graph, so you get a message naming this ruleset rather
-than an error from inside it.
+`parkrevil_rules_yarn` declares `bazel_compatibility = [">=8.3.0"]`, the
+release where the repository API it uses arrives. Bazel refuses an older
+version while it resolves the module graph, so you get a message naming this
+ruleset rather than an error from inside it.
 
 The launcher is a Bash script: it uses `[[ ]]`, `pipefail` and `source`, and
 the shell toolchain points at Bash on every operating system it supports. So
@@ -285,8 +303,13 @@ none — tags it, builds the release with its documentation archive, and opens
 the Bazel Central Registry pull request as a draft for the author to mark
 ready. The daily run waits two weeks after a release. A breaking change calls
 for a major version, which it reports and leaves to a person: pushing that tag
-releases it, and until then no minor or patch release is cut, since the
-commits since the last release include the breaking one.
+— or the version they choose — releases it, and until then no minor or patch
+release is cut, since the commits since the last release include the breaking
+one. The tag must be lightweight: `git tag --no-sign <tag> <commit>`, with
+none of `-a`, `-s`, `-u`, `-m` or `-F`, and `--no-sign` so that a
+`tag.gpgSign` setting does not sign it. `ccv` cannot see an annotated tag, so
+it would keep counting the breaking commit, and the release workflow refuses
+one.
 
 ## License
 

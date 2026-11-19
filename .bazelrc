@@ -1,5 +1,5 @@
-# Settings for developing rules_yarn. Modules that depend on rules_yarn do not
-# inherit them.
+# Settings for developing rules_yarn. Modules that depend on
+# parkrevil_rules_yarn do not inherit them.
 
 # Keep MODULE.bazel.lock complete and committed so every checkout resolves the
 # same module versions and Node.js digests. After changing dependencies, run:

@@ -61,7 +61,7 @@ yarn_binary = rule(
 Use `bazel run` to run Yarn in the directory Bazel was invoked from:
 
 ```starlark
-load("@rules_yarn//yarn:defs.bzl", "yarn_binary")
+load("@parkrevil_rules_yarn//yarn:defs.bzl", "yarn_binary")
 
 yarn_binary(
     name = "yarn",

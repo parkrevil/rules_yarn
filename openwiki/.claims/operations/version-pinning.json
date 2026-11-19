@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:04ef26b3134d573a0935d197fa7672478c8f584c0d8b680b49f526937ccc46a2",
+  "pageVersion": "sha256:4283479207f2023f28262b450cc498084d2389aaa4da3d9a8acf67ec0cfca225",
   "claims": [
     {
       "id": "claim_f94f369481c3466db1302dc475650602",
@@ -18,7 +18,7 @@
       "evidence": [
         {
           "resource": "repo://.bazelrc",
-          "version": "repo-file-v1:sha256:bca2256a26505247fe6442e653e1504c00b7a3fc5da6f9a1ce5e16cfb8a2a791"
+          "version": "repo-file-v1:sha256:64191e6bac756069ef2f8027cd86c1d74bf4404854e46e18306c18d30ab5a955"
         }
       ]
     },
@@ -28,7 +28,7 @@
       "evidence": [
         {
           "resource": "repo://.bazelrc",
-          "version": "repo-file-v1:sha256:bca2256a26505247fe6442e653e1504c00b7a3fc5da6f9a1ce5e16cfb8a2a791"
+          "version": "repo-file-v1:sha256:64191e6bac756069ef2f8027cd86c1d74bf4404854e46e18306c18d30ab5a955"
         },
         {
           "resource": "repo://e2e/smoke/.bazelrc",
@@ -50,7 +50,7 @@
         },
         {
           "resource": "repo://e2e/smoke/MODULE.bazel#L1-L9",
-          "version": "repo-lines-v1:sha256:08ef781732e82eb7e4b02d002fc962d87fe7a94c649c7038c7318c821f0f94f5:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzI3NDQ2NzZiMDhlZTlmZGY0YjYyYTkxNjQ1N2M3OWI5ZmRkMmNmZjVkNTViMzdmMzkxNTJhOTkzOWNlNTZiNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTZmOTU4NTNhNGM2OWI1ZmNjMzc5ZjU1MGVjNWI1NDM5ZDYzM2UwNTVkZTJiYzdkYjFjMTI0MDBlNzNhNjE1MyJ9"
+          "version": "repo-lines-v1:sha256:235d8667cfc33e0619700d83b8f831773294195f7f5b8846c1de760ad004066f:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNzI3NDQ2NzZiMDhlZTlmZGY0YjYyYTkxNjQ1N2M3OWI5ZmRkMmNmZjVkNTViMzdmMzkxNTJhOTkzOWNlNTZiNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZmFmYmEwNTI3YzM5NTNjNGI2ZTBlNWI1NzM5YmE4MzYxMmY4MDUzYmNkYzk0NjY3MzAxOTNjZDFkNTkwYjQwOCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjAsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYTZmOTU4NTNhNGM2OWI1ZmNjMzc5ZjU1MGVjNWI1NDM5ZDYzM2UwNTVkZTJiYzdkYjFjMTI0MDBlNzNhNjE1MyJ9"
         }
       ]
     },
@@ -79,8 +79,8 @@
       "statement": "MODULE.bazel pins the oldest Bazel a consumer may bring with bazel_compatibility = [\">=8.3.0\"], so an older Bazel is refused while the module graph resolves.",
       "evidence": [
         {
-          "resource": "repo://MODULE.bazel#L3-L12",
-          "version": "repo-lines-v1:sha256:9d16fb0e606a533257eef1c5808e49d9ed7ca3381975f9c8879bb5f3c4d91349:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3N2NlZjQ4ZWY2MTI1MDBkOGMwODhhYTM1MTMyMTEzNGVhNGFmNTU1ZDc5MmY4ZWYzOTE1ZjE3MTdiMjY1ZjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU4OWJmNTRiN2NiZjNlNDVjMzlkNjU1NjJhNTg2YzRjYzA2YWViZGE4ZjExMGU3Y2JkYzllZThjZDk2Y2QzOGUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY3OTJmODYwYWFkZWY3Mzk3MWIwODAyNjUxMmFlZTlhZGFkMzZjNGVhYjhlOGRiMjc0ZmY1NmM3OTQ1NTMyYTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6Ijg3NTYxNzZjZjFkZGQ1Yzg2ZjVmNjI4ZjQ3ZDFmMmVlY2I5YjRjZjliYTY2ODYwMDMyZDlkNDAzNTFlODBjNzYifQ"
+          "resource": "repo://MODULE.bazel#L3-L15",
+          "version": "repo-lines-v1:sha256:a3e0198e79ad4349bfd2e8fb38e0b72f77d2c5d0de0a3035de757c8534550b21:eyJzZWxlY3RlZExpbmVDb3VudCI6MTMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ3N2NlZjQ4ZWY2MTI1MDBkOGMwODhhYTM1MTMyMTEzNGVhNGFmNTU1ZDc5MmY4ZWYzOTE1ZjE3MTdiMjY1ZjQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjoyLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY3OTJmODYwYWFkZWY3Mzk3MWIwODAyNjUxMmFlZTlhZGFkMzZjNGVhYjhlOGRiMjc0ZmY1NmM3OTQ1NTMyYTgiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjBiNjQ4YzVlZGFjMjYxNzQ0ZWNlMWY4ZDM5NmFiM2NiNGNmNTY3MDU1MDIyMzQxZWEzOGNiN2RjZjc5YmJjODMifQ"
         }
       ]
     },
@@ -155,6 +155,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-05T14:22:28.209Z"
+    "at": "2026-11-19T09:16:08.640Z"
   }
 }

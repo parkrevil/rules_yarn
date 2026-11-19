@@ -37,6 +37,9 @@ die() {
   echo >&2 "install_scenarios.sh: $*"
   exit 2
 }
+# Stops the script after a Bazel command it depends on failed, printing that
+# command's whole log first.
+fail_with() { cat >&2 "$1"; die "$2"; }
 
 record() {
   local ok=$1 what=$2
@@ -90,11 +93,11 @@ printf 'common --lockfile_mode=off\n' >"$ws/.bazelrc"
 
 module() {
   cat >"$ws/MODULE.bazel" <<EOF
-bazel_dep(name = "rules_yarn")
+bazel_dep(name = "parkrevil_rules_yarn")
 bazel_dep(name = "rules_nodejs", version = "6.7.5")
 
 local_path_override(
-    module_name = "rules_yarn",
+    module_name = "parkrevil_rules_yarn",
     path = "$repo",
 )
 
@@ -102,7 +105,7 @@ node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
 node.toolchain(node_version = "24.21.0")
 use_repo(node, "nodejs")
 
-yarn = use_extension("@rules_yarn//yarn:extensions.bzl", "yarn")
+yarn = use_extension("@parkrevil_rules_yarn//yarn:extensions.bzl", "yarn")
 yarn.distribution(version = "4.18.0")
 yarn.install(
     name = "npm",
@@ -117,7 +120,7 @@ EOF
 }
 module "{}"
 cat >"$ws/BUILD.bazel" <<'EOF'
-load("@rules_yarn//yarn:defs.bzl", "yarn_binary")
+load("@parkrevil_rules_yarn//yarn:defs.bzl", "yarn_binary")
 
 exports_files([
     ".yarnrc.yml",
@@ -132,11 +135,23 @@ yarn_binary(
 )
 EOF
 
-b build @nodejs//:node_bin >/dev/null 2>&1 || die "cannot build the Bazel-managed Node.js"
+# Each Bazel command the setup depends on keeps its output in a log, which is
+# printed when the command fails, so a failure here says what Bazel said.
+b build @nodejs//:node_bin >"$work/setup.log" 2>&1 || fail_with "$work/setup.log" "cannot build the Bazel-managed Node.js"
+# Neither changes while the script runs, so each is asked for once.
+output_base=$(b info output_base 2>"$work/setup.log") || fail_with "$work/setup.log" "cannot find Bazel's output base"
+bazel_bin=$(b info bazel-bin 2>"$work/setup.log") || fail_with "$work/setup.log" "cannot find Bazel's bazel-bin"
 # The output base keeps a fetched repository; the execution root keeps only what
 # the last build used.
-node="$(b info output_base 2>/dev/null)/$(b cquery --output=files @nodejs//:node_bin 2>/dev/null | head -1)"
-[ -x "$node" ] || die "cannot find the Bazel-managed Node.js"
+node="$output_base/$(b cquery --output=files @nodejs//:node_bin 2>"$work/setup.log" | head -1)"
+# A failed query leaves the output base itself, a directory, which -x accepts.
+[ -f "$node" ] && [ -x "$node" ] || fail_with "$work/setup.log" "cannot find the Bazel-managed Node.js"
+# The install repository's canonical name, under which Bazel reports its
+# targets and keeps its files. Its format is not an API, so Bazel is asked for
+# it (site/en/external/module.md: "use the `bazel mod dump_repo_mapping`
+# command").
+npm_repo=$(b mod dump_repo_mapping '' 2>"$work/setup.log" | "$node" -p 'JSON.parse(require("fs").readFileSync(0, "utf8")).npm ?? ""')
+[ -n "$npm_repo" ] || fail_with "$work/setup.log" "cannot find the install repository's canonical name"
 
 start_registry() {
   local state=$1
@@ -160,11 +175,14 @@ project() {
   printf '{\n  "name": "scenario",\n  "packageManager": "yarn@4.18.0",\n  "dependencies": {%s}\n}\n' "$1" >"$ws/package.json"
 }
 
-lock() { b run //:yarn -- install --mode=update-lockfile >"$work/lock.log" 2>&1; }
-pin() { b run @npm//:pin >"$work/pin.log" 2>&1; }
-build() { b build @npm//:node_modules >"$work/build.log" 2>&1; }
-built() { echo "$(b info bazel-bin 2>/dev/null)/external/rules_yarn++yarn+npm/node_modules"; }
-layout_time() { "$node" -p 'require("fs").statSync(process.argv[1]).mtimeMs' "$(b info output_base 2>/dev/null)/external/rules_yarn++yarn+npm/layout.json" 2>/dev/null; }
+# Each keeps its output in its own log and records which log that is, so when a
+# chain of them stops, the log of the one that failed is the one printed.
+last_log=
+lock() { last_log="$work/lock.log"; b run //:yarn -- install --mode=update-lockfile >"$last_log" 2>&1; }
+pin() { last_log="$work/pin.log"; b run @npm//:pin >"$last_log" 2>&1; }
+build() { last_log="$work/build.log"; b build @npm//:node_modules >"$last_log" 2>&1; }
+built() { echo "$bazel_bin/external/$npm_repo/node_modules"; }
+layout_time() { "$node" -p 'require("fs").statSync(process.argv[1]).mtimeMs' "$output_base/external/$npm_repo/layout.json" 2>/dev/null; }
 store() { ls -d "$(built)"/.store/"$1"*/package 2>/dev/null | head -1; }
 log_has() { grep -qF -- "$1" "$work/build.log"; }
 # Rewrites a file through Node, so that the edit is the same on every host.
@@ -179,7 +197,7 @@ touch_pins() { edit "$ws/pins.json" "(s) => JSON.stringify(JSON.parse(s), null, 
 echo "# pinning"
 
 project '"left": "1.0.0", "@fx/scoped": "1.0.0", "tool": "1.0.0"'
-lock || die "locking the project failed: $(tail -5 "$work/lock.log")"
+lock || fail_with "$last_log" "locking the project failed"
 
 pin
 pinned=$?
@@ -259,7 +277,7 @@ echo "# building packages from their tarballs"
 source_of() { "$node" -e '
 const layout = JSON.parse(require("fs").readFileSync(process.argv[1], "utf8"));
 const p = layout.packages.find((x) => x.path.startsWith(`node_modules/.store/${process.argv[2]}-npm-`));
-console.log(p ? (p.tarball ? "tarball" : "archive") : "");' "$(b info output_base 2>/dev/null)/external/rules_yarn++yarn+npm/layout.json" "$1"; }
+console.log(p ? (p.tarball ? "tarball" : "archive") : "");' "$output_base/external/$npm_repo/layout.json" "$1"; }
 installed_files() { (cd "$(store "$1-npm")" && find . | LC_ALL=C sort | tr '\n' ' '); }
 
 build
@@ -279,7 +297,7 @@ case_tree_ok() {
 }
 shapes='"shape-dirmode": "1.0.0", "shape-mode0": "1.0.0", "shape-hardlink": "1.0.0", "shape-contiguous": "1.0.0", "shape-absolute": "1.0.0", "shape-dotslash": "1.0.0", "shape-dotdot": "1.0.0", "shape-fifo": "1.0.0"'"$case_shape"
 project "\"left\": \"1.0.0\", \"@fx/scoped\": \"1.0.0\", \"tool\": \"1.0.0\", \"right\": \"2.0.0\", $shapes"
-lock && pin || die "locking and pinning the tarball shapes failed: $(tail -20 "$work/pin.log")"
+lock && pin || fail_with "$last_log" "locking and pinning the tarball shapes failed"
 build
 shaped=$?
 {
@@ -305,7 +323,7 @@ shape-fifo archive"
   && case_tree_ok
 record $? "Tarballs bsdtar and Yarn extract differently: each installs Yarn's tree, from its tarball when normalising makes them equal, from an archive otherwise"
 project '"left": "1.0.0", "@fx/scoped": "1.0.0", "tool": "1.0.0", "right": "2.0.0"'
-lock && pin || die "locking and pinning without the tarball shapes failed: $(tail -20 "$work/pin.log")"
+lock && pin || fail_with "$last_log" "locking and pinning without the tarball shapes failed"
 
 echo
 echo "# a target per direct dependency"
@@ -318,7 +336,7 @@ built_alone() {
   ls "$(built)/.store" | sed 's/-npm-.*//' | LC_ALL=C sort | paste -sd, -
 }
 project '"left": "1.0.0", "@fx/scoped": "1.0.0", "@fx/other": "1.0.0", "tool": "1.0.0", "right": "2.0.0", "cyc-a": "1.0.0"'
-lock && pin || die "locking and pinning with the cycle and the second scoped package failed: $(tail -20 "$work/pin.log")"
+lock && pin || fail_with "$last_log" "locking and pinning with the cycle and the second scoped package failed"
 [ "$(built_alone @npm//:node_modules/left)" = "left" ]
 record $? "Only the dependency's packages are built: building one direct dependency's target builds its package's directory and no other's"
 [ "$(built_alone @npm//:node_modules/cyc-a)" = "cyc-a,cyc-b" ] \
@@ -327,7 +345,7 @@ record $? "Dependency cycle: the target of a package in a cycle holds both packa
 [ "$(built_alone @npm//:node_modules/@fx)" = "@fx-other,@fx-scoped" ]
 record $? "Scope: the scope's target holds both of its packages"
 project '"left": "1.0.0", "@fx/scoped": "1.0.0", "tool": "1.0.0", "right": "2.0.0"'
-lock && pin || die "locking and pinning without the cycle failed: $(tail -20 "$work/pin.log")"
+lock && pin || fail_with "$last_log" "locking and pinning without the cycle failed"
 
 echo
 echo "# refusals"
@@ -353,7 +371,7 @@ touch_pins
 ! build && log_has "Yarn does not accept the settings this install carries from .yarnrc.yml"
 record $? "Configuration Yarn cannot read: fetching fails, saying Yarn does not accept it"
 # A failed install has no layout to name its dependencies' targets after.
-! b build @npm//:node_modules/left >"$work/build.log" 2>&1 && log_has "no such target '@@rules_yarn++yarn+npm//:node_modules/left'"
+! b build @npm//:node_modules/left >"$work/build.log" 2>&1 && log_has "no such target '@@$npm_repo//:node_modules/left'"
 record $? "a failed install declares no dependency's target: Bazel reports no such target, and :node_modules says why"
 yarnrc
 touch_pins
@@ -362,11 +380,11 @@ project '"left": "1.0.0", "@fx/scoped": "1.0.0", "tool": "1.0.0", "right": "2.0.
 ! build && log_has "lockfile would have to be modified"
 record $? "Lockfile out of date: fetching fails, saying the lockfile would have to change"
 
-lock && pin || die "locking and pinning the project with linky failed: $(tail -20 "$work/pin.log")"
+lock && pin || fail_with "$last_log" "locking and pinning the project with linky failed"
 ! build && log_has "linky" && log_has "alias.js is a link"
 record $? "Link inside a package: fetching fails and names the package and the link"
 project '"left": "1.0.0", "@fx/scoped": "1.0.0", "tool": "1.0.0", "right": "2.0.0"'
-lock && pin && build || die "restoring the project failed: $(tail -20 "$work/build.log")"
+lock && pin && build || fail_with "$last_log" "restoring the project failed"
 
 echo
 echo "# the host"
@@ -431,7 +449,7 @@ record $? "Missing pin file: the build says so, and the pin target, still availa
 echo
 echo "# Bazel's downloader"
 
-b clean --expunge >"$work/clean.log" 2>&1 || die "bazel clean --expunge failed: $(tail -5 "$work/clean.log")"
+b clean --expunge >"$work/clean.log" 2>&1 || fail_with "$work/clean.log" "bazel clean --expunge failed"
 printf 'block 127.0.0.1\n' >"$work/downloader.cfg"
 before=$(wc -l <"$work/registry/requests")
 b build @npm//:node_modules --downloader_config="$work/downloader.cfg" >"$work/build.log" 2>&1 \
@@ -440,10 +458,10 @@ record $? "Cold fetch from the repository cache: with the registry blocked, a fr
 
 # The token tools/ci/fixtures/credential_helper.sh answers with.
 printf 'secret-token' >"$work/registry/require-auth"
-b clean --expunge >"$work/clean.log" 2>&1 || die "bazel clean --expunge failed: $(tail -5 "$work/clean.log")"
+b clean --expunge >"$work/clean.log" 2>&1 || fail_with "$work/clean.log" "bazel clean --expunge failed"
 ! b build @npm//:node_modules --repository_cache="$work/cold-cache" >"$work/build.log" 2>&1
 without=$?
-b clean --expunge >"$work/clean.log" 2>&1 || die "bazel clean --expunge failed: $(tail -5 "$work/clean.log")"
+b clean --expunge >"$work/clean.log" 2>&1 || fail_with "$work/clean.log" "bazel clean --expunge failed"
 b build @npm//:node_modules --repository_cache="$work/cold-cache-2" --credential_helper=127.0.0.1="$fixtures/credential_helper.sh" >"$work/build.log" 2>&1
 with=$?
 [ "$without" = 0 ] && [ "$with" = 0 ]
@@ -457,7 +475,7 @@ echo "# the measurements design.md relies on"
 # store package's own node_modules holds a link to the other, and a file with a
 # colon in its name survives.
 project '"left": "1.0.0", "@fx/scoped": "1.0.0", "tool": "1.0.0", "right": "2.0.0", "cyc-a": "1.0.0"'
-lock && pin || die "locking and pinning the project with cyc-a failed: $(tail -20 "$work/pin.log")"
+lock && pin || fail_with "$last_log" "locking and pinning the project with cyc-a failed"
 cp "$fixtures/cycle_probe.js" "$ws/" || die "copying the cycle probe failed"
 cat >>"$ws/BUILD.bazel" <<'EOF'
 
@@ -481,7 +499,7 @@ for pair in "cyc-a:cyc-b" "cyc-b:cyc-a"; do
   # The link is relative: ../../<slug>/package, inside .store.
   case "$target" in ../../"$to"-npm-*/package) ;; *) links_ok=0 ;; esac
 done
-[ "$cycled" = 0 ] && [ "$links_ok" = 1 ] && [ "$(cat "$(b info bazel-bin 2>/dev/null)/cycle.txt")" = "b a colon true" ]
+[ "$cycled" = 0 ] && [ "$links_ok" = 1 ] && [ "$(cat "$bazel_bin/cycle.txt")" = "b a colon true" ]
 record $? "A dependency cycle: each store package links to the other, and a sandboxed action reads both links, requires through them and reads col:on.js"
 
 # Why packageExtensions is carried: the dependency an extension adds is
@@ -492,7 +510,7 @@ yarnrc 'packageExtensions:
     dependencies:
       right: "1.0.0"
 '
-lock && pin || die "locking and pinning with a package extension failed: $(tail -20 "$work/pin.log")"
+lock && pin || fail_with "$last_log" "locking and pinning with a package extension failed"
 "$node" -e '
 const lock = require("fs").readFileSync(process.argv[1], "utf8");
 const left = /\n"left@npm:1\.0\.0":\n([\s\S]*?)\n\n/.exec(lock + "\n\n")[1];
@@ -508,7 +526,7 @@ touch_pins
 dropped=$?
 [ "$recorded" = 0 ] && [ "$extended" = 0 ] && [ "$dropped" = 0 ]
 record $? "packageExtensions: the added dependency is an entry, not a dependency of left; installed with them, and without them the immutable install fails with YN0028"
-lock && pin || die "locking and pinning without the extension failed: $(tail -20 "$work/pin.log")"
+lock && pin || fail_with "$last_log" "locking and pinning without the extension failed"
 
 # The cache key Yarn writes: the cache version, then c and the compression
 # level, or nothing for mixed.
@@ -516,11 +534,11 @@ grep -q '^  cacheKey: 10c0$' "$ws/yarn.lock"
 default_key=$?
 yarnrc 'compressionLevel: mixed
 '
-lock || die "locking with compressionLevel mixed failed: $(tail -20 "$work/lock.log")"
+lock || fail_with "$last_log" "locking with compressionLevel mixed failed"
 grep -q '^  cacheKey: 10$' "$ws/yarn.lock"
 mixed_key=$?
 yarnrc
-lock && pin || die "locking again without compressionLevel failed: $(tail -20 "$work/pin.log")"
+lock && pin || fail_with "$last_log" "locking again without compressionLevel failed"
 printf 'cacheKey by default found: %s; with mixed found: %s\n' "$default_key" "$mixed_key" >"$work/build.log"
 [ "$default_key" = 0 ] && [ "$mixed_key" = 0 ]
 record $? "The cache key Yarn writes: 10c0 by default, 10 with compressionLevel mixed"
@@ -558,7 +576,7 @@ record $? "Checksum mismatch on a patched entry: the patch applies, and a change
 project '"left": "1.0.0", "@fx/scoped": "1.0.0", "tool": "1.0.0", "right": "2.0.0", "cyc-a": "1.0.0"'
 edit "$ws/MODULE.bazel" "(s) => s.replace('$patches_line', '')"
 ! grep -q 'patches = ' "$ws/MODULE.bazel" || die "removing the patch from MODULE.bazel failed"
-lock && pin || die "locking and pinning without the patch failed: $(tail -20 "$work/pin.log")"
+lock && pin || fail_with "$last_log" "locking and pinning without the patch failed"
 
 # Why the project's file never reaches the install's Yarn: Yarn on its own
 # loads the plugin the project's file names, and the one a configuration file
@@ -605,7 +623,7 @@ record $? "YARN_SUPPORTED_ARCHITECTURES cannot carry Yarn's architecture sets"
 
 # Why the install gives Yarn private global and cache folders. Last, because
 # it installs into the consumer's own directory.
-b run //:yarn -- install >"$work/build.log" 2>&1 || die "a plain yarn install failed: $(tail -20 "$work/build.log")"
+b run //:yarn -- install >"$work/build.log" 2>&1 || fail_with "$work/build.log" "a plain yarn install failed"
 rm -rf "$ws/node_modules" "$ws/.pnp.cjs" "$ws/.pnp.loader.mjs" "$ws/.yarn/install-state.gz"
 touch "$work/registry/proxy"
 b run //:yarn -- install >"$work/build.log" 2>&1

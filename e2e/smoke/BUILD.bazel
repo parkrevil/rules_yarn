@@ -1,5 +1,5 @@
+load("@parkrevil_rules_yarn//yarn:defs.bzl", "yarn_binary")
 load("@rules_shell//shell:sh_test.bzl", "sh_test")
-load("@rules_yarn//yarn:defs.bzl", "yarn_binary")
 
 yarn_binary(
     name = "yarn",

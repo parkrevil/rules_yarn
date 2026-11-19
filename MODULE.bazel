@@ -9,7 +9,7 @@
 # a generated patch over the released archive — the same arrangement
 # rules_shell uses.
 module(
-    name = "rules_yarn",
+    name = "parkrevil_rules_yarn",
     version = "0.0.0",
     bazel_compatibility = [">=8.3.0"],
 )

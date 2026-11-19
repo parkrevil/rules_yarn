@@ -5,7 +5,8 @@
 # bazel-contrib/rules-template's tag.yaml (commit cb8787e7), with one
 # difference: ccv only works out the version, and the tag is written here,
 # for a minor or patch version only, so a major version — a person's
-# decision — leaves no tag behind. Pushing that tag by hand releases it.
+# decision — leaves no tag behind. Pushing that tag by hand releases it, as a
+# lightweight tag: release.yml refuses an annotated one, which ccv cannot see.
 name: Tag a release
 
 on:
@@ -78,8 +79,8 @@ jobs:
         env:
           TAG: ${{ steps.ccv.outputs.new-tag-version }}
         run: |
-          echo "::notice::The commits since the last release call for $TAG, a major version. Push that tag to release it."
-          echo "The commits since the last release call for \`$TAG\`, a major version; pushing that tag releases it." >>"$GITHUB_STEP_SUMMARY"
+          echo "::notice::The commits since the last release call for $TAG, a major version. Push it, or the version you choose, as a lightweight tag to release it: git tag --no-sign $TAG <commit> && git push origin $TAG"
+          echo "The commits since the last release call for \`$TAG\`, a major version. Pushing it, or the version you choose, as a lightweight tag releases it: \`git tag --no-sign $TAG <commit> && git push origin $TAG\`. release.yml refuses an annotated tag, which ccv cannot see." >>"$GITHUB_STEP_SUMMARY"
 
   release:
     needs: tag

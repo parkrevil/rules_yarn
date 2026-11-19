@@ -21,7 +21,7 @@ sources:
 generated: { by: "claude-code", at: "2026-10-04T12:22:38.266Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-06T17:26:00.906Z
+    at: 2026-11-19T09:16:08.640Z
 ---
 
 # Launcher and execution model

@@ -3,7 +3,7 @@
 Declare the Yarn distribution in `MODULE.bazel`:
 
 ```starlark
-yarn = use_extension("@rules_yarn//yarn:extensions.bzl", "yarn")
+yarn = use_extension("@parkrevil_rules_yarn//yarn:extensions.bzl", "yarn")
 yarn.distribution(version = "4.18.0")
 use_repo(yarn, "yarn")
 ```

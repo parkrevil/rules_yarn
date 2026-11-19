@@ -44,20 +44,21 @@ sources:
     resource: repo://tests/bcr/MODULE.bazel
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
-generated: { by: "claude-code", at: "2026-10-08T10:04:22.632Z" }
+generated: { by: "claude-code", at: "2026-11-19T10:17:13.013Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-20T10:48:25.667Z
+    at: 2026-11-19T10:17:13.013Z
 ---
 
 # Releasing and publishing
 
-`v0.1.0` is released on GitHub, and its registry pull request
-(bazelbuild/bazel-central-registry#10979) is open as a draft for the author to
-mark ready; until the registry merges it, a consumer adds a non-registry
-override, and because an override only takes effect in the root module, a
-module that depends on `rules_yarn` cannot pass it on — every root module
-downstream has to repeat it. Removing that is what this apparatus exists for.
+`v0.1.0` was released on GitHub as the module `rules_yarn`. The registry asked
+for a user-prefixed name, so from 0.2.0 the module is `parkrevil_rules_yarn`;
+the GitHub repository and its release archives keep `rules_yarn`. Until the
+registry merges an entry, a consumer adds a non-registry override, and because
+an override only takes effect in the root module, a module that depends on
+`parkrevil_rules_yarn` cannot pass it on — every root module downstream has to
+repeat it. Removing that is what this apparatus exists for.
 
 Everything below is in place, the token publishing needs is set, and the
 whole chain — tag, release, attestations, registry pull request — ran for
@@ -76,17 +77,29 @@ run of its own. A major version it reports and leaves to a person, whose
 pushed tag starts `release.yml` directly; the template's way, where `ccv`
 pushes every tag, would leave an unreleased major tag behind. Until that tag
 is pushed no minor or patch release is cut either, since `ccv` ranks the
-breaking commit first. The daily run
-does nothing within two weeks of the last tag. A CI job works out the same
+breaking commit first. The notice for a major version says to push a
+lightweight tag and gives the command, `git tag --no-sign <tag> <commit>`;
+`--no-sign` keeps a `tag.gpgSign` setting from signing it, which would make it
+annotated. The daily
+run does nothing within two weeks of the last tag. A CI job works out the same
 version on every push without writing a tag.
 
 ## What a tag sets off
 
 `.github/workflows/release.yml`, started by a pushed `v*.*.*` tag, called by
 `tag.yaml`, or dispatched with an existing tag to run a failed release again,
-runs three jobs in sequence.
+runs four jobs in sequence.
 
-The first calls the reusable release workflow from `bazel-contrib/.github`.
+The first, `lightweight-tag`, refuses an annotated tag. `ccv` keys tags by the
+ref's own hash, and an annotated tag's ref points at a tag object, so `ccv`
+would never see the release: it would keep counting the commits behind it and
+hold every later release at the version they call for. The job asks GitHub's
+"get a reference" API for the ref's object type and fails unless the type is
+`commit`, giving the commands that delete the annotated tag locally and on
+the remote and push a lightweight one. `tag.yaml`'s own tags are
+lightweight; the check is for a tag a person pushes.
+
+The second calls the reusable release workflow from `bazel-contrib/.github`.
 That workflow runs the repository's tests on the tagged commit — all but the
 ones tagged `block-network`, which the release runner's sandbox cannot honour
 and CI runs on every push — then calls
@@ -105,11 +118,11 @@ per public `.bzl` file — in an output base of its own and archives that
 output, which is the release notes. The workflow's `rules_yarn-*.tar.gz`
 uploads it, and its attestation step attests every uploaded file.
 
-The release is created as a draft. The second job calls the registry's own
+The release is created as a draft. The third job calls the registry's own
 publishing workflow from `bazel-contrib/publish-to-bcr`, which reads the
 templates under `.bcr/`, forms a registry entry for the tag, uploads the
 attestations to the draft, and opens a pull request against the Bazel Central
-Registry from a fork. The third, `finalize`, publishes the draft. A publish
+Registry from a fork. The fourth, `finalize`, publishes the draft. A publish
 that fails leaves the release a draft; `publish.yaml` can be dispatched again
 with the release run's id, since a draft's files cannot be fetched by URL.
 The secret reaches every job as `BCR_PUBLISH_TOKEN`, passed on with `secrets:
@@ -154,6 +167,14 @@ documentation archive holding each public file's binary proto, and a
 `docs_url` naming that archive. That the release uploads it and the registry
 renders it is shown only by a published release.
 
+The module and the repository are named differently, and each name has its
+place. The archive, its prefix, its URL and every `{REPO}` in the templates
+come from the repository, `rules_yarn`. What a consumer writes — the
+`bazel_dep` and the override's `module_name` in the release notes — names the
+module, `parkrevil_rules_yarn`. The same CI step requires the notes to name
+the module in both, and to use `rules_yarn` only in the archive's name, prefix
+and URL.
+
 ## The version placeholder
 
 `MODULE.bazel` declares `version = "0.0.0"`. The registry entry needs the real
@@ -165,9 +186,9 @@ cut, and no step has to stamp one in.
 ## What the registry runs
 
 `presubmit.yml` points at `tests/bcr`, a module whose whole job is to show
-that a module depending on `rules_yarn` can build a Yarn target through the
-public API and run it. The registry extracts the archive, and `tests/bcr`
-depends on the module under test with `local_path_override(path = "../..")`,
+that a module depending on `parkrevil_rules_yarn` can build a Yarn target
+through the public API and run it. The registry extracts the archive, and
+`tests/bcr` depends on the module under test with `local_path_override(path = "../..")`,
 which lands on the extracted root.
 
 It is separate from `e2e/smoke` for one reason: `e2e/smoke` pins a lockfile

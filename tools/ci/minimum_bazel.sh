@@ -34,24 +34,24 @@ consumer=$(mktemp -d)
 trap 'rm -rf "$consumer"' EXIT
 
 cat >"$consumer/MODULE.bazel" <<EOF
-bazel_dep(name = "rules_yarn")
+bazel_dep(name = "parkrevil_rules_yarn")
 bazel_dep(name = "rules_nodejs", version = "6.7.5")
 
 local_path_override(
-    module_name = "rules_yarn",
+    module_name = "parkrevil_rules_yarn",
     path = "$repository",
 )
 
 node = use_extension("@rules_nodejs//nodejs:extensions.bzl", "node")
 node.toolchain(node_version = "24.21.0")
 
-yarn = use_extension("@rules_yarn//yarn:extensions.bzl", "yarn")
+yarn = use_extension("@parkrevil_rules_yarn//yarn:extensions.bzl", "yarn")
 yarn.distribution(version = "$yarn_version")
 use_repo(yarn, "yarn")
 EOF
 
 cat >"$consumer/BUILD.bazel" <<'EOF'
-load("@rules_yarn//yarn:defs.bzl", "yarn_binary")
+load("@parkrevil_rules_yarn//yarn:defs.bzl", "yarn_binary")
 
 yarn_binary(
     name = "yarn",

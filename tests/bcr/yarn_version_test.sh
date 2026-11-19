@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 # The whole of what the registry presubmit checks: a module that depends on
-# rules_yarn can build a Yarn target through the public API and run it.
+# parkrevil_rules_yarn can build a Yarn target through the public API and run
+# it.
 
 # --- begin runfiles.bash initialization v3 ---
 # Copy-pasted from the Bazel Bash runfiles library v3.

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:617d393344468c830140102b206dd22563977248c37b25ea523b77ee1f7eee58",
+  "pageVersion": "sha256:6ca68590b202ebcfa6111154553fbed487323394b65f18e10668308370fa233b",
   "claims": [
     {
       "id": "claim_80120293013247f8b2a4c96dba175e61",
@@ -100,11 +100,11 @@
         },
         {
           "resource": "repo://e2e/smoke/BUILD.bazel#L1-L37",
-          "version": "repo-lines-v1:sha256:f538f81490b8846092b9295ab27119eac28f586e025e5472aa38b978d01b1dc9:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5M2I2MjM0MWU3YzcxYmEyZmVlMDA5Y2ZiZDUwZjc2NGNlMzgyYmRiNjVhNzU2NmI5NjVmOTQ2NjBkYWUwOGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "version": "repo-lines-v1:sha256:03d06317a7659c4e03f7c995c9a40d6fa68c6ea9540fcd2f9f3e6d59d84eaef2:eyJzZWxlY3RlZExpbmVDb3VudCI6MzcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk0Zjc5MmI4NDBmYjU0ZTRhNGQ1N2I1MzBlMTNiOWExMmI3MmM0NWE0ZWQ4M2JiYzJlOTRjM2U5Y2U2MjBhNjciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjowLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://tests/bcr/BUILD.bazel",
-          "version": "repo-file-v1:sha256:14be89cb29a40708c5258e5e23f745ecc8bfef22e71364fc6b616bf34ddd3694"
+          "version": "repo-file-v1:sha256:cc6f79db124ba2debd7d4d4ad96a66a7da15f07ac44c8e00af3b9336bbf5f0ee"
         }
       ]
     },
@@ -142,7 +142,7 @@
         },
         {
           "resource": "repo://tests/bcr/MODULE.bazel",
-          "version": "repo-file-v1:sha256:b49f1b9bc6c24079777036d2e1968364929d4b3dd9f833fc1a7f229639a3ca60"
+          "version": "repo-file-v1:sha256:a2ef7465f46905553449f6671552555f43c5d322f083ea4c6a89f9e80fea5003"
         }
       ]
     },
@@ -152,7 +152,7 @@
       "evidence": [
         {
           "resource": "repo://.github/workflows/ci.yml",
-          "version": "repo-file-v1:sha256:6de8d457ac72e8f7e9672f9ff9587ce4d24a0c3e51601a62cf5daacf2ab4b269"
+          "version": "repo-file-v1:sha256:eca109f874c82cbbcd776119f9188e3e86850e5e23ace66c489b61a903e5db1d"
         }
       ]
     },
@@ -162,7 +162,7 @@
       "evidence": [
         {
           "resource": "repo://tools/ci/minimum_bazel.sh",
-          "version": "repo-file-v1:sha256:315bdb35acabf6fb49d66a8ab761bcaf391c9432009a305f99b9c84e5cbe235c"
+          "version": "repo-file-v1:sha256:b8838bc8d7334fb0eb5b7f1d3a61386989d88a7a20195544c5a78e6a106d62fa"
         }
       ]
     },
@@ -254,7 +254,7 @@
         },
         {
           "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:d539ff413807ab6b6e84b79ba2e8a8bca8a74106c5e89721e4e6b02dacc31e50"
+          "version": "repo-file-v1:sha256:c86eb99b6eebaa43c822d0824cc82c5af92ef10ce56ca22e787372b6508486ec"
         }
       ]
     },
@@ -306,7 +306,7 @@
         },
         {
           "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:d539ff413807ab6b6e84b79ba2e8a8bca8a74106c5e89721e4e6b02dacc31e50"
+          "version": "repo-file-v1:sha256:c86eb99b6eebaa43c822d0824cc82c5af92ef10ce56ca22e787372b6508486ec"
         }
       ]
     },
@@ -344,13 +344,49 @@
         },
         {
           "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:d539ff413807ab6b6e84b79ba2e8a8bca8a74106c5e89721e4e6b02dacc31e50"
+          "version": "repo-file-v1:sha256:c86eb99b6eebaa43c822d0824cc82c5af92ef10ce56ca22e787372b6508486ec"
+        }
+      ]
+    },
+    {
+      "id": "claim_8bdf8d401f1640268744ced7870ac909",
+      "statement": "install_scenarios.sh does not spell out the install repository's canonical name: it reads it from bazel mod dump_repo_mapping '', printing Bazel's error output if that fails, and uses it to locate the installed tree and layout and to match Bazel's no such target message.",
+      "evidence": [
+        {
+          "resource": "repo://tools/ci/install_scenarios.sh#L149-L154",
+          "version": "repo-lines-v1:sha256:4639eef96578727800d55138c2162ec3284910faaa6a5a2c99efb5440b086948:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTU0ZTkwZTBmN2Y1OTMwYzE4ZjEyODMwMjFhYzE4ZGI0MjQ5YmU2YWU2NjZiMjFmNDZiNTg5ZjdmMTY5MGI0YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjI3MzYxN2YxODQ5NDMzZjgyMzUzZmJhMzBjMDNlYTY4OTRmNzU0ZDdlOGFiZDM2MGJhMTc3YzY5YTNjMGU3YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDZjZGU4NGY5MzJhNjhkOTEzMDczMDEyYjBjZDcwMGRkMzgzNzZjNDBhZWJjNDFmYjFmMWFmNDk3YjM2NzZmNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDJmOGYxNjMyYjI0MTExMmU0Zjg3ZWU5OWU0NTdmYjE1MmUxOWI2MDUwODhmMGIyNGY4MzQwYWUyMjljZWZmZiJ9"
+        },
+        {
+          "resource": "repo://tools/ci/install_scenarios.sh#L184-L185",
+          "version": "repo-lines-v1:sha256:0d52a09d28662d0d530686893c3df174245c43e01d41dbd9f48fd0fff9b732d0:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTA0MmI4YzYwMjVkNzEzYTliOWEwZGVkNTM0ZGZhODBjMjAzY2M5ZTMxYTBhYzMxY2EzMWJkNTkwNjVmODJkMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjkxMzkzM2NlYzRmNzU3Y2Q1ZTM4Mjc2NTE3NzcyN2JhZThiODUzM2U5M2RiN2EwMmMxMDYyZmQ3Yzk3Zjg0OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjAzZDNiOTYxOWE2OWU2MzY3OWRjMzBmOGExNDNiM2M4YjI0YTkxOWJiOGU1NTNmZDlhYmMwMGY2NWIyNWJiMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjU1OWIzNGVlNGQ4MzBiOTk4YTI1NjA5MjM2ODk2Mjg5OGFhNzYwMjY5NjlkODQ4MTg1NWI4ODAyZTlkOTM4YiJ9"
+        },
+        {
+          "resource": "repo://tools/ci/install_scenarios.sh#L374-L374",
+          "version": "repo-lines-v1:sha256:21248dccfc69bbbbc5d315d1447196ad4968095bdb0f19a67a8701d80700511a:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjEyNDhkY2NmYzY5YmJiYmM1ZDMxNWQxNDQ3MTk2YWQ0OTY4MDk1YmRiMGYxOWE2N2E4NzAxZDgwNzAwNTExYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjEyNDhkY2NmYzY5YmJiYmM1ZDMxNWQxNDQ3MTk2YWQ0OTY4MDk1YmRiMGYxOWE2N2E4NzAxZDgwNzAwNTExYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWFkNjYyMmJmMjYxNTM0NmJhMzFhOGI3OTA0YTEzY2UxYmU3MDExMzUwZDAyYjJjYzYzNzA3ZTQxM2QwNGQ0MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzRmYTMwYjJiOGJmZDAwNDgxYTBmYjE1YzhkYWRjZTE5YTEzZDlkMWU1MzA0OGM2M2I4M2FkY2JiZGVjM2E3YyJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_013bf7ef59da44e3a72c70d9f087cb14",
+      "statement": "Every Bazel command whose failure stops install_scenarios.sh keeps its output in a log that fail_with prints in full before the script stops; lock, pin and build record which log they wrote so a failed chain prints the failing step's log; output_base and bazel-bin are asked for once, and the Node.js path must be a regular executable file.",
+      "evidence": [
+        {
+          "resource": "repo://tools/ci/install_scenarios.sh#L138-L154",
+          "version": "repo-lines-v1:sha256:5d01a0da12f7f364362da7ab9c92d227b4ae8384200b69836c9534f804aecdc0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1NWFmYjZiODJmNDVhNGZlMWMwOTE4NzRlMGNkMGZmMmVkM2IwNTY1ZTEwYmIzNjFkYjE3OWU5MDQ2OTU2YjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyNzM2MTdmMTg0OTQzM2Y4MjM1M2ZiYTMwYzAzZWE2ODk0Zjc1NGQ3ZThhYmQzNjBiYTE3N2M2OWEzYzBlN2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE1ODU1ZWQ4MTY1NGE3N2UzYmUwZGQzYzcxZjkyODdiMDhlYWQxZTcxYzExNWRjMWRhMjhkZTEwMGFjYTkzYjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQyZjhmMTYzMmIyNDExMTJlNGY4N2VlOTllNDU3ZmIxNTJlMTliNjA1MDg4ZjBiMjRmODM0MGFlMjI5Y2VmZmYifQ"
+        },
+        {
+          "resource": "repo://tools/ci/install_scenarios.sh#L178-L183",
+          "version": "repo-lines-v1:sha256:3504372428da48adb6322b35528472768c7d5a03fe63bf426a876fc2780a88d9:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzMyYTVkMzRhMzA1ZGMyYWI5ZmNlM2E3ZTUyOWYyOTY2NGIyNGY4YzBmZGRiOWNjZDE5MzY4ZGFhZmJlMjhlNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzAzN2I5MjdiN2EyNjliN2RhNjI1ZWQ2YmEwOWJhNjIxODhiNDY4ZTEyMzkyY2Y0NGYxODFlMjc5MDYzZWY3YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGEwYTdkOWI3ZTY3ZDhhZDUyMzM3Yjc5ZTEzNTdhYmNjZWJmNDg1NWJlYmFjNDg3Y2QwMzM0ZTQyNDNkYjAzMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjczNDRkMWE0ZGFiNDYxMDA5MTQ3OWU4NWQ3YzYyMzE1OTM1OWVmZmJiMTA2ZTYxOTEyNWRhYTFjZmZmZWUwZiJ9"
+        },
+        {
+          "resource": "repo://tools/ci/install_scenarios.sh#L36-L42",
+          "version": "repo-lines-v1:sha256:67cfef5b3a28243f66a448ec73a94dd320af0a0435a774d7de5cadede66f2325:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTYxNzM2ZDRlMDk3ZTE4ODMzMTkxMTc4OWU0NjA5MzlkM2U5MDZkZjVjNGZlOWVlNjc0OTYxYWEzODA5ZTRlNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzU2Y2I4ZmM5ZTM1MGYwMGQ3NGE1M2ZiZGVlNjU1Yzc1NGMwMGQxMmUzNTdhNWMyNzRjMmQzZGNiOGM4MjEyNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWVkMDVlNjA1MGY0MDM2MzM2MWZkZDRhN2I1MmUzZjYwZjBlYTUyODc4MWUwMzdiNmFmYjIxNGQyNmFlMDc0OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2IyODhkNjE4Mzk3ZTBkZTA3ZDY2MTFjNTEyZjFiYmI0MzBmN2VkZmY0MWY5OTcxNzBmNDAxNjYwMjVlNGFlOSJ9"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-10-20T10:48:25.667Z"
+    "at": "2026-11-19T10:17:13.013Z"
   }
 }

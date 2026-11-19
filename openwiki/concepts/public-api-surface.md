@@ -6,6 +6,8 @@ tags: [public-api, starlark, visibility, bzl-library, consumer-contract]
 sources:
   - id: openwiki-source-9166404a3cbd4408b80101ce
     resource: repo://e2e/smoke/BUILD.bazel
+  - id: openwiki-source-e27756e3a61ff66626b48e05
+    resource: repo://e2e/smoke/MODULE.bazel
   - id: openwiki-source-d92bdd4d3d554717b6869e2d
     resource: repo://MODULE.bazel
   - id: openwiki-source-23775c3de52f3ab95a13cb8b
@@ -34,10 +36,10 @@ sources:
     resource: repo://yarn/private/yarn_binary.bzl
   - id: openwiki-source-60f4d0e18953b7fc477fc496
     resource: repo://yarn/providers.bzl
-generated: { by: "claude-code", at: "2026-10-06T17:04:45.060Z" }
+generated: { by: "claude-code", at: "2026-11-19T09:16:08.640Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-06T17:04:45.060Z
+    at: 2026-11-19T09:34:34.611Z
 ---
 
 # Public API surface
@@ -48,11 +50,16 @@ the build rather than by convention.
 
 ## The surface
 
+The Bazel module is `parkrevil_rules_yarn`, a user-prefixed name the
+registry asked for; the GitHub repository, its release archives and the
+project's own prose keep `rules_yarn`. A consumer depends on the module and
+loads its files under the module's name.
+
 | Entry point | Symbol | What a consumer does with it |
 | --- | --- | --- |
-| `@rules_yarn//yarn:defs.bzl` | `yarn_binary` | declares a runnable Yarn target in a `BUILD.bazel` file |
-| `@rules_yarn//yarn:extensions.bzl` | `yarn` | declares which Yarn version to fetch (`yarn.distribution`) and which projects to install (`yarn.install`), in `MODULE.bazel` |
-| `@rules_yarn//yarn:providers.bzl` | `YarnNodeModulesInfo` | reads an installed tree from a rule of its own |
+| `@parkrevil_rules_yarn//yarn:defs.bzl` | `yarn_binary` | declares a runnable Yarn target in a `BUILD.bazel` file |
+| `@parkrevil_rules_yarn//yarn:extensions.bzl` | `yarn` | declares which Yarn version to fetch (`yarn.distribution`) and which projects to install (`yarn.install`), in `MODULE.bazel` |
+| `@parkrevil_rules_yarn//yarn:providers.bzl` | `YarnNodeModulesInfo` | reads an installed tree from a rule of its own |
 | a distribution repository | `@yarn` | the label passed to `yarn_binary`'s `yarn` attribute |
 | an install repository | `@<name>//:node_modules`, `@<name>//:pin` | the installed tree as artifacts, carrying `YarnNodeModulesInfo`; the command that writes the pin file |
 | an install repository | `@<name>//:node_modules/<package>`, `@<name>//:node_modules/@<scope>`, `@<name>//:<workspace>/node_modules/<package>` | one direct dependency's or scope's part of the tree — what it reaches through Yarn's links — carrying `YarnNodeModulesInfo` for that part |
@@ -117,8 +124,9 @@ tooling can describe the Starlark dependency graph.
 
 Each also has a `starlark_doc_extract` target — `defs.doc_extract`,
 `extensions.doc_extract`, `providers.doc_extract` — on that library, with
-`render_main_repo_name` set so labels read `@rules_yarn//...`, as Bazel's
-documentation of the rule asks for files used from other repositories.
+`render_main_repo_name` set so labels read `@parkrevil_rules_yarn//...`, the
+module's name, as Bazel's documentation of the rule asks for files used from
+other repositories.
 Extraction loads every file the public file loads, so a library missing a
 dependency fails the build. `tests/docs:docs_test` reads the extracted text
 protos and requires a non-empty doc string on every rule, extension, tag

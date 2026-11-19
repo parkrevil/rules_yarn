@@ -27,7 +27,7 @@ sources:
 generated: { by: "claude-code", at: "2026-10-05T14:22:28.209Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-05T14:22:28.209Z
+    at: 2026-11-19T09:16:08.640Z
 ---
 
 # Version pinning and lockfiles

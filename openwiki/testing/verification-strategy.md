@@ -84,10 +84,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
-generated: { by: "claude-code", at: "2026-10-08T09:32:20.561Z" }
+generated: { by: "claude-code", at: "2026-11-19T10:17:13.013Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-20T10:48:25.667Z
+    at: 2026-11-19T10:17:13.013Z
 ---
 
 # Verification strategy
@@ -261,7 +261,19 @@ scoped one, platform packages, one whose tarball holds a link — so no case
 depends on a public registry. Every case runs with a `.yarnrc.yml` pointing the
 registry at a closed port, and a configuration under the install's former file
 name loading a marker plugin, in the Bazel client's home, above the output
-root and in it.
+root and in it. The consumer depends on `parkrevil_rules_yarn` through a
+`local_path_override`, and the script does not spell out the install
+repository's canonical name. It asks Bazel for it with
+`bazel mod dump_repo_mapping ''`, because the format is not an API, and uses
+it to find the installed tree and to match Bazel's "no such target" message.
+Every Bazel command whose failure stops the script keeps its output in a log,
+and `fail_with` prints that whole log before the script stops. That covers the
+setup — building Node.js, `bazel info` for the output base and `bazel-bin`,
+which it asks for once, the query for Node.js's path, and that lookup — and
+the cases' stopping points. Locking, pinning and building each record which
+log they wrote, so when a chain of them stops, the log printed is that of the
+step that failed. The Node.js path must be a regular file, since a failed
+query would otherwise leave a directory that passes an executable check.
 
 Its thirty-nine cases cover the first pin; the host's platform package and a
 scoped package; that nothing changed installs nothing; that a lockfile change
