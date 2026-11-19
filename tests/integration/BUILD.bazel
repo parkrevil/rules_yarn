@@ -1,0 +1,143 @@
+load("@rules_shell//shell:sh_library.bzl", "sh_library")
+load("@rules_shell//shell:sh_test.bzl", "sh_test")
+
+# The Bazel the nested-Bazel tests run, for the host's platform. MODULE.bazel
+# pins one binary per platform by its SHA-256.
+config_setting(
+    name = "darwin_arm64",
+    constraint_values = [
+        "@platforms//cpu:arm64",
+        "@platforms//os:macos",
+    ],
+)
+
+config_setting(
+    name = "darwin_x86_64",
+    constraint_values = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:macos",
+    ],
+)
+
+config_setting(
+    name = "linux_arm64",
+    constraint_values = [
+        "@platforms//cpu:arm64",
+        "@platforms//os:linux",
+    ],
+)
+
+config_setting(
+    name = "linux_x86_64",
+    constraint_values = [
+        "@platforms//cpu:x86_64",
+        "@platforms//os:linux",
+    ],
+)
+
+alias(
+    name = "bazel",
+    actual = select(
+        {
+            ":darwin_arm64": "@bazel_binary_darwin_arm64//file",
+            ":darwin_x86_64": "@bazel_binary_darwin_x86_64//file",
+            ":linux_arm64": "@bazel_binary_linux_arm64//file",
+            ":linux_x86_64": "@bazel_binary_linux_x86_64//file",
+        },
+        no_match_error = "the nested-Bazel tests run on Linux and macOS, on x86_64 or arm64",
+    ),
+    # Analysing it fetches the binary, which `//...` has no use for.
+    tags = ["manual"],
+)
+
+# Manual, as every target here is: it fetches a Bazel binary, which `//...`
+# has no other use for.
+sh_test(
+    name = "bazel_binary_test",
+    size = "small",
+    srcs = ["bazel_binary_test.sh"],
+    args = [
+        "$(rlocationpath :bazel)",
+        "$(rlocationpath //:.bazelversion)",
+    ],
+    data = [
+        ":bazel",
+        "//:.bazelversion",
+    ],
+    tags = ["manual"],
+    deps = ["@rules_shell//shell/runfiles"],
+)
+
+# What every test below sources: the consumer, the hostile host around it, the
+# registry, and the steps its cases are made of.
+sh_library(
+    name = "consumer",
+    srcs = ["consumer.sh"],
+    deps = ["//tests/fixture_registry:harness"],
+)
+
+# Each test runs a Bazel inside the test, on its own fresh copy of
+# install_consumer/, a consumer of this ruleset. Each holds the cases of one
+# concern, so that no case depends on another test's.
+#
+# Nested-Bazel tests, as rules_bazel_integration_test lays them out, without
+# that module as a dependency (see .bazelrc and //:local_repository_files):
+#   exclusive  a nested Bazel is heavy, so each runs alone;
+#   manual     `//...` leaves them out; integration_tests runs them;
+#   requires-network  the nested Bazel fetches modules and Node.js.
+[
+    sh_test(
+        name = name,
+        timeout = "long",
+        srcs = [name + ".sh"],
+        args = [
+            "$(rlocationpath :bazel)",
+            "$(rlocationpath @nodejs//:node_bin)",
+            "$(rlocationpath install_consumer/MODULE.bazel)",
+        ],
+        data = [
+            ":bazel",
+            "//:local_repository_files",
+            "@nodejs//:node_bin",
+        ] + glob(["fixtures/*"]) + glob(
+            ["install_consumer/**"],
+            exclude = ["install_consumer/bazel-*/**"],
+        ),
+        tags = [
+            "exclusive",
+            "manual",
+            "requires-network",
+        ],
+        deps = [
+            ":consumer",
+            "@rules_shell//shell/runfiles",
+        ],
+    )
+    for name in [
+        "install_downloader_test",
+        "install_fetching_test",
+        "install_host_test",
+        "install_pin_file_test",
+        "install_refusals_test",
+        "install_tarballs_test",
+        "install_targets_test",
+    ]
+]
+
+# Every test here. The suite is `manual` itself, because `manual` keeps out of
+# `//...` only the tests no suite lists by name. A suite's tags also select
+# among the tests it lists, so it carries no tag that a test here lacks.
+test_suite(
+    name = "integration_tests",
+    tags = ["manual"],
+    tests = [
+        ":bazel_binary_test",
+        ":install_downloader_test",
+        ":install_fetching_test",
+        ":install_host_test",
+        ":install_pin_file_test",
+        ":install_refusals_test",
+        ":install_tarballs_test",
+        ":install_targets_test",
+    ],
+)

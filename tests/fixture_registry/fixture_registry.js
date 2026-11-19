@@ -1,6 +1,6 @@
 "use strict";
-// A local npm registry for tools/ci/install_scenarios.sh, so that the scenarios
-// do not depend on a public registry being reachable or unchanged.
+// A local npm registry for the tests in tests/integration and tests/install,
+// so that they do not depend on a public registry being reachable or unchanged.
 //
 //   node fixture_registry.js <state-dir>
 //

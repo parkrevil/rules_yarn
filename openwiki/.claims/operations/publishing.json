@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:326ff7c943480adaad9c4ce48843a31d2ddbd5fcea4e7f60b2b17b488c70663c",
+  "pageVersion": "sha256:d43a27ae442f6fdde88b6455be12e6912e9121ed9452bece923fb65d65d1313e",
   "claims": [
     {
       "id": "claim_4937ff2c7dfc4c0bb7a1f0824afbd578",
@@ -199,7 +199,7 @@
       "statement": "The CI checks job runs release_prep.sh under a tag of its own and requires the release notes, the source archive, a documentation archive holding each public file's binary proto, and a docs_url naming that archive; it also requires the notes to name the module parkrevil_rules_yarn in the bazel_dep and the override's module_name, and to use rules_yarn only in the archive's name, prefix and URL.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/ci.yml#L180-L200",
+          "resource": "repo://.github/workflows/ci.yml#L197-L217",
           "version": "repo-lines-v1:sha256:91268eb2e7f90f6bd921f340ae845b91852c417789f9b5d6fdeba64cbeecb02d:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImU0YjFiZTY2NDk0NDE3ZjhmNTI3MDBlNWViZTNjZGVhYzMxYTBmZThmMmM4NDU4MzM3YjFiYmU4NWU5NDdkMzciLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjYxNDQwOTFmYzZmMDUyYjljYzJkMGFmM2U3YjY4NGY3ZjM0NGUxMjc2NGU0MzE1OWU0NjU2NWQxOGY0MjhlM2QiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImY5YzU4OWViMDZlYjcyMDdkNTY5YWVkNDI0NjVlNGExMzE4OGJlYTJlZGRjOWI5N2E3NDViNDJiNjAyMmZmNjAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
@@ -295,6 +295,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-11-19T10:17:13.013Z"
+    "at": "2026-11-19T18:45:24.702Z"
   }
 }

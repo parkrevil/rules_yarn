@@ -1,4 +1,4 @@
-// Run by the `cycle` genrule tools/ci/install_scenarios.sh declares, as a
+// Run by the `cycle` genrule install_targets_test.sh declares, as a
 // sandboxed action over an installed tree holding cyc-a and cyc-b, which
 // depend on each other:
 //

@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:b47162b94794a9fc10761d85b6aae33f0250922688b678f78fcb8d6e7a83a458",
+  "pageVersion": "sha256:c898e5df349e8519b113d4af65aefde080436508cdd5507216b872d23233290a",
   "claims": [
     {
       "id": "claim_982785d0fd074cf9afca2ef0e4673dd2",
@@ -40,11 +40,11 @@
     },
     {
       "id": "claim_3efad35e39f4402f9f26c09bade8e7c2",
-      "statement": "Only the extension and rule bzl_library targets are visible to //yarn; the repository and version libraries declare no visibility and so remain private to //yarn/private, and the launcher template is exported privately.",
+      "statement": "Of yarn/private's bzl_library targets, only the extension and rule ones are visible to //yarn; the repository and version libraries declare no visibility and so remain private to //yarn/private, and the launcher template is exported privately.",
       "evidence": [
         {
           "resource": "repo://yarn/private/BUILD.bazel",
-          "version": "repo-file-v1:sha256:ae83e2e91bfc988977dae99af1ebced6d47bcc2639aa2fcbedf93af6b518d697"
+          "version": "repo-file-v1:sha256:3236dda3e68b5aeac96e864226abb09bfb49a0804c262ff57219584f9115306f"
         }
       ]
     },
@@ -54,7 +54,7 @@
       "evidence": [
         {
           "resource": "repo://yarn/BUILD.bazel",
-          "version": "repo-file-v1:sha256:7add3d0bae6a77382bf712217e0d2a64875589dccd2ed1136e15f5a141eee8b7"
+          "version": "repo-file-v1:sha256:97ee3ed6120243ca5fa67cbe90fbb99f4d165b7c4b52c390a137a62214f0b75d"
         }
       ]
     },
@@ -192,7 +192,7 @@
       "evidence": [
         {
           "resource": "repo://MODULE.bazel",
-          "version": "repo-file-v1:sha256:4729289fa1608b6f438db42bcfe9d3e26efc1cb0b68678c4e6627eecc03e309c"
+          "version": "repo-file-v1:sha256:a8905d1da54f442027301f979293686fa66e9546e11f81033772e9a5ea9c4d3f"
         },
         {
           "resource": "repo://yarn/private/install/node_modules.bzl#L13-L18",
@@ -236,7 +236,7 @@
         },
         {
           "resource": "repo://yarn/BUILD.bazel",
-          "version": "repo-file-v1:sha256:7add3d0bae6a77382bf712217e0d2a64875589dccd2ed1136e15f5a141eee8b7"
+          "version": "repo-file-v1:sha256:97ee3ed6120243ca5fa67cbe90fbb99f4d165b7c4b52c390a137a62214f0b75d"
         }
       ]
     },
@@ -271,10 +271,32 @@
           "version": "repo-lines-v1:sha256:ea2c952ee5033ec68f37d1d8a083d11acdb34742e5f9b59b4bc7049f106844b8:eyJzZWxlY3RlZExpbmVDb3VudCI6MjIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRlM2JlNGVkMzhlMWVjN2ExZjczNGEzMDdjZmMyMDhjZDk3ZjliZTQzN2M4ZTA4NDA2MmViNzEzZmQ2MTJiOGMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBkNTU2MDQwYWM5NWE2Y2NiZmJhZjViMDdjOGVmNzZhZDQyZDI2OTcwZTU5ODk4NTgwY2Y5ZmM2ZjI4ZDkzYjIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjoyLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQ2ZjcyMjBlMDU3MmY3Njg2ZTEzZmM5MWZiMTJiZTFkYTRhN2MyYTAzNGI1NzZjYmJjNzliMGNmODAzMTkzNGQifQ"
         }
       ]
+    },
+    {
+      "id": "claim_f1042b2d73284d42856935b30e57ef30",
+      "statement": "Each ruleset package (yarn, yarn/private, yarn/private/install) has an all_files filegroup visible only to //:__subpackages__, which the root's local_repository_files collects for the nested-Bazel tests' child workspace.",
+      "evidence": [
+        {
+          "resource": "repo://BUILD.bazel",
+          "version": "repo-file-v1:sha256:d3215d9bf55d09f9ee46b9821e388fa57fb910795417a5c71729e6360962ee8d"
+        },
+        {
+          "resource": "repo://yarn/BUILD.bazel",
+          "version": "repo-file-v1:sha256:97ee3ed6120243ca5fa67cbe90fbb99f4d165b7c4b52c390a137a62214f0b75d"
+        },
+        {
+          "resource": "repo://yarn/private/BUILD.bazel",
+          "version": "repo-file-v1:sha256:3236dda3e68b5aeac96e864226abb09bfb49a0804c262ff57219584f9115306f"
+        },
+        {
+          "resource": "repo://yarn/private/install/BUILD.bazel",
+          "version": "repo-file-v1:sha256:c1fae6f6fc5701d734e82f33b4ae88521bfead9dfeafe5939016d63e6664b412"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-11-19T09:34:34.611Z"
+    "at": "2026-11-19T18:41:03.606Z"
   }
 }

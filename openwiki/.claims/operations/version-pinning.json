@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:4283479207f2023f28262b450cc498084d2389aaa4da3d9a8acf67ec0cfca225",
+  "pageVersion": "sha256:ae5a577bb93f4af13f5c6c0456d169aa876b8727f5e58618545a2a2a9f929a99",
   "claims": [
     {
       "id": "claim_f94f369481c3466db1302dc475650602",
@@ -18,17 +18,17 @@
       "evidence": [
         {
           "resource": "repo://.bazelrc",
-          "version": "repo-file-v1:sha256:64191e6bac756069ef2f8027cd86c1d74bf4404854e46e18306c18d30ab5a955"
+          "version": "repo-file-v1:sha256:a47a74eb1e642ca6bb9c02353359474cee2d6474140fe9ecc4622beb24a10702"
         }
       ]
     },
     {
       "id": "claim_ebb91cc4c5ef471189423ab862c801cf",
-      "statement": "Each module root states its own lockfile mode, because Bazel reads the .bazelrc of the root it was invoked in and one root's setting does not reach another: the repository and e2e/smoke set error, and tests/bcr sets off.",
+      "statement": "Each module root states its own lockfile mode, because Bazel reads the .bazelrc of the root it was invoked in and one root's setting does not reach another: the repository and e2e/smoke set error, and tests/bcr and the nested-Bazel tests' child workspace set off.",
       "evidence": [
         {
           "resource": "repo://.bazelrc",
-          "version": "repo-file-v1:sha256:64191e6bac756069ef2f8027cd86c1d74bf4404854e46e18306c18d30ab5a955"
+          "version": "repo-file-v1:sha256:a47a74eb1e642ca6bb9c02353359474cee2d6474140fe9ecc4622beb24a10702"
         },
         {
           "resource": "repo://e2e/smoke/.bazelrc",
@@ -37,6 +37,10 @@
         {
           "resource": "repo://tests/bcr/.bazelrc",
           "version": "repo-file-v1:sha256:4e8e242194386f4949fae3d99554fde44512b529c3164b90f4758a07eb5db61a"
+        },
+        {
+          "resource": "repo://tests/integration/install_consumer/.bazelrc",
+          "version": "repo-file-v1:sha256:59328d3db9d007f25c85f5e5a9b162b14efde821f1c02056a257bd7920de6b99"
         }
       ]
     },
@@ -56,11 +60,11 @@
     },
     {
       "id": "claim_80b561828663453a8744bff1db2a6b94",
-      "statement": "The Node.js toolchain registration, the test Yarn distribution, the platforms module and the testing framework are declared as development dependencies of the root module, so consumers do not inherit them; the per-platform Node.js repositories, js-yaml and tar.bzl are not development-only.",
+      "statement": "The Node.js toolchain registration, the test Yarn distribution, the platforms module, the testing framework and the Bazel binaries the nested-Bazel tests run are declared as development dependencies of the root module, so consumers do not inherit them; the per-platform Node.js repositories, js-yaml and tar.bzl are not development-only.",
       "evidence": [
         {
-          "resource": "repo://MODULE.bazel#L22-L86",
-          "version": "repo-lines-v1:sha256:f1a8034f14275be57b16ff3bd5344b17361a97500f8a65ea0d246a7eb9cea05c:eyJzZWxlY3RlZExpbmVDb3VudCI6NjUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjFlYjAzOWI0NzM0YmM4OWVkYjliNzhhYWM3OTFlNTA3MmY4MzAyMjRhZDY4ZTlmOWQwYzcwNTg2YzYxN2EzMzEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImRiYjVmZTNjOTg4NTFkMWE4OGIzNjAyNDI4ODExZjc4OGVhNGQ5N2RlZTQzODE4YWRjYWEwYjg5ZGIyZDU1YzIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImRiMDdhYzBiNTA5YmZhOTQzNWM3NTY4ZWM1MGQyNjUwZDRiZDgwZWIzY2YwZmNiZmMzZDk5MzdhYmE2MzI3MzMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://MODULE.bazel#L22-L132",
+          "version": "repo-lines-v1:sha256:483d853484f1cef4a756cda3f3ff1f6dac9560a750a7a13830a18e0e68d582ae:eyJzZWxlY3RlZExpbmVDb3VudCI6MTExLCJmaXJzdFNlbGVjdGVkTGluZUhhc2giOiIxZWIwMzliNDczNGJjODllZGI5Yjc4YWFjNzkxZTUwNzJmODMwMjI0YWQ2OGU5ZjlkMGM3MDU4NmM2MTdhMzMxIiwibGFzdFNlbGVjdGVkTGluZUhhc2giOiJkYmI1ZmUzYzk4ODUxZDFhODhiMzYwMjQyODgxMWY3ODhlYTRkOTdkZWU0MzgxOGFkY2FhMGI4OWRiMmQ1NWMyIiwicHJlY2VkaW5nQ29udGV4dExpbmVDb3VudCI6MywicHJlY2VkaW5nQ29udGV4dEhhc2giOiJkYjA3YWMwYjUwOWJmYTk0MzVjNzU2OGVjNTBkMjY1MGQ0YmQ4MGViM2NmMGZjYmZjM2Q5OTM3YWJhNjMyNzMzIiwiZm9sbG93aW5nQ29udGV4dExpbmVDb3VudCI6MCwiZm9sbG93aW5nQ29udGV4dEhhc2giOiJlM2IwYzQ0Mjk4ZmMxYzE0OWFmYmY0Yzg5OTZmYjkyNDI3YWU0MWU0NjQ5YjkzNGNhNDk1OTkxYjc4NTJiODU1In0"
         }
       ]
     },
@@ -104,7 +108,7 @@
       "evidence": [
         {
           "resource": "repo://AGENTS.md#L19-L24",
-          "version": "repo-lines-v1:sha256:413c79e58bc0643c12fc3ca1ac909f6d20c47b2d39bd2fdfa663225d917cc693:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjc0NDk3M2RiYWY4NTU3NTdhMzQ3MzdmODI0Mjc3NGRhNWE5ZDQ5MGE0ZDJlODFhYWNkMDkwYmY5NGZmNDVkNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDllZWQ4ZmE0M2U5MGU5YTZlZjRiNWZiZWUzZWVhOGRiOGFmNGI1NTY5N2NhN2YyYjI1YTU3MTcxY2NlNGMwZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjgxZGUxODM3YWRhNmM4NjYyOGU4Y2I5MzYyNGQ5NTNjN2ZjYTYyNWU5MGEwMTIwNTBhYjM0MzAyZDQzOTk4YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODgxNTM0ZTI2MTAwNjkzNWU3ODUwYzk3MGQzZGM4YWQxYzUwODc5MzIwODNhNmJkMmU2ZGU1NWI3MjU1ZDg2MiJ9"
+          "version": "repo-lines-v1:sha256:448c36ac5a77e02e7482691184fe18c8e3a8baadf312ada2a0e5288049acc322:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjc0NDk3M2RiYWY4NTU3NTdhMzQ3MzdmODI0Mjc3NGRhNWE5ZDQ5MGE0ZDJlODFhYWNkMDkwYmY5NGZmNDVkNyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDllZWQ4ZmE0M2U5MGU5YTZlZjRiNWZiZWUzZWVhOGRiOGFmNGI1NTY5N2NhN2YyYjI1YTU3MTcxY2NlNGMwZSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYjgxZGUxODM3YWRhNmM4NjYyOGU4Y2I5MzYyNGQ5NTNjN2ZjYTYyNWU5MGEwMTIwNTBhYjM0MzAyZDQzOTk4YiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiODgxNTM0ZTI2MTAwNjkzNWU3ODUwYzk3MGQzZGM4YWQxYzUwODc5MzIwODNhNmJkMmU2ZGU1NWI3MjU1ZDg2MiJ9"
         }
       ]
     },
@@ -151,10 +155,46 @@
           "version": "repo-lines-v1:sha256:9e0a944fd07f05bcde9e66ce0e302bfb61a868cc8aff5793f6bbc53b0e6fc179:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjcwMmIyY2MxNjM0NWRlNjFlOTk0NTZhMjY4N2Q4NmZhZDY4MDE4Mzk3NDk0MzU2ZTRmZDMwZDIwOWYyZDc4ZTQiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjliMDBmY2I0NGY3ZTg3Y2M2NGRjMmQ0MDYyNzVkN2YzNmQ4ZTcxOTYzNWY4N2FkYTY5NzY3NTZmZDRmYWI2MTAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjAzMThhZGE2NmM2NDdmMWE0Yjg0MDg2YWQ1ZTFmYjFhZjUyNzVjNDhhZTVkZWY1ZTcxYWI4NjdiMjhlMjQzZTQifQ"
         }
       ]
+    },
+    {
+      "id": "claim_9cbde3c02c6842578d64c1bffe0a6a0c",
+      "statement": "The Bazel the nested-Bazel tests run is the 9.2.0 binary fetched with http_file per platform by SHA-256, selected for the host by a manual alias, and bazel_binary_test fails unless it reports .bazelversion's version.",
+      "evidence": [
+        {
+          "resource": "repo://MODULE.bazel#L72-L116",
+          "version": "repo-lines-v1:sha256:11eca5d37e6785756d6e18d62f86c0bb1e31bf4675795f024917738420b8b65b:eyJzZWxlY3RlZExpbmVDb3VudCI6NDUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjNjYjI1ZWJhYzg2YTQ2ZjgzYjA0ZTYyMWU4ZmM4Y2FhNmVkMmY1MDAyNzA1NTM3ZGE2OGQxMGYwZWUxYTlmMDAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImFkM2I5MzU4MmE4N2YwZmZhMGM3M2U1YmJmMzMwOTIyYTBjZWFjMGY3ZjQ5NGQxMWQ3MTFmYjAyOTU1YTJmNDAiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjY2NTViNDNhZGUyZDJiODk2ZTc1YTIyYzlmYWY5ZGE2NjQ5ODgyNDg0YzYwZDJlOGQ1NmQzMTk4NDA0Y2EyMDQifQ"
+        },
+        {
+          "resource": "repo://tests/integration/BUILD.bazel#L5-L70",
+          "version": "repo-lines-v1:sha256:d46fd0136397f4d59a833829c002203d9d34bfcdc2b4c253df3fc0c85a598961:eyJzZWxlY3RlZExpbmVDb3VudCI6NjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjdkYWNlMGIwNWQwYzg1ZGZjYTU0YzBmN2I0OWUyY2Y1MTc2ZDRiZTYzZTVmYmMzNjY1ZTFhYjVjODIyNGQ5YTUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjZjNDUyYjVhMGQ5YmJlYjhiZjM5ZjJlNzE0ZjM3YWEwMzQxMGQ3MmQ1N2NhZTQwNDI0MjQzZjc1YTg0YjlkMTciLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImIzYWMwOGVlYzQxOWMzYzgyZDYzYmFjOTJkYzZkYjMyNWIzZDliNWNlMzg4M2VjYzU4ZmY1MGM2ZjBhMjljMjYifQ"
+        },
+        {
+          "resource": "repo://tests/integration/bazel_binary_test.sh#L28-L33",
+          "version": "repo-lines-v1:sha256:687ad88fa92412258cbcfa0dfa8144f562f0c2c1db85c260ad059d2895d43d7a:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjA0NmYzZTE3ZjhkYTU4NGNhZmFlMTAzN2NiMGUwNDkzOGRjMzkzNjQ3NDk0MDNkZTQxNjMzNzExNDhiYTg5MCIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMWUwZTY1NmQyOWM3NzFlNGFlODRmOGYyZjUzNDk3MjMyZjYwZDI2MGZiNjg1MzJhODZhNGE3YjZiMTNiMGNlNCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_ce5f74243190427cb42d18f4b88ae7b6",
+      "statement": "The test projects' packageManager Yarn version is written by tests/fixture_registry/harness.sh, and the nested-Bazel tests' consumer pins its own module versions in tests/integration/install_consumer/MODULE.bazel; AGENTS.md lists both as pins.",
+      "evidence": [
+        {
+          "resource": "repo://AGENTS.md#L21-L21",
+          "version": "repo-lines-v1:sha256:e023a13e64c6cad552c941d35a7bcebc2833aca92a1ad7bb21ef1520920124cc:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZTAyM2ExM2U2NGM2Y2FkNTUyYzk0MWQzNWE3YmNlYmMyODMzYWNhOTJhMWFkN2JiMjFlZjE1MjA5MjAxMjRjYyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZTAyM2ExM2U2NGM2Y2FkNTUyYzk0MWQzNWE3YmNlYmMyODMzYWNhOTJhMWFkN2JiMjFlZjE1MjA5MjAxMjRjYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjQxNDUwMWEyN2I3ZjE1MjM1MWMzMmM2N2QyYWIxNDJlODBhMDllMzU0OTM4NzZhN2JhZmRlODc1NGI2OWIwZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMDQwMzliMWIwYTdjMWE3NWY5ZGY5OWNhN2VhODljOTVmODljNjkwYzQzZGY1OTRmOGUwZDg5ZWY3ZDUxNjM5YSJ9"
+        },
+        {
+          "resource": "repo://tests/fixture_registry/harness.sh#L127-L130",
+          "version": "repo-lines-v1:sha256:bbf1405c82aa22276058acf5bf3c4954dae291bc7001d024fdb36710228351e3:eyJzZWxlY3RlZExpbmVDb3VudCI6NCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTQ1MTIyZGQzOWRhMzE0NTBjZjhkY2MwMjU5NjU1MDFkNWMxNzUxN2ViMmE5YTRjMGIxODVmZjRlZWIwN2EzYyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzAxZjVlNTRiNzdjOTk4YWY0YjNjOWYzZTI2YjkxYzBlYTI2ZmNiMDlmODg1ZDU3NTg4OWNlNWI0NmU0MDBhMyJ9"
+        },
+        {
+          "resource": "repo://tests/integration/install_consumer/MODULE.bazel",
+          "version": "repo-file-v1:sha256:d823ef289a2da7ba4384d8f02d591c92ca3602946d49964ef5964b8b78131a40"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-11-19T09:16:08.640Z"
+    "at": "2026-11-19T18:41:03.606Z"
   }
 }

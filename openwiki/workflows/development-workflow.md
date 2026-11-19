@@ -20,6 +20,8 @@ sources:
     resource: repo://openspec/changes/archive/2026-10-20-correct-the-completion-gate-records/design.md
   - id: openwiki-source-38af7bdd34d817fbd3c29077
     resource: repo://openspec/config.yaml
+  - id: openwiki-source-dbc74d28193fcb310b3e1626
+    resource: repo://tests/integration/BUILD.bazel
   - id: openwiki-source-b556aad9e4bffdbb4dc7c367
     resource: repo://tools/hooks/fixtures/failing_tool.sh
   - id: openwiki-source-f62aa9ed7021af1727946d31
@@ -30,10 +32,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-1182253f19cc7fc5a1a4410d
     resource: repo://tools/hooks/protect_generated.sh
-generated: { by: "claude-code", at: "2026-10-20T10:48:25.667Z" }
+generated: { by: "claude-code", at: "2026-11-19T18:41:03.606Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-10-20T14:50:23.669Z
+    at: 2026-11-19T18:45:24.702Z
 ---
 
 # Development workflow
@@ -56,7 +58,8 @@ or API is reported rather than worked around; the launcher template is the only
 generated script; generated directories are not hand-edited.
 
 Before committing, five things: the build-and-test gate across all four roots
-and the install scenario script;
+and the nested-Bazel suite, `bazel test //tests/integration:integration_tests`,
+which is `manual` and so not part of the root's `//...`;
 a reviewer who was not in the implementation conversation, **including for a
 commit that changes `AGENTS.md` itself**; fixing what the change is for instead
 of recording it as a known limit; applying a rule the change states to
@@ -217,19 +220,23 @@ the repository cannot hold an edit to it.
 ## CI
 
 `.github/workflows/ci.yml` runs on every push and pull request, with read-only
-permissions, in three jobs.
+permissions, in four jobs.
 
 **build and test** runs the gate `AGENTS.md` asks for — all four roots, each
 in its own invocation because `.bazelignore` keeps three of them out of the root
-run, and the install scenario script — on `ubuntu-latest` and `macos-latest`, with `fail-fast` off so one
+run, and the nested-Bazel suite — on `ubuntu-latest` and `macos-latest`, with `fail-fast` off so one
 platform's failure does not hide the other's result. Both runner images ship
 Bazelisk as `bazel`, so each root's `.bazelversion` decides the version and no
 setup action is needed.
 
-**oldest supported Bazel** builds a throwaway consumer at the floor
-`MODULE.bazel` declares, and installs `e2e/install` at the same floor with its
-lock off. The repository's own roots cannot check this as they stand: their
-lockfiles are written by a newer Bazel and set `--lockfile_mode=error`.
+**oldest supported Bazel** tests `e2e/smoke` and `e2e/install` at the floor
+`MODULE.bazel` declares, with their locks off, and runs `e2e/smoke`'s Yarn
+target there with `bazel run`. The repository's own roots cannot be tested at
+the floor as they stand: their lockfiles are written by a newer Bazel and set
+`--lockfile_mode=error`.
+
+**next release** works out the version `tag.yaml` would give, without writing
+a tag.
 
 **checks** runs the pre-commit hooks over all files, both hooks' contract
 tables, and the staleness gate itself.

@@ -1,0 +1,2 @@
+# Keep no lockfile: each test resolves this module from scratch.
+common --lockfile_mode=off

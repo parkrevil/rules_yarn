@@ -1,4 +1,5 @@
 load("@rules_shell//shell:sh_test.bzl", "sh_test")
+load("//yarn:defs.bzl", "yarn_binary")
 
 # The Node test runner, which tests/docs uses too.
 exports_files(
@@ -285,4 +286,30 @@ sh_test(
         "@nodejs//:node_bin",
     ] + glob(["testdata/**"]),
     deps = ["@bazel_tools//tools/bash/runfiles"],
+)
+
+yarn_binary(
+    name = "yarn",
+    yarn = "@yarn",
+)
+
+# What Yarn does on its own that the install's design rests on. It needs no
+# Bazel of its own: Yarn runs through a yarn_binary launcher, as `bazel run`
+# starts one in a consumer, against the local registry.
+sh_test(
+    name = "yarn_behavior_test",
+    size = "medium",
+    srcs = ["yarn_behavior_test.sh"],
+    args = [
+        "$(rlocationpath :yarn)",
+        "$(rlocationpath @nodejs//:node_bin)",
+    ],
+    data = [
+        ":yarn",
+        "@nodejs//:node_bin",
+    ],
+    deps = [
+        "//tests/fixture_registry:harness",
+        "@rules_shell//shell/runfiles",
+    ],
 )

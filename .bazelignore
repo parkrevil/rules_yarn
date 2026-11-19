@@ -1,2 +1,8 @@
 e2e/
 tests/bcr/
+# Bazel's links in the child workspace tests/integration copies, which
+# running Bazel there by hand leaves behind.
+tests/integration/install_consumer/bazel-bin
+tests/integration/install_consumer/bazel-install_consumer
+tests/integration/install_consumer/bazel-out
+tests/integration/install_consumer/bazel-testlogs

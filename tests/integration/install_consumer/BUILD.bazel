@@ -1,0 +1,15 @@
+load("@parkrevil_rules_yarn//yarn:defs.bzl", "yarn_binary")
+
+# package.json and .yarnrc.yml are written by each test, which knows its
+# registry's port; yarn.lock and pins.json start empty.
+exports_files([
+    ".yarnrc.yml",
+    "package.json",
+    "pins.json",
+    "yarn.lock",
+])
+
+yarn_binary(
+    name = "yarn",
+    yarn = "@yarn",
+)

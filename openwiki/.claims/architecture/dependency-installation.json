@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:f0cde2cb258d35a57519cbc05f31a50e22e3421c653df5ed9e6817b6af8bcffb",
+  "pageVersion": "sha256:f6cdff472b4d822b78f79e5d7c082a5ca77500f30c94eaeaaf8c2f45830c93b0",
   "claims": [
     {
       "id": "claim_54350d03825b4543a2e34ff911ba1463",
@@ -456,11 +456,11 @@
     },
     {
       "id": "claim_0083f86e6945479e9792c946c1d37a1b",
-      "statement": "When the install fails, building a dependency's target gives Bazel's no such target, as an install scenario shows.",
+      "statement": "When the install fails, building a dependency's target gives Bazel's no such target, as install_refusals_test shows.",
       "evidence": [
         {
-          "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:c86eb99b6eebaa43c822d0824cc82c5af92ef10ce56ca22e787372b6508486ec"
+          "resource": "repo://tests/integration/install_refusals_test.sh#L51-L53",
+          "version": "repo-lines-v1:sha256:32e79640b8d0fc79a13a3ff8400f6093730c8f57a8a9ea5c79be1780a18863a7:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzAwZDVjMDg1YTVjNTRlZjQ4MmExMjlhNzQxOTEwMTE3OWEzYjA2ZjI5NWViMzRhMzM3ZWU1NGZjM2JiNmZjZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2JmMjkyNzg0YmEwMGY2NTg1MjQ0NWFjNDIyOTZlYzM3OGRlYjMxMzU4MjYyNGZkODdkNjJkMWJlMDMxNDljNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGY0MzljOWFjZjQ2OWNhMWI1ZmQyNDcxNTRiMGQzN2QwNzVhZDAxOGI2YTYwOWQ4ZjBjOGEyODlhYmQxZjQzYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzA4OGZjY2RhZjA5NmQ5MGQyODU0YTI2Y2JlZWJjYTI4YWUxMTAyNDk4OTgxNGFkMDc3MDUyZGJlNGJlMWJjMiJ9"
         },
         {
           "resource": "repo://yarn/private/install/repository.bzl#L196-L203",
@@ -489,6 +489,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-11-19T10:17:13.013Z"
+    "at": "2026-11-19T18:41:03.606Z"
   }
 }

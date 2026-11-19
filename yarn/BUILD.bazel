@@ -43,3 +43,10 @@ starlark_doc_extract(
     visibility = ["//tests/docs:__pkg__"],
     deps = [":providers"],
 )
+
+# Every file of this package, for //:local_repository_files.
+filegroup(
+    name = "all_files",
+    srcs = glob(["*"]),
+    visibility = ["//:__subpackages__"],
+)

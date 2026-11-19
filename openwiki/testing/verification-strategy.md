@@ -1,15 +1,19 @@
 ---
 type: testing
 title: Verification strategy
-description: The test layers that hold the ruleset's guarantees — Starlark unit tests over selection, analysis tests over the rule, shell tests that execute the launcher and the real Yarn CLI, Node.js tests of the install driver's programs, consumer modules that use only the public API, and a scenario script that installs from a local registry in a hostile host.
+description: The test layers that hold the ruleset's guarantees — Starlark unit tests over selection, analysis tests over the rule, shell tests that execute the launcher and the real Yarn CLI, Node.js tests of the install driver's programs, consumer modules that use only the public API, nested-Bazel tests that install from a local registry in a hostile host, and a test of the Yarn behavior the install's design rests on.
 tags: [testing, rules-testing, analysis-test, sh-test, e2e]
 sources:
   - id: openwiki-source-a4bd6b79c62e34a3dbb09576
     resource: repo://.bazelignore
+  - id: openwiki-source-61e437e4689f6b29dc54938b
+    resource: repo://.bazelrc
   - id: openwiki-source-a996efa61d56b86aea305719
     resource: repo://.bcr/presubmit.yml
   - id: openwiki-source-164e2da859b5277df81c7d94
     resource: repo://.github/workflows/ci.yml
+  - id: openwiki-source-59d9ddc709e90a3c0e34a2d0
+    resource: repo://BUILD.bazel
   - id: openwiki-source-6baa3bd517a8e6434ec03836
     resource: repo://e2e/install/BUILD.bazel
   - id: openwiki-source-8f322198adc8ed03086b9d4d
@@ -40,6 +44,8 @@ sources:
     resource: repo://tests/docs/docs_test.js
   - id: openwiki-source-42fff598a74b8a8cf6e6de47
     resource: repo://tests/extensions/extensions_tests.bzl
+  - id: openwiki-source-cbb7c78690cd64711a0bd498
+    resource: repo://tests/fixture_registry/harness.sh
   - id: openwiki-source-225340f64cde50bf1db88e14
     resource: repo://tests/install/BUILD.bazel
   - id: openwiki-source-186e1eeea778492c4f3de07f
@@ -50,8 +56,24 @@ sources:
     resource: repo://tests/install/node_test.sh
   - id: openwiki-source-bb76665a0173e3c463c3f320
     resource: repo://tests/install/sources_test.js
+  - id: openwiki-source-6f81bc5575accb64cf886747
+    resource: repo://tests/install/yarn_behavior_test.sh
   - id: openwiki-source-ca84f08526069556e5f272aa
     resource: repo://tests/install/yarnrc_yarn_test.js
+  - id: openwiki-source-dbc74d28193fcb310b3e1626
+    resource: repo://tests/integration/BUILD.bazel
+  - id: openwiki-source-93582a2f2259eee3ad262a36
+    resource: repo://tests/integration/consumer.sh
+  - id: openwiki-source-d38c9b970d1bda57d9bd1209
+    resource: repo://tests/integration/fixtures/cycle_probe.js
+  - id: openwiki-source-bfe00a88896432bdfb87d372
+    resource: repo://tests/integration/install_consumer/MODULE.bazel
+  - id: openwiki-source-bbb5bcd1f33855c01068e6e3
+    resource: repo://tests/integration/install_refusals_test.sh
+  - id: openwiki-source-0ecae0a713b810a3bd4ff8b3
+    resource: repo://tests/integration/install_tarballs_test.sh
+  - id: openwiki-source-24cd100d0b69e38c82893ab4
+    resource: repo://tests/integration/install_targets_test.sh
   - id: openwiki-source-2786bbb2f5598011b27e9081
     resource: repo://tests/launcher/BUILD.bazel
   - id: openwiki-source-8de250de58da6ab4a8a00c9f
@@ -68,14 +90,6 @@ sources:
     resource: repo://tests/yarn_binary/BUILD.bazel
   - id: openwiki-source-eb3dcfac0b874f311a6353ac
     resource: repo://tests/yarn_binary/yarn_binary_tests.bzl
-  - id: openwiki-source-06ff1bab713011478aa79fbf
-    resource: repo://tools/ci/fixture_registry.js
-  - id: openwiki-source-73abdb8671b2a4726fca20ff
-    resource: repo://tools/ci/fixtures/cycle_probe.js
-  - id: openwiki-source-4030dc4bcad5a09c915b98fb
-    resource: repo://tools/ci/install_scenarios.sh
-  - id: openwiki-source-d0cac2a9da6e4ff2f6a238cf
-    resource: repo://tools/ci/minimum_bazel.sh
   - id: openwiki-source-b556aad9e4bffdbb4dc7c367
     resource: repo://tools/hooks/fixtures/failing_tool.sh
   - id: openwiki-source-f62aa9ed7021af1727946d31
@@ -84,10 +98,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
-generated: { by: "claude-code", at: "2026-11-19T10:17:13.013Z" }
+generated: { by: "claude-code", at: "2026-11-19T18:41:03.606Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-11-19T10:17:13.013Z
+    at: 2026-11-19T18:45:24.702Z
 ---
 
 # Verification strategy
@@ -207,6 +221,16 @@ counts as agreement, and each case states what Yarn should make of it. For
 the documents Yarn fails on, it requires Yarn to fail on the carried part read
 alone, which is the check the driver makes at every install.
 
+`tests/install:yarn_behavior_test` measures Yarn rather than the ruleset: the
+seven things Yarn does on its own that the install's design rests on — the
+cache key it writes, what `yarn npm info` answers for a missing version, a
+project's plugin loaded, a plugin named under a given rc name above the
+project loaded, a per-host proxy outliving `enableNetwork: false`, the
+architecture sets refused through the environment, and an install from the
+host's global cache with the registry refusing everything. It runs the pinned
+Yarn through a `yarn_binary` launcher, as `bazel run` would in a consumer, in a
+project under the hostile host described below, and needs no Bazel of its own.
+
 `tests/docs:docs_test`, on the same runner, reads the text protos Bazel's
 `starlark_doc_extract` extracts from the three public `.bzl` files and requires
 a non-empty doc string on every rule, extension, tag class, provider,
@@ -249,92 +273,96 @@ to re-run this suite.
 
 The repository root excludes all three from its own package discovery through
 `.bazelignore`, so each is built and tested by its own invocation in its own
-directory rather than being swept into `//...`.
+directory rather than being swept into `//...`. The floor job runs `e2e/smoke`
+and `e2e/install` again under the oldest Bazel `MODULE.bazel` accepts — the
+folders-by-Bazel-version arrangement of bazel-contrib's reusable test workflow.
 
 ## Layer 5 — what only a fresh consumer in a hostile host can show
 
 Fetching, pinning, refetching and isolation from the host cannot be shown
-from inside a module that has already fetched. `tools/ci/install_scenarios.sh`
-builds a throwaway consumer against a local registry,
-`tools/ci/fixture_registry.js`, that builds its fixture packages in memory — a
-scoped one, platform packages, one whose tarball holds a link — so no case
-depends on a public registry. Every case runs with a `.yarnrc.yml` pointing the
-registry at a closed port, and a configuration under the install's former file
-name loading a marker plugin, in the Bazel client's home, above the output
-root and in it. The consumer depends on `parkrevil_rules_yarn` through a
-`local_path_override`, and the script does not spell out the install
-repository's canonical name. It asks Bazel for it with
-`bazel mod dump_repo_mapping ''`, because the format is not an API, and uses
-it to find the installed tree and to match Bazel's "no such target" message.
-Every Bazel command whose failure stops the script keeps its output in a log,
-and `fail_with` prints that whole log before the script stops. That covers the
-setup — building Node.js, `bazel info` for the output base and `bazel-bin`,
-which it asks for once, the query for Node.js's path, and that lookup — and
-the cases' stopping points. Locking, pinning and building each record which
-log they wrote, so when a chain of them stops, the log printed is that of the
-step that failed. The Node.js path must be a regular file, since a failed
-query would otherwise leave a directory that passes an executable check.
+from inside a module that has already fetched. The tests in
+`tests/integration/` each run a Bazel of their own, inside the test, on a
+fresh copy of a consumer, the child workspace `install_consumer/`. That
+Bazel is the 9.2.0 binary `MODULE.bazel` pins by digest, not one found on the
+host (see Version pinning). The layout follows `rules_bazel_integration_test`'s
+pattern without that module as a dependency:
 
-Its thirty-nine cases cover the first pin; the host's platform package and a
-scoped package; that nothing changed installs nothing; that a lockfile change
-and a pin-only change install again, and a new version is installed; named
-architectures; integrity, checksum, out-of-date lockfile and link refusals; a
-poisoned `node`, `yarn` and `corepack` first on the `PATH` repository rules see; the host home, its Yarn
-global folder included, unchanged in content and metadata; a project plugin
-not loaded and a project proxy seeing nothing; a malformed and a missing pin
-file repaired through `:pin`; a cold fetch with the registry blocked; and
-credentials from a credential helper; and a `.yarnrc.yml` Yarn cannot read,
-refused because Yarn rejects the settings the install would carry. Two cases
-cover building packages from their tarballs: plain packages are extracted at
-build time with no archive kept, and nine tarballs shaped the way some registry
-tarballs are — directories without an execute bit, a mode-0000 file, a hard
-link, a contiguous file, an absolute path, a `./package/` prefix, a `..`
-entry, a FIFO, and, where the filesystem keeps case apart, names differing
-only by case — each install Yarn's tree, the first two from their tarballs and
-the rest from archives. On a filesystem that folds case Yarn itself cannot lay
-out that last package, so it is left out there. Four cases cover the targets
-per direct dependency: with the outputs removed, building one dependency's
-target builds only its package's directory; a cycle between two packages is
-held whole by the target of one of them; a scope's target holds both of its
-packages; and an install that failed declares no dependency's target.
+- the child is in `--deleted_packages`, so the root's `//...` does not load
+  it, and its files are globbed as the tests' data;
+- the root's `local_repository_files` gathers each ruleset package's
+  `all_files`, so the child's `local_path_override(path = "../../..")` finds
+  the ruleset in the copy;
+- the tests are `exclusive`, `manual` and `requires-network`, and the
+  `integration_tests` suite that lists them is `manual` too, so neither the
+  root's `//...` nor the release workflow runs them. CI runs the suite.
 
-The last eleven are the measurements the design rests on, kept as tests rather
-than as notes: a dependency cycle and a file named `col:on.js` used from a
-sandboxed action, whose program is the checked-in
-`tools/ci/fixtures/cycle_probe.js`; what `packageExtensions` records in the lockfile; the cache
-key Yarn writes; what `yarn npm info` answers for a missing version; a changed
-checksum on a patched entry; Yarn run on its own loading a project's plugin,
-and a plugin named in a file above the project under the rc name it is given;
-a per-host proxy outliving `enableNetwork: false`; the architecture sets
-refused through the environment; an install from the host's global cache with
-the registry refusing everything; and the lockfile's checksum being the digest
-of Yarn's cache archive, not of the tarball the pin records. The change's task
-list maps each paragraph of the design's evidence to the test that reproduces
-it, and lists the few facts read from Yarn's source instead. Executables it puts in the host's way are
-checked-in fixtures, copied rather than written. Two reviews found assertions
-in it that could pass after a failure; each was fixed and then broken on
-purpose to see it fail.
+Each test copies the runfiles tree's `_main` into a `mktemp` directory under
+`/tmp` and works there, never in the runfiles, whose links lead into the
+source tree. The scratch directory is under `/tmp` because Yarn run on its own
+reads a `.yarnrc.yml` in every directory above its project, and the test's own
+temporary directory sits under the user's home on Linux; before planting
+anything, `harness.sh` stops the test if any directory above the scratch
+directory holds one. The nested Bazel runs under `env -i`, with
+`--nosystem_rc --nohome_rc` and an output root in the scratch directory.
 
-A measurement, not a test, sits beside it: a 717-entry project installed and
-used, recorded in the change's task list with its times and sizes.
+`tests/fixture_registry/fixture_registry.js` serves fixture packages it builds
+in memory — a scoped one, platform packages, one whose tarball holds a link —
+so no case depends on a public registry. The host is hostile: the nested
+Bazel's home, the directory above its output root and the output root itself
+each hold a `.yarnrc.yml` pointing the registry at a closed port, and a file
+under the install's former configuration name that loads a marker plugin.
+Every test ends with the case that the marker was never left.
+
+The tests ask Bazel for the install repository's canonical name with
+`bazel mod dump_repo_mapping ''`, because the format is not an API, and use
+it to find the installed tree and to match Bazel's "no such target". Every
+Bazel command whose failure stops a test keeps its output in a log that
+`fail_with` prints in full; locking, pinning and building record which log
+they wrote, so when a chain of them stops, the failing step's log is printed.
+
+| Test | Cases |
+| --- | --- |
+| `install_fetching_test` | the first pin; the host's platform package only, under the planted configuration; a scoped package; nothing changed installs nothing; a lockfile change and a pin-only change install again; a new version is installed; named architectures |
+| `install_tarballs_test` | plain packages extracted at build time with no archive kept; nine tarballs shaped the way some registry tarballs are — directories without an execute bit, a mode-0000 file, a hard link, a contiguous file, an absolute path, a `./package/` prefix, a `..` entry, a FIFO, and, where the filesystem keeps case apart, names differing only by case — each installing Yarn's tree, the first two from their tarballs and the rest from archives |
+| `install_targets_test` | building one dependency's target builds only its package's directory; a cycle held whole by one package's target; a scope's target holding both its packages; a dependency cycle and a file named `col:on.js` used from an action in the host's own sandbox |
+| `install_refusals_test` | integrity, checksum, unreadable-configuration, out-of-date-lockfile and link refusals; no dependency's target after a failed install; `packageExtensions` and the immutable install; a changed checksum on a patched entry |
+| `install_pin_file_test` | a malformed and a missing pin file repaired through `:pin`; the lockfile's checksum being the digest of Yarn's cache archive, not of the tarball the pin records |
+| `install_host_test` | a poisoned `node`, `yarn` and `corepack` first on the `PATH` repository rules see; the host home, its Yarn global folder included, unchanged in content and metadata; a project plugin not loaded and a project proxy seeing nothing |
+| `install_downloader_test` | a cold fetch from the repository cache with the registry blocked; credentials from a credential helper |
+
+On a filesystem that folds case Yarn itself cannot lay out the case-differing
+package, so it is left out there. The cycle case names the host's sandbox —
+`linux-sandbox` or `darwin-sandbox` — because `sandboxed` would fall back to
+processwrapper-sandbox where the real one cannot run; its program is the
+checked-in `tests/integration/fixtures/cycle_probe.js`. Executables the tests
+put in the host's way are checked-in fixtures, copied rather than written.
+
+These cases were once one script, `tools/ci/install_scenarios.sh`, whose
+thirty-nine cases ran in sequence on one consumer. They were split by concern so
+that each test starts from its own consumer and fails alone, and each test was
+shown to fail with one thing it checks broken in the ruleset or a fixture. The
+change's task list records each break and its output.
+
+A measurement, not a test, sits beside them: a 717-entry project installed and
+used, recorded in the install change's task list with its times and sizes.
 
 ## On top: what runs without being asked
 
 `.github/workflows/ci.yml` runs on every push and pull request, over Linux and
 macOS:
 
-- **build and test** — all four roots and the install scenarios, on both
+- **build and test** — all four roots and the nested-Bazel suite, on both
   platforms. This is where the platform claim stops being a claim.
-- **oldest supported Bazel** — `tools/ci/minimum_bazel.sh` builds a throwaway
-  consumer module under the floor `MODULE.bazel` declares and runs its Yarn
-  target. It reads the floor and the Yarn version out of the repository, so
-  the check cannot drift from what is declared. The repository's own roots
-  cannot answer this: their lockfiles are written by a newer Bazel and both
-  set `--lockfile_mode=error`, so an older Bazel fails on the lockfile before
-  reaching the ruleset. The same job installs `e2e/install` at the floor with
-  the lock off, as a consumer resolving from scratch would, and runs every
-  test there but the network-blocking one, which needs the sandbox
-  adjustment the build-and-test job makes.
+- **oldest supported Bazel** — reads the floor from `bazel_compatibility` in
+  `MODULE.bazel` and exports it as `USE_BAZEL_VERSION`. Under it, `e2e/smoke`
+  and `e2e/install` are tested with the lock off, as a consumer resolving from
+  scratch would, leaving out the `block-network` tests, which need the sandbox
+  adjustment the build-and-test job makes. `e2e/smoke`'s Yarn target is also
+  run with `bazel run`, the one way into the launcher's
+  `BUILD_WORKING_DIRECTORY` branch, and must report the version the module
+  asks for; the step runs under `bash` with `pipefail`, so a failed run fails
+  it. The repository's own roots cannot be tested at the floor as they are:
+  their lockfiles are written by a newer Bazel and set `--lockfile_mode=error`.
 - **next release** — `smlx/ccv` with `write-tag: false`, which writes to the
   job summary the version `tag.yaml` would give the next release, so a change
   in how commits are written shows before the schedule acts on it.

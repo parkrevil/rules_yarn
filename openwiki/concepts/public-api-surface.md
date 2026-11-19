@@ -4,6 +4,8 @@ title: Public API surface
 description: What consumers of rules_yarn may depend on — the yarn_binary rule, the yarn module extension, and the repository they produce — and the load-visibility boundary that keeps everything else internal.
 tags: [public-api, starlark, visibility, bzl-library, consumer-contract]
 sources:
+  - id: openwiki-source-59d9ddc709e90a3c0e34a2d0
+    resource: repo://BUILD.bazel
   - id: openwiki-source-9166404a3cbd4408b80101ce
     resource: repo://e2e/smoke/BUILD.bazel
   - id: openwiki-source-e27756e3a61ff66626b48e05
@@ -26,6 +28,8 @@ sources:
     resource: repo://yarn/private/BUILD.bazel
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
+  - id: openwiki-source-5e468f7d2c202d45c6c999ba
+    resource: repo://yarn/private/install/BUILD.bazel
   - id: openwiki-source-9e1e67b90ea3e259fedb1f39
     resource: repo://yarn/private/install/node_modules.bzl
   - id: openwiki-source-6da6376cacb3a4c5f3725a78
@@ -36,10 +40,10 @@ sources:
     resource: repo://yarn/private/yarn_binary.bzl
   - id: openwiki-source-60f4d0e18953b7fc477fc496
     resource: repo://yarn/providers.bzl
-generated: { by: "claude-code", at: "2026-11-19T09:16:08.640Z" }
+generated: { by: "claude-code", at: "2026-11-19T18:41:03.606Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-11-19T09:34:34.611Z
+    at: 2026-11-19T18:41:03.606Z
 ---
 
 # Public API surface
@@ -100,7 +104,11 @@ layers:
   file — the extension and the rule — are exposed to `//yarn`. The repository
   and version libraries declare no visibility at all, so they stay private to
   `//yarn/private` and are reachable only from inside that package; the launcher
-  template is exported privately as well.
+  template is exported privately as well. Each ruleset package also has an
+  `all_files` filegroup, which the root's `local_repository_files` collects so
+  the nested-Bazel tests' child workspace sees the ruleset's files; it is
+  visible to this repository's own packages only (`//:__subpackages__`), so a
+  consumer cannot depend on it.
 - **Package layout.** The public directory contains no implementation, so there
   is nothing in it to depend on accidentally.
 

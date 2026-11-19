@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:6ca68590b202ebcfa6111154553fbed487323394b65f18e10668308370fa233b",
+  "pageVersion": "sha256:27a1290fa1380b1d06a0d646afb03b1554de8c458cb849a7da08f9b714cf9b26",
   "claims": [
     {
       "id": "claim_80120293013247f8b2a4c96dba175e61",
@@ -96,7 +96,7 @@
       "evidence": [
         {
           "resource": "repo://.bazelignore",
-          "version": "repo-file-v1:sha256:e9a93a6a6541e1ffd5ff2379d04d03d61a5c505cc9f19cecb050f0a97b8189c0"
+          "version": "repo-file-v1:sha256:293c93cf4e67d5854f8c4ed16968c412599afbc76c9776c8191586f5c2e88aad"
         },
         {
           "resource": "repo://e2e/smoke/BUILD.bazel#L1-L37",
@@ -148,21 +148,11 @@
     },
     {
       "id": "claim_a4680c64fab84820a5937baae2224a81",
-      "statement": "CI runs on every push and pull request over Linux and macOS with four jobs: build and test across all four roots plus the install scenarios, the declared Bazel floor for a Yarn target and for every e2e/install test but the network-blocking one, the version the next release would get, and checks covering pre-commit with actionlint, both harness hooks' contract tables, the wiki staleness gate itself and a run of release_prep.sh.",
+      "statement": "CI runs on every push and pull request over Linux and macOS with four jobs: build and test across all four roots plus the nested-Bazel integration suite, the declared Bazel floor for e2e/smoke and e2e/install, the version the next release would get, and checks covering pre-commit with actionlint, both harness hooks' contract tables, the wiki staleness gate itself and a run of release_prep.sh.",
       "evidence": [
         {
           "resource": "repo://.github/workflows/ci.yml",
-          "version": "repo-file-v1:sha256:eca109f874c82cbbcd776119f9188e3e86850e5e23ace66c489b61a903e5db1d"
-        }
-      ]
-    },
-    {
-      "id": "claim_f8cf71885c594ba59f5df3fb2f4064d9",
-      "statement": "tools/ci/minimum_bazel.sh reads the Bazel floor from MODULE.bazel and the Yarn version from yarn/private/versions.bzl, so the floor check cannot drift from what the ruleset declares, and it uses a throwaway consumer module because the repository's own roots fail on their lockfiles under an older Bazel.",
-      "evidence": [
-        {
-          "resource": "repo://tools/ci/minimum_bazel.sh",
-          "version": "repo-file-v1:sha256:b8838bc8d7334fb0eb5b7f1d3a61386989d88a7a20195544c5a78e6a106d62fa"
+          "version": "repo-file-v1:sha256:ba5040ac836ca2cb2141ec02f4dc87f52aa09dc973f25039231b18defdd6e1ac"
         }
       ]
     },
@@ -171,7 +161,7 @@
       "statement": "Neither harness hook is built by Bazel, so each carries a plain test script naming the decisions it is supposed to make — forty cases for the generated-file guard and fifty-six rows for the wiki staleness gate, mostly refusals, the latter including injected failures of the commands the gate depends on through a checked-in wrapper — and CI runs both.",
       "evidence": [
         {
-          "resource": "repo://.github/workflows/ci.yml#L167-L173",
+          "resource": "repo://.github/workflows/ci.yml#L184-L190",
           "version": "repo-lines-v1:sha256:80b928a3aef7616b25d39c5c4aab94a42ac1d8c3cd526602327162de2f0bbff3:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMGRkNTg0YjM3NjAwYjg2MTE3NTFlZTg1NTZjOTA4ZmRiYWIyYTM0NjljZWU0YmFiMmNkMjM2YTRmYTZmMDRkOSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZjIwNTRmMjcwMjNjZDUzZGY3MWFjZTkyMzRiYWM3NDhiMzNmM2E4MGFmMjU0ZDIyNTVlNTY5ZGExNzgwZTZlNyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiMGRjOWEyZDk2ZjY4ZjAzMTY3MGQwNGI5MDUzMjgzMWYxOTgzOTRlM2U3NGYyNjI1MjAxOGVmMWJiY2NkNDM2NyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzg4NWMxYmM1ZDY5MWZiM2EyNWE5NzRiMDQyOGQwZDE2N2Q1MTE3ZDNlN2NkNTY1NzA2ODk2YjgyN2RiNGNkYiJ9"
         },
         {
@@ -208,7 +198,7 @@
       "evidence": [
         {
           "resource": "repo://tests/install/BUILD.bazel",
-          "version": "repo-file-v1:sha256:ba0204a253a55adced8ad96ae88b74f58e0550457b35ff6dba22bb170734c568"
+          "version": "repo-file-v1:sha256:094f7f8efe94fc9325a428434de55a4a51454f8b261ca378b41e95fb238ef739"
         },
         {
           "resource": "repo://tests/install/node_test.sh",
@@ -241,20 +231,6 @@
         {
           "resource": "repo://e2e/install/part_test.sh",
           "version": "repo-file-v1:sha256:90f5ffb628cdf85bedb54ac6dcf67658459ae131cf0ac31f5491f1363c0878ba"
-        }
-      ]
-    },
-    {
-      "id": "claim_7035247e5f91438aabb64dc64d646cff",
-      "statement": "install_scenarios.sh builds a throwaway consumer against a local fixture registry, in a host whose home and output-root ancestors hold hostile configuration files, and runs thirty-nine cases, including two for building packages from their tarballs with crafted tarball shapes, four for the targets per direct dependency, a .yarnrc.yml Yarn cannot read being refused, and eleven that reproduce the measurements the design rests on.",
-      "evidence": [
-        {
-          "resource": "repo://tools/ci/fixture_registry.js",
-          "version": "repo-file-v1:sha256:4e63924f0611f9210c2ceb45621fd28a802503de616a613c51d91c90cd731284"
-        },
-        {
-          "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:c86eb99b6eebaa43c822d0824cc82c5af92ef10ce56ca22e787372b6508486ec"
         }
       ]
     },
@@ -298,15 +274,15 @@
     },
     {
       "id": "claim_6c7bba9f87244fafbba5640e8cb60ee8",
-      "statement": "The scenario with crafted tarball shapes adds the tarball holding names that differ only by case only where the work filesystem keeps case apart, because on a case-folding filesystem Yarn itself cannot lay that package out.",
+      "statement": "The tarball-shapes case adds the tarball holding names that differ only by case only where the work filesystem keeps case apart, because on a case-folding filesystem Yarn itself cannot lay that package out.",
       "evidence": [
         {
           "resource": "repo://openspec/changes/archive/2026-10-05-extract-packages-from-tarballs/tasks.md",
           "version": "repo-file-v1:sha256:0f506e3b03f46f01a6eb61e08acff81271b6ea82ba21ea2e113f1e3c4311a13a"
         },
         {
-          "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:c86eb99b6eebaa43c822d0824cc82c5af92ef10ce56ca22e787372b6508486ec"
+          "resource": "repo://tests/integration/install_tarballs_test.sh#L41-L52",
+          "version": "repo-lines-v1:sha256:917dddb97fc52732c596c2ca80f80b37f89d0813dae0d636f8eaf6c17dea861d:eyJzZWxlY3RlZExpbmVDb3VudCI6MTIsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjU5NDRhOWJiOTkxYjIzODdiOTk1ZDVjOWNmODExNDg4NTQ1MDY3YWNiZDJhZGY3OTdkMTgxNjZkYzdiOGMzOTMiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjUyMzRlN2Y4YzFkYjM4MjkxOGUzNDUzZGQ2N2Y1NGFhZjc5MWZlZjRhY2Q0NThkOTIyN2UyNzYzY2NiMzY5OGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjNhYzM0MzJhOTZhYmQ2ZWYyMjE0MzU4Nzc2NjE2NTE2MTRkYjg5ZjM4MWYyYmEzY2Q0YmQwMTU1ZThkNjVkMzIifQ"
         }
       ]
     },
@@ -336,57 +312,139 @@
     },
     {
       "id": "claim_8de7251afa014e4b83659b1c942679dc",
-      "statement": "The scenario measuring a dependency cycle from a sandboxed action runs a checked-in program, tools/ci/fixtures/cycle_probe.js, named by the genrule the scenario declares.",
+      "statement": "The case measuring a dependency cycle from a sandboxed action runs the checked-in tests/integration/fixtures/cycle_probe.js through a genrule it declares, under the host's own sandbox named by uname, since the sandboxed strategy would fall back to processwrapper-sandbox.",
       "evidence": [
         {
-          "resource": "repo://tools/ci/fixtures/cycle_probe.js",
-          "version": "repo-file-v1:sha256:3f5b58ee1e0b90b391b61c172fa477fc6faca0c1697836ce08a5bdb632c823bb"
+          "resource": "repo://tests/integration/fixtures/cycle_probe.js",
+          "version": "repo-file-v1:sha256:1baa1893b9bd237808adc9a9ae63a9da98edfe1a3eea42510b60db7d6aa828c6"
         },
         {
-          "resource": "repo://tools/ci/install_scenarios.sh",
-          "version": "repo-file-v1:sha256:c86eb99b6eebaa43c822d0824cc82c5af92ef10ce56ca22e787372b6508486ec"
+          "resource": "repo://tests/integration/install_targets_test.sh#L44-L73",
+          "version": "repo-lines-v1:sha256:d9eafcbf9eae2a34501fb789c01290106287ebc3f3a4e26edebd8d50f3bff2ee:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3NjMxYTdkMDFkOWVmZWU3YjQyNjU5NmExMDZiMjI1NzkwMmNjYzQxZDVkMjdhYjU4NmFiYjBiNDI2YzIzOGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImVkY2FlOWFhMmU1Zjg1YzQ5YWJlZWI4MTJhY2RiZTBhNjYwNzBiNWYxYTA4MTQ1NTZmMThiMmMyNjVmOWQwZDYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUxMGU0NTViZjg0NjUxNzljYjQ3YmY2ZjVmNWUzYjA1MmY3ODc0MTEyMGYxNGVhNGY5NjVmZTFmZmY0NzkxZGIifQ"
         }
       ]
     },
     {
       "id": "claim_8bdf8d401f1640268744ced7870ac909",
-      "statement": "install_scenarios.sh does not spell out the install repository's canonical name: it reads it from bazel mod dump_repo_mapping '', printing Bazel's error output if that fails, and uses it to locate the installed tree and layout and to match Bazel's no such target message.",
+      "statement": "The nested-Bazel tests do not spell out the install repository's canonical name: consumer.sh reads it from bazel mod dump_repo_mapping '', printing Bazel's error output if that fails, and uses it to locate the installed tree and layout and to match Bazel's no such target message.",
       "evidence": [
         {
-          "resource": "repo://tools/ci/install_scenarios.sh#L149-L154",
-          "version": "repo-lines-v1:sha256:4639eef96578727800d55138c2162ec3284910faaa6a5a2c99efb5440b086948:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiNTU0ZTkwZTBmN2Y1OTMwYzE4ZjEyODMwMjFhYzE4ZGI0MjQ5YmU2YWU2NjZiMjFmNDZiNTg5ZjdmMTY5MGI0YyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjI3MzYxN2YxODQ5NDMzZjgyMzUzZmJhMzBjMDNlYTY4OTRmNzU0ZDdlOGFiZDM2MGJhMTc3YzY5YTNjMGU3YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZDZjZGU4NGY5MzJhNjhkOTEzMDczMDEyYjBjZDcwMGRkMzgzNzZjNDBhZWJjNDFmYjFmMWFmNDk3YjM2NzZmNyIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNDJmOGYxNjMyYjI0MTExMmU0Zjg3ZWU5OWU0NTdmYjE1MmUxOWI2MDUwODhmMGIyNGY4MzQwYWUyMjljZWZmZiJ9"
+          "resource": "repo://tests/integration/consumer.sh#L42-L48",
+          "version": "repo-lines-v1:sha256:4b0e276f6e8cb70422e5086487fb176aea3f22834acbbb45ce7e8a3c57c5041f:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzg5ZDZmZjYyYzQyZTZmZTdkM2Q0MTY2MTRhYzhmMGExNjg3ZThkNWU3ZDE0OTJjZmZlYWEzZjRkZjliNDg1YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiZWVjNDY1YzlkODRhY2YzMjVjNjJkZGIzNzBmMGEzZmNiOGE3NDQ3MjNiMmVmZTZhMzZlODJjZTU2NTMzZTJiYyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYmFlYjZiY2RiNDdkOGIyYzNmNTI3MzQ3ZTgyZmJiNTNhYjI3ZjdhNDk3MzRmNjczOGZmMTQ4NjIxN2NlODYxOCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmYxMWRmYjQ3MjBmYWYwODAyMjU3YmFiYzdjMWZkY2YwZjA4Mzg4NGUxMjIzMTIzZmU1YTg5YWNhODRlNTYyZiJ9"
         },
         {
-          "resource": "repo://tools/ci/install_scenarios.sh#L184-L185",
-          "version": "repo-lines-v1:sha256:0d52a09d28662d0d530686893c3df174245c43e01d41dbd9f48fd0fff9b732d0:eyJzZWxlY3RlZExpbmVDb3VudCI6MiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMTA0MmI4YzYwMjVkNzEzYTliOWEwZGVkNTM0ZGZhODBjMjAzY2M5ZTMxYTBhYzMxY2EzMWJkNTkwNjVmODJkMyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNjkxMzkzM2NlYzRmNzU3Y2Q1ZTM4Mjc2NTE3NzcyN2JhZThiODUzM2U5M2RiN2EwMmMxMDYyZmQ3Yzk3Zjg0OSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjAzZDNiOTYxOWE2OWU2MzY3OWRjMzBmOGExNDNiM2M4YjI0YTkxOWJiOGU1NTNmZDlhYmMwMGY2NWIyNWJiMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjU1OWIzNGVlNGQ4MzBiOTk4YTI1NjA5MjM2ODk2Mjg5OGFhNzYwMjY5NjlkODQ4MTg1NWI4ODAyZTlkOTM4YiJ9"
+          "resource": "repo://tests/integration/consumer.sh#L83-L90",
+          "version": "repo-lines-v1:sha256:b8a2a6b912eb2352ccb0e07469ea9de84229865d5340279e00467e326f75e8fd:eyJzZWxlY3RlZExpbmVDb3VudCI6OCwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiN2YyNjYyNGMwMGUzZDMwMWZjOWE0OTViYzFjZjViNjFkN2FkMzAwYjZiNWY3OTgzZWFkYjVlNTQzYzE1NjY1NCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYjk5YjIxZGY0M2MyZGZhNWRlNDhkY2I3MDEzYTE5OGEzYjBlZjIxZDIxY2U3MDMwMmIwM2Y5OWEwNzEwMmI0NSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYzJmOGJhMWU4ZjE4YjAzM2EwMGI0YmFiNzM3ODdlZGY5NzIyNzBiMzkxNmMzZTBmNGQxZjI2MTZhMmQ3MWQ2OSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTMxN2MyNWY1NmEzOTkxNWM4NTZiN2VkNTU2YjRiZDg3ZWMwNzZkYzY2MTFjMjk5Y2NkYjc2YmY4ZWU1ZjZlMSJ9"
         },
         {
-          "resource": "repo://tools/ci/install_scenarios.sh#L374-L374",
-          "version": "repo-lines-v1:sha256:21248dccfc69bbbbc5d315d1447196ad4968095bdb0f19a67a8701d80700511a:eyJzZWxlY3RlZExpbmVDb3VudCI6MSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMjEyNDhkY2NmYzY5YmJiYmM1ZDMxNWQxNDQ3MTk2YWQ0OTY4MDk1YmRiMGYxOWE2N2E4NzAxZDgwNzAwNTExYSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMjEyNDhkY2NmYzY5YmJiYmM1ZDMxNWQxNDQ3MTk2YWQ0OTY4MDk1YmRiMGYxOWE2N2E4NzAxZDgwNzAwNTExYSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOWFkNjYyMmJmMjYxNTM0NmJhMzFhOGI3OTA0YTEzY2UxYmU3MDExMzUwZDAyYjJjYzYzNzA3ZTQxM2QwNGQ0MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiMzRmYTMwYjJiOGJmZDAwNDgxYTBmYjE1YzhkYWRjZTE5YTEzZDlkMWU1MzA0OGM2M2I4M2FkY2JiZGVjM2E3YyJ9"
+          "resource": "repo://tests/integration/install_refusals_test.sh#L51-L53",
+          "version": "repo-lines-v1:sha256:32e79640b8d0fc79a13a3ff8400f6093730c8f57a8a9ea5c79be1780a18863a7:eyJzZWxlY3RlZExpbmVDb3VudCI6MywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzAwZDVjMDg1YTVjNTRlZjQ4MmExMjlhNzQxOTEwMTE3OWEzYjA2ZjI5NWViMzRhMzM3ZWU1NGZjM2JiNmZjZSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiN2JmMjkyNzg0YmEwMGY2NTg1MjQ0NWFjNDIyOTZlYzM3OGRlYjMxMzU4MjYyNGZkODdkNjJkMWJlMDMxNDljNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiOGY0MzljOWFjZjQ2OWNhMWI1ZmQyNDcxNTRiMGQzN2QwNzVhZDAxOGI2YTYwOWQ4ZjBjOGEyODlhYmQxZjQzYiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiNzA4OGZjY2RhZjA5NmQ5MGQyODU0YTI2Y2JlZWJjYTI4YWUxMTAyNDk4OTgxNGFkMDc3MDUyZGJlNGJlMWJjMiJ9"
         }
       ]
     },
     {
       "id": "claim_013bf7ef59da44e3a72c70d9f087cb14",
-      "statement": "Every Bazel command whose failure stops install_scenarios.sh keeps its output in a log that fail_with prints in full before the script stops; lock, pin and build record which log they wrote so a failed chain prints the failing step's log; output_base and bazel-bin are asked for once, and the Node.js path must be a regular executable file.",
+      "statement": "Every Bazel command whose failure stops a nested-Bazel test keeps its output in a log that fail_with prints in full before the test stops; lock, pin and build record which log they wrote so a failed chain prints the failing step's log; output_base and bazel-bin are asked for once.",
       "evidence": [
         {
-          "resource": "repo://tools/ci/install_scenarios.sh#L138-L154",
-          "version": "repo-lines-v1:sha256:5d01a0da12f7f364362da7ab9c92d227b4ae8384200b69836c9534f804aecdc0:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI1NWFmYjZiODJmNDVhNGZlMWMwOTE4NzRlMGNkMGZmMmVkM2IwNTY1ZTEwYmIzNjFkYjE3OWU5MDQ2OTU2YjIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjIyNzM2MTdmMTg0OTQzM2Y4MjM1M2ZiYTMwYzAzZWE2ODk0Zjc1NGQ3ZThhYmQzNjBiYTE3N2M2OWEzYzBlN2IiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjE1ODU1ZWQ4MTY1NGE3N2UzYmUwZGQzYzcxZjkyODdiMDhlYWQxZTcxYzExNWRjMWRhMjhkZTEwMGFjYTkzYjQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjQyZjhmMTYzMmIyNDExMTJlNGY4N2VlOTllNDU3ZmIxNTJlMTliNjA1MDg4ZjBiMjRmODM0MGFlMjI5Y2VmZmYifQ"
+          "resource": "repo://tests/fixture_registry/harness.sh#L27-L32",
+          "version": "repo-lines-v1:sha256:ff0abb3cae8a749d92d541cf41a4a6f01cb890cc91722558cd229a69e02cc730:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMzVkNTA0YmU4OTgxOTQ0NjgyNjdmNTczNmE4MDA0MThmYTY3MTY1MzI2OGEyNTlmNjA1M2I5M2FlYjVhMDZiYiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZjJiMGU4MmU0NDFmNDA3NDk4OTEzOWRiZjQzYmExYTc0NGE3YjEzY2Y0MjUyNmJmYzkwOGNiY2JlMjg1YTNlZCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2IyODhkNjE4Mzk3ZTBkZTA3ZDY2MTFjNTEyZjFiYmI0MzBmN2VkZmY0MWY5OTcxNzBmNDAxNjYwMjVlNGFlOSJ9"
         },
         {
-          "resource": "repo://tools/ci/install_scenarios.sh#L178-L183",
-          "version": "repo-lines-v1:sha256:3504372428da48adb6322b35528472768c7d5a03fe63bf426a876fc2780a88d9:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzMyYTVkMzRhMzA1ZGMyYWI5ZmNlM2E3ZTUyOWYyOTY2NGIyNGY4YzBmZGRiOWNjZDE5MzY4ZGFhZmJlMjhlNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzAzN2I5MjdiN2EyNjliN2RhNjI1ZWQ2YmEwOWJhNjIxODhiNDY4ZTEyMzkyY2Y0NGYxODFlMjc5MDYzZWY3YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZGEwYTdkOWI3ZTY3ZDhhZDUyMzM3Yjc5ZTEzNTdhYmNjZWJmNDg1NWJlYmFjNDg3Y2QwMzM0ZTQyNDNkYjAzMSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjczNDRkMWE0ZGFiNDYxMDA5MTQ3OWU4NWQ3YzYyMzE1OTM1OWVmZmJiMTA2ZTYxOTEyNWRhYTFjZmZmZWUwZiJ9"
+          "resource": "repo://tests/integration/consumer.sh#L40-L45",
+          "version": "repo-lines-v1:sha256:3504372428da48adb6322b35528472768c7d5a03fe63bf426a876fc2780a88d9:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiYzMyYTVkMzRhMzA1ZGMyYWI5ZmNlM2E3ZTUyOWYyOTY2NGIyNGY4YzBmZGRiOWNjZDE5MzY4ZGFhZmJlMjhlNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMzAzN2I5MjdiN2EyNjliN2RhNjI1ZWQ2YmEwOWJhNjIxODhiNDY4ZTEyMzkyY2Y0NGYxODFlMjc5MDYzZWY3YyIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNjFjZDYyNzUxNzI4YjJjNjk3YWE0MTFjNTE1M2FiNjAyMmE2ZDgwY2QyMGEyZGZkZDljNDg1ODM2YWFhMDc3MiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZjczNDRkMWE0ZGFiNDYxMDA5MTQ3OWU4NWQ3YzYyMzE1OTM1OWVmZmJiMTA2ZTYxOTEyNWRhYTFjZmZmZWUwZiJ9"
         },
         {
-          "resource": "repo://tools/ci/install_scenarios.sh#L36-L42",
-          "version": "repo-lines-v1:sha256:67cfef5b3a28243f66a448ec73a94dd320af0a0435a774d7de5cadede66f2325:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOTYxNzM2ZDRlMDk3ZTE4ODMzMTkxMTc4OWU0NjA5MzlkM2U5MDZkZjVjNGZlOWVlNjc0OTYxYWEzODA5ZTRlNSIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiYzU2Y2I4ZmM5ZTM1MGYwMGQ3NGE1M2ZiZGVlNjU1Yzc1NGMwMGQxMmUzNTdhNWMyNzRjMmQzZGNiOGM4MjEyNiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiYWVkMDVlNjA1MGY0MDM2MzM2MWZkZDRhN2I1MmUzZjYwZjBlYTUyODc4MWUwMzdiNmFmYjIxNGQyNmFlMDc0OCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiY2IyODhkNjE4Mzk3ZTBkZTA3ZDY2MTFjNTEyZjFiYmI0MzBmN2VkZmY0MWY5OTcxNzBmNDAxNjYwMjVlNGFlOSJ9"
+          "resource": "repo://tests/integration/consumer.sh#L80-L90",
+          "version": "repo-lines-v1:sha256:e53bf32f0ec8aa8c7b8af9eccfe427917deb26186c4b2f9fc0649feb185f80aa:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2NDJhM2RlNjNjNjNiYmViZGQ2YjdiOGE0ZjE2OGE0ZmU5YzYzNjIyMmJiNTFkY2Y0OGZlNjkwMGY1ZGYyOWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImI5OWIyMWRmNDNjMmRmYTVkZTQ4ZGNiNzAxM2ExOThhM2IwZWYyMWQyMWNlNzAzMDJiMDNmOTlhMDcxMDJiNDUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZhZmI1MDQzMjlhOTEzYTA2NmM4MTZhMWI1ZjUxYjFiZDdkYTk4ZDAzNzU5YmYxZDM4YjMwYzA4ZDk5ZWJlZTUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzMTdjMjVmNTZhMzk5MTVjODU2YjdlZDU1NmI0YmQ4N2VjMDc2ZGM2NjExYzI5OWNjZGI3NmJmOGVlNWY2ZTEifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_89cb804c68d542eea2c6905986b1651c",
+      "statement": "The floor job reads the floor from MODULE.bazel's bazel_compatibility, exports it as USE_BAZEL_VERSION, tests e2e/smoke and e2e/install with the lock off and without their block-network tests, and runs e2e/smoke's Yarn target with bazel run under bash with pipefail, requiring the version the module asks for.",
+      "evidence": [
+        {
+          "resource": "repo://.github/workflows/ci.yml#L76-L115",
+          "version": "repo-lines-v1:sha256:f4658705af339cf4140bb350e4e8482b697d3abb48906d5acf9fe56d1a95a594:eyJzZWxlY3RlZExpbmVDb3VudCI6NDAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjM0NmU1OTAzN2Y5YTMyMzBiMDBjZTk2YjU4OTMxOTE3NjM4MjE4ODA2Y2UwYmE3Yjc1ZTVjZWI3NzVkMjFiZGEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjljNzRlNTBiMWY0YzRhYzAyY2NkMTQyMjExZjkxODg0YTU4NGQ2MzZiYjE0NTczMzEwODVmODE1YmZkNDgzZmQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU5MWM2ZGNmNTY4MmYyM2QyOGIzM2I3ZDhjZTAwZDc4N2VhNDUzNjI1NzA2NDA5NTJiZmIzMzU4N2NkYTdjYzAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_81ef1e530b2c4367aba460d6eb10359f",
+      "statement": "The seven nested-Bazel tests are sh_tests tagged exclusive, manual and requires-network, collected by an integration_tests suite that is itself manual, so neither the root's //... nor the release workflow runs them; their child workspace is in --deleted_packages and reaches the ruleset through //:local_repository_files.",
+      "evidence": [
+        {
+          "resource": "repo://.bazelrc",
+          "version": "repo-file-v1:sha256:a47a74eb1e642ca6bb9c02353359474cee2d6474140fe9ecc4622beb24a10702"
+        },
+        {
+          "resource": "repo://BUILD.bazel",
+          "version": "repo-file-v1:sha256:d3215d9bf55d09f9ee46b9821e388fa57fb910795417a5c71729e6360962ee8d"
+        },
+        {
+          "resource": "repo://tests/integration/BUILD.bazel#L80-L143",
+          "version": "repo-lines-v1:sha256:4941376d45c96f5b56a774d18201830757011369493619c596fd1fd3d96f497f:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViZGRkNjJhOGIyNWJhYjU5NmY0NmYyMDAyZjY5MmVhNDJmOGUyNWEyYTc5MmQ3NDAwNjU2YjkxMzllYjk4ZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiMTY4ZGRkM2JhMTc0MmQxYTYyMTM2ZDM0YzkxZjU1ODQwMTFhY2UyMzYxNWNmNTAwNjg0M2JlYTdlMzVmMzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/integration/install_consumer/MODULE.bazel",
+          "version": "repo-file-v1:sha256:d823ef289a2da7ba4384d8f02d591c92ca3602946d49964ef5964b8b78131a40"
+        }
+      ]
+    },
+    {
+      "id": "claim_d302563ab49d44189f2012adc0378fa1",
+      "statement": "Each nested-Bazel test copies the runfiles tree's _main into a mktemp directory under /tmp, stops if any directory above it holds a .yarnrc.yml, and runs the pinned Bazel under env -i with --nosystem_rc, --nohome_rc and an output root in that directory.",
+      "evidence": [
+        {
+          "resource": "repo://tests/fixture_registry/harness.sh#L58-L90",
+          "version": "repo-lines-v1:sha256:6fcd417bde5f10d2de9e36c064cc7dca66bcaf280cde44a196c45ba97b23aba3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ1ZTAzODdlYjcwYTJmYjNlNDRlMmM4YzU3NDFjNTNkMDkyZjkwMWJkODhkZDcxOWZjY2FmNjNkZWQwYWNiNzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwOWQxM2E0YWY4MWQ4MDNkMWE5MWY4NzBiYzYwMzE3ZjY0NWM3ZDhjZTM2OTRlMjUyODY4ZDYxNzdmM2Y0YmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUxYmJmMjZmZmNmMmY1YWNmODVkMDFjMzE0ZTdhODAyZTU2YWQxZWUzNzg0ZDYyZTVmNzZiZTgzMDVmZjEzMDMifQ"
+        },
+        {
+          "resource": "repo://tests/integration/consumer.sh#L26-L34",
+          "version": "repo-lines-v1:sha256:1500a7ed77637e748d005258c40259ef9116f4e9f5fae2a3285a24643212272d:eyJzZWxlY3RlZExpbmVDb3VudCI6OSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiOGRlODcyMmRjNDI3MzY1YTlkNThjYTgyMTYxMjEwNThlZWEzOTgwMzg5ZmU4MmI3ODg4NzU1MjVmNWZkMzQ0NyIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiZWQ4NDIyMTZjMDQ2MGYxOTE2OGIzMDFkYTk3NDgwYjk5OGYxMmZkZTk2ZjUxYzFjYjRkZDM1M2RkZDA1YjIzNSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZmMyZTBhMjU1MTZmZTlkNmNkMTk1M2MzMjIwYTg3ZDk2MmE4Zjg1YzQ3OTRlYzBlYTE0NmFmYjY3ZGE2MjEwZiJ9"
+        },
+        {
+          "resource": "repo://tests/integration/consumer.sh#L60-L80",
+          "version": "repo-lines-v1:sha256:908daf9c7e69c063d7cdc740df1453c3c7f21094ee0f1146e665ba053ea22f80:eyJzZWxlY3RlZExpbmVDb3VudCI6MjEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ2NDZlZTNhNmMxMjY1YzUyOWNlMWMzYTAyNjRmOTZhMzJlM2EyYjJjMjQzYzQ2MDEzOGFmOWZlODkwNWQ4OWUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ2NDJhM2RlNjNjNjNiYmViZGQ2YjdiOGE0ZjE2OGE0ZmU5YzYzNjIyMmJiNTFkY2Y0OGZlNjkwMGY1ZGYyOWUiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjQ0NWM1YzlmMDY4ZTMwMjg5ZDk5OGY3ZTBkODk3N2VjYTNhYmM4MzE5Yzc0MjA5NmU4N2IzZmY4MTM0MDQ3MjkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImE0NTMzOWY5NDZiOTIwZjY1MzMyNDRjYWE2NzBhMGVlOGRhZGU2NTJiMDMyZjJmYTdlODRhYTdkYmQ3ZjM2NTAifQ"
+        }
+      ]
+    },
+    {
+      "id": "claim_e7f9fcac030a494e96610e9fd61f708e",
+      "statement": "The hostile host plants, in the nested Bazel's home, above its output root and in it, a .yarnrc.yml pointing the registry at a closed port and a file under the install's former configuration name loading a marker plugin, and every nested-Bazel test ends by requiring the marker was never left.",
+      "evidence": [
+        {
+          "resource": "repo://tests/fixture_registry/harness.sh#L92-L108",
+          "version": "repo-lines-v1:sha256:fb8b6f3678e6e6c7e98ce02b5cecfc4a1954f5cffaf273a2ee5567e950625a4b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3ZjQ1N2I0NzgzZjg0Y2NkNzhkODE4MmIwNjk2ZGU5OTQzMjllYmZkMTA5ZTZiNjYxMGEzZGFiNGZkODliZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRhOTdkMmYxYzdhNTY1YmJmMWQ1NmUzMzc3ZjQ3YjE5ODJhOWViMmMwZWM5ZmM0ZWVhMmMwMTE4YTE4MzA0YzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM0M2FhOGQ4NmI2NGY1MDQxYjM4MmFiYTk3MThhODY5YWFlMDU3YTYwNjlhMDRlZWJiZWRhM2E0N2FkMmEzYzQifQ"
+        },
+        {
+          "resource": "repo://tests/integration/consumer.sh#L75-L79",
+          "version": "repo-lines-v1:sha256:1e9679b32479c180288b67930c83fb362b7e3367e92cc14773714dd6e2fe4f57:eyJzZWxlY3RlZExpbmVDb3VudCI6NSwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiZjJjMWVhOTJhOWU4ZWQyM2NjYWU1ZTgxNGNmZjk5NWRhZWFjZGRlNGViZjhhZTkyN2MwZDE0MjU3NzhlMDcxNiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiY2E4MWI5NjYxMGRhMWVkYjcxMGY4MTZmMTY0ZTVjNmRhYzc2YWIwMWE5YTcxZTAzODE0ZDk4NzM4OGQxNmFkYSIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiYzJmOGJhMWU4ZjE4YjAzM2EwMGI0YmFiNzM3ODdlZGY5NzIyNzBiMzkxNmMzZTBmNGQxZjI2MTZhMmQ3MWQ2OSJ9"
+        },
+        {
+          "resource": "repo://tests/integration/consumer.sh#L96-L102",
+          "version": "repo-lines-v1:sha256:0fff9be37db66195233c7c6db53435ad47a064bfd491577aeebe59c1470fdb59:eyJzZWxlY3RlZExpbmVDb3VudCI6NywiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiMDFiYTQ3MTljODBiNmZlOTExYjA5MWE3YzA1MTI0YjY0ZWVlY2U5NjRlMDljMDU4ZWY4Zjk4MDVkYWNhNTQ2YiIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNDEyY2EzNDVjY2Y3NWJmOWMwODA2YmNlNjk1YmU4ZGU4MDhiNzk5ODQyNTFhN2E1NGQyMDJjZjYxMDFkZDQ1MSIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNWYwYTgwNmIyMGE3MWVlYTI4NTM3YzliZTYxZTRjODhlYjUwOTM0NmMyYzgwOTYyOGU5YTgyNWEyMjgwNzc4NCIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjAsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZTNiMGM0NDI5OGZjMWMxNDlhZmJmNGM4OTk2ZmI5MjQyN2FlNDFlNDY0OWI5MzRjYTQ5NTk5MWI3ODUyYjg1NSJ9"
+        }
+      ]
+    },
+    {
+      "id": "claim_fe31c76ad4c64ed7bec73310b0fc3293",
+      "statement": "tests/install:yarn_behavior_test measures seven things Yarn does on its own that the install's design rests on, running the pinned Yarn through a yarn_binary launcher against the fixture registry in a hostile-host scratch directory, with no Bazel of its own, and is not manual.",
+      "evidence": [
+        {
+          "resource": "repo://tests/install/BUILD.bazel#L290-L315",
+          "version": "repo-lines-v1:sha256:2a270e5e78c311b8cc31573f80242f72e11cfbf2f465393da6323258970131d2:eyJzZWxlY3RlZExpbmVDb3VudCI6MjYsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijg1OTcyMDliMWQyZmEzMDEyNDkyYTg0ZTAwYTIwMWExYjU2MmFkYWZlMzY1Y2NmNzhjNTY1MjlmOWQyNWQ3M2IiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+        },
+        {
+          "resource": "repo://tests/install/yarn_behavior_test.sh",
+          "version": "repo-file-v1:sha256:735eb481bbb8894bc80ebc0aacaae52cef3674ec22aefc3bd2d45b9aaa522132"
         }
       ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-11-19T10:17:13.013Z"
+    "at": "2026-11-19T18:45:24.702Z"
   }
 }

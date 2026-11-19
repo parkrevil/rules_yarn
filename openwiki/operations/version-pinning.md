@@ -22,12 +22,22 @@ sources:
     resource: repo://MODULE.bazel
   - id: openwiki-source-01bd775b2b199eca72dcc70e
     resource: repo://tests/bcr/.bazelrc
+  - id: openwiki-source-cbb7c78690cd64711a0bd498
+    resource: repo://tests/fixture_registry/harness.sh
+  - id: openwiki-source-4d1c6b2c9f156f6176f800c9
+    resource: repo://tests/integration/bazel_binary_test.sh
+  - id: openwiki-source-dbc74d28193fcb310b3e1626
+    resource: repo://tests/integration/BUILD.bazel
+  - id: openwiki-source-6d6a780c5679ea526fd316e5
+    resource: repo://tests/integration/install_consumer/.bazelrc
+  - id: openwiki-source-bfe00a88896432bdfb87d372
+    resource: repo://tests/integration/install_consumer/MODULE.bazel
   - id: openwiki-source-847ceba95f7fcfa239c5f25b
     resource: repo://yarn/private/versions.bzl
-generated: { by: "claude-code", at: "2026-10-05T14:22:28.209Z" }
+generated: { by: "claude-code", at: "2026-11-19T18:41:03.606Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-11-19T09:16:08.640Z
+    at: 2026-11-19T18:41:03.606Z
 ---
 
 # Version pinning and lockfiles
@@ -40,7 +50,7 @@ are few enough to list.
 
 | File | Pins |
 | --- | --- |
-| `MODULE.bazel` | Bazel module dependencies and their versions; js-yaml 4.3.0, by URL and the npm registry's integrity, which `yarn.install` reads YAML with; the Node.js version used for development and the Yarn version used by the ruleset's own tests |
+| `MODULE.bazel` | Bazel module dependencies and their versions; js-yaml 4.3.0, by URL and the npm registry's integrity, which `yarn.install` reads YAML with; the Node.js version used for development and the Yarn version used by the ruleset's own tests; the Bazel 9.2.0 binary the nested-Bazel tests run, one per platform by SHA-256 |
 | `MODULE.bazel.lock` | the resolved graph and the registry file hashes behind it |
 | `.bazelversion` | the Bazel release |
 | `yarn/private/versions.bzl` | every Yarn version the ruleset can fetch, with its integrity digest and its cache version |
@@ -48,13 +58,15 @@ are few enough to list.
 | `e2e/install/MODULE.bazel`, `e2e/install/MODULE.bazel.lock`, `e2e/install/.bazelversion` | the same, for the `yarn.install` consumer module |
 | `e2e/install/yarn.lock`, `e2e/install/yarn_pins.json` | the npm packages that module installs, and each tarball's URL and SHA-512 integrity |
 | `tests/bcr/MODULE.bazel` | the same, for the module the registry presubmit runs — no lock, for the reason below |
+| `tests/integration/install_consumer/MODULE.bazel` | the same, for the consumer the nested-Bazel tests copy — no lock either |
+| `tests/fixture_registry/harness.sh` | the `packageManager` Yarn version it writes into the test projects |
 
 `MODULE.bazel` also declares `bazel_compatibility = [">=8.3.0"]`, which pins
 the other direction: not what this repository depends on, but the oldest Bazel
 a consumer may bring. Below it Bazel refuses the module while resolving,
 naming the ruleset, rather than failing inside it.
 
-The three other modules are separate Bazel modules with their own roots. Each
+The other modules are separate Bazel modules with their own roots. Each
 depends on the ruleset through a non-registry override pointing at the
 repository root, which is why each has its own module file rather than
 participating in the root module's resolution.
@@ -97,6 +109,7 @@ stale lock without reporting anything — or writes one where none was wanted.
 | `e2e/smoke` | `error` | the same, for the configuration it checks |
 | `e2e/install` | `error` | the same |
 | `tests/bcr` | `off` | the registry presubmit resolves it under several Bazel versions, and a lock written by one fails under another |
+| `tests/integration/install_consumer` | `off` | each nested-Bazel test resolves its own copy from scratch |
 
 `tests/bcr` keeps no lockfile at all. It had one briefly — Bazel's default
 wrote it and a commit carried it in, while the documentation said the module
@@ -120,11 +133,22 @@ Changing what `e2e/install` installs means two more steps: regenerating its
 `bazel run @npm//:pin`. The error mode makes a forgotten refresh
 fail loudly on the next build rather than producing a drifted checkout.
 
+## The Bazel the nested-Bazel tests run
+
+The tests in `tests/integration` run a Bazel of their own inside the test.
+That Bazel is not Bazelisk's choice at run time: `MODULE.bazel` fetches the
+9.2.0 binary with `http_file`, one repository per platform, each pinned by the
+SHA-256 Bazel publishes beside the release, and an alias picks the host's.
+It must be the version in `.bazelversion`, and
+`//tests/integration:bazel_binary_test` runs the binary with `--version` and
+fails if it is not, so a change to one is a change to both. The alias and
+the test are `manual`, so a root `//...` does not fetch the binary.
+
 ## Development-only pins
 
 The Node.js toolchain registration, the test-only Yarn distribution, the
-platforms module and the testing framework are all declared as development
-dependencies of the root module: they are needed to build and test the ruleset,
+platforms module, the testing framework and the Bazel binaries above are all
+declared as development dependencies of the root module: they are needed to build and test the ruleset,
 not to consume it. A consumer supplies its own Node.js toolchain and declares its
 own Yarn version.
 

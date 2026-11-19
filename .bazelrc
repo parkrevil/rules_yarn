@@ -6,5 +6,9 @@
 #     bazel mod deps --lockfile_mode=update
 common --lockfile_mode=error
 
+# The child workspace the tests in tests/integration copy is a module of its
+# own, not a package of this one; the tests glob its files.
+common --deleted_packages=tests/integration/install_consumer
+
 # Per-user settings; keep this import last so it can override the settings above.
 try-import %workspace%/.bazelrc.user

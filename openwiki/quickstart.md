@@ -22,10 +22,10 @@ sources:
     resource: repo://yarn/private/yarn_binary.bzl
   - id: openwiki-source-c20b05d8b903795173b9a3b2
     resource: repo://yarn/private/yarn_binary.sh.tpl
-generated: { by: "claude-code", at: "2026-11-19T09:16:08.640Z" }
+generated: { by: "claude-code", at: "2026-11-19T18:41:03.606Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-11-19T09:34:34.611Z
+    at: 2026-11-19T18:41:03.606Z
 ---
 
 # Quickstart
@@ -94,5 +94,6 @@ publishing removes, and the apparatus for it is already in place.
 The repository root, `e2e/smoke`, `e2e/install` and `tests/bcr` are separate
 Bazel modules, and the root excludes the other three from package discovery.
 Building or testing everything means four invocations, one in each directory,
-plus the install scenario script — which is also what CI does, on Linux and
-macOS.
+plus `bazel test //tests/integration:integration_tests` in the root, the
+nested-Bazel tests, which are `manual` and so outside `//...` — which is also
+what CI does, on Linux and macOS.

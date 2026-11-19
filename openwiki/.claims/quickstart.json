@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:415ae81dd414cea0403e23a523f6af74845d999d69779150562cac094691b7e2",
+  "pageVersion": "sha256:96869cc4b05b9bbd940ec5ef402a15d60285d02ed6e45fb188f229ec16179f39",
   "claims": [
     {
       "id": "claim_8726f27a9d394749af7f84cf2e263861",
@@ -22,7 +22,7 @@
       "evidence": [
         {
           "resource": "repo://AGENTS.md",
-          "version": "repo-file-v1:sha256:38c2ece6eed674edaaf3563f91c555f8005ddd6632ce34cfcd231f9db95a9bc7"
+          "version": "repo-file-v1:sha256:0fee343e718717730bd6690ec24e10ef11628cd5a377ca242d780b093ce1d568"
         },
         {
           "resource": "repo://README.md#L276-L278",
@@ -88,19 +88,19 @@
     },
     {
       "id": "claim_e1515e3ec7764039831a7393ca3b0b02",
-      "statement": "The repository has four separate Bazel module roots — the repository itself, e2e/smoke, e2e/install and tests/bcr — with the other three excluded from the root's package discovery, so building or testing everything takes four invocations plus the install scenario script, which is what CI runs on both Linux and macOS.",
+      "statement": "The repository has four separate Bazel module roots — the repository itself, e2e/smoke, e2e/install and tests/bcr — with the other three excluded from the root's package discovery, so building or testing everything takes four invocations plus the manual nested-Bazel suite in the root, which is what CI runs on both Linux and macOS.",
       "evidence": [
         {
           "resource": "repo://.bazelignore",
-          "version": "repo-file-v1:sha256:e9a93a6a6541e1ffd5ff2379d04d03d61a5c505cc9f19cecb050f0a97b8189c0"
+          "version": "repo-file-v1:sha256:293c93cf4e67d5854f8c4ed16968c412599afbc76c9776c8191586f5c2e88aad"
         },
         {
           "resource": "repo://.github/workflows/ci.yml",
-          "version": "repo-file-v1:sha256:eca109f874c82cbbcd776119f9188e3e86850e5e23ace66c489b61a903e5db1d"
+          "version": "repo-file-v1:sha256:ba5040ac836ca2cb2141ec02f4dc87f52aa09dc973f25039231b18defdd6e1ac"
         },
         {
           "resource": "repo://AGENTS.md",
-          "version": "repo-file-v1:sha256:38c2ece6eed674edaaf3563f91c555f8005ddd6632ce34cfcd231f9db95a9bc7"
+          "version": "repo-file-v1:sha256:0fee343e718717730bd6690ec24e10ef11628cd5a377ca242d780b093ce1d568"
         }
       ]
     },
@@ -135,6 +135,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-11-19T09:34:34.611Z"
+    "at": "2026-11-19T18:41:03.606Z"
   }
 }

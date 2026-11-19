@@ -5,7 +5,7 @@ description: How yarn.install turns a project's yarn.lock into Bazel artifacts â
 tags: [yarn-install, repository-rule, module-extension, integrity, isolation, node-modules]
 verified:
   - by: openwiki/0.5.1
-    at: 2026-11-19T10:17:13.013Z
+    at: 2026-11-19T18:41:03.606Z
 sources:
   - id: openwiki-source-6baa3bd517a8e6434ec03836
     resource: repo://e2e/install/BUILD.bazel
@@ -39,8 +39,8 @@ sources:
     resource: repo://tests/install/yarnrc_test.js
   - id: openwiki-source-ca84f08526069556e5f272aa
     resource: repo://tests/install/yarnrc_yarn_test.js
-  - id: openwiki-source-4030dc4bcad5a09c915b98fb
-    resource: repo://tools/ci/install_scenarios.sh
+  - id: openwiki-source-bbb5bcd1f33855c01068e6e3
+    resource: repo://tests/integration/install_refusals_test.sh
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
   - id: openwiki-source-0a3b1034f06d7d11f2f65afd
@@ -71,7 +71,7 @@ sources:
     resource: repo://yarn/private/install/yarnrc.js
   - id: openwiki-source-60f4d0e18953b7fc477fc496
     resource: repo://yarn/providers.bzl
-generated: { by: "claude-code", at: "2026-11-19T09:34:34.611Z" }
+generated: { by: "claude-code", at: "2026-11-19T18:41:03.606Z" }
 ---
 
 # Installing a project's dependencies
@@ -416,7 +416,7 @@ A dependency's target cuts what is extracted, staged and hashed, not what is
 fetched: analysing it analyses `:node_modules`, which names every pinned
 tarball, so every tarball is downloaded. When the install fails, only
 `:node_modules`, which reports why, and `:pin` exist, so a consumer depending
-on a dependency's target sees Bazel's "no such target", as a scenario shows. On the 717-entry
+on a dependency's target sees Bazel's "no such target", as `install_refusals_test` shows. On the 717-entry
 project, building `:node_modules/react` wrote 3 store packages (339 KB) in
 0.36 s, against 732 (425 MB) in 2.54 s for `:node_modules`; the generated
 `BUILD` file grew from 403 KB to 476 KB, and analysis time did not change.

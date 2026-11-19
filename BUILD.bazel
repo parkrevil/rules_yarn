@@ -1,0 +1,22 @@
+# Files of this repository that its own tests read. Nothing here is part of the
+# ruleset's API.
+
+exports_files(
+    [".bazelversion"],
+    visibility = ["//:__subpackages__"],
+)
+
+# The ruleset as a module that depends on it sees it, for the child workspace
+# in tests/integration, which reaches it with local_path_override. Every
+# package it needs lists its files as all_files.
+filegroup(
+    name = "local_repository_files",
+    srcs = [
+        "BUILD.bazel",
+        "MODULE.bazel",
+        "//yarn:all_files",
+        "//yarn/private:all_files",
+        "//yarn/private/install:all_files",
+    ],
+    visibility = ["//:__subpackages__"],
+)

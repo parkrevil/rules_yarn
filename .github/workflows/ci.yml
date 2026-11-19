@@ -61,10 +61,11 @@ jobs:
         run: bazel build //... && bazel test //... --test_output=errors
 
       # What only a fresh consumer can show about yarn.install: fetching,
-      # pinning, refetching and isolation from the host, against a local
-      # registry so no public one is needed.
-      - name: Run the yarn.install scenarios
-        run: tools/ci/install_scenarios.sh
+      # pinning, refetching and isolation from the host, each test running a
+      # Bazel of its own, against a local registry so no public one is needed.
+      # The tests are manual, so the root's //... above leaves them out.
+      - name: Run the nested-Bazel tests of yarn.install
+        run: bazel test //tests/integration:integration_tests --test_output=errors
 
       # The module the registry presubmit runs. Its own .bazelrc keeps it
       # from writing a lockfile, as the other two roots' .bazelrc files pin
@@ -73,9 +74,12 @@ jobs:
         working-directory: tests/bcr
         run: bazel build //... && bazel test //... --test_output=errors
 
-  # A consumer resolving from scratch under the oldest Bazel MODULE.bazel
-  # accepts. The repository's own roots cannot check this: their lockfiles are
-  # written by a newer Bazel and both set --lockfile_mode=error.
+  # The consumer folders under the oldest Bazel MODULE.bazel accepts, as
+  # bazel-contrib's reusable test workflow runs folders across Bazel versions.
+  # Each folder's lock is written by the Bazel in .bazelversion, which an older
+  # Bazel refuses, so these runs resolve without it, as a consumer starting from
+  # scratch would. The block-network tests need the sandbox adjustment the
+  # build-and-test job makes, and are run there.
   minimum-bazel:
     name: oldest supported Bazel
     runs-on: ubuntu-latest
@@ -83,19 +87,32 @@ jobs:
       - name: Check out repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Build and run a Yarn target at the declared floor
-        run: tools/ci/minimum_bazel.sh
+      - name: Find the declared floor
+        run: |
+          floor=$(sed -n 's/.*bazel_compatibility.*">=\([0-9][0-9.]*\)".*/\1/p' MODULE.bazel)
+          test -n "$floor"
+          echo "USE_BAZEL_VERSION=$floor" >>"$GITHUB_ENV"
 
-      # The same floor for yarn.install. The module's lock is written by the
-      # Bazel in .bazelversion, which an older Bazel refuses, so this run
-      # resolves without it, as a consumer starting from scratch would. The
-      # offline test needs the sandbox adjustment the build-and-test job makes,
-      # and is run there.
+      # `bazel run` as well as the test, because only `bazel run` takes the
+      # launcher into the directory it was started from.
+      # `shell: bash` runs it with -e and pipefail, so a failed `bazel run` fails the
+      # step rather than leaving `reported` empty.
+      - name: Build, test and run the Yarn target at the declared floor
+        working-directory: e2e/smoke
+        shell: bash
+        run: |
+          bazel test --lockfile_mode=off --test_output=errors --test_tag_filters=-block-network //...
+          want=$(sed -n 's/^yarn.distribution(version = "\([0-9.]*\)")$/\1/p' MODULE.bazel)
+          test -n "$want"
+          reported=$(bazel run --lockfile_mode=off //:yarn -- --version | tail -1)
+          if [ "$reported" != "$want" ]; then
+            echo "::error::bazel run //:yarn reported '$reported', expected Yarn $want"
+            exit 1
+          fi
+
       - name: Install a project with yarn.install at the declared floor
         working-directory: e2e/install
-        run: |
-          floor=$(sed -n 's/.*bazel_compatibility.*">=\([0-9][0-9.]*\)".*/\1/p' ../../MODULE.bazel)
-          USE_BAZEL_VERSION="$floor" bazel test --lockfile_mode=off --test_output=errors -- //... -//:offline_test
+        run: bazel test --lockfile_mode=off --test_output=errors --test_tag_filters=-block-network //...
 
   # The version tag.yaml would give the next release, worked out the same way
   # but without writing a tag, so a change in how commits are written shows

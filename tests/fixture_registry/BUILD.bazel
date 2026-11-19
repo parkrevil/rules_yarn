@@ -1,0 +1,14 @@
+load("@rules_shell//shell:sh_library.bzl", "sh_library")
+
+# The local npm registry the tests in tests/integration and tests/install run
+# against, with the fixtures both use, and the harness both run their cases in.
+sh_library(
+    name = "harness",
+    srcs = ["harness.sh"],
+    data = [
+        "fixture_registry.js",
+        "fixtures/marker_plugin.cjs",
+        "fixtures/tool_cli.js",
+    ],
+    visibility = ["//tests:__subpackages__"],
+)
