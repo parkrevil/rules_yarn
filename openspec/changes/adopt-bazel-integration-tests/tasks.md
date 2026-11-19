@@ -143,6 +143,24 @@
     early push of its own. Each push needs the user's go-ahead, and all the
     cases were moved by then anyway. If macOS does not nest, the fix is a tag,
     and 5.4 records which happened.
+  - 2026-11-20, CI run 44596357423: **macOS does not nest.**
+    - `install_targets_test`'s cycle case failed on macOS with "'darwin-sandbox'
+      was requested for explicit default strategies but no strategy with that
+      identifier was registered".
+    - The other six targets passed there, under the outer darwin-sandbox, and
+      all seven passed on Linux.
+    - Naming the sandbox is what showed it. Under `sandboxed` the case would
+      have run on processwrapper-sandbox, which `SandboxModule` registers under
+      that name and which the error lists as valid.
+    - Fix: `install_targets_test` alone takes `no-sandbox`. Locally on Linux it
+      passed, 5 of 5, with the test run `local` and the nested Bazel's
+      `linux-sandbox` underneath. Its `/tmp` scratch directory was removed
+      afterwards. The macOS result of the fix is 5.4's, and this task stays
+      open until that run shows it.
+    - The fix's review found no blocker. Taken: this task left open; "would
+      have run" for "would have passed"; the Bazel lines that keep
+      `no-sandbox` under `exclusive` cited in the design; and the `/tmp`
+      leftover recorded as a known limit there and in `harness.sh`.
 
 ## 3. Moving the cases
 

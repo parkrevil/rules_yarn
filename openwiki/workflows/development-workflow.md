@@ -35,7 +35,7 @@ sources:
 generated: { by: "claude-code", at: "2026-11-19T18:41:03.606Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-11-19T18:45:24.702Z
+    at: 2026-11-19T19:25:05.306Z
 ---
 
 # Development workflow

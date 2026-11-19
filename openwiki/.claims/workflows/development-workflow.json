@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:8ac8514f5a85e21fd3fe95adb9bf854ee09b53df9bb0bdca4fe429ba0ab93e63",
+  "pageVersion": "sha256:e9343250bbf802273af7542fb97a737e2380b7c40eff8e146260a7c52907c939",
   "claims": [
     {
       "id": "claim_0d817a7a3b964d06937894529d820b10",
@@ -273,7 +273,7 @@
           "version": "repo-file-v1:sha256:0fee343e718717730bd6690ec24e10ef11628cd5a377ca242d780b093ce1d568"
         },
         {
-          "resource": "repo://tests/integration/BUILD.bazel#L127-L143",
+          "resource": "repo://tests/integration/BUILD.bazel#L131-L147",
           "version": "repo-lines-v1:sha256:440bfcaaf568093fcdbefefa6a08e4fd9edff1a19240ee5f614fde5fdc10e461:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImNjYjZkMGVkYWQ5ODcxZTMzMWM0YjM2NGRjMWU1NjJjYzIwZjM5Yzg5Yjk0M2I3YzI5OGZmZmE5YTY5ODNhOTgiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjMyNDRhYWQ0ODczZjYyYjUzY2RmZmFkMTcyN2M5ZjkzNGI0MjM4NWM3ZjQ2ZmRmYzUyOTgwMTg2Y2EzNGE0ODMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         }
       ]
@@ -309,6 +309,6 @@
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-11-19T18:45:24.702Z"
+    "at": "2026-11-19T19:25:05.306Z"
   }
 }

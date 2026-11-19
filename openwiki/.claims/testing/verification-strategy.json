@@ -1,6 +1,6 @@
 {
   "schemaVersion": 1,
-  "pageVersion": "sha256:27a1290fa1380b1d06a0d646afb03b1554de8c458cb849a7da08f9b714cf9b26",
+  "pageVersion": "sha256:7f6139fb4882606799e73c311840eabbed3d4428618badccc194c6c12271fdde",
   "claims": [
     {
       "id": "claim_80120293013247f8b2a4c96dba175e61",
@@ -383,8 +383,8 @@
           "version": "repo-file-v1:sha256:d3215d9bf55d09f9ee46b9821e388fa57fb910795417a5c71729e6360962ee8d"
         },
         {
-          "resource": "repo://tests/integration/BUILD.bazel#L80-L143",
-          "version": "repo-lines-v1:sha256:4941376d45c96f5b56a774d18201830757011369493619c596fd1fd3d96f497f:eyJzZWxlY3RlZExpbmVDb3VudCI6NjQsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImViZGRkNjJhOGIyNWJhYjU5NmY0NmYyMDAyZjY5MmVhNDJmOGUyNWEyYTc5MmQ3NDAwNjU2YjkxMzllYjk4ZGEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImZiMTY4ZGRkM2JhMTc0MmQxYTYyMTM2ZDM0YzkxZjU1ODQwMTFhY2UyMzYxNWNmNTAwNjg0M2JlYTdlMzVmMzQiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
+          "resource": "repo://tests/integration/BUILD.bazel#L79-L147",
+          "version": "repo-lines-v1:sha256:a3a5a11afef8f2878de629201830ddc81cc11222afd0e9ebde1abc5b32af7f29:eyJzZWxlY3RlZExpbmVDb3VudCI6NjksImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJhYzJiYjI1MTYwZWYwYTAxNjhiYTgwOWNlOGQ4MTRkMzZkMWU5M2NkMWY2ZDY0OWIwNjZlOGNlODNiM2E2ZGMiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImZhZmJhMDUyN2MzOTUzYzRiNmUwZTViNTczOWJhODM2MTJmODA1M2JjZGM5NDY2NzMwMTkzY2QxZDU5MGI0MDgiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijc4M2IyMjMzNGU3NDhhMDRhZjRlOWFlYTk0OWJlMWMxN2Y1N2ViNjk3OTJiZGNkNjM2MGRmYTBlNWMyOTE2OGMiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjowLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImUzYjBjNDQyOThmYzFjMTQ5YWZiZjRjODk5NmZiOTI0MjdhZTQxZTQ2NDliOTM0Y2E0OTU5OTFiNzg1MmI4NTUifQ"
         },
         {
           "resource": "repo://tests/integration/install_consumer/MODULE.bazel",
@@ -397,8 +397,12 @@
       "statement": "Each nested-Bazel test copies the runfiles tree's _main into a mktemp directory under /tmp, stops if any directory above it holds a .yarnrc.yml, and runs the pinned Bazel under env -i with --nosystem_rc, --nohome_rc and an output root in that directory.",
       "evidence": [
         {
-          "resource": "repo://tests/fixture_registry/harness.sh#L58-L90",
-          "version": "repo-lines-v1:sha256:6fcd417bde5f10d2de9e36c064cc7dca66bcaf280cde44a196c45ba97b23aba3:eyJzZWxlY3RlZExpbmVDb3VudCI6MzMsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ1ZTAzODdlYjcwYTJmYjNlNDRlMmM4YzU3NDFjNTNkMDkyZjkwMWJkODhkZDcxOWZjY2FmNjNkZWQwYWNiNzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwOWQxM2E0YWY4MWQ4MDNkMWE5MWY4NzBiYzYwMzE3ZjY0NWM3ZDhjZTM2OTRlMjUyODY4ZDYxNzdmM2Y0YmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUxYmJmMjZmZmNmMmY1YWNmODVkMDFjMzE0ZTdhODAyZTU2YWQxZWUzNzg0ZDYyZTVmNzZiZTgzMDVmZjEzMDMifQ"
+          "resource": "repo://tests/fixture_registry/harness.sh#L58-L74",
+          "version": "repo-lines-v1:sha256:93d5e07b3192cb24e0ccd1706993b8255fd7adf85c50f51830cfd245624004fb:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQ1ZTAzODdlYjcwYTJmYjNlNDRlMmM4YzU3NDFjNTNkMDkyZjkwMWJkODhkZDcxOWZjY2FmNjNkZWQwYWNiNzIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6ImMwOWQxM2E0YWY4MWQ4MDNkMWE5MWY4NzBiYzYwMzE3ZjY0NWM3ZDhjZTM2OTRlMjUyODY4ZDYxNzdmM2Y0YmEiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjhkZjc2ZDgyZjI0MzU2NDBmM2I3MjY3MDBkMTE3ZWQ2M2E5MDY2MWExYzg4ODYwZjYwODdhYWEyN2ZlMjM2YTAifQ"
+        },
+        {
+          "resource": "repo://tests/fixture_registry/harness.sh#L76-L90",
+          "version": "repo-lines-v1:sha256:2502d602002089e55d79a4bedef3674cb52a41a4463f0a5574900d5d00a0f536:eyJzZWxlY3RlZExpbmVDb3VudCI6MTUsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6Ijk1MmViMGMxNjNjMmM5MjI3NDA0YTk1NzM1YjUxMTY4YWU1MjEzZTA1ODAzMjU5YzU3ZjM3NDU4NDg2Nzc0OGYiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjBjOTdhMWI4ZDVlZDg2MTljNDAzMDg3NzlkMjU0NDViNjAzNGI2MWJiMjQyM2NhNGJmNTAzOTA4NjYxMWM0OWYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImU5ODQzZDlmYjI4OTQ2YzFkMDJiYTc1OWQ1MGY3NWM2YTM0N2U1OGNkMjFhMDA2YjFhMmMyNTUxMWEyYzViNWIifQ"
         },
         {
           "resource": "repo://tests/integration/consumer.sh#L26-L34",
@@ -415,8 +419,12 @@
       "statement": "The hostile host plants, in the nested Bazel's home, above its output root and in it, a .yarnrc.yml pointing the registry at a closed port and a file under the install's former configuration name loading a marker plugin, and every nested-Bazel test ends by requiring the marker was never left.",
       "evidence": [
         {
-          "resource": "repo://tests/fixture_registry/harness.sh#L92-L108",
-          "version": "repo-lines-v1:sha256:fb8b6f3678e6e6c7e98ce02b5cecfc4a1954f5cffaf273a2ee5567e950625a4b:eyJzZWxlY3RlZExpbmVDb3VudCI6MTcsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3ZjQ1N2I0NzgzZjg0Y2NkNzhkODE4MmIwNjk2ZGU5OTQzMjllYmZkMTA5ZTZiNjYxMGEzZGFiNGZkODliZDEiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjAxYmE0NzE5YzgwYjZmZTkxMWIwOTFhN2MwNTEyNGI2NGVlZWNlOTY0ZTA5YzA1OGVmOGY5ODA1ZGFjYTU0NmIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjRhOTdkMmYxYzdhNTY1YmJmMWQ1NmUzMzc3ZjQ3YjE5ODJhOWViMmMwZWM5ZmM0ZWVhMmMwMTE4YTE4MzA0YzkiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImM0M2FhOGQ4NmI2NGY1MDQxYjM4MmFiYTk3MThhODY5YWFlMDU3YTYwNjlhMDRlZWJiZWRhM2E0N2FkMmEzYzQifQ"
+          "resource": "repo://tests/fixture_registry/harness.sh#L92-L97",
+          "version": "repo-lines-v1:sha256:bb5d816729ee95872ef19de8f1f8b02f7632e275abf3c0d38d2618b36fb5d83f:eyJzZWxlY3RlZExpbmVDb3VudCI6NiwiZmlyc3RTZWxlY3RlZExpbmVIYXNoIjoiY2Y4NmFjMWQ3MGUzNDljZWRjZjkxZDIyNjYzMTgyNmE0YTExZGM3ZTY0MDhhOGYzZGM2ZTYyYWY1MDc0YmJkNCIsImxhc3RTZWxlY3RlZExpbmVIYXNoIjoiNzQ4OWQ3N2YyODkxMjY4YWM1YjA5MmZjN2Q4NmQwYzg3ZGJhZDE1OTZhMGU2NGJkZWZjYTg3NDIzNjFkZGUwYiIsInByZWNlZGluZ0NvbnRleHRMaW5lQ291bnQiOjMsInByZWNlZGluZ0NvbnRleHRIYXNoIjoiNTUyZTY1NDk4ZDA3ODBhOWViNGFiODg4MTVjODAyYzhhZTk2MGM3NWExNDBiOTcwN2Y4NzdjNTY4YWY3NDg4ZiIsImZvbGxvd2luZ0NvbnRleHRMaW5lQ291bnQiOjMsImZvbGxvd2luZ0NvbnRleHRIYXNoIjoiZWJkOTEwMjEwOTUwN2U1N2I4YWEyMDBiMTAxYjM3OTBjOWMxYTE1OTQzODIwZjdiNDFkNzUzMzFiZmRiM2MyOCJ9"
+        },
+        {
+          "resource": "repo://tests/fixture_registry/harness.sh#L98-L108",
+          "version": "repo-lines-v1:sha256:50df3b738ddfc999a69436e188dd14f8d4480520c7075a51a2cfafbdd278a7f7:eyJzZWxlY3RlZExpbmVDb3VudCI6MTEsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjkwZjRkOGFiZTM5NDZmMTYwMjA0MzQyNTc3NDM2Njg5NzdmMTVkY2M5NWJlYmEzZjhhYTEyYTk0YjMzZDVkYzAiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjQxMmNhMzQ1Y2NmNzViZjljMDgwNmJjZTY5NWJlOGRlODA4Yjc5OTg0MjUxYTdhNTRkMjAyY2Y2MTAxZGQ0NTEiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6Ijk1ODYzNGU2MWI1MTBkZDU1MTdlZDZjOTFkZDllYjZhNGY0ZDYxNmFlNjdlODBiOTkzZGI4YzcxMDZlNWUwZGIiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImY2N2JmNDk1YTNlOGJjNDMwY2U5NmRmNTRjZDkwZTc1MjFiODczYWMzZjMzMTdhZjQ1OWI4MzM2MTBlMDRjMjgifQ"
         },
         {
           "resource": "repo://tests/integration/consumer.sh#L75-L79",
@@ -441,10 +449,24 @@
           "version": "repo-file-v1:sha256:735eb481bbb8894bc80ebc0aacaae52cef3674ec22aefc3bd2d45b9aaa522132"
         }
       ]
+    },
+    {
+      "id": "claim_ab85781277374a709020d940ae74e1b4",
+      "statement": "install_targets_test alone is also tagged no-sandbox, because one of its cases runs an action in the nested Bazel's own sandbox and on macOS the nested Bazel registers no darwin-sandbox strategy inside the outer one.",
+      "evidence": [
+        {
+          "resource": "repo://tests/integration/BUILD.bazel#L85-L114",
+          "version": "repo-lines-v1:sha256:ef582f029bdd9b2c1090bd930ca5d9b0f9771462c037efb96543b5829b194869:eyJzZWxlY3RlZExpbmVDb3VudCI6MzAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6IjhkOGNkYTYzYWRiYmM3YjAzYmFlMzVkNmNhODg0OTMzNjFkZDM5MGU0NDQ2MjBlMDM0ZmQwMDlhNDRmZDAwNmUiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6IjJjZjc0NjYyYjMzN2U0ZDVhZDdkMzE2YTg2YTMxODgwMTEyMWZmNmY1Y2NiOWJkNTFmOTAwNDc3YjI5YjNiZmYiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjkxNjc1YjM2MzlkNzAzNDYxNjU0OGNkMDAzNjljMGU2NjA2OTcwNGFmYjUyYmNlNmIxMjVkZGE5ZmE3MmM5MTYiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6ImJhYTRlY2U4MjdmYzA5YWNjNmJjZjcwZjRmY2IzMjEzMjk1YWVjNzI5ZWNmNTFjYzEyMzU3NzA0NmFiMDdmM2UifQ"
+        },
+        {
+          "resource": "repo://tests/integration/install_targets_test.sh#L64-L73",
+          "version": "repo-lines-v1:sha256:9427aa91f24506cba007d3c0740022dc51dba60dad910f4eaf78c764f9cfc24a:eyJzZWxlY3RlZExpbmVDb3VudCI6MTAsImZpcnN0U2VsZWN0ZWRMaW5lSGFzaCI6ImFlMTYzMzg4NWZjYjgxY2UxOTk2MjI2YjA3NjgyMWU1ZGQxMDRlMWM5OGY5MDY5MmM2ZDA4OGVlMjQyZmI5YWIiLCJsYXN0U2VsZWN0ZWRMaW5lSGFzaCI6ImQ3NjMxYTdkMDFkOWVmZWU3YjQyNjU5NmExMDZiMjI1NzkwMmNjYzQxZDVkMjdhYjU4NmFiYjBiNDI2YzIzOGIiLCJwcmVjZWRpbmdDb250ZXh0TGluZUNvdW50IjozLCJwcmVjZWRpbmdDb250ZXh0SGFzaCI6IjY0ZjQwYzg0OGU3MGVhMjgzNjgwNmY5N2NmNTc5ZDA1MWNjOWUzZTk0MmU5NTA5NmRjNTNkZjc0YmIzOWQzZGUiLCJmb2xsb3dpbmdDb250ZXh0TGluZUNvdW50IjozLCJmb2xsb3dpbmdDb250ZXh0SGFzaCI6IjUxMGU0NTViZjg0NjUxNzljYjQ3YmY2ZjVmNWUzYjA1MmY3ODc0MTEyMGYxNGVhNGY5NjVmZTFmZmY0NzkxZGIifQ"
+        }
+      ]
     }
   ],
   "verification": {
     "by": "openwiki/0.5.1",
-    "at": "2026-11-19T18:45:24.702Z"
+    "at": "2026-11-19T19:35:30.372Z"
   }
 }

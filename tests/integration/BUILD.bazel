@@ -85,6 +85,10 @@ sh_library(
 #   exclusive  a nested Bazel is heavy, so each runs alone;
 #   manual     `//...` leaves them out; integration_tests runs them;
 #   requires-network  the nested Bazel fetches modules and Node.js.
+# install_targets_test is also no-sandbox: one of its cases runs an action in
+# the nested Bazel's own sandbox, and on macOS a sandbox does not nest. Inside
+# the outer darwin-sandbox the nested Bazel registers no darwin-sandbox
+# strategy (CI run 44596357423).
 [
     sh_test(
         name = name,
@@ -107,7 +111,7 @@ sh_library(
             "exclusive",
             "manual",
             "requires-network",
-        ],
+        ] + (["no-sandbox"] if name == "install_targets_test" else []),
         deps = [
             ":consumer",
             "@rules_shell//shell/runfiles",

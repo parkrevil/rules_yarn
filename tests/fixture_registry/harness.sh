@@ -66,7 +66,8 @@ harness_setup() {
   # Under /tmp, not the test's TEST_TMPDIR, which on Linux sits under the user's
   # own home, where a ~/.yarnrc.yml would reach Yarn run on its own (see
   # check_ancestors). linux-sandbox gives each test a /tmp of its own, and
-  # darwin-sandbox lets a test write to /tmp.
+  # darwin-sandbox lets a test write to /tmp. A no-sandbox test uses the host's
+  # /tmp, which the EXIT trap cleans unless the test is killed outright.
   work=$(mktemp -d /tmp/rules_yarn_test.XXXXXX) || die "cannot make a scratch directory under /tmp"
   trap harness_cleanup EXIT
   mkdir -p "$work/tmp" "$work/home" "$work/ancestor" || die "mkdir $work failed"

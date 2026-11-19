@@ -98,10 +98,10 @@ sources:
     resource: repo://tools/hooks/protect_generated_test.sh
   - id: openwiki-source-e8d8326f8a04a478f4895424
     resource: repo://yarn/private/extensions.bzl
-generated: { by: "claude-code", at: "2026-11-19T18:41:03.606Z" }
+generated: { by: "claude-code", at: "2026-11-19T19:25:05.306Z" }
 verified:
   - by: openwiki/0.5.1
-    at: 2026-11-19T18:45:24.702Z
+    at: 2026-11-19T19:35:30.372Z
 ---
 
 # Verification strategy
@@ -294,7 +294,12 @@ pattern without that module as a dependency:
   the ruleset in the copy;
 - the tests are `exclusive`, `manual` and `requires-network`, and the
   `integration_tests` suite that lists them is `manual` too, so neither the
-  root's `//...` nor the release workflow runs them. CI runs the suite.
+  root's `//...` nor the release workflow runs them. CI runs the suite;
+- `install_targets_test` is also `no-sandbox`, because one of its cases runs
+  an action in the nested Bazel's own sandbox, and on macOS a sandbox does not
+  nest: inside the outer `darwin-sandbox`, the nested Bazel registered no
+  `darwin-sandbox` strategy at all (CI run 44596357423). The other six keep
+  the outer sandbox.
 
 Each test copies the runfiles tree's `_main` into a `mktemp` directory under
 `/tmp` and works there, never in the runfiles, whose links lead into the

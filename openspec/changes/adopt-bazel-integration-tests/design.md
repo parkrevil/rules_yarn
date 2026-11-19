@@ -249,8 +249,19 @@ The 7 targets are tagged `exclusive`, `manual` and `requires-network`
   and Node.js.
 
 Exclusive tests run sandboxed by default
-(`incompatible_exclusive_test_sandboxed`), so the outer sandbox stays on; see
-Risks for macOS.
+(`incompatible_exclusive_test_sandboxed`), and the outer sandbox stays on for
+six of them. `install_targets_test` is also `no-sandbox` (`common/tags.html:24`),
+because one of its cases runs an action in the nested Bazel's own sandbox,
+and on macOS a sandbox does not nest (Risks). The tag survives `exclusive`:
+
+- `TestTargetProperties.java:88-103` copies the test's tags into its
+  execution info.
+- With `incompatible_exclusive_test_sandboxed` on, its default
+  (`TestConfiguration.java:354-355`), `exclusive` only adds `no-remote-exec`.
+- `Spawns.mayBeSandboxed` (lines 64-68) is false for `no-sandbox`, so no
+  sandbox strategy takes the test.
+
+All at 9.2.0.
 
 `bazel_binary_test` is `manual` only. It fetches a Bazel binary, which
 `//...` has no other use for, but it starts no server.
@@ -323,12 +334,27 @@ The `integration_tests` suite is tagged `manual` itself, for two reasons:
   - If macOS fails, the targets get `no-sandbox` (`common/tags.html:24`).
     That is the script's arrangement today: the nested Bazel's own sandbox is
     the only one. Tags cannot be `select()`ed, so it would apply on Linux too.
-  - Either outcome is recorded.
-- [Trade-off] CI will take longer than the script's 2 m 30 s and 4 m 11 s. Each
+  - **Outcome: macOS failed** (CI run 44596357423). Inside the outer
+    darwin-sandbox, the nested Bazel registered no `darwin-sandbox` strategy:
+    "'darwin-sandbox' was requested for explicit default strategies but no
+    strategy with that identifier was registered. Valid values are:
+    [dynamic_worker, processwrapper-sandbox, standalone, …]". The other six
+    targets passed on macOS, sandboxed, and all seven on Linux.
+  - So only `install_targets_test` takes `no-sandbox`; the six that need no
+    nested sandbox keep the outer one. Judged by need, one tag on one target
+    beats one on all seven.
+- [Trade-off] CI takes longer than the script's 2 m 30 s and 4 m 11 s. Each
   of the 7 targets fetches its consumer's dependencies afresh, where the
   script fetched once, and `exclusive` runs them one at a time.
-  - The time is measured and recorded. That is the price of independent
-    cases.
+  - Measured in run 44596357423, the suite's step took 4 m 32 s on Linux and
+    5 m 19 s on macOS, with `install_targets_test` failing there. That is the
+    price of independent cases.
+- [Known limit] `install_targets_test` runs unsandboxed, so on Linux its
+  scratch directory is in the host's real `/tmp`, not a sandbox's private one.
+  The EXIT trap removes it on a normal end and on SIGTERM. A test Bazel
+  SIGKILLs after its grace period leaves `/tmp/rules_yarn_test.*` behind,
+  nested output root included. On macOS nothing changes: darwin-sandbox
+  already wrote to the real `/tmp`.
 - [Known limit] The child sees the ruleset through the packages
   `//:local_repository_files` names. Each package's `all_files` globs every
   file in it, so a new file is seen. A new package under `yarn/` is not seen
