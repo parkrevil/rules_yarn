@@ -254,9 +254,12 @@
     - `install_scenarios.sh` 39/39; all four roots; `minimum_bazel.sh`;
       pre-commit with actionlint; `openspec validate --all --strict`.
     - A fifth wiki run, after which `openwiki_staleness.sh` passes.
-- [ ] 4.7 Fold everything into the branch's single commit (`63c354b`,
+- [x] 4.7 Fold everything into the branch's single commit (`63c354b`,
   unpushed) by amending it; done 2026-11-19. With the user's go-ahead, push. Verified: every
   CI job passes, wiki staleness included. Record the run id.
+  - 2026-11-19: `7f97d0f` pushed as `rename-the-module`. CI run 44515306415
+    passed every job: checks with the wiki staleness gate, next release,
+    both platforms' build and test, and the oldest supported Bazel.
 
 ## 5. Release
 
